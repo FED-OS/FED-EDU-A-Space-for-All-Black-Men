@@ -1,6 +1,6 @@
 # STRUCTURE — THE FULL MAP OF THE BLOCK
 
-Every file in the FED-EDU repo, one tree, no mystery. 145 files across 45
+Every file in the FED-EDU repo, one tree, no mystery. 157 files across 44
 directories. Nothing hidden, nothing unexplained — the block builds in the open.
 
 If you're new: start at `README.md`, walk into `wiki/First-Steps/`, and use this
@@ -56,6 +56,7 @@ one line of plain talk.
 |   |   |-- brick-one-html.md
 |   |   `-- index.html
 |   `-- 03-the-corporate-ship
+|       |-- README.md
 |       |-- interview-cheat-sheet.md
 |       `-- markdown-resume-builder.md
 |-- discussion
@@ -151,6 +152,7 @@ one line of plain talk.
 |   |   |-- json_explained.md
 |   |   |-- prompt_engineering.md
 |   |   `-- saas_model.md
+|   |-- index.html
 |   |-- index.json
 |   `-- search-engine.js
 |-- wiki
@@ -196,8 +198,17 @@ one line of plain talk.
 |-- SUMMARY.md
 |-- SUPPORT.md
 |-- STRUCTURE.md
+|-- app.js
 |-- bug_report.md
 |-- feature_request.md
+|-- favicon.ico
+|-- icon-192.png
+|-- icon-512-maskable.png
+|-- icon-512.png
+|-- index.html
+|-- manifest.json
+|-- pops.js
+|-- service-worker.js
 |-- styles.css
 |-- todo.md
 `-- usage.md
@@ -217,11 +228,11 @@ is the dashboard every brother lands on; the manifest and service worker make it
 installable as an app on any phone (PWA, works offline); `fed-os-bridge/` holds
 the rig tools — hardware profiler, tether monitor, PC boot script.
 
-**`courses-and-guides/` (8 files)** — the three ships: EasyTether Mastery (get
+**`courses-and-guides/` (9 files)** — the three ships: EasyTether Mastery (get
 online on a tethered phone), Real-Life Minecraft (first HTML, with the offline
 playground), The Corporate Ship (resume + interview, turn skills into income).
 
-**`urban-dictionary/` (8 files)** — the decoder ring. Six seed terms translated
+**`urban-dictionary/` (9 files)** — the decoder ring. The live search page, six seed terms translated
 street-to-tech (`api_endpoint`, `database_supabase`, `github_fork`, `json`,
 `prompt_engineering`, `saas_model`), the search engine, and the index that says
 what's in the book.
@@ -273,12 +284,12 @@ that keeps addresses out of git history forever.
 (`YOUR_USERNAME` placeholder, swap-or-fail rule enforced by `build.yml`), the
 money README, and the archive-and-stash where closed cycles get filed.
 
-**The root (31 files)** — the paper trail of a real organization: README
+**The root (40 files)** — `index.html` is the front door (every room one tap away), and the PWA spine that makes the whole block installable: `manifest.json` (root scope, every room), `service-worker.js` (offline shell for all rooms), `app.js` (registers the worker), `pops.js` (the daily practice engine — the work, read, or pray pops that fire on every page, five to twenty minutes a day), and the real icons (`icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `favicon.ico` — the `>_` glyph in forest on warm cream). Plus the paper trail of a real organization: README
 (manifesto + front door), LICENSE/COPYING/NOTICE (the legal spine),
 CONTRIBUTING/CODE_OF_CONDUCT/GOVERNANCE (how the block runs itself),
 SECURITY/PRIVACY posture, PRICING (the rate floors), ROADMAP, ADR (the
 architecture decisions — no frameworks, 3-second rule), INSTALL/BUILD/DEPLOYMENT
-(runbooks), FAQ/SUPPORT, styles.css (the shared Cyber-Hustle theme), todo.md
+(runbooks), FAQ/SUPPORT, styles.css (the shared Warm Study theme), todo.md
 (the public task board), and this file.
 
 ## THE COUNTS
@@ -287,7 +298,7 @@ architecture decisions — no frameworks, 3-second rule), INSTALL/BUILD/DEPLOYME
 |---|---|
 | `.github/` | 14 |
 | `core-system/` | 8 |
-| `courses-and-guides/` | 8 |
+| `courses-and-guides/` | 9 |
 | `discussion/` | 6 |
 | `excellence-matrix/` | 9 |
 | `hustle-index/` | 7 |
@@ -296,12 +307,12 @@ architecture decisions — no frameworks, 3-second rule), INSTALL/BUILD/DEPLOYME
 | `prompts/` | 6 |
 | `sandbox-blueprints/` | 13 |
 | `support-the-block/` | 3 |
-| `urban-dictionary/` | 8 |
+| `urban-dictionary/` | 9 |
 | `wiki/` | 12 |
 | `fed-comm-dm/` | 7 |
 | `fedpromptly-coach/` | 5 |
-| root files | 31 |
-| **TOTAL** | **146** |
+| root files | 40 |
+| **TOTAL** | **157** |
 
 One repo. Every file has a job. Every job serves one mission: every Black man
 who wants to build, can build — on whatever device he's got, from wherever he

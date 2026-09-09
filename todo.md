@@ -24,7 +24,7 @@
 ## Phase 1 — The Front Door
 
 - [x] core-system/index.html dashboard v1
-- [x] Cyber-Hustle dark theme (styles.css)
+- [x] Warm Study theme (styles.css) — v2, retired the neon
 - [x] manifest.json + service-worker.js for install-anywhere PWA
 - [ ] Launch GitHub Pages deployment
 - [ ] Custom domain decision (fed-edu subdomain vs standalone)

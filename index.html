@@ -3,354 +3,400 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="THE BLOCK — 14 pages, one hub, zero boring. Hustle, raffles, prompts, wiki, coaching and more.">
-  <title>THE BLOCK — 14 Pages. One Hub. Zero Boring.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>FED-EDU — Every Black Man Builds</title>
+  <meta name="description" content="The global block for brothers who code — phone, tether, or tower. Free education, real community, honest money.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#f7f2e9">
+  <style>
+    :root {
+      --ink: #2a2520;
+      --paper: #f7f2e9;
+      --card: #fffdf8;
+      --field: #f3ecdd;
+      --hairline: #e5dcc9;
+      --hairline-hi: #d4c8ae;
+      --forest: #256d46;
+      --forest-deep: #1d5837;
+      --bronze: #b07d2f;
+      --plum: #6d5a8e;
+      --muted: #6f675c;
+      --shadow: 0 1px 3px rgba(70,60,40,.07), 0 10px 30px rgba(70,60,40,.06);
+      --shadow-lift: 0 2px 6px rgba(70,60,40,.10), 0 18px 44px rgba(70,60,40,.12);
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--paper);
+      background-image: radial-gradient(rgba(176,125,47,.05) 1px, transparent 1px);
+      background-size: 26px 26px;
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; }
+
+    /* ── masthead ── */
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: 22px;
+      box-shadow: var(--shadow-lift);
+      padding: 44px 28px 38px;
+      margin: 8px 0 14px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -20%, rgba(37,109,70,.10), transparent 70%),
+        radial-gradient(ellipse 60% 40% at 50% 120%, rgba(176,125,47,.08), transparent 70%);
+      pointer-events: none;
+    }
+    .crest {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 58px; height: 58px;
+      border-radius: 16px;
+      background: var(--forest);
+      color: #fffdf8;
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 16px rgba(37,109,70,.30);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      color: var(--forest-deep);
+      font-size: clamp(2.0rem, 7vw, 3.0rem);
+      letter-spacing: .5px;
+      line-height: 1.12;
+      position: relative;
+    }
+    .hero .tag {
+      color: var(--bronze);
+      font-family: var(--serif);
+      font-size: clamp(.95rem, 3vw, 1.1rem);
+      letter-spacing: 3.5px;
+      margin-top: 10px;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .hero .rule {
+      width: 90px; height: 3px;
+      background: var(--bronze);
+      border-radius: 99px;
+      margin: 18px auto 14px;
+      position: relative;
+    }
+    .hero .sub {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero .pill-row { margin-top: 18px; position: relative; }
+    .pill {
+      display: inline-block;
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--field);
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      padding: 5px 14px;
+      margin: 4px 5px;
+    }
+    .pill.forest { color: var(--forest); border-color: rgba(37,109,70,.35); background: rgba(37,109,70,.07); }
+
+    /* ── section labels ── */
+    .section-label {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      color: var(--forest-deep);
+      font-family: var(--serif);
+      font-size: 1.02rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin: 34px 4px 14px;
+    }
+    .section-label::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid var(--hairline);
+      transform: translateY(-4px);
+    }
+    .section-label .n {
+      color: var(--bronze);
+      font-family: 'Courier New', monospace;
+      font-size: .8rem;
+    }
+
+    /* ── doors ── */
+    .door-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .door {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      border: 1px solid var(--hairline);
+      background: var(--card);
+      border-radius: 18px;
+      padding: 20px 18px;
+      min-height: 150px;
+      box-shadow: var(--shadow);
+      transition: border-color .22s, box-shadow .22s, transform .22s;
+      position: relative;
+      overflow: hidden;
+    }
+    .door:hover {
+      border-color: rgba(37,109,70,.55);
+      box-shadow: var(--shadow-lift);
+      transform: translateY(-3px);
+      text-decoration: none;
+    }
+    .door::after {
+      content: "";
+      position: absolute; inset: 0 0 auto 0; height: 3px;
+      background: var(--forest);
+      opacity: 0;
+      transition: opacity .22s;
+    }
+    .door:hover::after { opacity: 1; }
+    .door .d-emoji { font-size: 1.6rem; line-height: 1; }
+    .door h2 {
+      color: var(--forest-deep);
+      font-family: var(--serif);
+      font-size: 1.02rem;
+      letter-spacing: .3px;
+      margin: 10px 0 5px;
+    }
+    .door p { color: var(--muted); font-size: .8rem; line-height: 1.5; flex: 1; }
+    .door .tagchip {
+      align-self: flex-start;
+      margin-top: 12px;
+      color: var(--bronze);
+      background: rgba(176,125,47,.08);
+      border: 1px solid rgba(176,125,47,.30);
+      border-radius: 999px;
+      font-size: .64rem;
+      font-weight: 700;
+      padding: 3px 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    /* ── support strip ── */
+    .kofi-strip {
+      border: 1px solid rgba(176,125,47,.45);
+      background: linear-gradient(140deg, #fffdf8 55%, #faf3e2 100%);
+      border-radius: 18px;
+      padding: 22px 18px;
+      margin-top: 34px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .kofi-strip h2 {
+      font-family: var(--serif);
+      color: var(--bronze);
+      font-size: 1.05rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .kofi-strip .kofi-sub { color: var(--muted); font-size: .85rem; max-width: 520px; margin: 0 auto 14px; }
+    .kofi-strip a {
+      display: inline-block;
+      background: var(--forest);
+      color: #fffdf8;
+      font-family: var(--serif);
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 26px;
+      border-radius: 12px;
+      font-size: .88rem;
+      box-shadow: 0 4px 14px rgba(37,109,70,.28);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .kofi-strip a:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,109,70,.35); text-decoration: none; }
+    .kofi-strip p { color: var(--muted); font-size: .72rem; margin-top: 10px; }
+
+    footer {
+      border-top: 1px solid var(--hairline);
+      background: var(--card);
+      border-radius: 18px 18px 0 0;
+      padding: 18px 20px;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+    }
+    footer a { color: var(--forest); text-decoration: none; font-weight: 600; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 520px) {
+      .hero { padding: 34px 18px 30px; border-radius: 18px; }
+      .door { min-height: 138px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .door, .kofi-strip a { transition: none; }
+    }
+  </style>
 </head>
 <body>
+  <div class="wrap">
 
-  <div class="bg-glow" aria-hidden="true"></div>
-  <canvas id="stars" aria-hidden="true"></canvas>
-  <div class="noise" aria-hidden="true"></div>
-
-  <!-- top nav -->
-  <nav class="top">
-    <a class="brand" href="index.html">
-      <div class="mark">B</div>
-      <span>THE&nbsp;BLOCK</span>
-    </a>
-    <div class="links">
-      <a class="pill" href="#pages">Pages</a>
-      <a class="pill" href="#tabs">Tabs</a>
-      <a class="pill cta" href="app.html">Launch →</a>
-    </div>
-  </nav>
-
-  <!-- hero -->
-  <header class="hero">
-    <h1 class="giant">
-      <span class="outline">Everything</span>
-      <span class="rotator-wrap">
-        <span class="fixed">the block runs on —</span>
-        <span id="rotator">HUSTLE</span>
-      </span>
-    </h1>
-    <p class="sub">Fourteen pages of raw utility: raffles, prompts, wiki, boards, coaching and more.
-       Uniquely named, cross-linked with tabs, ready to launch on GitHub Pages in one push.</p>
-    <div class="actions">
-      <a class="btn primary" href="#pages">Pick a page ↓</a>
-      <a class="btn ghost" href="app.html">Tabs view</a>
-    </div>
-
-    <div class="stats" id="stats">
-      <div class="stat"><b data-count="14">0</b><small>Pages</small></div>
-      <div class="stat"><b data-count="15">0</b><small>Tab Links Each</small></div>
-      <div class="stat"><b data-count="1">0</b><small>Repo · One Push</small></div>
-      <div class="stat"><b data-count="0">0</b><small>Build Tools</small></div>
-    </div>
-  </header>
-
-  <!-- dual crossing marquees -->
-  <div class="marquees" aria-hidden="true">
-    <div class="marquee a">
-      <div class="track">
-        <span>HUSTLE INDEX ◆ PHYSICAL RAFFLES ◆ PROMPTS ◆ SANDBOX BLUEPRINTS ◆ SUPPORT THE BLOCK ◆ URBAN DICTIONARY ◆ WIKI ◆ </span>
-        <span>HUSTLE INDEX ◆ PHYSICAL RAFFLES ◆ PROMPTS ◆ SANDBOX BLUEPRINTS ◆ SUPPORT THE BLOCK ◆ URBAN DICTIONARY ◆ WIKI ◆ </span>
+    <header class="hero">
+      <div class="crest">&gt;_</div>
+      <h1>Every Black Man Builds</h1>
+      <div class="tag">F E D — E D U</div>
+      <div class="rule"></div>
+      <p class="sub">The global block for brothers who code — phone, tether, or tower. Every room open, every page free, no gatekeeper between you and the skill.</p>
+      <div class="pill-row">
+        <span class="pill forest">Free forever</span>
+        <span class="pill">Works offline</span>
+        <span class="pill">All devices</span>
+        <span class="pill">Work · Read · Pray</span>
       </div>
-    </div>
-    <div class="marquee b">
-      <div class="track">
-        <span>COMMUNITY BOARDS ◆ CORE SYSTEM ◆ COURSES &amp; GUIDES ◆ DISCUSSION ◆ EXCELLENCE MATRIX ◆ FED COMM DM ◆ FEDPROMPTLY COACH ◆ </span>
-        <span>COMMUNITY BOARDS ◆ CORE SYSTEM ◆ COURSES &amp; GUIDES ◆ DISCUSSION ◆ EXCELLENCE MATRIX ◆ FED COMM DM ◆ FEDPROMPTLY COACH ◆ </span>
-      </div>
-    </div>
+    </header>
+
+    <div class="section-label"><span class="n">01</span> Start Here</div>
+    <nav class="door-grid">
+      <a class="door" href="core-system/index.html">
+        <span class="d-emoji">🖥️</span>
+        <h2>The Dashboard</h2>
+        <p>The core system hub — install it as an app on your phone (PWA), works offline, links every room.</p>
+        <span class="tagchip">Core System</span>
+      </a>
+      <a class="door" href="courses-and-guides/02-real-life-minecraft/index.html">
+        <span class="d-emoji">🧱</span>
+        <h2>The Playground</h2>
+        <p>Real-Life Minecraft: place HTML blocks, watch them exist, build a house you can stand in. Zero knowledge needed.</p>
+        <span class="tagchip">First Build · Offline</span>
+      </a>
+      <a class="door" href="community-boards/index.html">
+        <span class="d-emoji">🗺️</span>
+        <h2>Community Boards</h2>
+        <p>The diaspora map, help desk, showcase vault, leaderboard — where the block meets. No algorithm between us.</p>
+        <span class="tagchip">The Map · Vault · Board</span>
+      </a>
+    </nav>
+
+    <div class="section-label"><span class="n">02</span> Learn</div>
+    <nav class="door-grid">
+      <a class="door" href="courses-and-guides/01-easytether-mastery/README.md">
+        <span class="d-emoji">📶</span>
+        <h2>EasyTether Mastery</h2>
+        <p>Get your PC online through your phone's data — no Wi-Fi, no cable internet bill. The survival course.</p>
+        <span class="tagchip">Course</span>
+      </a>
+      <a class="door" href="courses-and-guides/02-real-life-minecraft/README.md">
+        <span class="d-emoji">🧱</span>
+        <h2>Real-Life Minecraft</h2>
+        <p>The full course: HTML as blocks, the web as your world. Assumes nothing, teaches everything.</p>
+        <span class="tagchip">Course</span>
+      </a>
+      <a class="door" href="courses-and-guides/03-the-corporate-ship/README.md">
+        <span class="d-emoji">💼</span>
+        <h2>The Corporate Ship</h2>
+        <p>Resume builder + interview cheat sheet. Turn the skills into the income.</p>
+        <span class="tagchip">Course</span>
+      </a>
+      <a class="door" href="wiki/Home.md">
+        <span class="d-emoji">📖</span>
+        <h2>The Wiki</h2>
+        <p>The whole journey in 12 pages: account, first change, first site, publish, app, price your work.</p>
+        <span class="tagchip">Manual</span>
+      </a>
+      <a class="door" href="urban-dictionary/index.html">
+        <span class="d-emoji">🔑</span>
+        <h2>Urban Dictionary</h2>
+        <p>The decoder ring — tech words translated to plain talk, with a live search box. API, database, fork, JSON, prompt, SaaS.</p>
+        <span class="tagchip">Decoder Ring</span>
+      </a>
+    </nav>
+
+    <div class="section-label"><span class="n">03</span> Build — The Ready-to-Fork Projects</div>
+    <nav class="door-grid">
+      <a class="door" href="sandbox-blueprints/01-rap-lab/index.html">
+        <span class="d-emoji">🎤</span>
+        <h2>Rap Lab</h2>
+        <p>Write bars, tap the beat, hear it back. Your phone is the studio. For the music brothers.</p>
+        <span class="tagchip">Blueprint 01</span>
+      </a>
+      <a class="door" href="sandbox-blueprints/02-football-stats/index.html">
+        <span class="d-emoji">🏀</span>
+        <h2>StatTracker</h2>
+        <p>Log buckets and boards, see who's really hooping. Real database app. For the ball brothers.</p>
+        <span class="tagchip">Blueprint 02</span>
+      </a>
+      <a class="door" href="sandbox-blueprints/03-media-fx-clipper/index.html">
+        <span class="d-emoji">✂️</span>
+        <h2>Media FX Clipper</h2>
+        <p>In-browser image effects, one-tap export, plus the Python background remover for the PC rung. For the eye brothers.</p>
+        <span class="tagchip">Blueprint 03</span>
+      </a>
+      <a class="door" href="sandbox-blueprints/04-streamer-tools/index.html">
+        <span class="d-emoji">🔴</span>
+        <h2>Streamer Tools</h2>
+        <p>Alert wall test bench, Streamlabs/Twitch bot, trend scraper. For the going-live brothers.</p>
+        <span class="tagchip">Blueprint 04</span>
+      </a>
+    </nav>
+
+    <div class="section-label"><span class="n">04</span> Level Up</div>
+    <nav class="door-grid">
+      <a class="door" href="excellence-matrix/index.html">
+        <span class="d-emoji">👑</span>
+        <h2>Excellence Matrix</h2>
+        <p>Seven halls of receipts: leaders, executives, moguls, engineers, cleats, directors, streamers. We built this before.</p>
+        <span class="tagchip">The Receipts</span>
+      </a>
+      <a class="door" href="hustle-index/index.html">
+        <span class="d-emoji">💰</span>
+        <h2>Hustle Index</h2>
+        <p>The commission board with rate floors: $150 one-pager, $500 multi-page, $50/mo retainer. Undercut and you're benched.</p>
+        <span class="tagchip">Rate Floors Are Law</span>
+      </a>
+      <a class="door" href="fed-comm-dm/index.html">
+        <span class="d-emoji">🔐</span>
+        <h2>fed-comm-dm</h2>
+        <p>The custom DM system — encrypted, offline-friendly, built because the platform DMs were never made for us.</p>
+        <span class="tagchip">Encrypted</span>
+      </a>
+    </nav>
+
+    <section class="kofi-strip">
+      <h2>☕ Fuel a Machine</h2>
+      <p class="kofi-sub">Every coffee goes straight to the raffle fund — machines shipped to brothers who earn them. Read the receipts, hold us accountable.</p>
+      <a href="support-the-block/kofi-button.html">Buy a Coffee — Fuel a Machine</a>
+      <p>100% of raffle money ships hardware. The ledger is public.</p>
+    </section>
+
+    <footer>
+      FED-EDU · the block builds in the open · <a href="STRUCTURE.md">STRUCTURE.md</a> · <a href="README.md">README.md</a><br>
+      Work · Read · Pray — five minutes a day changes the whole trajectory.
+    </footer>
+
   </div>
-
-  <!-- bento grid: every tile unique -->
-  <section id="pages">
-    <div class="section-head">
-      <span class="kicker">The Full Network</span>
-      <h2>Fourteen doors.<br><span class="hot-word">No two alike.</span></h2>
-      <p>Every page lives in the same repo, carries its own tab bar, and loads instantly — static, fast, no build step.</p>
-    </div>
-
-    <div class="bento">
-
-      <!-- 01 HUSTLE INDEX — flagship color flood -->
-      <a class="tile t-flood feature" href="hustle-index.html" style="--tc:var(--acid)">
-        <div class="glare"></div>
-        <div class="stripes" aria-hidden="true"></div>
-        <div class="body">
-          <span class="tag">Flagship</span>
-          <div class="num">01</div>
-          <div class="chip" style="margin-top:0.4rem">⚡</div>
-          <h3>Hustle Index</h3>
-          <p>The master directory of every hustle, play and opportunity on the block — start here, branch anywhere.</p>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 02 PHYSICAL RAFFLES — perforated ticket -->
-      <a class="tile t-ticket tall" href="physical-raffles.html" style="--tc:var(--hot)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="chip">🎟️</div>
-          <h3>Physical Raffles</h3>
-          <p>Listings, rules, draws, winner boards.</p>
-          <span class="serial">ADMIT-ONE · №0472</span>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 03 PROMPTS — terminal -->
-      <a class="tile t-term" href="prompts.html" style="--tc:var(--acid)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="bar-dots"><i></i><i></i><i></i></div>
-          <div class="chip">🧠</div>
-          <h3>PROMPTS</h3>
-          <div class="line">$ generate --best<span class="caret"></span></div>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 04 SANDBOX BLUEPRINTS — blueprint sheet -->
-      <a class="tile t-bp" href="sandbox-blueprints.html" style="--tc:var(--cyan)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="chip">📐</div>
-          <h3>Sandbox Blueprints</h3>
-          <p>Schematics for fast experiments.</p>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 05 SUPPORT THE BLOCK — halftone -->
-      <a class="tile t-dots" href="support-the-block.html" style="--tc:var(--violet)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="chip">🛡️</div>
-          <h3>Support The Block</h3>
-          <p>Back the network.</p>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 06 URBAN DICTIONARY — book entry -->
-      <a class="tile t-book" href="urban-dictionary.html" style="--tc:var(--hot)">
-        <div class="glare"></div>
-        <div class="body">
-          <span class="quote">“</span>
-          <h3>urban dictionary</h3>
-          <div class="pos">n. — slang, by the block</div>
-          <p>Definitions written on the street, for the street.</p>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 07 WIKI — folder with tab -->
-      <a class="tile t-folder feature" href="wiki.html" style="--tc:var(--cyan)">
-        <div class="glare"></div>
-        <div class="body">
-          <span class="tag">Knowledge</span>
-          <div class="chip">🗂️</div>
-          <h3>Wiki</h3>
-          <p>The knowledge base — how things work and why they work. Deep dives, references and the operating manual of the whole block.</p>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 08 COMMUNITY BOARDS — cork board with note -->
-      <a class="tile t-board" href="community-boards.html" style="--tc:var(--gold)">
-        <div class="glare"></div>
-        <div class="pin" aria-hidden="true">📌</div>
-        <div class="body">
-          <div class="chip">📋</div>
-          <h3>Community Boards</h3>
-          <span class="note">PINNED: read me first!</span>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 09 CORE SYSTEM — gauge -->
-      <a class="tile t-gauge" href="core-system.html" style="--tc:var(--gold)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="chip">⚙️</div>
-          <h3>Core System</h3>
-          <p>The engine room.</p>
-          <div class="dial" aria-hidden="true"></div>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 10 COURSES & GUIDES — progress bars -->
-      <a class="tile t-course wide" href="courses-and-guides.html" style="--tc:var(--violet)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="chip">🎓</div>
-          <h3>Courses &amp; Guides</h3>
-          <div class="bars" aria-hidden="true">
-            <div class="bar"><i style="--p:.85"></i></div>
-            <div class="bar"><i style="--p:.6"></i></div>
-            <div class="bar"><i style="--p:.4"></i></div>
-          </div>
-          <span class="pct">LESSON 07/12 — keep going</span>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 11 DISCUSSION — chat bubbles -->
-      <a class="tile t-chat" href="discussion.html" style="--tc:var(--cyan)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="chip">💬</div>
-          <h3>Discussion</h3>
-          <div class="bubbles" aria-hidden="true">
-            <div class="bub l">you seen the new wiki?</div>
-            <div class="bub r">reading it rn 🔥</div>
-          </div>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 12 EXCELLENCE MATRIX — podium -->
-      <a class="tile t-podium" href="excellence-matrix.html" style="--tc:var(--acid)">
-        <div class="glare"></div>
-        <span class="crown" aria-hidden="true">👑</span>
-        <div class="body">
-          <div class="chip">🏆</div>
-          <h3>Excellence Matrix</h3>
-          <p>The scoreboard.</p>
-          <div class="podium" aria-hidden="true">
-            <b data-r="2" style="--o:26%; height:40px"></b>
-            <b data-r="1" style="--o:40%; height:58px"></b>
-            <b data-r="3" style="--o:20%; height:28px"></b>
-          </div>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 13 FED COMM DM — radar -->
-      <a class="tile t-radar" href="fed-comm-dm.html" style="--tc:var(--hot)">
-        <div class="glare"></div>
-        <div class="body">
-          <div class="chip">📡</div>
-          <h3>Fed Comm DM</h3>
-          <p>Channels &amp; protocols.</p>
-          <div class="rings" aria-hidden="true">
-            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
-          </div>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- 14 FEDPROMPTLY COACH — target & dart -->
-      <a class="tile t-target" href="fedpromptly-coach.html" style="--tc:var(--gold)">
-        <div class="glare"></div>
-        <span class="dart" aria-hidden="true">🎯</span>
-        <div class="body">
-          <div class="chip">🎯</div>
-          <h3>FedPromptly Coach</h3>
-          <p>Coaching loops.</p>
-          <div class="rings" aria-hidden="true">
-            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
-          </div>
-          <span class="open">Open →</span>
-        </div>
-      </a>
-
-      <!-- bonus cta -->
-      <a class="tile cta-tile" href="app.html" style="--tc:var(--acid)">
-        <div class="glare"></div>
-        <div class="body">
-          <span class="tag">Bonus</span>
-          <h3>Prefer tabs?</h3>
-          <p>Flip all 15 pages inside one window — click a tab, switch instantly, bookmark any view.</p>
-          <span class="btn primary" style="padding:0.7rem 1.3rem; font-size:0.8rem;">Launch tabs view →</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- footer -->
-  <footer id="tabs">
-    <div class="mega">THE BLOCK</div>
-    <p class="fine">
-      One repo · one push · live on GitHub Pages &nbsp;·&nbsp;
-      <a href="app.html">Tabs View</a> &nbsp;·&nbsp; <a href="#pages">All Pages</a>
-    </p>
-  </footer>
-
-  <script>
-    /* ---- kinetic rotator ---- */
-    const words = ['HUSTLE', 'RAFFLES', 'PROMPTS', 'THE WIKI', 'COACHING', 'THE BLOCK'];
-    const rot = document.getElementById('rotator');
-    let wi = 0;
-    setInterval(() => {
-      wi = (wi + 1) % words.length;
-      rot.textContent = words[wi];
-      rot.style.animation = 'none';
-      void rot.offsetWidth;
-      rot.style.animation = 'pop 0.45s cubic-bezier(0.2,1.6,0.4,1)';
-    }, 2100);
-
-    /* ---- count-up stats ---- */
-    const statEls = document.querySelectorAll('#stats b');
-    const statIO = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if (!en.isIntersecting) return;
-        statIO.unobserve(en.target);
-        const target = +en.target.dataset.count, dur = 900, t0 = performance.now();
-        (function tick(t) {
-          const p = Math.min((t - t0) / dur, 1);
-          en.target.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-          if (p < 1) requestAnimationFrame(tick);
-        })(t0);
-      });
-    }, { threshold: 0.6 });
-    statEls.forEach(el => statIO.observe(el));
-
-    /* ---- starfield ---- */
-    const cv = document.getElementById('stars'), ctx = cv.getContext('2d');
-    let stars = [];
-    function resize() {
-      cv.width = innerWidth; cv.height = innerHeight;
-      stars = Array.from({ length: 90 }, () => ({
-        x: Math.random() * cv.width, y: Math.random() * cv.height,
-        r: Math.random() * 1.6 + 0.3, vy: (Math.random() - 0.5) * 0.25,
-        tw: Math.random() * Math.PI * 2, sp: 0.02 + Math.random() * 0.03
-      }));
-    }
-    resize(); addEventListener('resize', resize);
-    (function draw() {
-      ctx.clearRect(0, 0, cv.width, cv.height);
-      for (const s of stars) {
-        s.y += s.vy; s.tw += s.sp;
-        if (s.y < 0) s.y = cv.height; if (s.y > cv.height) s.y = 0;
-        const a = 0.35 + Math.abs(Math.sin(s.tw)) * 0.55;
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(244,244,240,${a})`;
-        ctx.arc(s.x, s.y, s.r, 0, 7);
-        ctx.fill();
-      }
-      requestAnimationFrame(draw);
-    })();
-
-    /* ---- 3D tilt + glare tracking ---- */
-    document.querySelectorAll('.tile').forEach(tile => {
-      tile.addEventListener('pointermove', e => {
-        const r = tile.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-        tile.style.setProperty('--mx', (px * 100) + '%');
-        tile.style.setProperty('--my', (py * 100) + '%');
-        tile.style.transform = `perspective(800px) rotateY(${(px - 0.5) * 6}deg) rotateX(${(0.5 - py) * 6}deg) translateY(-3px)`;
-      });
-      tile.addEventListener('pointerleave', () => { tile.style.transform = ''; });
-    });
-  </script>
+  <script src="app.js"></script>
+  <script src="pops.js"></script>
 </body>
 </html>
