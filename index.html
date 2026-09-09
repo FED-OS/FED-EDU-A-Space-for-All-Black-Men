@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="THE BLOCK — 14 pages, one hub, zero boring. Hustle, raffles, prompts, wiki, coaching and more.">
+  <title>THE BLOCK — 14 Pages. One Hub. Zero Boring.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- top nav -->
+  <nav class="top">
+    <a class="brand" href="index.html">
+      <div class="mark">B</div>
+      <span>THE&nbsp;BLOCK</span>
+    </a>
+    <div class="links">
+      <a class="pill" href="#pages">Pages</a>
+      <a class="pill" href="#tabs">Tabs</a>
+      <a class="pill cta" href="app.html">Launch →</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <header class="hero">
+    <h1 class="giant">
+      <span class="outline">Everything</span>
+      <span class="rotator-wrap">
+        <span class="fixed">the block runs on —</span>
+        <span id="rotator">HUSTLE</span>
+      </span>
+    </h1>
+    <p class="sub">Fourteen pages of raw utility: raffles, prompts, wiki, boards, coaching and more.
+       Uniquely named, cross-linked with tabs, ready to launch on GitHub Pages in one push.</p>
+    <div class="actions">
+      <a class="btn primary" href="#pages">Pick a page ↓</a>
+      <a class="btn ghost" href="app.html">Tabs view</a>
+    </div>
+
+    <div class="stats" id="stats">
+      <div class="stat"><b data-count="14">0</b><small>Pages</small></div>
+      <div class="stat"><b data-count="15">0</b><small>Tab Links Each</small></div>
+      <div class="stat"><b data-count="1">0</b><small>Repo · One Push</small></div>
+      <div class="stat"><b data-count="0">0</b><small>Build Tools</small></div>
+    </div>
+  </header>
+
+  <!-- dual crossing marquees -->
+  <div class="marquees" aria-hidden="true">
+    <div class="marquee a">
+      <div class="track">
+        <span>HUSTLE INDEX ◆ PHYSICAL RAFFLES ◆ PROMPTS ◆ SANDBOX BLUEPRINTS ◆ SUPPORT THE BLOCK ◆ URBAN DICTIONARY ◆ WIKI ◆ </span>
+        <span>HUSTLE INDEX ◆ PHYSICAL RAFFLES ◆ PROMPTS ◆ SANDBOX BLUEPRINTS ◆ SUPPORT THE BLOCK ◆ URBAN DICTIONARY ◆ WIKI ◆ </span>
+      </div>
+    </div>
+    <div class="marquee b">
+      <div class="track">
+        <span>COMMUNITY BOARDS ◆ CORE SYSTEM ◆ COURSES &amp; GUIDES ◆ DISCUSSION ◆ EXCELLENCE MATRIX ◆ FED COMM DM ◆ FEDPROMPTLY COACH ◆ </span>
+        <span>COMMUNITY BOARDS ◆ CORE SYSTEM ◆ COURSES &amp; GUIDES ◆ DISCUSSION ◆ EXCELLENCE MATRIX ◆ FED COMM DM ◆ FEDPROMPTLY COACH ◆ </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- bento grid: every tile unique -->
+  <section id="pages">
+    <div class="section-head">
+      <span class="kicker">The Full Network</span>
+      <h2>Fourteen doors.<br><span class="hot-word">No two alike.</span></h2>
+      <p>Every page lives in the same repo, carries its own tab bar, and loads instantly — static, fast, no build step.</p>
+    </div>
+
+    <div class="bento">
+
+      <!-- 01 HUSTLE INDEX — flagship color flood -->
+      <a class="tile t-flood feature" href="hustle-index.html" style="--tc:var(--acid)">
+        <div class="glare"></div>
+        <div class="stripes" aria-hidden="true"></div>
+        <div class="body">
+          <span class="tag">Flagship</span>
+          <div class="num">01</div>
+          <div class="chip" style="margin-top:0.4rem">⚡</div>
+          <h3>Hustle Index</h3>
+          <p>The master directory of every hustle, play and opportunity on the block — start here, branch anywhere.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 02 PHYSICAL RAFFLES — perforated ticket -->
+      <a class="tile t-ticket tall" href="physical-raffles.html" style="--tc:var(--hot)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="chip">🎟️</div>
+          <h3>Physical Raffles</h3>
+          <p>Listings, rules, draws, winner boards.</p>
+          <span class="serial">ADMIT-ONE · №0472</span>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 03 PROMPTS — terminal -->
+      <a class="tile t-term" href="prompts.html" style="--tc:var(--acid)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="bar-dots"><i></i><i></i><i></i></div>
+          <div class="chip">🧠</div>
+          <h3>PROMPTS</h3>
+          <div class="line">$ generate --best<span class="caret"></span></div>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 04 SANDBOX BLUEPRINTS — blueprint sheet -->
+      <a class="tile t-bp" href="sandbox-blueprints.html" style="--tc:var(--cyan)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="chip">📐</div>
+          <h3>Sandbox Blueprints</h3>
+          <p>Schematics for fast experiments.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 05 SUPPORT THE BLOCK — halftone -->
+      <a class="tile t-dots" href="support-the-block.html" style="--tc:var(--violet)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="chip">🛡️</div>
+          <h3>Support The Block</h3>
+          <p>Back the network.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 06 URBAN DICTIONARY — book entry -->
+      <a class="tile t-book" href="urban-dictionary.html" style="--tc:var(--hot)">
+        <div class="glare"></div>
+        <div class="body">
+          <span class="quote">“</span>
+          <h3>urban dictionary</h3>
+          <div class="pos">n. — slang, by the block</div>
+          <p>Definitions written on the street, for the street.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 07 WIKI — folder with tab -->
+      <a class="tile t-folder feature" href="wiki.html" style="--tc:var(--cyan)">
+        <div class="glare"></div>
+        <div class="body">
+          <span class="tag">Knowledge</span>
+          <div class="chip">🗂️</div>
+          <h3>Wiki</h3>
+          <p>The knowledge base — how things work and why they work. Deep dives, references and the operating manual of the whole block.</p>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 08 COMMUNITY BOARDS — cork board with note -->
+      <a class="tile t-board" href="community-boards.html" style="--tc:var(--gold)">
+        <div class="glare"></div>
+        <div class="pin" aria-hidden="true">📌</div>
+        <div class="body">
+          <div class="chip">📋</div>
+          <h3>Community Boards</h3>
+          <span class="note">PINNED: read me first!</span>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 09 CORE SYSTEM — gauge -->
+      <a class="tile t-gauge" href="core-system.html" style="--tc:var(--gold)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="chip">⚙️</div>
+          <h3>Core System</h3>
+          <p>The engine room.</p>
+          <div class="dial" aria-hidden="true"></div>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 10 COURSES & GUIDES — progress bars -->
+      <a class="tile t-course wide" href="courses-and-guides.html" style="--tc:var(--violet)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="chip">🎓</div>
+          <h3>Courses &amp; Guides</h3>
+          <div class="bars" aria-hidden="true">
+            <div class="bar"><i style="--p:.85"></i></div>
+            <div class="bar"><i style="--p:.6"></i></div>
+            <div class="bar"><i style="--p:.4"></i></div>
+          </div>
+          <span class="pct">LESSON 07/12 — keep going</span>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 11 DISCUSSION — chat bubbles -->
+      <a class="tile t-chat" href="discussion.html" style="--tc:var(--cyan)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="chip">💬</div>
+          <h3>Discussion</h3>
+          <div class="bubbles" aria-hidden="true">
+            <div class="bub l">you seen the new wiki?</div>
+            <div class="bub r">reading it rn 🔥</div>
+          </div>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 12 EXCELLENCE MATRIX — podium -->
+      <a class="tile t-podium" href="excellence-matrix.html" style="--tc:var(--acid)">
+        <div class="glare"></div>
+        <span class="crown" aria-hidden="true">👑</span>
+        <div class="body">
+          <div class="chip">🏆</div>
+          <h3>Excellence Matrix</h3>
+          <p>The scoreboard.</p>
+          <div class="podium" aria-hidden="true">
+            <b data-r="2" style="--o:26%; height:40px"></b>
+            <b data-r="1" style="--o:40%; height:58px"></b>
+            <b data-r="3" style="--o:20%; height:28px"></b>
+          </div>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 13 FED COMM DM — radar -->
+      <a class="tile t-radar" href="fed-comm-dm.html" style="--tc:var(--hot)">
+        <div class="glare"></div>
+        <div class="body">
+          <div class="chip">📡</div>
+          <h3>Fed Comm DM</h3>
+          <p>Channels &amp; protocols.</p>
+          <div class="rings" aria-hidden="true">
+            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+          </div>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- 14 FEDPROMPTLY COACH — target & dart -->
+      <a class="tile t-target" href="fedpromptly-coach.html" style="--tc:var(--gold)">
+        <div class="glare"></div>
+        <span class="dart" aria-hidden="true">🎯</span>
+        <div class="body">
+          <div class="chip">🎯</div>
+          <h3>FedPromptly Coach</h3>
+          <p>Coaching loops.</p>
+          <div class="rings" aria-hidden="true">
+            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+          </div>
+          <span class="open">Open →</span>
+        </div>
+      </a>
+
+      <!-- bonus cta -->
+      <a class="tile cta-tile" href="app.html" style="--tc:var(--acid)">
+        <div class="glare"></div>
+        <div class="body">
+          <span class="tag">Bonus</span>
+          <h3>Prefer tabs?</h3>
+          <p>Flip all 15 pages inside one window — click a tab, switch instantly, bookmark any view.</p>
+          <span class="btn primary" style="padding:0.7rem 1.3rem; font-size:0.8rem;">Launch tabs view →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer id="tabs">
+    <div class="mega">THE BLOCK</div>
+    <p class="fine">
+      One repo · one push · live on GitHub Pages &nbsp;·&nbsp;
+      <a href="app.html">Tabs View</a> &nbsp;·&nbsp; <a href="#pages">All Pages</a>
+    </p>
+  </footer>
+
+  <script>
+    /* ---- kinetic rotator ---- */
+    const words = ['HUSTLE', 'RAFFLES', 'PROMPTS', 'THE WIKI', 'COACHING', 'THE BLOCK'];
+    const rot = document.getElementById('rotator');
+    let wi = 0;
+    setInterval(() => {
+      wi = (wi + 1) % words.length;
+      rot.textContent = words[wi];
+      rot.style.animation = 'none';
+      void rot.offsetWidth;
+      rot.style.animation = 'pop 0.45s cubic-bezier(0.2,1.6,0.4,1)';
+    }, 2100);
+
+    /* ---- count-up stats ---- */
+    const statEls = document.querySelectorAll('#stats b');
+    const statIO = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        statIO.unobserve(en.target);
+        const target = +en.target.dataset.count, dur = 900, t0 = performance.now();
+        (function tick(t) {
+          const p = Math.min((t - t0) / dur, 1);
+          en.target.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    }, { threshold: 0.6 });
+    statEls.forEach(el => statIO.observe(el));
+
+    /* ---- starfield ---- */
+    const cv = document.getElementById('stars'), ctx = cv.getContext('2d');
+    let stars = [];
+    function resize() {
+      cv.width = innerWidth; cv.height = innerHeight;
+      stars = Array.from({ length: 90 }, () => ({
+        x: Math.random() * cv.width, y: Math.random() * cv.height,
+        r: Math.random() * 1.6 + 0.3, vy: (Math.random() - 0.5) * 0.25,
+        tw: Math.random() * Math.PI * 2, sp: 0.02 + Math.random() * 0.03
+      }));
+    }
+    resize(); addEventListener('resize', resize);
+    (function draw() {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      for (const s of stars) {
+        s.y += s.vy; s.tw += s.sp;
+        if (s.y < 0) s.y = cv.height; if (s.y > cv.height) s.y = 0;
+        const a = 0.35 + Math.abs(Math.sin(s.tw)) * 0.55;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(244,244,240,${a})`;
+        ctx.arc(s.x, s.y, s.r, 0, 7);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    /* ---- 3D tilt + glare tracking ---- */
+    document.querySelectorAll('.tile').forEach(tile => {
+      tile.addEventListener('pointermove', e => {
+        const r = tile.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        tile.style.setProperty('--mx', (px * 100) + '%');
+        tile.style.setProperty('--my', (py * 100) + '%');
+        tile.style.transform = `perspective(800px) rotateY(${(px - 0.5) * 6}deg) rotateX(${(0.5 - py) * 6}deg) translateY(-3px)`;
+      });
+      tile.addEventListener('pointerleave', () => { tile.style.transform = ''; });
+    });
+  </script>
+</body>
+</html>
