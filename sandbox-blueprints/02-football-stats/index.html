@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Football Stats — the sandbox blueprint for brothers who live in the numbers. Player table, stat calculator, league view. Works offline, phone-first.">
+  <title>Football Stats — FED-EDU Sandbox</title>
+  <link rel="manifest" href="../../core-system/manifest.json">
+  <style>
+    /* Cyber-Hustle theme — compressed for the sandbox (root styles.css is the full version) */
+    :root {
+      --bg: #0a0a0a; --panel: #111311; --ink: #e8f5e9; --muted: #9e9e9e;
+      --green: #00ff66; --border: #1f241f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 12px; background: var(--bg); color: var(--ink);
+      font-family: "Courier New", Courier, monospace; font-size: 16px; line-height: 1.6;
+      max-width: 720px; margin: 0 auto;
+    }
+    header { border-bottom: 2px solid var(--green); padding-bottom: 10px; margin-bottom: 14px; }
+    h1 { color: var(--green); font-size: 1.35rem; margin: 0; }
+    .tagline { color: var(--muted); font-size: 0.82rem; margin: 4px 0 0 0; }
+
+    .card { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 14px; margin-bottom: 14px; }
+    .card h2 { color: var(--green); font-size: 1rem; margin: 0 0 8px 0; }
+    .card p { margin: 0 0 8px 0; font-size: 0.9rem; }
+    .muted { color: var(--muted); font-size: 0.8rem; }
+
+    input, select {
+      background: #000; color: var(--green); border: 1px solid var(--border);
+      font-family: inherit; font-size: 0.9rem; padding: 10px; min-height: 44px; width: 100%;
+    }
+    input:focus, select:focus { outline: 1px solid var(--green); }
+    label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+    .btn {
+      background: var(--green); color: #000; border: none; font-family: inherit;
+      font-weight: bold; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 8px 6px 0 0;
+    }
+    .btn-outline {
+      background: transparent; color: var(--green); border: 1px solid var(--green);
+      font-family: inherit; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 8px 6px 0 0;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { color: var(--green); text-align: left; border-bottom: 2px solid var(--green); padding: 8px 6px; font-size: 0.75rem; }
+    td { border-bottom: 1px solid var(--border); padding: 8px 6px; }
+    tr.leader td { background: #00221133; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* data-saver light mode (core-system/styles.css pattern) */
+    html.data-saver {
+      --bg: #f4f4f4; --panel: #fff; --ink: #111; --muted: #555;
+      --green: #00884a; --border: #ccc;
+    }
+    html.data-saver input, html.data-saver select { background: #fff; color: #006633; }
+    html.data-saver tr.leader td { background: #e6f4ea; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏈 Football Stats</h1>
+    <p class="tagline">You already do the math at halftime. This lab shows you the code doing the same math — with receipts.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Add a player</h2>
+      <p>Every fantasy league, every sideline debate, every "he's better than you think" argument runs on this exact data shape: a player row with numbers attached. Build the row, the table does the rest.</p>
+      <div class="grid-2">
+        <div><label for="p-name">Player name</label><input id="p-name" type="text" placeholder="Mahomes"></div>
+        <div><label for="p-team">Team</label><input id="p-team" type="text" placeholder="KC"></div>
+      </div>
+      <div class="grid-3" style="margin-top:10px">
+        <div><label for="p-pass">Passing yds</label><input id="p-pass" type="number" inputmode="numeric" placeholder="0"></div>
+        <div><label for="p-rush">Rushing yds</label><input id="p-rush" type="number" inputmode="numeric" placeholder="0"></div>
+        <div><label for="p-td">TDs</label><input id="p-td" type="number" inputmode="numeric" placeholder="0"></div>
+      </div>
+      <div>
+        <button class="btn" id="btn-add" type="button">＋ Add to table</button>
+        <button class="btn-outline" id="btn-sort" type="button">↓ Sort by total</button>
+        <button class="btn-outline" id="btn-saver" type="button">🌗 Data-saver</button>
+        <button class="btn-outline" id="btn-export" type="button">📥 Export JSON</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>The league table</h2>
+      <p>The table sorts itself by total yards + TDs. The leader row glows green. This is the same ranking logic the Hustle Index uses (hustle-index/market-engine.js) and the same sort logic the leaderboard workflow uses — one pattern, everywhere on the block.</p>
+      <div id="table-wrap"><p class="muted">No players yet — add one above. Your data saves on THIS device only (SECURITY.md rules — nothing leaves your phone).</p></div>
+    </section>
+
+    <section class="card">
+      <h2>What you're actually learning</h2>
+      <p>Every stat you already argue about is a programming concept wearing cleats:</p>
+      <p>
+        • <b>The player row</b> = an object — keys and values bundled as one thing ({name: "Mahomes", team: "KC", pass: 4500})<br>
+        • <b>The league table</b> = an array of objects — and every fantasy app you've used is exactly that, with a nicer paint job<br>
+        • <b>Sort by total</b> = a sort function with custom logic — the same move that powers every leaderboard you've ever seen<br>
+        • <b>Export JSON</b> = turning live data into the file format the whole block runs on (urban-dictionary/json_explained.md is the primer)
+      </p>
+      <p class="muted">Open db-bridge.js (this folder) — the whole engine is one readable file. It's the math you already do, visible.</p>
+    </section>
+
+    <section class="card">
+      <h2>The database rung — where this gets real</h2>
+      <p>This table saves to your browser (localStorage). The next rung is a REAL database: schema.sql (this folder) is the SQL that creates the same table in Supabase — the block's stat-tracker backend (ADR-006). Same data, now shareable with the whole league: every brother's picks, one source of truth.</p>
+      <p><b>SQL — that's the language databases speak.</b> "SELECT * FROM players ORDER BY total DESC" is literally "show me the table, best first." You already think in these queries at halftime. SQL just writes it down.</p>
+      <p class="muted">The full SQL walkthrough: urban-dictionary/terms/database_supabase.md — the barbershop notebook analogy, from JSON file to real database.</p>
+    </section>
+
+    <section class="card">
+      <h2>Take it further (the rungs)</h2>
+      <p><b>Rung 1 (this week):</b> Ship this lab as YOUR repo — fork, change colors, add one stat column of your own (receptions? interceptions?), deploy on Pages. Merged PR, 5 tickets.</p>
+      <p><b>Rung 2 (this month):</b> Connect it to Supabase with schema.sql — the league's shared table, live for every brother in it. Guide-level, 10 tickets.</p>
+      <p><b>Rung 3 (the hustle):</b> The league commissioner hustle — "I run the league's numbers, stats page live all season, $50/month" (retainer floor — PRICING.md). Your league IS the client.</p>
+    </section>
+    <p class="muted">Sandbox blueprint 02 of 04 · FED-EDU · The project coach's full rung ladder: fedpromptly-coach/prompts/project_generator.txt</p>
+  </main>
+
+  <script src="db-bridge.js"></script>
+</body>
+</html>

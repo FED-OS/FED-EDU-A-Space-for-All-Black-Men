@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Media FX Clipper — the sandbox blueprint for brothers who already cut clips. In-browser image effects, one-tap export, and the Python bg-remover for the PC rung. Works offline, phone-first.">
+  <title>Media FX Clipper — FED-EDU Sandbox</title>
+  <link rel="manifest" href="../../core-system/manifest.json">
+  <style>
+    /* Cyber-Hustle theme — compressed for the sandbox (root styles.css is the full version) */
+    :root {
+      --bg: #0a0a0a; --panel: #111311; --ink: #e8f5e9; --muted: #9e9e9e;
+      --green: #00ff66; --border: #1f241f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 12px; background: var(--bg); color: var(--ink);
+      font-family: "Courier New", Courier, monospace; font-size: 16px; line-height: 1.6;
+      max-width: 720px; margin: 0 auto;
+    }
+    header { border-bottom: 2px solid var(--green); padding-bottom: 10px; margin-bottom: 14px; }
+    h1 { color: var(--green); font-size: 1.35rem; margin: 0; }
+    .tagline { color: var(--muted); font-size: 0.82rem; margin: 4px 0 0 0; }
+
+    .card { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 14px; margin-bottom: 14px; }
+    .card h2 { color: var(--green); font-size: 1rem; margin: 0 0 8px 0; }
+    .card p { margin: 0 0 8px 0; font-size: 0.9rem; }
+    .muted { color: var(--muted); font-size: 0.8rem; }
+
+    .drop-zone {
+      border: 2px dashed var(--green); padding: 26px 12px; text-align: center;
+      color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; cursor: pointer;
+      min-height: 88px; display: flex; align-items: center; justify-content: center;
+    }
+    .drop-zone.has-image { border-style: solid; padding: 0; }
+    canvas { max-width: 100%; display: block; }
+
+    .fx-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+    .fx-btn {
+      background: #000; color: var(--ink); border: 1px solid var(--border);
+      border-left: 3px solid var(--green); font-family: inherit; font-size: 0.85rem;
+      padding: 10px 12px; min-height: 44px; cursor: pointer;
+    }
+    .fx-btn:active, .fx-btn.on { background: var(--green); color: #000; }
+
+    .btn {
+      background: var(--green); color: #000; border: none; font-family: inherit;
+      font-weight: bold; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 6px 6px 0 0;
+    }
+    .btn-outline {
+      background: transparent; color: var(--green); border: 1px solid var(--green);
+      font-family: inherit; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 6px 6px 0 0;
+    }
+
+    .slider-row { display: grid; grid-template-columns: 90px 1fr 60px; gap: 10px; align-items: center; margin: 8px 0; font-size: 0.85rem; }
+    input[type=range] { width: 100%; min-height: 24px; accent-color: var(--green); }
+
+    /* data-saver light mode (core-system/styles.css pattern) */
+    html.data-saver {
+      --bg: #f4f4f4; --panel: #fff; --ink: #111; --muted: #555;
+      --green: #00884a; --border: #ccc;
+    }
+    html.data-saver .fx-btn { background: #fff; color: #111; }
+    html.data-saver .fx-btn.on { background: #00884a; color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎬 Media FX Clipper</h1>
+    <p class="tagline">You already cut clips and pick filters. This lab shows you the code behind the look — pixel math you can read.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Load a picture</h2>
+      <p>Tap the box (or drop a file). The picture stays on THIS device — the effects run in your browser, nothing uploads anywhere (SECURITY.md rules).</p>
+      <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Load an image">
+        📷 Tap to load a picture<br><span class="muted">(or drag one onto this box)</span>
+      </div>
+      <canvas id="stage" width="0" height="0" hidden></canvas>
+      <input type="file" id="file-input" accept="image/*" hidden>
+    </section>
+
+    <section class="card" id="fx-card" hidden>
+      <h2>The FX rack</h2>
+      <p>Every effect is one math operation on the pixels. Tap one, watch it hit, tap again to stack. The slider tunes intensity. Nothing here uploads anything.</p>
+      <div class="fx-bar">
+        <button class="fx-btn" type="button" data-fx="green">💚 Hustle tint</button>
+        <button class="fx-btn" type="button" data-fx="grayscale">⚫ Grayscale</button>
+        <button class="fx-btn" type="button" data-fx="contrast">🎆 Contrast punch</button>
+        <button class="fx-btn" type="button" data-fx="vhs">📼 VHS drift</button>
+        <button class="fx-btn" type="button" data-fx="invert">🌑 Invert</button>
+        <button class="fx-btn" type="button" data-fx="reset">🧹 Reset</button>
+      </div>
+      <div class="slider-row">
+        <label for="fx-strength">Strength</label>
+        <input type="range" id="fx-strength" min="0" max="100" value="60">
+        <span id="fx-strength-val">60%</span>
+      </div>
+      <div>
+        <button class="btn" id="btn-download" type="button">📥 Save the picture</button>
+        <button class="btn-outline" id="btn-saver" type="button">🌗 Data-saver</button>
+      </div>
+      <p class="muted" id="fx-readout" style="margin-top:10px">Load a picture to begin.</p>
+    </section>
+
+    <section class="card">
+      <h2>What you're actually learning</h2>
+      <p>Every filter you've ever picked is a loop over pixels — the same loop pattern as the Rap Lab's verse analyzer and the stats table's ranking. One concept, three costumes:</p>
+      <p>
+        • <b>Hustle tint</b> = blend math — mix each pixel toward the green by X% (the slider IS the X)<br>
+        • <b>Grayscale</b> = the luminosity formula — 0.3R + 0.6G + 0.1B, the same weights every editor uses, because that's how eyes weigh color<br>
+        • <b>Contrast punch</b> = pushing values away from mid-gray — the same math behind every "vivid" toggle<br>
+        • <b>VHS drift</b> = offsetting color channels a few pixels — real glitch effects are exactly this, just fancier offsets
+      </p>
+      <p class="muted">The FX rack runs in THIS page. The PC rung is bg-remover.py (this folder) — Python removing backgrounds offline. Two languages, one skill: you already have the eye, now you collect the tools.</p>
+    </section>
+
+    <section class="card">
+      <h2>The PC rung — bg-remover.py</h2>
+      <p>On a tethered PC (01-easytether-mastery) you unlock heavier work: the Python script in this folder strips backgrounds offline — no upload, no watermark, no subscription. The client version: product pics with clean backgrounds for the reseller hustle, promo shots for the artist hustle.</p>
+      <p><b>Python — that's the language heavier lifting gets done in.</b> Same ideas as JavaScript (variables, loops, functions) with different street names. Brothers who know both pick work from two menus.</p>
+      <p class="muted">Run it with: <code>python3 bg-remover.py input.jpg output.png</code> — the script's header comments walk you through the install once, then it's yours forever.</p>
+    </section>
+
+    <section class="card">
+      <h2>Take it further (the rungs)</h2>
+      <p><b>Rung 1 (this week):</b> Ship this lab as YOUR repo — fork, change the tint to your color, add one FX of your own (sepia? pixelate?), deploy on Pages. Merged PR, 5 tickets.</p>
+      <p><b>Rung 2 (this month):</b> Batch mode — process a whole folder on the PC rung, or add text-overlay captions in the browser (canvas text, the same <code>fillText</code> the export uses). Guide-level, 10 tickets.</p>
+      <p><b>Rung 3 (the hustle):</b> The content-pack hustle — "Clean product pics + caption cards for your shop, $150 flat" (rate floors — PRICING.md). Your before/after folder IS the portfolio.</p>
+    </section>
+    <p class="muted">Sandbox blueprint 03 of 04 · FED-EDU · The project coach's full rung ladder: fedpromptly-coach/prompts/project_generator.txt</p>
+  </main>
+
+  <script>
+    /* ================================================================
+       FED-EDU :: sandbox-blueprints/03-media-fx-clipper :: index.html
+       The FX rack engine — vanilla JS, zero dependencies (ADR-001).
+       Every effect is one loop over pixels. Read it after you use it.
+       ================================================================ */
+
+    (function () {
+      "use strict";
+
+      var dropZone  = document.getElementById("drop-zone");
+      var fileInput = document.getElementById("file-input");
+      var stage     = document.getElementById("stage");
+      var ctx       = stage.getContext("2d");
+      var fxCard    = document.getElementById("fx-card");
+      var readout   = document.getElementById("fx-readout");
+      var strength  = document.getElementById("fx-strength");
+
+      var original = null;   // the untouched ImageData — every effect works FROM this, not from the last effect (so stacking never compounds into mush)
+      var activeFX = {};     // which buttons are on
+
+      var HUSTLE_GREEN = { r: 0, g: 255, b: 102 };  // #00ff66 — the block's signature
+
+      /* ---- Load a picture ---- */
+      dropZone.addEventListener("click", function () { fileInput.click(); });
+      dropZone.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { fileInput.click(); }
+      });
+      dropZone.addEventListener("dragover", function (e) { e.preventDefault(); });
+      dropZone.addEventListener("drop", function (e) {
+        e.preventDefault();
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) { loadFile(e.dataTransfer.files[0]); }
+      });
+      fileInput.addEventListener("change", function () {
+        if (fileInput.files && fileInput.files[0]) { loadFile(fileInput.files[0]); }
+      });
+
+      function loadFile(file) {
+        if (!file.type || file.type.indexOf("image/") !== 0) {
+          readout.textContent = "That's not a picture — the FX rack needs an image file.";
+          return;
+        }
+        var img = new Image();
+        img.onload = function () {
+          // cap the canvas at 1280 on the long side — big files punish 3G phones and refurbs
+          var maxSide = 1280;
+          var scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+          stage.width  = Math.round(img.width * scale);
+          stage.height = Math.round(img.height * scale);
+          stage.hidden = false;
+          dropZone.classList.add("has-image");
+          dropZone.innerHTML = "";
+          dropZone.appendChild(stage);
+
+          ctx.drawImage(img, 0, 0, stage.width, stage.height);
+          original = ctx.getImageData(0, 0, stage.width, stage.height);
+          activeFX = {};
+          syncButtons();
+          fxCard.hidden = false;
+          readout.textContent = "Loaded: " + stage.width + "×" + stage.height + " — tap an FX. Nothing uploads; the math runs in this page.";
+        };
+        img.onerror = function () { readout.textContent = "That file didn't load as an image — try a JPG or PNG."; };
+        img.src = URL.createObjectURL(file);
+      }
+
+      /* ---- The FX rack — every effect is one loop over pixels ---- */
+
+      function applyFX() {
+        if (!original) { return; }
+        var t = strength.value / 100;   // the slider, as a 0..1 mix
+        var out = ctx.createImageData(stage.width, stage.height);
+        var src = original.data, dst = out.data;
+
+        var useGreen = !!activeFX.green;
+        var useGray  = !!activeFX.grayscale;
+        var useContr = !!activeFX.contrast;
+        var useVHS   = !!activeFX.vhs;
+        var useInv   = !!activeFX.invert;
+
+        for (var y = 0; y < stage.height; y++) {
+          for (var x = 0; x < stage.width; x++) {
+            var i = (y * stage.width + x) * 4;
+
+            // VHS drift: sample the RED channel a few pixels left, BLUE a few right (the glitch move)
+            var rIdx = i, bIdx = i;
+            if (useVHS) {
+              var dx = Math.round(4 * t);
+              var rx = Math.max(0, x - dx), bx = Math.min(stage.width - 1, x + dx);
+              rIdx = (y * stage.width + rx) * 4;
+              bIdx = (y * stage.width + bx) * 4;
+            }
+
+            var r = src[rIdx], g = src[i + 1], b = src[bIdx + 2];
+
+            // grayscale: luminosity weights — how eyes weigh color (0.3/0.6/0.1)
+            if (useGray) {
+              var lum = 0.3 * r + 0.6 * g + 0.1 * b;
+              r = r + (lum - r) * t; g = g + (lum - g) * t; b = b + (lum - b) * t;
+            }
+
+            // Hustle tint: blend toward the green by t
+            if (useGreen) {
+              r = r + (HUSTLE_GREEN.r - r) * t;
+              g = g + (HUSTLE_GREEN.g - g) * t;
+              b = b + (HUSTLE_GREEN.b - b) * t;
+            }
+
+            // contrast punch: push values away from mid-gray
+            if (useContr) {
+              var f = 1 + 1.5 * t;
+              r = (r - 128) * f + 128; g = (g - 128) * f + 128; b = (b - 128) * f + 128;
+            }
+
+            // invert
+            if (useInv) { r = 255 - r; g = 255 - g; b = 255 - b; }
+
+            dst[i]     = Math.max(0, Math.min(255, r));
+            dst[i + 1] = Math.max(0, Math.min(255, g));
+            dst[i + 2] = Math.max(0, Math.min(255, b));
+            dst[i + 3] = src[i + 3];   // alpha stays — transparency survives
+          }
+        }
+        ctx.putImageData(out, 0, 0);
+      }
+
+      /* ---- Buttons: toggle, re-render ---- */
+      var fxBtns = document.querySelectorAll(".fx-btn");
+      function syncButtons() {
+        for (var i = 0; i < fxBtns.length; i++) {
+          var fx = fxBtns[i].getAttribute("data-fx");
+          fxBtns[i].classList.toggle("on", !!activeFX[fx]);
+        }
+      }
+      document.querySelector(".fx-bar").addEventListener("click", function (ev) {
+        var btn = ev.target.closest("[data-fx]");
+        if (!btn || !original) { return; }
+        var fx = btn.getAttribute("data-fx");
+        if (fx === "reset") {
+          activeFX = {};
+          ctx.putImageData(original, 0, 0);
+          syncButtons();
+          readout.textContent = "Back to the original — fresh start.";
+          return;
+        }
+        activeFX[fx] = !activeFX[fx];
+        syncButtons();
+        applyFX();
+        var onList = Object.keys(activeFX).filter(function (k) { return activeFX[k]; });
+        readout.textContent = onList.length
+          ? "On the rack: " + onList.join(" + ") + " · strength " + strength.value + "% — the loop just walked " + (stage.width * stage.height).toLocaleString() + " pixels."
+          : "Rack empty — tap an FX.";
+      });
+
+      strength.addEventListener("input", function () {
+        document.getElementById("fx-strength-val").textContent = strength.value + "%";
+        applyFX();
+      });
+
+      /* ---- Export ---- */
+      document.getElementById("btn-download").addEventListener("click", function () {
+        if (!original) { return; }
+        var a = document.createElement("a");
+        a.href = stage.toDataURL("image/png");
+        a.download = "fed-fx-clip.png";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+
+      /* ---- Data-saver ---- */
+      document.getElementById("btn-saver").addEventListener("click", function () {
+        document.documentElement.classList.toggle("data-saver");
+      });
+
+    })();
+  </script>
+</body>
+</html>

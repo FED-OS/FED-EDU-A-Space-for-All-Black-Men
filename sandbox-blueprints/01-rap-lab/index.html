@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rap Lab — the sandbox blueprint for brothers who already write bars. Rhyme finder, bar counter, verse builder. Works offline, phone-first.">
+  <title>Rap Lab — FED-EDU Sandbox</title>
+  <link rel="manifest" href="../../core-system/manifest.json">
+  <style>
+    /* Cyber-Hustle theme — compressed for the sandbox (root styles.css is the full version) */
+    :root {
+      --bg: #0a0a0a; --panel: #111311; --ink: #e8f5e9; --muted: #9e9e9e;
+      --green: #00ff66; --border: #1f241f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 12px; background: var(--bg); color: var(--ink);
+      font-family: "Courier New", Courier, monospace; font-size: 16px; line-height: 1.6;
+      max-width: 720px; margin: 0 auto;
+    }
+    header { border-bottom: 2px solid var(--green); padding-bottom: 10px; margin-bottom: 14px; }
+    h1 { color: var(--green); font-size: 1.35rem; margin: 0; }
+    .tagline { color: var(--muted); font-size: 0.82rem; margin: 4px 0 0 0; }
+
+    .card { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 14px; margin-bottom: 14px; }
+    .card h2 { color: var(--green); font-size: 1rem; margin: 0 0 8px 0; }
+    .card p { margin: 0 0 8px 0; font-size: 0.9rem; }
+    .muted { color: var(--muted); font-size: 0.8rem; }
+
+    textarea {
+      width: 100%; min-height: 160px; background: #000; color: var(--green);
+      border: 1px solid var(--border); font-family: inherit; font-size: 0.95rem;
+      padding: 10px; resize: vertical;
+    }
+    textarea:focus { outline: 1px solid var(--green); }
+
+    .btn {
+      background: var(--green); color: #000; border: none; font-family: inherit;
+      font-weight: bold; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 6px 6px 6px 0;
+    }
+    .btn-outline {
+      background: transparent; color: var(--green); border: 1px solid var(--green);
+      font-family: inherit; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 6px 6px 6px 0;
+    }
+    .stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .stat {
+      background: #000; border: 1px solid var(--border); padding: 8px 12px;
+      font-size: 0.85rem; flex: 1; min-width: 120px;
+    }
+    .stat b { color: var(--green); display: block; font-size: 1.1rem; }
+
+    .result { margin-top: 10px; font-size: 0.9rem; }
+    .result .word { background: #000; border: 1px solid var(--border); border-left: 2px solid var(--green); padding: 6px 10px; display: inline-block; margin: 3px; }
+    .rhyme-list { columns: 2; column-gap: 12px; }
+    @media (min-width: 600px) { .rhyme-list { columns: 3; } }
+
+    /* data-saver light mode — the metered-3G brother (core-system/styles.css pattern) */
+    html.data-saver {
+      --bg: #f4f4f4; --panel: #fff; --ink: #111; --muted: #555;
+      --green: #00884a; --border: #ccc;
+    }
+    html.data-saver textarea { background: #fff; color: #006633; }
+    html.data-saver .stat, html.data-saver .result .word { background: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎤 Rap Lab</h1>
+    <p class="tagline">You already write bars. This lab turns that skill into code skill — one rhyme at a time.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Write a bar, get the rhyme tech readout</h2>
+      <p>Type your bar below. The lab counts syllables, finds the last word, and pulls rhymes from the same sound family — the same way your ear does it, but with receipts you can see.</p>
+      <textarea id="bar-input" placeholder="Type a bar. Any bar. The lab does the rest.&#10;&#10;Example: I been stacking up these bricks like I'm playing Minecraft" spellcheck="false"></textarea>
+      <div class="stat-row" id="stats"></div>
+      <div class="result" id="rhymes"></div>
+    </section>
+
+    <section class="card">
+      <h2>The verse builder</h2>
+      <p>Paste a whole verse (16 bars, one per line). The lab counts bars, syllables per bar, flags bars that run long, and saves your draft on THIS device — nothing leaves your phone (SECURITY.md rules).</p>
+      <textarea id="verse-input" placeholder="One bar per line..." spellcheck="false"></textarea>
+      <div class="actions">
+        <button class="btn" id="btn-analyze" type="button">📊 Analyze verse</button>
+        <button class="btn-outline" id="btn-clear" type="button">🧹 Clear</button>
+        <button class="btn-outline" id="btn-saver" type="button">🌗 Data-saver</button>
+      </div>
+      <div class="result" id="verse-report"></div>
+    </section>
+
+    <section class="card">
+      <h2>What you're actually learning</h2>
+      <p>Every feature here is a real programming concept wearing street clothes:</p>
+      <p>
+        • <b>Syllable counting</b> = string processing + regex (the same tech behind every text analyzer you've ever seen)<br>
+        • <b>Rhyme matching</b> = data structures — matching words by their ENDING sound is how autocomplete and search engines work<br>
+        • <b>Verse analysis</b> = arrays + loops — a verse is just an array of bars, and the report is a loop over that array
+      </p>
+      <p class="muted">Open audio-core.js (this folder) — the whole lab is one readable file. Read it after you use it. It's the same skill you already have: hearing structure in bars, except now you can see the code doing the hearing.</p>
+    </section>
+
+    <section class="card">
+      <h2>Take it further (the rungs)</h2>
+      <p><b>Rung 1 (this week):</b> Ship this lab as YOUR repo — fork it, change the colors to yours, add one rhyme family of your own words to the data, deploy on GitHub Pages. That's a merged PR. 5 tickets.</p>
+      <p><b>Rung 2 (this month):</b> Add a feature: a "punchline detector" that flags lines with double meanings (hint: search for words with two entries in the rhyme data). That's a real feature on a real repo. 10 tickets (guide-level).</p>
+      <p><b>Rung 3 (the hustle):</b> Turn it into the artist promo hustle — "I build promo pages with your best bars interactive for $150 flat" (rate floors — PRICING.md). Your lab becomes your portfolio piece in the pitch.</p>
+    </section>
+    <p class="muted">Sandbox blueprint 01 of 04 · FED-EDU · All skill levels welcome — spawn to OG. Full rung ladder in the project coach's file (fedpromptly-coach/prompts/project_generator.txt).</p>
+  </main>
+
+  <script src="audio-core.js"></script>
+</body>
+</html>
