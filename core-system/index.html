@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FED-EDU — The Block</title>
+  <meta name="description" content="AI, coding, and tech for every Black man — phone-only to full rig. The block that builds together.">
+  <meta name="theme-color" content="#00ff66">
+
+  <!-- PWA identity (see ADR-007) -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- The block's shared theme (root styles.css) -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Icon placeholders: swap in real PNGs (192/512) before launch — build.yml flags oversized ones -->
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="site-header">
+      <p class="tag">FED-EDU</p>
+      <h1>The Block</h1>
+      <p class="tagline">Every Black man. Every starting point. One block.</p>
+    </header>
+
+    <nav class="quick-nav" aria-label="Main">
+      <a class="btn" href="#spawn">🏁 Where you starting from?</a>
+      <a class="btn btn-outline" href="#wings">🗺️ The wings</a>
+      <a class="btn btn-outline" href="#elevator">⚡ 60-second pitch</a>
+    </nav>
+
+    <section id="spawn" class="card">
+      <h2>Where you starting from?</h2>
+      <p class="muted">Every row below works. Nobody's situation disqualifies them here.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Your situation</th><th>Your first move</th></tr></thead>
+          <tbody>
+            <tr><td>📱 Phone only</td><td><a href="../wiki/Getting-Online/Free-WiFi-Spots-and-Libraries.md">Free WiFi &amp; libraries</a> → everything here works on phones</td></tr>
+            <tr><td>🔌 Old PC, no internet</td><td><a href="../wiki/Getting-Online/EasyTether-Basics.md">EasyTether Basics</a> — internet through your phone's cable</td></tr>
+            <tr><td>🆔 Brand new to GitHub</td><td><a href="../wiki/First-Steps/Make-a-GitHub-Account.md">Make a GitHub Account</a> → <a href="../wiki/First-Steps/Push-Your-First-Change.md">Push your first change</a></td></tr>
+            <tr><td>🧱 Never touched code</td><td><a href="../wiki/Building/Your-First-Website.md">Your First Website</a> — real-life Minecraft, brick one</td></tr>
+            <tr><td>🏠 Home from incarceration</td><td><a href="../FAQ.md">FAQ</a> (the record answer first) → <a href="../.github/ISSUE_TEMPLATE/01_hustle_spawn.md">spawn ticket</a></td></tr>
+            <tr><td>🔨 Already build — here to give back</td><td><a href="../CONTRIBUTING.md">CONTRIBUTING</a> + <a href="../MAINTAINERS.md">wings marked 🟡 Seeking</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="wings" class="card">
+      <h2>The wings — every door on the block</h2>
+      <div class="grid">
+        <a class="card-link" href="../urban-dictionary/"><h3>📖 Urban Dictionary</h3><p>Tech jargon → plain talk. No gatekept vocabulary.</p></a>
+        <a class="card-link" href="../excellence-matrix/"><h3>🏆 Excellence Matrix</h3><p>Seven boards: leaders to streamers. Where brothers stand on giants.</p></a>
+        <a class="card-link" href="../hustle-index/"><h3>💼 Hustle Index</h3><p>The marketplace. Skills, rate floors, real work.</p></a>
+        <a class="card-link" href="../fed-comm-dm/"><h3>💬 Fed-Comm DM</h3><p>The block's own DMs — the founder's fix for gists and community tabs.</p></a>
+        <a class="card-link" href="../courses-and-guides/"><h3>🎓 Courses &amp; Guides</h3><p>EasyTether mastery, first websites, the corporate ship.</p></a>
+        <a class="card-link" href="../sandbox-blueprints/"><h3>🧪 Sandbox Blueprints</h3><p>Rap Lab, Football Stats, Media FX, Streamer Tools — remix, don't stare.</p></a>
+        <a class="card-link" href="../prompts/"><h3>🧠 Prompts Library</h3><p>Ready-made AI prompts: translator, coaches, project generator, résumé hustle.</p></a>
+        <a class="card-link" href="../wiki/Home.md"><h3>📚 The Wiki</h3><p>The full ladder: getting online → first steps → building → hustling.</p></a>
+        <a class="card-link" href="../physical-raffles/"><h3>🎟️ Raffles</h3><p>Refurb PCs for brothers who build. Public ledger, livestreamed draws.</p></a>
+      </div>
+    </section>
+
+    <section id="elevator" class="card">
+      <h2>⚡ The 60-second pitch</h2>
+      <blockquote>
+        <p><strong>FED-EDU = (Urban Dictionary + GitHub) × FED-OS × fedpromptly.</strong></p>
+        <p>We get Black men into AI, coding, and tech — ALL of us: Jamaican, Haitian, African, American, British; gay and trans brothers; young and old; locked up and coming home; homeless and rebuilding; kids who need somewhere to be. Not by melanin alone — a white boy who grew up on this block is more "of it" than a stranger with the darkest skin. The block is culture and love, not color.</p>
+        <p>Hardware is never the disqualifier: phone-only brothers are full members. Scrap-PC brothers run EasyTether. The site obeys the <strong>3-second rule</strong> — every page loads fast on tethered 3G, because that's who we serve first.</p>
+        <p>Kunta Kinte had his name beaten out of him. MLK left us an economic blueprint. Obama showed the system can be mastered. <strong>We're the chapter they never got to write.</strong></p>
+      </blockquote>
+      <p class="muted">Full manifesto: <a href="../README.md">README.md</a> · Plain-terms overview: <a href="../SUMMARY.md">SUMMARY.md</a></p>
+    </section>
+
+    <section class="card">
+      <h2>📲 Install the block as an app</h2>
+      <p>Phone browser menu (⋮) → <strong>Add to Home Screen</strong>. Full-screen, works offline on visited pages, zero app store. That's the PWA move — ADR-007.</p>
+    </section>
+
+    <footer class="site-footer">
+      <p class="muted">Built by brothers, for brothers. MIT licensed — fork it, own it, ship it.</p>
+      <p class="muted"><a href="../README.md">Manifesto</a> · <a href="../CODE_OF_CONDUCT.md">Six Rules</a> · <a href="../SUPPORT.md">Support</a> · <a href="../SECURITY.md">Security</a></p>
+      <p class="muted small">FED-EDU 🏁 — Light the torch.</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

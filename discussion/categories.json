@@ -1,0 +1,88 @@
+{
+  "note": "FED-EDU Discussions configuration — mirrors the categories we set up in GitHub's Discussions tab (Settings → Discussions → New category). This file is our record of the block's porch layout. When GitHub's UI lets you import/export discussion categories, this is the source of truth. Keep them in sync.",
+  "setup_instructions": [
+    "Enable Discussions: repo Settings → General → Features → check Discussions",
+    "Create these categories IN ORDER (order matters for the porch flow): Announcements, Introduce Yourself, Q&A, Show and Tell, Ideas, General",
+    "Pin the three pinned posts from discussion/pinned/ (see README in that folder)",
+    "Set Announcements to 'Only maintainers can start' — everything else open to all members",
+    "Link the welcome readme: the first post brothers see is discussion/pinned/welcome-to-the-block.md content"
+  ],
+  "categories": [
+    {
+      "name": "Announcements",
+      "emoji": "📢",
+      "description": "Official block news — raffles, releases, town halls. Maintainers only.",
+      "who_can_post": "maintainers_only",
+      "format": "discussion"
+    },
+    {
+      "name": "Introduce Yourself",
+      "emoji": "🏁",
+      "description": "New brothers post here first. City + hardware + what you're trying to build. The welcome agent greets every intro within 24 hours.",
+      "who_can_post": "all_members",
+      "format": "discussion"
+    },
+    {
+      "name": "Q&A",
+      "emoji": "❓",
+      "description": "Any question, any level. Rule 1 of the block: no stupid questions. Mark answers that solved it so the next brother finds them fast.",
+      "who_can_post": "all_members",
+      "format": "q_and_a"
+    },
+    {
+      "name": "Show and Tell",
+      "emoji": "🚢",
+      "description": "Built something? ANYTHING? Post it. First buttons count. Broken-but-learned counts double.",
+      "who_can_post": "all_members",
+      "format": "discussion"
+    },
+    {
+      "name": "Ideas",
+      "emoji": "💡",
+      "description": "Pitches for the block: features, courses, hustles, partnerships. Ideas are contributions — they earn tickets.",
+      "who_can_post": "all_members",
+      "format": "discussion"
+    },
+    {
+      "name": "General",
+      "emoji": "🧢",
+      "description": "The porch. Life, wins, Ls, grief, game night, whatever's heavy or light. Brothers here.",
+      "who_can_post": "all_members",
+      "format": "discussion"
+    }
+  ],
+  "pinned_posts": [
+    {
+      "title": "🏁 Welcome to the Block — Start Here",
+      "file": "pinned/welcome-to-the-block.md",
+      "category": "Announcements",
+      "note": "Pin first. This is the front door."
+    },
+    {
+      "title": "🗺️ Introduce Yourself (The Official Thread)",
+      "file": "pinned/introduce-yourself.md",
+      "category": "Introduce Yourself",
+      "note": "Pin second. Brothers post intros as replies/comments on this thread to keep them all findable in one place."
+    },
+    {
+      "title": "🎟️ How to Earn Raffle Tickets (The Full Ledger)",
+      "file": "pinned/how-to-earn-raffle-tickets.md",
+      "category": "Announcements",
+      "note": "Pin third. Money questions are the most-asked on any block."
+    }
+  ],
+  "discussion_template_posts": [
+    {
+      "title": "New Member Intro Template",
+      "file": "templates/new_member_intro.md",
+      "category": "Introduce Yourself",
+      "note": "Brothers copy this shape for their intro post."
+    },
+    {
+      "title": "Project Help Request Template",
+      "file": "templates/project_help_request.md",
+      "category": "Q&A",
+      "note": "Use when asking for help on a project — gives helpers the info they need on the first reply."
+    }
+  ]
+}

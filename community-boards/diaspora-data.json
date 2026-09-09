@@ -1,0 +1,88 @@
+{
+  "what_this_is": "The data behind diaspora-map.js. Regions and hubs where FED-EDU brothers are building. Edit counts as brothers join — PR the update, build.yml validates.",
+
+  "regions": [
+    {
+      "key": "north-america",
+      "name": "North America",
+      "tagline": "USA and Canada — Atlanta, NYC, LA, Chicago, Toronto, and every city between.",
+      "hubs": [
+        { "city": "Atlanta, GA", "note": "The anchor hub. First courses tested here; barbershop commission client lives here.", "brothers": 4 },
+        { "city": "New York City", "note": "Borough by borough — the Bronx energy is streaming energy.", "brothers": 3 },
+        { "city": "Chicago, IL", "note": "The I PROMISE-style school pipeline dream lives in this hub's roadmap.", "brothers": 2 },
+        { "city": "Los Angeles, CA", "note": "Film and media brothers — the Hollywood matrix runs through this hub.", "brothers": 2 },
+        { "city": "Toronto, ON", "note": "The Canadian bridge — Caribana to the code.", "brothers": 1 }
+      ]
+    },
+    {
+      "key": "caribbean",
+      "name": "The Caribbean",
+      "tagline": "Jamaica, Haiti, Trinidad — the islands raised half this community's grandfathers.",
+      "hubs": [
+        { "city": "Kingston, Jamaica", "note": "Bolt and Bogle country. Tether-first hub — most brothers here are phone-only by default.", "brothers": 5 },
+        { "city": "Port-au-Prince, Haiti", "note": "Toussaint's island. First-run translation: the coach prompts speak plain, and the community glossary carries the Kreyòl.", "brothers": 3 },
+        { "city": "Port of Spain, Trinidad", "note": "Carnival math is league math — the football-stats blueprint found its first users here.", "brothers": 2 }
+      ]
+    },
+    {
+      "key": "west-africa",
+      "name": "West Africa",
+      "tagline": "Nigeria, Ghana, Senegal — Kunta's coast and Nkrumah's country.",
+      "hubs": [
+        { "city": "Lagos, Nigeria", "note": "Biggest potential hub on the map. Phone-first by culture — the PWA strategy was designed with Lagos in mind.", "brothers": 4 },
+        { "city": "Accra, Ghana", "note": "Nkrumah's city. The 'learn away, build home' pattern — brothers in the diaspora building for family businesses back home.", "brothers": 3 },
+        { "city": "Dakar, Senegal", "note": "French-language bridge hub. The urban-dictionary translation layer runs French + English here.", "brothers": 1 }
+      ]
+    },
+    {
+      "key": "east-africa",
+      "name": "East Africa",
+      "tagline": "Ethiopia, Kenya, Tanzania — the origin line runs through here.",
+      "hubs": [
+        { "city": "Nairobi, Kenya", "note": "Obama's father's line runs through this soil. M-Pesa culture means mobile money is native — the hustle-index fees model made sense here first.", "brothers": 3 },
+        { "city": "Addis Ababa, Ethiopia", "note": "Never colonized. The blueprint: infrastructure built own-way. FED-EDU's no-dependency architecture is the same instinct.", "brothers": 2 },
+        { "city": "Kampala, Uganda", "note": "Youngest population on the map — the 14-year-old brothers entry point.", "brothers": 1 }
+      ]
+    },
+    {
+      "key": "europe",
+      "name": "Europe & UK",
+      "tagline": "London, Paris, Birmingham — the Windrush line and the new wave.",
+      "hubs": [
+        { "city": "London, UK", "note": "Windrush descendants coding in the city their grandfathers rebuilt after the war. South London hub forming.", "brothers": 4 },
+        { "city": "Birmingham, UK", "note": "The second UK city — the Caribbean community here mirrors the Kingston hub.", "brothers": 2 },
+        { "city": "Paris, France", "note": "Banlieue brothers — the French translation layer's first users. Same mission, different gatekeepers.", "brothers": 2 }
+      ]
+    },
+    {
+      "key": "global-south",
+      "name": "South America & Beyond",
+      "tagline": "Brazil, Colombia — the diaspora the maps forget. FED-EDU doesn't.",
+      "hubs": [
+        { "city": "São Paulo, Brazil", "note": "Pelé's country. The Portuguese translation layer lives in this hub's roadmap. Largest African-descended population outside Africa.", "brothers": 2 },
+        { "city": "Bogotá, Colombia", "note": "Palenque descendants — the first free Black town in the Americas. The Spanish layer's anchor.", "brothers": 1 }
+      ]
+    },
+    {
+      "key": "incarcerated",
+      "name": "Inside The System",
+      "tagline": "Brothers with time and a tablet, or coming home soon. The mail-in program runs through this row.",
+      "hubs": [
+        { "city": "Mail-In Program", "note": "Printed courses + offline HTML files on approved tablets. The physical-raffles safe-shipping checklist covers the physical leg. 15 brothers on the waitlist as of the seed data.", "brothers": 15 },
+        { "city": "Reentry Bridge", "note": "Returning citizens: resume optimizer (Ban-the-Box playbook), the hustle-index first commission priority. Toussaint time applies — there is no too-late.", "brothers": 6 }
+      ]
+    },
+    {
+      "key": "everywhere",
+      "name": "Everywhere Else",
+      "tagline": "The brothers whose marker is a time zone, not a city — homeless brothers on library terminals, road brothers, the scattered.",
+      "hubs": [
+        { "city": "Library Terminals", "note": "The hardware_profiler.py knows the library-terminal profile: no installs, USB stick workflow, 60-minute session limits. The courses are built for the timer.", "brothers": 7 },
+        { "city": "The Road", "note": "Truckers, military, touring crews — the PWA offline cache means the lessons ride along.", "brothers": 3 }
+      ]
+    }
+  ],
+
+  "the_count_note": "Counts in this file are seed numbers for launch. The nightly leaderboard_sync.yml workflow and the DAP culture are the real tally — this map updates by PR as hubs report.",
+  "membership_reminder": "The mission is ALL Black men — Jamaicans, Haitians, Africans, Americans, British; gay and trans brothers; young and old; incarcerated and free; housed and unhoused; every situation. Cultural alignment over melanin math. If a brother's heart is in this work, his marker has a spot on this map."
+}

@@ -1,0 +1,86 @@
+/* FED-EDU Core System styles — layer sits ON TOP of the root styles.css
+ * (root = the block's design language; this file = core app specifics only).
+ * Keep this file SMALL. The 3-second rule applies to CSS too.
+ */
+
+/* Connection note: the gentle banner app.js fills in for slow/offline brothers */
+#connection-note {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: block;
+  padding: 8px 14px;
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--accent, #00ff66);
+  background: rgba(10, 10, 10, 0.92);
+  border-bottom: 1px solid currentColor;
+}
+#connection-note[hidden] { display: none; }
+
+/* Light mode (data-saver class, added by app.js): strip the flourishes,
+   keep the content. The decoration is a luxury; the block is not. */
+body.data-saver .quick-nav { display: none; }      /* nav buttons are redundant on slow loads — the page anchors still work */
+body.data-saver blockquote {
+  border-left: 3px solid var(--accent, #00ff66);
+  background: none;
+}
+body.data-saver .grid { grid-gap: 10px; }
+
+/* The wing cards on the homepage: full-card click targets (fingers, not mice) */
+.card-link {
+  display: block;
+  padding: 14px;
+  border: 1px solid var(--border, #222);
+  border-radius: 8px;
+  background: var(--card, #111);
+  text-decoration: none;
+  color: inherit;
+  min-height: 88px;             /* 44px touch target doubled — thumb-friendly */
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.card-link h3 { margin: 0 0 6px; font-size: 1rem; color: var(--accent, #00ff66); }
+.card-link p  { margin: 0; font-size: 0.85rem; color: var(--muted, #aaa); line-height: 1.35; }
+.card-link:hover,
+.card-link:focus-visible {
+  border-color: var(--accent, #00ff66);
+  transform: translateY(-2px);
+  outline: none;
+}
+.card-link:active { transform: translateY(0); }
+
+/* Quick nav row: wraps on small phones instead of overflowing (360px rule) */
+.quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+.quick-nav .btn { flex: 1 1 auto; text-align: center; }
+
+/* The pitch blockquote: the manifesto in miniature */
+blockquote {
+  margin: 0;
+  padding: 16px;
+  border-left: 4px solid var(--accent, #00ff66);
+  background: rgba(0, 255, 102, 0.04);
+  border-radius: 0 8px 8px 0;
+}
+blockquote p { margin: 0 0 12px; }
+blockquote p:last-child { margin-bottom: 0; }
+blockquote strong { color: var(--accent, #00ff66); }
+
+/* Small-phone pass (the 360px reference device — see BUILD.md) */
+@media (max-width: 380px) {
+  .card-link { min-height: 72px; padding: 12px; }
+  blockquote { padding: 12px; }
+}
+
+/* Reduced motion: brothers who set it get zero animation. Respect the phone, respect the man. */
+@media (prefers-reduced-motion: reduce) {
+  .card-link, .card-link:hover, .card-link:focus-visible, .card-link:active {
+    transition: none;
+    transform: none;
+  }
+}
