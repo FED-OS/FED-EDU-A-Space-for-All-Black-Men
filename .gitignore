@@ -1,7 +1,86 @@
-node_modules/
-dist/
-.env
-.env.*
-!.env.example
-.manus-logs/
+# FED-EDU .gitignore — keeps junk out the stash
+
+# ─── OS Junk ───
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ─── Editor Junk ───
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# ─── Node / Build Junk ───
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.cache/
+.parcel-cache/
+.vite/
+
+# ─── Python Junk ───
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+.env
+.Python
+
+# ─── Secrets & Credentials — NEVER COMMIT THESE ───
+# Your GitHub tokens, API keys, Supabase keys, anything that opens your doors.
+.env
+.env.local
+.env.development
+.env.production
+*.pem
+*.key
+secrets/
+credentials.json
+service-account.json
+config/secrets.*
+!.env.example
+
+# ─── Logs & Temp ───
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+
+# ─── Audio/Video scratch files from the Rap Lab & Media FX ───
+*.wav.tmp
+*.mp3.tmp
+raw_audio/
+render_cache/
+
+# ─── Local databases & exports ───
+*.sqlite
+*.db
+*.csv.export
+exports/
+
+# ─── Raffle ticket ledgers (regenerated from verified GitHub data) ───
+physical-raffles/private_ledgers/
+
+# ─── AI agent local scratch ───
+.claude/
+.agents/cache/
+fedpromptly-cache/
