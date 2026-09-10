@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set Up Ko fi — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: Set Up Ko fi">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>☕ Set Up Ko-fi — Take Payments Without a Bank Gatekeeping You</h1>
+<p><strong>Plain terms:</strong> Ko-fi is the simplest way to take money online: a free page with a link, people tip or pay you, money lands in your PayPal/Stripe. No monthly fee, no application, no &quot;we reviewed your business.&quot; For brothers without traditional banking, this is often the FIRST door — and it opens today.</p>
+<h2>🧠 Why Ko-fi and Not the Others</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>The gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stripe directly</td>
+<td>Needs a bank account in good standing, business verification</td>
+</tr>
+<tr>
+<td>PayPal Goods &amp; Services for freelancing</td>
+<td>Fees + dispute risk + account freezes on new sellers</td>
+</tr>
+<tr>
+<td>CashApp/Venmo</td>
+<td>Great for the block, but no storefront, no receipts, no tips page</td>
+</tr>
+<tr>
+<td><strong>Ko-fi</strong></td>
+<td><strong>An email address. That's basically it.</strong> Connects to PayPal/Stripe later, but you start with the page.**</td>
+</tr>
+</tbody>
+</table>
+<p>Ko-fi = the storefront, CashApp/Venmo = the pipes. Start with Ko-fi's page, connect whichever pipe you actually have.</p>
+<h2>🪜 The Steps (15 minutes)</h2>
+<h3>Step 1 — Create the page</h3>
+<p>Go to <code>ko-fi.com</code> → <strong>Sign up</strong> (email + password). Choose your handle — this becomes your link: <code>ko-fi.com/yourhandle</code>. Same naming care as your GitHub username (see <a href="../First-Steps/Make-a-GitHub-Account.md.html">Make a GitHub Account</a>): clean, professional, yours.</p>
+<h3>Step 2 — Set the essentials</h3>
+<p>On your page setup: a short blurb (&quot;Atlanta builder. Websites for local hustles, fixed fast and clean.&quot;), a photo or your logo, and your goal (optional). Keep it real — brothers can smell a fake story and they respect a true one.</p>
+<h3>Step 3 — Turn on Shop (if you're selling)</h3>
+<p>Free Ko-fi includes basic Shop items. Add your first offering using the block's rate floors: &quot;One-page site — $150&quot; or &quot;Website fix-up — $60/hr, $45 min.&quot; Every price you post publicly holds the floor for every brother behind you (see <a href="Price-Your-Work.md.html">Price Your Work</a>).</p>
+<h3>Step 4 — Connect the money pipe</h3>
+<p>Ko-fi → Settings → Payouts → connect PayPal (easiest start; prepaid PayPal accounts work for brothers without banks) or Stripe (needs a bank — add it when you have one; CashApp direct deposit counts as a bank for Stripe purposes for many users — verify for your situation).</p>
+<h3>Step 5 — Put the link EVERYWHERE</h3>
+<ul>
+<li>Your GitHub profile bio (first line)</li>
+<li>Your Hustle Index listing (<code>contact</code> field)</li>
+<li>Your site's footer</li>
+<li>Link-in-bio pages</li>
+</ul>
+<p>The link only works where people see it.</p>
+<h2>🔗 The Official FED-EDU Ko-fi Button (for your site)</h2>
+<p>The block ships a ready-made button snippet — grab it from <code>support-the-block/kofi-button.html</code>, swap <code>YOUR_USERNAME</code> for your handle, drop it in your footer. Green on black, matches the theme, 2KB total. (This is the same button pattern as the main README — replace YOUR_USERNAME before shipping, or the build check (build.yml) will flag it.)</p>
+<h2>⚠️ Real Talk</h2>
+<ul>
+<li><strong>Ko-fi tips are &quot;support,&quot; not &quot;wages.&quot;</strong> Money through Ko-fi can land as gifts/donations rather than formal invoices — great for tips and donations, less ideal for big client contracts. For $500+ client work, also learn a simple invoice habit (a Google Doc with line items, dates, and both names signed counts; a real invoice tool like Wave is free and does it cleaner).</li>
+<li><strong>Taxes are real.</strong> Money in is income. Track every payment (the Ko-fi dashboard exports history — do it monthly). &quot;I didn't know&quot; doesn't work with the IRS, and building wealth means building clean books (see <a href="../../docs/PRICING.md.html">PRICING.md</a> — the recurring revenue section covers bookkeeping habits).</li>
+<li><strong>Never put your Ko-fi link in the main FED-EDU repo's donation button.</strong> That button belongs to the block's own support fund (support-the-block/). Yours goes on YOUR pages and YOUR listings.</li>
+<li><strong>Watch out for fake &quot;buyers.&quot;</strong> Scammers DM new sellers with fake payment screenshots. Rule: money visible in YOUR account before work starts. No exceptions, no matter the story.</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Create your Ko-fi page now (15 minutes), connect whatever pipe you have, and add the link to your GitHub bio + Hustle Index draft. Then ship one thing priced at or above the floor. The first dollar a brother earns from code hits different — protect that moment by charging what it's worth.</p>
+<p><em>Previous rung: <a href="List-on-Hustle-Index.md.html">List on Hustle Index</a> · Next rung: <a href="Price-Your-Work.md.html">Price Your Work →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

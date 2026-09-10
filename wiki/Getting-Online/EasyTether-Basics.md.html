@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyTether Basics — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: EasyTether Basics">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>🔌 EasyTether Basics — Internet Through Your Phone</h1>
+<p><strong>Plain terms:</strong> Your old PC has no WiFi (or broken WiFi). Your phone has internet. EasyTether is the USB cable trick that gives your PC internet THROUGH the phone. One cable, problem solved.</p>
+<h2>🧠 What You Need</h2>
+<table>
+<thead>
+<tr>
+<th>Thing</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Android phone</td>
+<td>With working internet (data plan or WiFi)</td>
+</tr>
+<tr>
+<td>USB cable</td>
+<td>The charger cable — same one.</td>
+</tr>
+<tr>
+<td>Old PC</td>
+<td>Windows 7/8/10/11 or Linux</td>
+</tr>
+<tr>
+<td>~$10</td>
+<td>One-time license for EasyTether full version (free trial works too)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>iPhone brothers:</strong> iPhone USB tethering is built-in (Settings → Personal Hotspot → &quot;Allow Others&quot; + USB cable). This page focuses on Android because that's what most of the block uses, but the concept is identical.</p>
+<h2>🪜 The Steps</h2>
+<h3>Step 1 — On the PHONE: Turn on USB Debugging</h3>
+<ol>
+<li>Open <strong>Settings → About Phone</strong></li>
+<li>Find <strong>Build Number</strong> and tap it <strong>7 times</strong> (I'm serious — seven)</li>
+<li>You'll see &quot;You are now a developer&quot; 🎉</li>
+<li>Go back → <strong>Settings → Developer Options</strong> → turn ON <strong>USB Debugging</strong></li>
+<li>When it asks to confirm, tap <strong>Allow</strong></li>
+</ol>
+<blockquote>
+<p><strong>Why 7 taps?</strong> Google hides developer mode so regular users don't break things. The 7 taps are you telling the phone &quot;I'm not a regular user no more.&quot; First digital chain you break today.</p>
+</blockquote>
+<h3>Step 2 — Install EasyTether</h3>
+<ul>
+<li><strong>On the PHONE:</strong> Install &quot;EasyTether&quot; from the Play Store (the one by <strong>Mobile Stream</strong>).</li>
+<li><strong>On the PC:</strong> Go to <code>easytether.com</code> in any browser, download the desktop app for your Windows version, install it.</li>
+</ul>
+<h3>Step 3 — Connect and Prove</h3>
+<ol>
+<li>Connect phone to PC with the USB cable.</li>
+<li>On the phone, a popup appears: <strong>&quot;Allow USB debugging?&quot;</strong> — check &quot;Always allow from this computer&quot; and tap <strong>Allow</strong>.</li>
+<li>Right-click the EasyTether icon in the PC system tray (bottom-right corner) → <strong>Connect Android</strong></li>
+<li>Wait ~10 seconds.</li>
+<li>Open a browser on the PC → try any website. <strong>If it loads, you're online through your phone.</strong> 🔓</li>
+</ol>
+<h2>⚠️ Real Talk (The Honest Section)</h2>
+<ul>
+<li><strong>The full version costs ~$10 one-time.</strong> The free version blocks secure websites (https). Most of the internet is https now, so the $10 is basically mandatory — but it's ONE-TIME, not monthly. Cheapest internet in the game for a PC.</li>
+<li><strong>Your phone's data plan is the limit.</strong> Tethering eats data like a hungry cousin. If you have 10GB/month, streaming videos through the PC will eat it in days. <strong>Web browsing and coding use almost nothing</strong> — a full day of GitHub work uses maybe 50MB.</li>
+<li><strong>Text-heavy beats video-heavy.</strong> This is WHY the whole FED-EDU site is text-first (ADR-001, the 3-second rule). We build for brothers on metered connections because that's who we serve.</li>
+<li><strong>Battery heat is normal.</strong> The phone charges off the PC while tethering — it'll get warm. That's fine. Unplug when you're done.</li>
+</ul>
+<h2>🔧 Troubleshooting (The &quot;It's Not Working&quot; Section)</h2>
+<p><strong>&quot;The popup never appeared on the phone&quot;</strong>
+→ USB debugging is off, or it's a charge-only cable. Charge-only cables look identical but carry no data. Try the cable that came with the phone, or another known-good one.</p>
+<p><strong>&quot;EasyTether says 'No device'&quot;</strong>
+→ Re-plug the USB cable. Then check Developer Options → USB Debugging is still ON (some phone updates turn it back off).</p>
+<p><strong>&quot;Connected but no internet&quot;</strong>
+→ Check the phone itself has internet. Open a website ON the phone first. No phone internet = no PC internet.</p>
+<p><strong>&quot;It worked yesterday&quot;</strong>
+→ Phone did a system update. Re-allow USB debugging popup (re-plug the cable).</p>
+<h2>🏁 Your Move</h2>
+<p>Grab your phone and PC, run the 3 steps above, and confirm you can load any website on the PC through the tether. That's your first infrastructure win — you just built your own internet connection out of a cable and stubbornness.</p>
+<p>Full course with more detail: <a href="../../courses-and-guides/01-easytether-mastery/README.md.html">courses-and-guides/01-easytether-mastery</a> — completing it earns <strong>10 raffle tickets</strong>.</p>
+<p><em>Next rung: <a href="Free-WiFi-Spots-and-Libraries.md.html">Free WiFi Spots and Libraries →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

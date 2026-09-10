@@ -1,0 +1,64 @@
+{
+  "blueprint": "01-rap-lab",
+  "name": "Rap Lab",
+  "version": "1.0.0",
+  "description": "The sandbox blueprint that turns bar-writing skill into code skill. Syllable counter, rhyme finder, verse analyzer — vanilla JS, phone-first, offline-capable.",
+
+  "the_pitch": {
+    "for_the_brother": "You already hear structure in bars — syllables, pockets, rhyme schemes. This lab shows you the code that does the same hearing. Same skill, new receipts.",
+    "for_the_client": "Interactive promo pages for artists — their best bars, live on their fans' phones. $150 one-pager floor (PRICING.md)."
+  },
+
+  "files": {
+    "index.html": "The lab UI — bar input with live readout, verse analyzer, the learning card that maps every feature to its programming concept, and the rungs ladder.",
+    "audio-core.js": "The whole engine in one readable file: RHYME_FAMILIES data, syllableCount(), lastWord(), findRhymes(), analyzeBar(), analyzeVerse(), UI wiring. Read it after using the lab — that's the design.",
+    "project-manifest.json": "This file — the blueprint's ID card: what it is, who it's for, how to ship it, what it teaches."
+  },
+
+  "tech": {
+    "framework": "none — vanilla only (ADR-001: if it can't run on a 2015 Android over USB tether, it doesn't ship)",
+    "dependencies": [],
+    "storage": "localStorage (drafts stay on the device — SECURITY.md: nothing leaves without your say-so)",
+    "offline": "drops into any PWA shell — pair with core-system/manifest.json + service-worker.js pattern (wiki/Building/Turn-Website-Into-App.md)",
+    "weight": "under 20KB total — the 3-second rule on tethered 3G (ADR-002)"
+  },
+
+  "concepts_taught": [
+    "string processing (regex vowel-grouping in syllableCount)",
+    "data structures (RHYME_FAMILIES — a dictionary keyed by ending sound)",
+    "arrays + loops (a verse IS an array of bars; the report is one loop over it)",
+    "functions composing functions (analyzeBar = syllableCount + lastWord + findRhymes)",
+    "event handling + debouncing (the live readout waits 250ms so 3G thumbs aren't punished)"
+  ],
+
+  "rungs": {
+    "rung_1": {
+      "what": "Fork this lab, make it yours — change the colors, add one rhyme family of your own words, deploy on GitHub Pages.",
+      "receipt": "A merged PR on your own repo. 5 raffle tickets.",
+      "time": "one week"
+    },
+    "rung_2": {
+      "what": "Add a real feature — the punchline detector (flag words with double meanings), a bar randomizer, a share-card export.",
+      "receipt": "Guide-level contribution. 10 raffle tickets.",
+      "time": "2-4 weeks"
+    },
+    "rung_3": {
+      "what": "The artist promo hustle — 'I build interactive promo pages for your bars, $150 flat' — this lab is the portfolio piece in the pitch.",
+      "receipt": "Client work at the rate floors. The hustle becomes the income.",
+      "time": "1-3 months"
+    }
+  },
+
+  "extend_it": {
+    "data_grows": "Add rhyme families to RHYME_FAMILIES in audio-core.js — every gap the lab reports is a contribution waiting to happen.",
+    "next_tech": "When rung 2 feels easy: save verses as JSON files (a repo of your bars, version-controlled — urban-dictionary/json_explained.md is the primer), then load them back. That's real app architecture.",
+    "pair_with": "fedpromptly-coach (drop the engine-connector.js tag in and the lab gains a Coach button) and prompts/project-generator/match_my_hobby_to_project.txt"
+  },
+
+  "block_rules_respected": [
+    "Six Rules: no drama, no scams, real receipts, build each other up, the block stays free, protect the young brothers",
+    "Rate floors: $150 one-pager / $500 multi-page / $50mo retainer (PRICING.md)",
+    "Plain talk: every jargon term defined on first use, in the code comments AND the UI copy",
+    "Offline-first: works with zero connection after first load — the metered-data brother is a first-class user"
+  ]
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free WiFi Spots and Libraries — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: Free WiFi Spots and Libraries">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>📚 Free WiFi Spots and Libraries — Getting Online When Money's Tight</h1>
+<p><strong>Plain terms:</strong> Tethering is the main play, but sometimes you need a fast connection for an hour (big downloads, a video course, uploading a big project). This page maps the free (and safe) places to get online — and how to use public computers without leaving your passwords behind.</p>
+<h2>🗺️ Where the Free Internet Lives</h2>
+<table>
+<thead>
+<tr>
+<th>Spot</th>
+<th>What you get</th>
+<th>The catch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Public library</strong></td>
+<td>Free computers + free WiFi + quiet + PRINTERS</td>
+<td>Sessions are time-limited (usually 60-90 min), may need a library card (free)</td>
+</tr>
+<tr>
+<td><strong>McDonald's / Starbucks / Chick-fil-A</strong></td>
+<td>Free WiFi, no purchase required at most</td>
+<td>Time limits at some locations, 2-hour courtesy norm</td>
+</tr>
+<tr>
+<td><strong>Community centers &amp; churches</strong></td>
+<td>Often free WiFi and sometimes free computer labs</td>
+<td>Hours vary — call ahead</td>
+</tr>
+<tr>
+<td><strong>Some laundromats &amp; barbershops</strong></td>
+<td>Free WiFi while you wait</td>
+<td>Ask, don't assume</td>
+</tr>
+<tr>
+<td><strong>City WiFi initiatives</strong></td>
+<td>Some cities run free public WiFi downtown</td>
+<td>Search &quot;[your city] free public WiFi&quot;</td>
+</tr>
+<tr>
+<td><strong>A brother's house</strong></td>
+<td>The original WiFi spot</td>
+<td>Bring something, be respectful of the time</td>
+</tr>
+<tr>
+<td><strong>School/college campus</strong></td>
+<td>If you're enrolled — or walk the outside edges, the signal often leaks</td>
+<td>Enrollment or proximity</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pro move:</strong> The <a href="https://libbyapp.com">Libby app</a> with a library card = free ebooks and audiobooks on tech, straight to your phone. The library is the block's free university and most brothers drive past it every day.</p>
+<h2>⚠️ Public Computer Survival Rules (READ THIS — PROTECT YOURSELF)</h2>
+<p>Library and school computers are shared machines. Brothers come after you, and brothers went before you. These rules keep everybody safe:</p>
+<ol>
+<li><strong>Never save passwords on a public computer.</strong> When the browser asks &quot;Remember this password?&quot; — the answer is <strong>NEVER</strong> on a public machine.</li>
+<li><strong>Use a Private/Incognito window.</strong> Chrome: three dots → New Incognito Tab. Firefox: menu → New Private Window. It forgets everything when you close it. This is the ONE habit that saves your accounts.</li>
+<li><strong>When you're done: sign out, then close the browser.</strong> Both steps. Signing out kills the session; Incognito forgetting means there's nothing to find.</li>
+<li><strong>Watch your screen in public.</strong> Your password shouldn't be visible to the brother next to you. Cover it like a poker hand.</li>
+<li><strong>Two-factor (2FA) on your GitHub.</strong> If a public machine ever catches a keylogger, 2FA saves your account. Settings → Password and authentication → Enable 2FA. Do it today — it's the one security move that protects everything else (see SECURITY.md).</li>
+</ol>
+<h2>📱 The Phone-First Backup Plan</h2>
+<p>No PC at all yet? Everything in this operation is built to work <strong>on a phone alone</strong>:</p>
+<ul>
+<li><strong>GitHub's mobile site</strong> (github.com in the phone browser) lets you read, edit, and push code — from the phone. Full browser mode, not the app.</li>
+<li><strong>The PWA move:</strong> Visit the FED-EDU site → browser menu → &quot;Add to Home Screen.&quot; Now it sits on your home screen like a real app, works offline for pages you've already visited, and doesn't eat data.</li>
+<li><strong>Budget move:</strong> The library PC for the heavy work, the phone for daily reading and light edits. That combination carries a brother all the way to his first job.</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Three-part mission, all free:</p>
+<ol>
+<li>Find your nearest public library — search &quot;[your city] public library hours&quot; right now.</li>
+<li>Ask for a library card (free, usually just needs an ID or proof of address — some libraries no longer even require that).</li>
+<li>While you're there, log into GitHub in an Incognito window and make sure 2FA is on.</li>
+</ol>
+<p>You now have a free office, free internet, free books, and free printing. That's a real setup for $0.</p>
+<p><em>Next rung: <a href="../First-Steps/Make-a-GitHub-Account.md.html">Make a GitHub Account →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

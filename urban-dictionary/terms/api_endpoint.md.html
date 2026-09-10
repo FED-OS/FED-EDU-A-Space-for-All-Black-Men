@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>api_endpoint — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: api_endpoint">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>API Endpoint</h1>
+<p><strong>Category:</strong> web · <strong>Added by:</strong> fedpromptly · <strong>Level:</strong> beginner</p>
+<h2>🗣️ Plain Talk Translation</h2>
+<p>An <strong>API</strong> is a waiter: you order, the waiter carries your request to the kitchen (the server), and brings back your food (the data).</p>
+<p>An <strong>endpoint</strong> is a specific door at the restaurant — the exact spot where you place a specific kind of order. One restaurant might have a door for pizza orders, a door for salad orders, and a door for reservations. Same building, different doors, different outcomes.</p>
+<p>So: <strong>an endpoint is a URL where a specific kind of request gets a specific kind of answer.</strong></p>
+<h2>🏪 Life Example</h2>
+<p>The corner store. One building, several windows:</p>
+<ul>
+<li>The front register → you ask for the total, you pay — that's <code>GET /price</code></li>
+<li>The deli counter → you order the sandwich EXACTLY how you want it — that's <code>POST /order</code></li>
+<li>The ATM outside → different window entirely, different machine, but same block — that's a different service with its own endpoints</li>
+</ul>
+<p>You already use endpoints daily. Every time your weather app refreshes, it's knocking on <code>api.weather.com/today</code> and saying &quot;give me today.&quot; Every time you refresh Instagram, you knock on Instagram's feed endpoint. You just never saw the door.</p>
+<h2>💻 What It Looks Like (Code You Can Read)</h2>
+<pre><code>https://api.example.com/weather?city=atlanta
+</code></pre>
+<p>Read it left to right: &quot;the example API … the weather door … for Atlanta.&quot; That whole line IS the endpoint. The <code>?city=atlanta</code> part is you telling the waiter your table number.</p>
+<h2>💰 Where It Pays</h2>
+<p>Brothers on the block charge $250+ to build things that &quot;talk to APIs&quot; — a sneaker price tracker (knocks on a store's endpoint every hour), a weather widget for a client site, a bot that posts to social automatically. Every &quot;automation&quot; hustle is endpoint work at heart. See <code>sandbox-blueprints/04-streamer-tools/trend-scraper.py</code> — it's literally a brother knocking on endpoints and getting paid for the answers.</p>
+<h2>🔗 Related Terms</h2>
+<ul>
+<li><a href="json_explained.md.html">JSON</a> — the language endpoints usually answer in</li>
+<li><a href="database_supabase.md.html">Database</a> — the kitchen the waiter pulls your food from</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Open a new browser tab and paste this real public endpoint: <code>https://api.github.com/users/torvalds</code> — you just knocked on GitHub's door and got a JSON answer back (what Linus's GitHub looks like to machines). That's an API response, live, free, from your phone. You've been a door-knocker your whole life; now you know the name.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "dictionary");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

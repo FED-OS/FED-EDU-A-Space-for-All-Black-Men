@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Football Stats — the sandbox blueprint for brothers who live in the numbers. Player table, stat calculator, league view. Works offline, phone-first.">
+  <title>Football Stats — FED-EDU Sandbox</title>
+  <link rel="manifest" href="../../manifest.json">
+<link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <style>
+    /* Warm Study theme — compressed for the sandbox (root styles.css is the full version) */
+    :root {
+      --bg: #f7f2e9; --panel: #fffdf8; --ink: #2a2520; --muted: #6f675c;
+      --green: #256d46; --border: #e5dcc9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 12px; background: var(--bg); color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 16px; line-height: 1.6;
+      max-width: 720px; margin: 0 auto;
+    }
+    header { border-bottom: 2px solid var(--green); padding-bottom: 10px; margin-bottom: 14px; }
+    h1 { color: var(--green); font-size: 1.35rem; margin: 0; }
+    .tagline { color: var(--muted); font-size: 0.82rem; margin: 4px 0 0 0; }
+
+    .card { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 14px; margin-bottom: 14px; }
+    .card h2 { color: var(--green); font-size: 1rem; margin: 0 0 8px 0; }
+    .card p { margin: 0 0 8px 0; font-size: 0.9rem; }
+    .muted { color: var(--muted); font-size: 0.8rem; }
+
+    input, select {
+      background: #f3ecdd; color: #2a2520; border: 1px solid var(--border);
+      font-family: inherit; font-size: 0.9rem; padding: 10px; min-height: 44px; width: 100%;
+    }
+    input:focus, select:focus { outline: 1px solid var(--green); }
+    label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+    .btn {
+      background: var(--green); color: #fffdf8; border: none; font-family: inherit;
+      font-weight: bold; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 8px 6px 0 0;
+    }
+    .btn-outline {
+      background: transparent; color: var(--green); border: 1px solid var(--green);
+      font-family: inherit; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 8px 6px 0 0;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { color: var(--green); text-align: left; border-bottom: 2px solid var(--green); padding: 8px 6px; font-size: 0.75rem; }
+    td { border-bottom: 1px solid var(--border); padding: 8px 6px; }
+    tr.leader td { background: #00221133; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* data-saver light mode (core-system/styles.css pattern) */
+    html.data-saver {
+      --bg: #f3ecdd; --panel: #fffdf8; --ink: #2a2520; --muted: #6f675c;
+      --green: #256d46; --border: #e5dcc9;
+    }
+    html.data-saver input, html.data-saver select { background: #fffdf8; color: #1d5837; }
+    html.data-saver tr.leader td { background: #f3ecdd; }
+  </style>
+
+  
+  
+  
+  
+  
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<header>
+    <h1>🏈 Football Stats</h1>
+    <p class="tagline">You already do the math at halftime. This lab shows you the code doing the same math — with receipts.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Add a player</h2>
+      <p>Every fantasy league, every sideline debate, every "he's better than you think" argument runs on this exact data shape: a player row with numbers attached. Build the row, the table does the rest.</p>
+      <div class="grid-2">
+        <div><label for="p-name">Player name</label><input id="p-name" type="text" placeholder="Mahomes"></div>
+        <div><label for="p-team">Team</label><input id="p-team" type="text" placeholder="KC"></div>
+      </div>
+      <div class="grid-3" style="margin-top:10px">
+        <div><label for="p-pass">Passing yds</label><input id="p-pass" type="number" inputmode="numeric" placeholder="0"></div>
+        <div><label for="p-rush">Rushing yds</label><input id="p-rush" type="number" inputmode="numeric" placeholder="0"></div>
+        <div><label for="p-td">TDs</label><input id="p-td" type="number" inputmode="numeric" placeholder="0"></div>
+      </div>
+      <div>
+        <button class="btn" id="btn-add" type="button">＋ Add to table</button>
+        <button class="btn-outline" id="btn-sort" type="button">↓ Sort by total</button>
+        <button class="btn-outline" id="btn-saver" type="button">🌗 Data-saver</button>
+        <button class="btn-outline" id="btn-export" type="button">📥 Export JSON</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>The league table</h2>
+      <p>The table sorts itself by total yards + TDs. The leader row glows green. This is the same ranking logic the Hustle Index uses (hustle-index/market-engine.js) and the same sort logic the leaderboard workflow uses — one pattern, everywhere on the block.</p>
+      <div id="table-wrap"><p class="muted">No players yet — add one above. Your data saves on THIS device only (SECURITY.md rules — nothing leaves your phone).</p></div>
+    </section>
+
+    <section class="card">
+      <h2>What you're actually learning</h2>
+      <p>Every stat you already argue about is a programming concept wearing cleats:</p>
+      <p>
+        • <b>The player row</b> = an object — keys and values bundled as one thing ({name: "Mahomes", team: "KC", pass: 4500})<br>
+        • <b>The league table</b> = an array of objects — and every fantasy app you've used is exactly that, with a nicer paint job<br>
+        • <b>Sort by total</b> = a sort function with custom logic — the same move that powers every leaderboard you've ever seen<br>
+        • <b>Export JSON</b> = turning live data into the file format the whole block runs on (urban-dictionary/json_explained.md is the primer)
+      </p>
+      <p class="muted">Open db-bridge.js (this folder) — the whole engine is one readable file. It's the math you already do, visible.</p>
+    </section>
+
+    <section class="card">
+      <h2>The database rung — where this gets real</h2>
+      <p>This table saves to your browser (localStorage). The next rung is a REAL database: schema.sql (this folder) is the SQL that creates the same table in Supabase — the block's stat-tracker backend (ADR-006). Same data, now shareable with the whole league: every brother's picks, one source of truth.</p>
+      <p><b>SQL — that's the language databases speak.</b> "SELECT * FROM players ORDER BY total DESC" is literally "show me the table, best first." You already think in these queries at halftime. SQL just writes it down.</p>
+      <p class="muted">The full SQL walkthrough: urban-dictionary/terms/database_supabase.md — the barbershop notebook analogy, from JSON file to real database.</p>
+    </section>
+
+    <section class="card">
+      <h2>Take it further (the rungs)</h2>
+      <p><b>Rung 1 (this week):</b> Ship this lab as YOUR repo — fork, change colors, add one stat column of your own (receptions? interceptions?), deploy on Pages. Merged PR, 5 tickets.</p>
+      <p><b>Rung 2 (this month):</b> Connect it to Supabase with schema.sql — the league's shared table, live for every brother in it. Guide-level, 10 tickets.</p>
+      <p><b>Rung 3 (the hustle):</b> The league commissioner hustle — "I run the league's numbers, stats page live all season, $50/month" (retainer floor — PRICING.md). Your league IS the client.</p>
+    </section>
+    <p class="muted">Sandbox blueprint 02 of 04 · FED-EDU · The project coach's full rung ladder: fedpromptly-coach/prompts/project_generator.txt</p>
+  </main>
+
+  <script src="db-bridge.js"></script>
+  <script src="../../pops.js"></script>
+
+
+
+
+
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "blueprints");
+  });
+})();
+</script>
+
+</body>
+</html>

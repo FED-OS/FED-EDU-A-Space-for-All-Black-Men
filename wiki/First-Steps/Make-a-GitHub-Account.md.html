@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make a GitHub Account — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: Make a GitHub Account">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>🆔 Make a GitHub Account — Your Digital ID</h1>
+<p><strong>Plain terms:</strong> GitHub is the world's biggest workshop — millions of builders, their tools, and their work, all in one place. An account is free. Your username is your street name on the internet. Let's set it up right, first time.</p>
+<h2>🧠 What GitHub Actually Is (30 seconds)</h2>
+<p>Think of it as a giant storage facility + social network + résumé, all in one:</p>
+<ul>
+<li>Every project (&quot;repo&quot;) is a <strong>workshop with an open door</strong> — you can see how anybody built anything</li>
+<li>&quot;Forking&quot; is <strong>copying somebody's workshop</strong> to make your own version</li>
+<li>Your profile page is your <strong>living résumé</strong> — it shows every project you've ever shipped. Recruiters literally search these.</li>
+</ul>
+<h2>🪜 The Steps (10 minutes, phone works fine)</h2>
+<h3>Step 1 — Go to github.com</h3>
+<p>Any browser, phone or PC. Tap <strong>Sign Up</strong>.</p>
+<h3>Step 2 — Choose the Username (THINK BEFORE YOU TYPE)</h3>
+<p>This name shows up in your repo links, your PR comments, and on job applications. Rules from the block:</p>
+<ul>
+<li>✅ <strong>Good:</strong> your real name or a clean brand — <code>marcus-builds</code>, <code>TreyCodes</code>, <code>BrooklynBuilder</code>, <code>dev-ant</code></li>
+<li>❌ <strong>Risky:</strong> anything you'd have to explain in a job interview — gang names, drug references, numbers that look like affiliations</li>
+</ul>
+<p><strong>THINK.</strong> The username follows you. A brother named <code>TrapLord69</code> in 2026 is explaining that username in a 2028 interview. Be yourself, but be your BEST self. You can rename later (Settings → Account → Change username) but old links can break — first choice is the cheapest choice.</p>
+<h3>Step 3 — Email + Password</h3>
+<p>Use an email you actually check. Password: long beats clever. A full sentence with numbers: <code>MyNephewBorn2019!IsTheReason</code> — 30 seconds to type, centuries to crack.</p>
+<h3>Step 4 — Verify email</h3>
+<p>GitHub sends a code to your email. Enter it. Unverified email = half-power account.</p>
+<h3>Step 5 — Lock it down with 2FA</h3>
+<p>Settings → Password and authentication → <strong>Enable 2FA</strong>. It'll want your phone number or an authenticator app. This one step is the difference between &quot;my account got hacked&quot; and &quot;they tried and failed&quot; (see SECURITY.md). Non-optional on this block.</p>
+<h2>📱 Phone-Only Brothers: You're Fully In The Game</h2>
+<p>The whole operation works from the phone browser:</p>
+<ul>
+<li>github.com in the phone browser → request &quot;Desktop site&quot; from the browser menu when you need the full interface</li>
+<li>Editing files: any repo → click the pencil icon on a file → edit → commit. Real code editing, from your palm.</li>
+<li>The FED-EDU site itself: &quot;Add to Home Screen&quot; makes it an app on your phone (see <a href="../Building/Turn-Website-Into-App.md.html">Turn Website Into App</a>).</li>
+</ul>
+<h2>⚠️ Real Talk</h2>
+<ul>
+<li><strong>It's free.</strong> The free tier is genuinely enough for everything FED-EDU does. You never need to pay for anything in this org.</li>
+<li><strong>Your profile is public by default</strong> — that's a FEATURE for job hunting, but curate what's public (repos you're proud of; delete or privatize the experiments that don't represent you).</li>
+<li><strong>Verify your email the same day</strong> or you'll hit walls later at random moments.</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Create the account now (10 minutes). Then post your username in <a href="https://github.com/fedpromptly/FED-EDU/discussions">Discussions → Introduce Yourself</a> — the welcome agent greets every new username, and elders vouch for active brothers when opportunity comes knocking.</p>
+<p><em>Next rung: <a href="Fork-Your-First-Repo.md.html">Fork Your First Repo →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

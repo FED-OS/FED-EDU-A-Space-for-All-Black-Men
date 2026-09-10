@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List on Hustle Index — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: List on Hustle Index">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>💼 List on Hustle Index — Put Your Services in Front of the Block</h1>
+<p><strong>Plain terms:</strong> The Hustle Index is the block's marketplace. You built a skill — now list it. Brothers (and local businesses) come here looking for builders: websites, bots, fix-ups, tutoring. Listing is free, takes one PR, and your card stays up as long as you keep building.</p>
+<h2>🧠 How It Works</h2>
+<p>The marketplace runs as plain JSON files — our database (ADR-005). Your listing is one small file in <code>hustle-index/members/</code>:</p>
+<ul>
+<li><strong>Customers browse</strong> the live site (<code>fedpromptly.github.io/FED-EDU/hustle-index/index.html</code>)</li>
+<li><strong>They click through</strong> to YOUR GitHub, Ko-fi, or contact link</li>
+<li><strong>You handle the deal</strong> — the Index is the storefront, not the middleman. We take zero cut. (Founding rule: the block never taxes a brother's hustle.)</li>
+<li><strong>Rate floors protect everybody</strong> (see <a href="Price-Your-Work.md.html">Price Your Work</a> and <a href="../../docs/PRICING.md.html">PRICING.md</a>): nobody lists a full website for $75, because one undercutter starves the whole block.</li>
+</ul>
+<h2>🪜 The Steps — Your Listing (20 minutes)</h2>
+<h3>Step 1 — Copy the pattern</h3>
+<p>Look at the sample listing: <code>hustle-index/members/sample_brother_hustle.json</code> in the repo. It's small — name, skills, rates, links. That file IS the whole listing.</p>
+<h3>Step 2 — Make yours</h3>
+<p>In your fork, create <code>hustle-index/members/your-username.json</code> following the sample's exact shape:</p>
+<pre><code class="language-json">{
+  &quot;github&quot;: &quot;your-username&quot;,
+  &quot;name&quot;: &quot;Marcus J.&quot;,
+  &quot;city&quot;: &quot;Atlanta, GA&quot;,
+  &quot;level&quot;: &quot;Builder&quot;,
+  &quot;skills&quot;: [&quot;one-page websites&quot;, &quot;small business sites&quot;, &quot;bug fixes&quot;],
+  &quot;rates&quot;: {
+    &quot;one_page_site&quot;: 150,
+    &quot;five_page_site&quot;: 500
+  },
+  &quot;work_links&quot;: [
+    &quot;https://your-username.github.io/your-site/&quot;,
+    &quot;https://github.com/your-username/another-project&quot;
+  ],
+  &quot;contact&quot;: &quot;Ko-fi or GitHub — whatever you check daily&quot;,
+  &quot;since&quot;: &quot;2026&quot;
+}
+</code></pre>
+<p>(Keep it honest — the sample is the pattern, not a template to inflate.)</p>
+<h3>Step 3 — Check the rate floors and the schema</h3>
+<p>Before you PR, check your numbers against the floors in <a href="../../docs/PRICING.md.html">PRICING.md</a>: one-page $150+, multi-page $500+, retainers $50/mo+. If your numbers are below floor, a maintainer will ask you to raise them — not to gatekeep, but because $75 websites hurt every brother listing after you. The exact field format your listing must follow lives in <code>hustle-index/members/commissions_schema.json</code>.</p>
+<h3>Step 4 — Open the PR</h3>
+<p>Title: <code>Hustle Index listing: your-username</code>. Body: quick description + which rate floor category you're in. Use the <code>#communitybuild</code> tag. A maintainer reviews (fast merge — see CONTRIBUTING.md) and your card goes live on the Index.</p>
+<h3>Step 5 — Keep it fresh</h3>
+<p>Your listing is living data. Shipped a new project? Add it to <code>work_links</code>. Level up from Builder to Certified Builder (5 merged PRs)? Update it. A stale listing with dead links gets retired after 90 days of inactivity — the Index feeds families, so it stays current.</p>
+<h2>🎯 What Sells on the Block (Real Demand)</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Demand</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-page sites for barbers, trainers, DJs, detailers</td>
+<td>🔥🔥🔥</td>
+<td>Every local hustle needs a link-in-bio that looks pro</td>
+</tr>
+<tr>
+<td>Link-in-bio pages (K-link style)</td>
+<td>🔥🔥🔥</td>
+<td>$150-300, one day of work once you have the pattern</td>
+</tr>
+<tr>
+<td>Fix-ups / bug hunts on existing sites</td>
+<td>🔥🔥</td>
+<td>Brothers (and their clients) break things — you fix</td>
+</tr>
+<tr>
+<td>Simple automation (forms → sheet → text)</td>
+<td>🔥🔥</td>
+<td>Small businesses drown in manual work</td>
+</tr>
+<tr>
+<td>Tutoring / &quot;build your first site in a weekend&quot;</td>
+<td>🔥🔥</td>
+<td>The block grows — new brothers always need onboarding</td>
+</tr>
+</tbody>
+</table>
+<h2>⚠️ Real Talk</h2>
+<ul>
+<li><strong>Your GitHub IS your résumé.</strong> Customers will click your GitHub before they DM you. Clean it up: pin your best repos, real READMEs, professional username (see <a href="../First-Steps/Make-a-GitHub-Account.md.html">Make a GitHub Account</a>).</li>
+<li><strong>Take deposits.</strong> 50% up front for new clients, non-negotiable handshake rule. Established clients can pay on delivery. The deposit is how you find out who's serious before you build.</li>
+<li><strong>The block doesn't tax the hustle.</strong> Listing is free forever. The raffles and support runs on Ko-fi donations and the founder's pockets — not a percentage of your work. That's a founding rule (GOVERNANCE.md).</li>
+<li><strong>Vouching counts.</strong> Once you complete work for another brother, ask for one line of vouch in the PR comments or Discussions. Reputation compounds faster than skills.</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Draft your <code>your-username.json</code> listing right now (even if you're not ready to PR it — draft it). Then complete one project worth linking (remix a blueprint from sandbox-blueprints/ if you need a first ship), and PR the listing. First listing merged earns tickets + your card on the live Index.</p>
+<p><em>Next rung: <a href="Set-Up-Ko-fi.md.html">Set Up Ko-fi →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

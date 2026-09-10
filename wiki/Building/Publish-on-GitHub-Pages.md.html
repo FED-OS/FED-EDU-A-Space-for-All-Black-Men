@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publish on GitHub Pages — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: Publish on GitHub Pages">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>🌍 Publish on GitHub Pages — Your Site on the Real Internet, Free</h1>
+<p><strong>Plain terms:</strong> GitHub Pages is FREE hosting for your site. Flip two settings, push your files, and your page gets a real URL (<code>yourname.github.io/repo</code>) that opens on any phone or computer on earth. No monthly bill, no credit card, no landlord. This is how the whole FED-EDU block ships.</p>
+<h2>🧠 What's Happening (30 seconds)</h2>
+<p>A website needs a computer that's always on, holding your files, serving them to visitors. That's &quot;hosting&quot; — and it usually costs money. GitHub Pages gives every repo free hosting because open-source builders earned it. Your repo becomes your landlord-free property on the internet.</p>
+<h2>🪜 The Steps (10 minutes, ONE TIME)</h2>
+<h3>Step 1 — Make sure the site files exist</h3>
+<p>Your repo needs the pages you want live: <code>index.html</code> (the homepage — required, exact name) plus anything it links to. No <code>index.html</code> = GitHub Pages has no front door to serve. If you built <code>my-first-page.html</code>, create an <code>index.html</code> that links to it (a simple page with your name and a link works — it's your repo's front door).</p>
+<h3>Step 2 — Open the Pages settings</h3>
+<p>In YOUR repo (not the main FED-EDU repo): <strong>Settings → Pages</strong> (left sidebar).</p>
+<h3>Step 3 — Choose the source</h3>
+<p>This repo has a deployment workflow (<code>.github/workflows/build.yml</code>) that handles publishing automatically. Under <strong>Build and deployment → Source</strong>, select <strong>GitHub Actions</strong>.</p>
+<blockquote>
+<p>If you're publishing a personal repo WITHOUT our workflow, choose <strong>Deploy from a branch</strong> instead → Branch: <code>main</code> → folder: <code>/ (root)</code> → Save. Both routes are free; the workflow route just adds the block's checks first.</p>
+</blockquote>
+<h3>Step 4 — Wait ~2-5 minutes, then load your URL</h3>
+<p>Your URL appears at the top of the Pages settings page:</p>
+<pre><code>https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
+</code></pre>
+<p>Open it on your phone. <strong>That's your site, live, worldwide, permanently free.</strong></p>
+<h3>Step 5 — Verify, then celebrate properly</h3>
+<p>Check on two devices if you can (your phone + a brother's). If the page loads raw code as text, your file probably isn't named <code>index.html</code> — that's the classic first-publish bug. Rename and refresh after a minute.</p>
+<h2>🔗 After Your First Publish — Every Update After This</h2>
+<p>The beauty part: <strong>you never touch the settings again.</strong> Every commit to main automatically re-publishes in 1-3 minutes. Edit → commit → refresh the live URL. That loop is the whole game — and it's why keeping the site lightweight matters (see <a href="../../docs/BUILD.md.html">BUILD.md</a>, the 3-second rule: pages must load fast on tethered 3G, because that's who we serve).</p>
+<h2>🏠 The Custom Domain Move (Later, When You're Hustling)</h2>
+<p><code>yourname.github.io</code> is free forever. But when you start charging businesses for sites (see <a href="../../docs/PRICING.md.html">PRICING.md</a>), a custom domain (<code>marcusbuilds.com</code>) is the professional move:</p>
+<ul>
+<li>Buy a domain (~$10-15/year at Namecheap/Porkbun — the only real cost in this whole operation)</li>
+<li>Repo → Settings → Pages → Custom domain → enter it → Save</li>
+<li>Add the DNS records the settings page tells you to (two lines at your domain provider)</li>
+<li>GitHub serves free HTTPS certificates for custom domains automatically</li>
+</ul>
+<p>A $12 domain on free hosting = a client-ready professional site. That's the whole stack, under the rate floor of $150 (one-page site), all margin.</p>
+<h2>⚠️ Real Talk</h2>
+<ul>
+<li><strong>HTTPS is automatic and required.</strong> Every <code>*.github.io</code> site is HTTPS (the padlock). This is also what makes service workers work (see <a href="Turn-Website-Into-App.md.html">Turn Website Into App</a>) — PWA and Pages are a package deal.</li>
+<li><strong>The URL structure:</strong> <code>username.github.io/repo-name/</code>. Links between YOUR pages must be relative (<code>href=&quot;my-first-page.html&quot;</code> not <code>https://...</code>) or they break on the live site. The block's build check (build.yml) flags stranded pages without home links.</li>
+<li><strong>Public repos = public code.</strong> Anything in the repo is visible to the world. Never put passwords, keys, client info, or private ledgers in a public repo (see SECURITY.md — this rule has no exceptions).</li>
+<li><strong>Never pay for hosting again — until you outgrow free.</strong> Pages handles small-to-medium traffic fine. When a client site outgrows it, you charge enough to cover real hosting (Cloudflare Pages / Netlify free tiers are the next step up, still $0).</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Publish your repo right now (10 minutes, one time). Then send the live link to two people — one who'll be proud of you and one who doubts you. Both need to see it. Then post it in <a href="https://github.com/fedpromptly/FED-EDU/discussions">Show and tell</a> — first live site posted earns dap + tickets from the welcome agent.</p>
+<p><em>Previous rung: <a href="Turn-Website-Into-App.md.html">Turn Website Into App</a> · Next level: <a href="../Hustling/List-on-Hustle-Index.md.html">List on Hustle Index →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>json_explained — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: json_explained">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>JSON</h1>
+<p><strong>Category:</strong> data · <strong>Added by:</strong> fedpromptly · <strong>Level:</strong> beginner</p>
+<h2>🗣️ Plain Talk Translation</h2>
+<p><strong>JSON</strong> is a way of storing information in labeled boxes — a format both humans and machines can read. You write it with your hands; computers read it with their eyes. It looks like curly braces <code>{ }</code> and quotes everywhere, but underneath it's just <strong>labeled boxes</strong>.</p>
+<p>The block runs on it (ADR-005): the Hustle Index listings, the Urban Dictionary index, the raffle rates, the excellence matrix data — all plain JSON files sitting in the repo, updated by pull request. <strong>On this block, GitHub IS the database and JSON is the filing format.</strong></p>
+<h2>🏪 Life Example</h2>
+<p>A manila folder in a filing cabinet. On the tab: &quot;LEASE.&quot; Inside: labeled lines — Name: Marcus. Unit: 4B. Rent: $1,100. Start: March 1.</p>
+<p>That's JSON. The folder <code>{ }</code> is the braces. The lines <code>&quot;rent&quot;: 1100</code> are the labels and what's inside them. Anybody who opens the folder knows exactly where everything is — no phone call to the landlord, no guessing. And a machine can find &quot;rent&quot; across a MILLION folders in a blink.</p>
+<p>You've been reading structured files your whole life — restaurant menus, price sheets, clipper guard charts. JSON is just the digital version with strict spelling rules.</p>
+<h2>💻 What It Looks Like</h2>
+<p>A Hustle Index listing (this is REAL — it's the shape in <code>hustle-index/members/</code>):</p>
+<pre><code class="language-json">{
+  &quot;github&quot;: &quot;marcus-builds&quot;,
+  &quot;name&quot;: &quot;Marcus J.&quot;,
+  &quot;city&quot;: &quot;Atlanta, GA&quot;,
+  &quot;skills&quot;: [&quot;one-page sites&quot;, &quot;bug fixes&quot;],
+  &quot;rates&quot;: {
+    &quot;one_page_site&quot;: 150,
+    &quot;five_page_site&quot;: 500
+  }
+}
+</code></pre>
+<p>Read it out loud: github is marcus-builds. Name is Marcus J. Skills is a LIST (square brackets <code>[ ]</code> = a row of boxes). Rates is a folder INSIDE the folder. <strong>You just read production code.</strong> That's a real listing format brothers push every week.</p>
+<h2>⚖️ The Four Rules of JSON (The Only Syntax That Matters)</h2>
+<ol>
+<li><strong>Labels get double quotes</strong>: <code>&quot;name&quot;</code> ✅ — not <code>'name'</code> ❌ not <code>name</code> ❌</li>
+<li><strong>Colons separate label from value</strong>: <code>&quot;city&quot;: &quot;Atlanta&quot;</code> — label, colon, value</li>
+<li><strong>Commas between entries — but NO comma after the last one.</strong> The #1 JSON bug on this block, by far. <code>{&quot;a&quot;: 1, &quot;b&quot;: 2,}</code> = broken (trailing comma). This single rule is why <code>build.yml</code> validates every JSON file on every push.</li>
+<li><strong>Braces match</strong>: every <code>{</code> needs its <code>}</code> — every <code>[</code> needs its <code>]</code>. Count your brackets like you count your change.</li>
+</ol>
+<p>Break a rule and the whole file refuses to load — but here's the beauty: the build check catches it BEFORE it reaches the block, and the error message names the exact line. The machine polices its own grammar so you learn it fast.</p>
+<h2>💰 Where It Pays</h2>
+<p>JSON is EVERYWHERE — every app's settings, every API's answers (<a href="api_endpoint.md.html">API Endpoint</a> speaks JSON), every config file, every hustle the block runs. A brother who can read and write JSON can: update marketplace listings, build data for client sites, read API responses, and debug configs — that's four income streams from one format. It's the closest thing tech has to a universal dialect, and it takes an afternoon to learn.</p>
+<h2>🔗 Related Terms</h2>
+<ul>
+<li><a href="api_endpoint.md.html">API Endpoint</a> — the door; JSON is what comes back through it</li>
+<li><a href="database_supabase.md.html">Database</a> — when JSON files stop being enough</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Open <code>urban-dictionary/index.json</code> in your fork and READ it — just read, no editing. Find the terms list, find one term's entry, and notice the four rules in action. Then click the pencil and add a fake term (any slug, any one-liner) WITHOUT breaking a rule, and check the JSON with <a href="https://jsonlint.com">jsonlint.com</a> before you commit. Ten minutes and you'll never fear curly braces again — and a build system that catches your mistakes is the best teacher in the world.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "dictionary");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

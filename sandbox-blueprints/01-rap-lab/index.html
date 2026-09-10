@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rap Lab — the sandbox blueprint for brothers who already write bars. Rhyme finder, bar counter, verse builder. Works offline, phone-first.">
+  <title>Rap Lab — FED-EDU Sandbox</title>
+  <link rel="manifest" href="../../manifest.json">
+<link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <style>
+    /* Warm Study theme — compressed for the sandbox (root styles.css is the full version) */
+    :root {
+      --bg: #f7f2e9; --panel: #fffdf8; --ink: #2a2520; --muted: #6f675c;
+      --green: #256d46; --border: #e5dcc9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 12px; background: var(--bg); color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 16px; line-height: 1.6;
+      max-width: 720px; margin: 0 auto;
+    }
+    header { border-bottom: 2px solid var(--green); padding-bottom: 10px; margin-bottom: 14px; }
+    h1 { color: var(--green); font-size: 1.35rem; margin: 0; }
+    .tagline { color: var(--muted); font-size: 0.82rem; margin: 4px 0 0 0; }
+
+    .card { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 14px; margin-bottom: 14px; }
+    .card h2 { color: var(--green); font-size: 1rem; margin: 0 0 8px 0; }
+    .card p { margin: 0 0 8px 0; font-size: 0.9rem; }
+    .muted { color: var(--muted); font-size: 0.8rem; }
+
+    textarea {
+      width: 100%; min-height: 160px; background: #f3ecdd; color: #2a2520;
+      border: 1px solid var(--border); font-family: inherit; font-size: 0.95rem;
+      padding: 10px; resize: vertical;
+    }
+    textarea:focus { outline: 1px solid var(--green); }
+
+    .btn {
+      background: var(--green); color: #fffdf8; border: none; font-family: inherit;
+      font-weight: bold; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 6px 6px 6px 0;
+    }
+    .btn-outline {
+      background: transparent; color: var(--green); border: 1px solid var(--green);
+      font-family: inherit; font-size: 0.9rem; padding: 12px 16px; min-height: 44px;
+      cursor: pointer; margin: 6px 6px 6px 0;
+    }
+    .stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .stat {
+      background: #f3ecdd; border: 1px solid var(--border); padding: 8px 12px;
+      font-size: 0.85rem; flex: 1; min-width: 120px;
+    }
+    .stat b { color: var(--green); display: block; font-size: 1.1rem; }
+
+    .result { margin-top: 10px; font-size: 0.9rem; }
+    .result .word { background: #f3ecdd; border: 1px solid var(--border); border-left: 2px solid var(--green); padding: 6px 10px; display: inline-block; margin: 3px; }
+    .rhyme-list { columns: 2; column-gap: 12px; }
+    @media (min-width: 600px) { .rhyme-list { columns: 3; } }
+
+    /* data-saver light mode — the metered-3G brother (core-system/styles.css pattern) */
+    html.data-saver {
+      --bg: #f3ecdd; --panel: #fffdf8; --ink: #2a2520; --muted: #6f675c;
+      --green: #256d46; --border: #e5dcc9;
+    }
+    html.data-saver textarea { background: #fffdf8; color: #1d5837; }
+    html.data-saver .stat, html.data-saver .result .word { background: #fffdf8; }
+  </style>
+
+  
+  
+  
+  
+  
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<header>
+    <h1>🎤 Rap Lab</h1>
+    <p class="tagline">You already write bars. This lab turns that skill into code skill — one rhyme at a time.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Write a bar, get the rhyme tech readout</h2>
+      <p>Type your bar below. The lab counts syllables, finds the last word, and pulls rhymes from the same sound family — the same way your ear does it, but with receipts you can see.</p>
+      <textarea id="bar-input" placeholder="Type a bar. Any bar. The lab does the rest.&#10;&#10;Example: I been stacking up these bricks like I'm playing Minecraft" spellcheck="false"></textarea>
+      <div class="stat-row" id="stats"></div>
+      <div class="result" id="rhymes"></div>
+    </section>
+
+    <section class="card">
+      <h2>The verse builder</h2>
+      <p>Paste a whole verse (16 bars, one per line). The lab counts bars, syllables per bar, flags bars that run long, and saves your draft on THIS device — nothing leaves your phone (SECURITY.md rules).</p>
+      <textarea id="verse-input" placeholder="One bar per line..." spellcheck="false"></textarea>
+      <div class="actions">
+        <button class="btn" id="btn-analyze" type="button">📊 Analyze verse</button>
+        <button class="btn-outline" id="btn-clear" type="button">🧹 Clear</button>
+        <button class="btn-outline" id="btn-saver" type="button">🌗 Data-saver</button>
+      </div>
+      <div class="result" id="verse-report"></div>
+    </section>
+
+    <section class="card">
+      <h2>What you're actually learning</h2>
+      <p>Every feature here is a real programming concept wearing street clothes:</p>
+      <p>
+        • <b>Syllable counting</b> = string processing + regex (the same tech behind every text analyzer you've ever seen)<br>
+        • <b>Rhyme matching</b> = data structures — matching words by their ENDING sound is how autocomplete and search engines work<br>
+        • <b>Verse analysis</b> = arrays + loops — a verse is just an array of bars, and the report is a loop over that array
+      </p>
+      <p class="muted">Open audio-core.js (this folder) — the whole lab is one readable file. Read it after you use it. It's the same skill you already have: hearing structure in bars, except now you can see the code doing the hearing.</p>
+    </section>
+
+    <section class="card">
+      <h2>Take it further (the rungs)</h2>
+      <p><b>Rung 1 (this week):</b> Ship this lab as YOUR repo — fork it, change the colors to yours, add one rhyme family of your own words to the data, deploy on GitHub Pages. That's a merged PR. 5 tickets.</p>
+      <p><b>Rung 2 (this month):</b> Add a feature: a "punchline detector" that flags lines with double meanings (hint: search for words with two entries in the rhyme data). That's a real feature on a real repo. 10 tickets (guide-level).</p>
+      <p><b>Rung 3 (the hustle):</b> Turn it into the artist promo hustle — "I build promo pages with your best bars interactive for $150 flat" (rate floors — PRICING.md). Your lab becomes your portfolio piece in the pitch.</p>
+    </section>
+    <p class="muted">Sandbox blueprint 01 of 04 · FED-EDU · All skill levels welcome — spawn to OG. Full rung ladder in the project coach's file (fedpromptly-coach/prompts/project_generator.txt).</p>
+  </main>
+
+  <script src="audio-core.js"></script>
+  <script src="../../pops.js"></script>
+
+
+
+
+
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "blueprints");
+  });
+})();
+</script>
+
+</body>
+</html>

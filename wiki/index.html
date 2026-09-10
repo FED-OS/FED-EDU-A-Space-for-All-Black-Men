@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wiki — THE BLOCK</title>
+  <meta name="description" content="The block&#x27;s knowledge book: 12 plain-talk pages, read in order. Account, first site, publish, app, price your work.">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .sect-wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+      .hub-intro { padding: 34px 4px 10px; }
+      .hub-intro h1 { font-family: Georgia, serif; color: #256d46; font-size: 2.2rem; margin: 0 0 10px; }
+      .hub-intro p { max-width: 720px; color: #2a2520; }
+      .hint { color: #6f675c; font-size: 0.9rem; }
+      .hint a, .hub-intro a { color: #256d46; }
+      .hint.status { background: rgba(176,125,47,.09); border: 1px solid rgba(176,125,47,.35);
+                     padding: 10px 14px; border-radius: 10px; display: block; max-width: 720px; }
+      .hint.status code { background: rgba(176,125,47,.12); }
+      .level { margin: 26px 0 8px; }
+      .level h2 { font-family: Georgia, serif; color: #2a2520; border-bottom: 2px solid #256d46;
+                  padding-bottom: 6px; font-size: 1.5rem; }
+      .level-sub { color: #6f675c; font-style: italic; margin: 4px 0 14px; }
+      .doc-links { display: grid; gap: 10px; }
+      .doc-link { display: grid; gap: 3px; background: #fffdf8; border: 1px solid #e5dcc9;
+                  border-radius: 12px; padding: 16px 18px; text-decoration: none;
+                  box-shadow: 0 1px 3px rgba(70,60,40,.07); transition: border-color .2s, transform .2s; }
+      .doc-link:hover { border-color: #256d46; transform: translateY(-1px); }
+      .doc-link strong { color: #256d46; font-family: Georgia, serif; font-size: 1.05rem; }
+      .doc-link span { color: #6f675c; font-size: 0.92rem; line-height: 1.45; }
+      .sect-foot { border-top: 1px solid #e5dcc9; margin-top: 40px; padding: 18px 16px 26px;
+                   text-align: center; color: #6f675c; font-size: 0.8rem;
+                   font-family: 'Courier New', monospace; }
+      @media (max-width: 600px) { .hub-intro h1 { font-size: 1.7rem; } }
+    </style>
+
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+
+    <section class="level">
+      <h2>LEVEL 1 — Getting Online</h2>
+      <p class="level-sub">You got a device and a will. That&#x27;s enough.</p>
+      <div class="doc-links">
+      <a class="doc-link" href="Getting-Online/EasyTether-Basics.md.html"><strong>🔌 EasyTether Basics — Internet Through Your Phone</strong><span>Your old PC has no WiFi (or broken WiFi). Your phone has internet. EasyTether is the USB cable trick that gives your PC internet T</span></a>
+      <a class="doc-link" href="Getting-Online/Free-WiFi-Spots-and-Libraries.md.html"><strong>📚 Free WiFi Spots and Libraries — Getting Online When Money&#x27;s Tight</strong><span>Tethering is the main play, but sometimes you need a fast connection for an hour (big downloads, a video course, uploading a big p</span></a>
+      </div>
+    </section>
+    <section class="level">
+      <h2>LEVEL 2 — First Steps</h2>
+      <p class="level-sub">You&#x27;re online. Now get your GitHub — your first piece of digital property.</p>
+      <div class="doc-links">
+      <a class="doc-link" href="First-Steps/Make-a-GitHub-Account.md.html"><strong>🆔 Make a GitHub Account — Your Digital ID</strong><span>GitHub is the world&#x27;s biggest workshop — millions of builders, their tools, and their work, all in one place. An account is free. </span></a>
+      <a class="doc-link" href="First-Steps/Fork-Your-First-Repo.md.html"><strong>🍴 Fork Your First Repo — Copy the Block to Your Account</strong><span>&quot;Forking&quot; = making your own copy of somebody&#x27;s project, connected to the original. You can change ANYTHING in your copy without as</span></a>
+      <a class="doc-link" href="First-Steps/Push-Your-First-Change.md.html"><strong>⬆️ Push Your First Change — The Moment You Become a Builder</strong><span>A &quot;commit&quot; is a saved change. &quot;Pushing&quot; sends it to your GitHub repo. Your first push is the moment the internet officially record</span></a>
+      </div>
+    </section>
+    <section class="level">
+      <h2>LEVEL 3 — Building</h2>
+      <p class="level-sub">You&#x27;re a builder. Now build something real.</p>
+      <div class="doc-links">
+      <a class="doc-link" href="Building/Your-First-Website.md.html"><strong>🏗️ Your First Website — HTML &amp; CSS From Zero, In Plain Talk</strong><span>Every website you&#x27;ve ever visited — every single one — is built from the same three things: HTML (the structure), CSS (the style),</span></a>
+      <a class="doc-link" href="Building/Publish-on-GitHub-Pages.md.html"><strong>🌍 Publish on GitHub Pages — Your Site on the Real Internet, Free</strong><span>GitHub Pages is FREE hosting for your site. Flip two settings, push your files, and your page gets a real URL (`yourname.github.io</span></a>
+      <a class="doc-link" href="Building/Turn-Website-Into-App.md.html"><strong>📱 Turn Website Into App — The PWA Move</strong><span>A PWA (Progressive Web App) is a website that your phone treats like a real app: it gets its own icon, opens full-screen without t</span></a>
+      </div>
+    </section>
+    <section class="level">
+      <h2>LEVEL 4 — Hustling</h2>
+      <p class="level-sub">You can build. Now get paid.</p>
+      <div class="doc-links">
+      <a class="doc-link" href="Hustling/Price-Your-Work.md.html"><strong>💰 Price Your Work — The Rate Floors and the &quot;Never $75 for a Website&quot; Talk</strong><span>This page is the block&#x27;s price protection. There&#x27;s a floor under every service — the minimum you can charge without hurting yourse</span></a>
+      <a class="doc-link" href="Hustling/List-on-Hustle-Index.md.html"><strong>💼 List on Hustle Index — Put Your Services in Front of the Block</strong><span>The Hustle Index is the block&#x27;s marketplace. You built a skill — now list it. Brothers (and local businesses) come here looking fo</span></a>
+      <a class="doc-link" href="Hustling/Set-Up-Ko-fi.md.html"><strong>☕ Set Up Ko-fi — Take Payments Without a Bank Gatekeeping You</strong><span>Ko-fi is the simplest way to take money online: a free page with a link, people tip or pay you, money lands in your PayPal/Stripe.</span></a>
+      </div>
+    </section>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

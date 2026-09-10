@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fork Your First Repo — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: Fork Your First Repo">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>🍴 Fork Your First Repo — Copy the Block to Your Account</h1>
+<p><strong>Plain terms:</strong> &quot;Forking&quot; = making your own copy of somebody's project, connected to the original. You can change ANYTHING in your copy without asking permission. It's the most important button on GitHub and it takes one click.</p>
+<h2>🧠 Why Forking Is Beautiful</h2>
+<p>Remember mixtapes? A DJ takes somebody's track, remixes it, makes it his own — and the original still stands untouched. That's a fork. You take the FED-EDU code, remix it, ship your version. The original block keeps running; YOUR block runs how YOU want it.</p>
+<p>This is also how you contribute back: you build in your fork, then send a &quot;pull request&quot; (a request to merge your changes into the main block) — that's a real contribution, and it earns raffle tickets.</p>
+<h2>🪜 The Steps (5 minutes)</h2>
+<ol>
+<li><strong>Make sure you're signed in</strong> to your GitHub account.</li>
+<li>Go to the FED-EDU repo: <code>github.com/fedpromptly/FED-EDU</code></li>
+<li>Top right of the repo page, click <strong>Fork</strong>.</li>
+<li>On the fork screen: keep the name (or rename if you want), leave &quot;Copy the main branch only&quot; checked, click <strong>Create fork</strong>.</li>
+<li>Watch it work for ~10 seconds. Done.</li>
+</ol>
+<p>Your URL is now <code>github.com/YOUR-USERNAME/FED-EDU</code> — that's YOUR copy. Same content, your workshop.</p>
+<h2>🧭 What You Just Got</h2>
+<p>Your fork carries the whole block: every guide, every blueprint, the works. You can now:</p>
+<ul>
+<li><strong>Read &amp; study</strong> — open any file, learn from real code, no permission needed</li>
+<li><strong>Practice editing</strong> — hit the pencil icon on any file, type, commit. Zero risk: your fork is a playground, not a museum.</li>
+<li><strong>Start contributing</strong> — make a real change (fix a typo, improve a guide) and send it back as a pull request (see <a href="Push-Your-First-Change.md.html">Push Your First Change</a>)</li>
+</ul>
+<h2>⚙️ Fork vs. Clone — The 30-Second Difference</h2>
+<p>You'll hear both words. Simple:</p>
+<ul>
+<li><strong>Fork</strong> = copy on GITHUB (the cloud). One click. Works from the phone. This is where you START.</li>
+<li><strong>Clone</strong> = download the files to YOUR computer. Used when you're doing serious work locally with a real code editor. Comes later, when you have a machine and it makes sense (see <a href="../../docs/BUILD.md.html">BUILD.md</a>).</li>
+</ul>
+<p>Phone-first brothers live in the fork. It's the full experience minus the download.</p>
+<h2>⚠️ Real Talk</h2>
+<ul>
+<li><strong>Your fork does NOT auto-update</strong> when the main block updates. It's a snapshot at the moment you forked. To pull fresh changes later: your fork page → &quot;Sync fork&quot; button → Update branch. Do this before starting any new work so you're not remixing old code.</li>
+<li><strong>Fork ≠ ownership of the original.</strong> Your fork is yours; the main block stays with the maintainers. If you contribute back via PR and it merges, THAT's when your work becomes part of the main block — and your name lands on the Builders wall (AUTHORS.md).</li>
+<li><strong>Forking is free, unlimited, and expected.</strong> Every open-source project in the world WANTS to be forked. You're not stealing — you're participating in how the whole internet gets built.</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Fork FED-EDU right now (5 minutes, works on a phone). Then open your fork's <code>README.md</code>, click the pencil, and add one line at the very bottom: <code>Forked by YOUR-USERNAME on a mission.</code> Commit it. That's your first edit in your own workshop — and a rehearsal for the real thing.</p>
+<p><em>Next rung: <a href="Push-Your-First-Change.md.html">Push Your First Change →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

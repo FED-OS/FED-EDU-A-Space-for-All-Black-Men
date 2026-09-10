@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Push Your First Change — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: Push Your First Change">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>⬆️ Push Your First Change — The Moment You Become a Builder</h1>
+<p><strong>Plain terms:</strong> A &quot;commit&quot; is a saved change. &quot;Pushing&quot; sends it to your GitHub repo. Your first push is the moment the internet officially records that you BUILD things. There were zero commits with your name before this; after this, there's one. Let's make it count.</p>
+<h2>🧠 The 60-Second Vocabulary (All Four, Once)</h2>
+<p>You'll see these four words everywhere. Here's the whole game:</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Plain meaning</th>
+<th>Life version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Commit</strong></td>
+<td>A saved change with your name and a message on it</td>
+<td>Signing your name on your work</td>
+</tr>
+<tr>
+<td><strong>Push</strong></td>
+<td>Upload your commits to GitHub</td>
+<td>Mailing the signed work to the shop</td>
+</tr>
+<tr>
+<td><strong>Pull Request (PR)</strong></td>
+<td>&quot;Main block, I made something — check it, maybe merge it&quot;</td>
+<td>Showing your remix to the OG DJ</td>
+</tr>
+<tr>
+<td><strong>Merge</strong></td>
+<td>Your change officially becomes part of the main project</td>
+<td>Your verse made the album</td>
+</tr>
+</tbody>
+</table>
+<p><strong>That's it.</strong> Commit → push → PR → merge. Everything else on GitHub is a variation of these four moves.</p>
+<h2>🪜 The Steps — Your First Push (All In The Browser, Phone Works)</h2>
+<ol>
+<li>Open your FED-EDU fork: <code>github.com/YOUR-USERNAME/FED-EDU</code></li>
+<li>Open any file — start with <code>todo.md</code> (the community task board).</li>
+<li>Click the <strong>pencil icon</strong> (top right of the file view) — the file becomes editable.</li>
+<li>Make your change: find the <code>- [ ]</code> list, and add one line at the bottom of the open tasks section: <code>- [ ] First push completed by @YOUR-USERNAME — the legend begins</code></li>
+<li>Scroll down to <strong>Commit changes</strong>:
+<ul>
+<li>The commit message box: write a real message — <code>add my name to the task board, first push</code></li>
+<li>Choose <strong>&quot;Commit directly to the main branch&quot;</strong> → click <strong>Commit changes</strong> (green button).</li>
+</ul>
+</li>
+<li><strong>LOOK AT THE FILE.</strong> Your line is there. Saved. Timestamped. YOURS.</li>
+</ol>
+<p>That was a commit AND a push in one move. The internet now has a record that you build.</p>
+<h2>🏆 The First PR (The Real Badge)</h2>
+<p>Your fork's change lives in YOUR copy. Now send it to the main block:</p>
+<ol>
+<li>Go to your fork's main page. A banner appears: <strong>&quot;This branch is 1 commit ahead of FED-EDU:main&quot;</strong> → click <strong>Contribute</strong> → <strong>Open pull request</strong>.</li>
+<li>GitHub shows a diff (your change highlighted). Click <strong>Create pull request</strong>.</li>
+<li>Fill the title: <code>Add my name to the task board</code> — and in the body, check the box: <strong>🏅 THIS IS MY FIRST PR EVER</strong>.</li>
+<li>Click <strong>Create pull request</strong> one more time.</li>
+</ol>
+<p>Now the auto-dap bot shows up (it greets every first PR — see <code>.github/workflows/auto_dap.yml</code>), a maintainer reviews, and when it merges: your name enters AUTHORS.md, you earn <strong>5 raffle tickets</strong> toward the refurb-PC raffle, and GitHub puts a <strong>first-PR badge</strong> on your profile. Permanent. Free. Yours.</p>
+<h2>⚠️ Real Talk</h2>
+<ul>
+<li><strong>Commit messages matter.</strong> Future-you is the main reader. <code>add my name to the task board</code> tells future-you everything. <code>asdf</code> tells him nothing. Every commit is a note to the brother you'll be next year.</li>
+<li><strong>Small commits beat big ones.</strong> One change, one commit. It's easier to review, easier to fix if something breaks, and it looks better on your profile graph.</li>
+<li><strong>It's normal to be nervous.</strong> Every brother who ever merged code was once staring at their first commit button. Press it. The block catches people — that's what the six rules are for.</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Right now: open your fork, edit <code>todo.md</code>, commit with a real message, open the PR, and check the first-PR box. Ten minutes. At the end of it you'll have a green contribution square on your profile — the first of thousands.</p>
+<p><em>Next level: <a href="../Building/Your-First-Website.md.html">Your First Website →</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

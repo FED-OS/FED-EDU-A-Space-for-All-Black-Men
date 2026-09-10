@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turn Website Into App — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: Turn Website Into App">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>📱 Turn Website Into App — The PWA Move</h1>
+<p><strong>Plain terms:</strong> A PWA (Progressive Web App) is a website that your phone treats like a real app: it gets its own icon, opens full-screen without the browser bar, and works offline. You build ONE website and it runs on every device — phone, tablet, PC — from the same files. No app store, no approval, no fees.</p>
+<h2>🧠 Why This Changes the Game</h2>
+<p>The app store route costs money ($100/year for Apple), requires approvals, and can reject you. The PWA route costs <strong>zero dollars, zero approvals, and nobody can pull it.</strong> For brothers building for their communities, that's the difference between having a voice and asking permission to speak.</p>
+<p>This is exactly how the FED-EDU app itself works — it's a PWA (see ADR-007). When you understand this page, you understand how the block ships to every device on earth from one repo.</p>
+<h2>🪜 The Three Parts of a PWA</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. The manifest</td>
+<td><code>manifest.json</code></td>
+<td>The app's ID card — name, colors, icon</td>
+</tr>
+<tr>
+<td>2. The service worker</td>
+<td><code>service-worker.js</code></td>
+<td>The app's memory — saves pages so they load offline</td>
+</tr>
+<tr>
+<td>3. The link</td>
+<td>one line in your HTML</td>
+<td>The line that connects the two</td>
+</tr>
+</tbody>
+</table>
+<h2>🪜 The Steps — Make Your First Page an App (30 min)</h2>
+<h3>Step 1 — Add the manifest (5 min)</h3>
+<p>In your fork (same folder as <code>my-first-page.html</code>): <strong>Add file → Create new file</strong> → <code>manifest.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Marcus First App&quot;,
+  &quot;short_name&quot;: &quot;MarcusApp&quot;,
+  &quot;start_url&quot;: &quot;./my-first-page.html&quot;,
+  &quot;display&quot;: &quot;standalone&quot;,
+  &quot;background_color&quot;: &quot;#f7f2e9&quot;,
+  &quot;theme_color&quot;: &quot;#256d46&quot;,
+  &quot;icons&quot;: [
+    { &quot;src&quot;: &quot;icon.png&quot;, &quot;sizes&quot;: &quot;192x192&quot;, &quot;type&quot;: &quot;image/png&quot; }
+  ]
+}
+</code></pre>
+<p>Change the name/short_name to yours. <code>display: standalone</code> is the magic line — it's what makes it open WITHOUT the browser bar, like a real app.</p>
+<h3>Step 2 — Connect it in your HTML (2 min)</h3>
+<p>Open <code>my-first-page.html</code> and add this line inside <code>&lt;head&gt;</code>, right under the <code>&lt;title&gt;</code> line:</p>
+<pre><code class="language-html">&lt;link rel=&quot;manifest&quot; href=&quot;manifest.json&quot;&gt;
+</code></pre>
+<p>Commit: <code>add manifest - my page is becoming an app</code></p>
+<h3>Step 3 — Add the service worker (15 min)</h3>
+<p><strong>Create <code>service-worker.js</code></strong> (same folder):</p>
+<pre><code class="language-javascript">// The app's memory: saves pages so they work offline.
+const CACHE = &quot;my-first-app-v1&quot;;
+const PAGES  = [
+  &quot;./my-first-page.html&quot;,
+  &quot;./manifest.json&quot;
+];
+
+self.addEventListener(&quot;install&quot;, (event) =&gt; {
+  event.waitUntil(
+    caches.open(CACHE).then((store) =&gt; store.addAll(PAGES))
+  );
+});
+
+self.addEventListener(&quot;fetch&quot;, (event) =&gt; {
+  event.respondWith(
+    caches.match(event.request).then((hit) =&gt; {
+      return hit || fetch(event.request);
+    })
+  );
+});
+</code></pre>
+<p><strong>Register it</strong> — add this script block at the very bottom of <code>my-first-page.html</code>, just before <code>&lt;/body&gt;</code>:</p>
+<pre><code class="language-html">&lt;script&gt;
+  if (&quot;serviceWorker&quot; in navigator) {
+    navigator.serviceWorker.register(&quot;./service-worker.js&quot;);
+  }
+&lt;/script&gt;
+</code></pre>
+<p>Commit: <code>service worker added - offline mode unlocked</code></p>
+<h3>Step 4 — Icon (5 min)</h3>
+<p>Any square PNG, 192x192 minimum (512x512 for best quality). A phone photo of a drawing, squared and cropped, works. Name it <code>icon.png</code>, upload to the same folder (Add file → Upload files). For now, missing icon = a default letter tile; the app still installs fine.</p>
+<h3>Step 5 — INSTALL IT (the moment)</h3>
+<p>Your repo must be live on GitHub Pages first (<a href="Publish-on-GitHub-Pages.md.html">Publish on GitHub Pages →</a> — do that rung if you haven't).</p>
+<p>Then, on your PHONE, in Chrome:</p>
+<ol>
+<li>Visit your live site URL</li>
+<li>Browser menu (⋮ three dots) → <strong>&quot;Add to Home Screen&quot;</strong> (or &quot;Install app&quot;)</li>
+<li>Confirm the name → <strong>Add</strong></li>
+</ol>
+<p><strong>The icon is now on your home screen between the real apps.</strong> Open it — full-screen, no browser bar, YOUR app. Send the URL to your cousin and tell HIM to add it to HIS home screen. That's your first distribution.</p>
+<h2>⚠️ Real Talk</h2>
+<ul>
+<li><strong>Service workers ONLY work on HTTPS.</strong> GitHub Pages is always HTTPS, so once you're published, you're covered. That's another reason the block runs on GitHub Pages.</li>
+<li><strong>The cache is sticky.</strong> When you update your site, the old version might linger. Fix: bump the cache name in <code>service-worker.js</code> (<code>v1</code> → <code>v2</code>) with every update. That one habit prevents 90% of &quot;my update isn't showing&quot; confusion.</li>
+<li><strong>Install works on Android Chrome + iOS Safari</strong> (iOS menu says &quot;Add to Home Screen&quot; too). Desktop Chrome also offers an install icon in the address bar.</li>
+<li><strong>No app store = no gatekeeper.</strong> Apple/Google can't reject your app because they don't control it. Your URL is your app store.</li>
+</ul>
+<h2>🏁 Your Move</h2>
+<p>Add the manifest, the link line, the service worker, and the icon to your first page — then install it on your own phone. When the icon hits your home screen, post the link in <a href="https://github.com/fedpromptly/FED-EDU/discussions">Discussions → Show and tell</a> with what you'd add in v2. You just built and SHIPPED an app — most people never do either.</p>
+<p><em>Previous rung: <a href="Your-First-Website.md.html">Your First Website</a> · Next rung: <a href="Publish-on-GitHub-Pages.md.html">Publish on GitHub Pages</a></em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "wiki");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>
