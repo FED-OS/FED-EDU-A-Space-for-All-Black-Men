@@ -1,5 +1,0 @@
-{
-  "what_this_is": "The roster manifest for the commission board. market-engine.js reads this file, then loads every file it lists from commissions/. To post a commission: add your commission JSON here + PR both files. build.yml validates the shape against commissions_schema.json.",
-
-  "files": ["HUSTLE-20260315-01.json"]
-}

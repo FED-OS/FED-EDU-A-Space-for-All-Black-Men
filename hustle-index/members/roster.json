@@ -1,5 +1,0 @@
-{
-  "what_this_is": "The roster manifest for the member market. market-engine.js reads this file, then loads every profile it lists from members/. To join the market: copy sample_brother_hustle.json, rename to your GitHub handle, fill your real receipts, add your file here, PR it.",
-
-  "files": ["sample_brother_hustle.json"]
-}
