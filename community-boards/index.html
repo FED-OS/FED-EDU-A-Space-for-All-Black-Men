@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <meta name="description" content="FED-EDU Community Boards — the diaspora map, the help desk bridge, the showcase vault, and the leaderboard. Where the block meets, no algorithm between us. Phone-first, offline-friendly.">
+  <title>Community Boards — FED-EDU</title>
+  <style>
+    :root {
+      --green: #256d46;
+      --bg: #f7f2e9;
+      --panel: #fffdf8;
+      --line: #e5dcc9;
+      --text: #2a2520;
+      --dim: #6f675c;
+      --gold: #b07d2f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.55;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+    header {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--green);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    header .sub { color: var(--dim); font-size: 0.8rem; margin-top: 4px; }
+    header .back {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--dim);
+      font-size: 0.75rem;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+    }
+    header .back:hover { color: var(--green); border-color: var(--green); }
+
+    /* tab nav — same DNA as the hustle index */
+    #boards-nav {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    #boards-nav button {
+      flex: 1 1 auto;
+      font-family: inherit;
+      font-size: 0.78rem;
+      color: var(--dim);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 10px 8px;
+      min-height: 42px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #boards-nav button.active { color: var(--green); border-color: var(--green); }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .card h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--green);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    .card p { color: var(--text); font-size: 0.85rem; }
+    .card .tagline { color: var(--dim); font-size: 0.8rem; margin-top: 6px; }
+    .card.err { border-color: #8e3530; }
+    .card.err p { color: #a0524d; }
+
+    /* ---- diaspora map ---- */
+    .map-grid { display: inline-block; margin: 0 auto; }
+    .map-row { display: flex; }
+    .cell {
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      margin: 1px;
+    }
+    .cell.ocean {
+      background: #f3ecdd;
+      border-color: #f3ecdd;
+      cursor: default;
+    }
+    button.cell.land {
+      cursor: pointer;
+      color: var(--text);
+      background: var(--panel);
+    }
+    button.cell.land:hover { border-color: var(--green); }
+    button.cell.land.active {
+      border-color: var(--green);
+      background: #f3ecdd;
+      box-shadow: 0 0 4px rgba(37,109,70,0.35);
+    }
+    .sit-rows { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .sit-row {
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .sit-row .count { color: var(--dim); font-size: 0.7rem; }
+    .sit-row:hover { border-color: var(--green); }
+    .sit-row.active { border-color: var(--green); background: #f3ecdd; }
+    .hub {
+      border-top: 1px dashed var(--line);
+      padding: 8px 0 2px;
+      margin-top: 8px;
+      font-size: 0.85rem;
+    }
+    .hub b { color: var(--green); }
+    .hub-note { display: block; color: var(--dim); font-size: 0.75rem; }
+    .hub-brothers { display: block; color: var(--gold); font-size: 0.75rem; }
+
+    /* ---- help desk ---- */
+    .ticket-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .action-btn {
+      flex: 1 1 auto;
+      display: inline-block;
+      text-align: center;
+      background: var(--green);
+      color: var(--bg);
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-decoration: none;
+      border: 1px solid var(--green);
+      padding: 10px 8px;
+      min-height: 40px;
+    }
+    .action-btn:hover { background: var(--bg); color: var(--green); }
+    .filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .fchip {
+      font-family: inherit;
+      font-size: 0.72rem;
+      color: var(--dim);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .fchip.active { color: var(--green); border-color: var(--green); }
+    .stale-banner {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+    }
+    .fresh-note {
+      border: 1px dashed var(--line);
+      color: var(--dim);
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+    }
+    .ticket { padding: 10px 0; border-top: 1px solid var(--line); }
+    .ticket .tnum { color: var(--dim); font-size: 0.7rem; }
+    .ticket .tlab { color: var(--green); font-size: 0.85rem; font-weight: bold; }
+    .ticket .tmeta { color: var(--dim); font-size: 0.72rem; }
+
+    /* ---- showcase vault ---- */
+    .vault-entry {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .vault-entry .v-title { color: var(--green); font-size: 0.9rem; font-weight: bold; }
+    .vault-entry .v-meta { color: var(--dim); font-size: 0.72rem; margin: 4px 0; }
+    .vault-entry .v-meta .gold { color: var(--gold); }
+    .vault-entry .v-note { color: var(--text); font-size: 0.8rem; margin-top: 6px; }
+    .vault-entry a { color: var(--green); font-size: 0.75rem; word-break: break-all; }
+
+    /* ---- leaderboard ---- */
+    .lb-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      padding: 10px 0;
+    }
+    .lb-row .lb-rank { color: var(--gold); font-size: 0.8rem; width: 34px; }
+    .lb-row .lb-handle { color: var(--green); font-size: 0.85rem; font-weight: bold; }
+    .lb-row .lb-tickets { color: var(--text); font-size: 0.85rem; margin-left: auto; white-space: nowrap; }
+    .lb-row .lb-receipts { color: var(--dim); font-size: 0.72rem; width: 100%; }
+    .gold-note { color: var(--gold); font-size: 0.75rem; }
+
+    footer {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 12px 14px;
+      margin-top: 12px;
+      color: var(--dim);
+      font-size: 0.72rem;
+    }
+    footer a { color: var(--green); text-decoration: none; }
+
+    @media (max-width: 420px) {
+      .cell { width: 22px; height: 22px; font-size: 0.7rem; }
+      .map-grid { transform: scale(0.95); transform-origin: top left; }
+    }
+  </style>
+
+  
+  
+  
+  
+  
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<header>
+    <h1>Community Boards</h1>
+    <p class="sub">The map, the help desk, the vault, the board. Where the block meets — no algorithm between us.</p>
+    <a class="back" href="../core-system/index.html">&larr; back to the dashboard</a>
+  </header>
+
+  <nav id="boards-nav" aria-label="community boards views">
+    <button type="button" data-view="map" class="active">THE MAP</button>
+    <button type="button" data-view="help">HELP DESK</button>
+    <button type="button" data-view="vault">SHOWCASE VAULT</button>
+    <button type="button" data-view="board">LEADERBOARD</button>
+  </nav>
+
+  <!-- ============ THE MAP ============ -->
+  <section class="view active" id="view-map">
+    <div id="diaspora-app"><div class="card"><p>Loading the map...</p></div></div>
+  </section>
+
+  <!-- ============ HELP DESK ============ -->
+  <section class="view" id="view-help">
+    <div class="card">
+      <h2>The Help Desk Bridge</h2>
+      <p>Every question, bug, and pitch rides a GitHub issue — public, searchable, forever.
+      The buttons below open a ticket with the form already filled in. No account games,
+      no waiting room. If the list won't load, the repo itself is always current.</p>
+    </div>
+    <div id="helpdesk-app"><div class="card"><p>Booting the bridge...</p></div></div>
+  </section>
+
+  <!-- ============ SHOWCASE VAULT ============ -->
+  <section class="view" id="view-vault">
+    <div class="card">
+      <h2>The Showcase Vault</h2>
+      <p>Shipped work with witnesses. Every entry is a live link, a brother's handle, and a
+      vouch from someone who saw it work. Want in? Ship something, get one brother to vouch,
+      and add your entry to <b>showcase-vault/shared_links.json</b> by pull request.
+      The vault runs on receipts — no vouch, no entry.</p>
+    </div>
+    <div id="vault-app"><div class="card"><p>Opening the vault...</p></div></div>
+  </section>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <section class="view" id="view-board">
+    <div class="card">
+      <h2>The Leaderboard</h2>
+      <p>Tickets earned the same way everywhere — merged PRs, completed guides, shipped rungs,
+      paid commissions, vouches. Same economics as the raffle economy, so every ticket on
+      this board is a ticket in the next refurb-machine draw. <span class="gold-note">This
+      board exists to motivate, not to rank — every brother on it was once at zero.</span></p>
+    </div>
+    <div id="leaderboard-app"><div class="card"><p>Counting the receipts...</p></div></div>
+  </section>
+
+  <footer>
+    Community Boards · FED-EDU · vanilla JS, zero dependencies (ADR-001) ·
+    the map data lives in <a href="diaspora-data.json">diaspora-data.json</a>,
+    tickets live in the <a href="https://github.com/fedpromptly/FED-EDU/issues" target="_blank" rel="noopener">repo issues</a> ·
+    add your vouched work by pull request — the block builds in the open.
+  </footer>
+
+  <script src="diaspora-map.js"></script>
+  <script src="help-desk-bridge.js"></script>
+  <script>
+    /* ============================================================
+       COMMUNITY BOARDS PAGE ENGINE — tabs + vault + leaderboard
+       The map and help desk engines self-boot on their mounts.
+       This script only handles tab switching and the two small
+       JSON renderers. Vanilla, no dependencies (ADR-001).
+       ============================================================ */
+    (function () {
+      "use strict";
+
+      function escapeHTML(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+
+      /* ---------- tabs ---------- */
+      var nav = document.getElementById("boards-nav");
+      if (nav) {
+        nav.addEventListener("click", function (e) {
+          var btn = e.target.closest("button[data-view]");
+          if (!btn) return;
+          var view = btn.getAttribute("data-view");
+          nav.querySelectorAll("button[data-view]").forEach(function (b) {
+            b.classList.toggle("active", b === btn);
+          });
+          document.querySelectorAll(".view").forEach(function (sec) {
+            sec.classList.toggle("active", sec.id === "view-" + view);
+          });
+        });
+      }
+
+      /* ---------- showcase vault ---------- */
+      function renderVault(data) {
+        var app = document.getElementById("vault-app");
+        if (!app) return;
+        var entries = data.entries || [];
+        var html = "";
+        entries.forEach(function (en) {
+          html += '<div class="vault-entry">' +
+            '<div class="v-title">' + escapeHTML(en.title) + "</div>" +
+            '<div class="v-meta">shipped by <span class="gold">' + escapeHTML(en.by) +
+            "</span> · " + escapeHTML(en.type) + " · " + escapeHTML(en.shipped) + "</div>" +
+            '<a href="' + escapeHTML(en.url) + '" target="_blank" rel="noopener">' +
+            escapeHTML(en.url) + "</a>" +
+            '<div class="v-meta">vouched by <span class="gold">' + escapeHTML(en.vouched_by) + "</span></div>" +
+            '<div class="v-note">' + escapeHTML(en.receipt_note) + "</div>" +
+            "</div>";
+        });
+        app.innerHTML = html ||
+          '<div class="card"><p>No entries yet — the vault starts with the first vouched ship. See the card above for how to get in.</p></div>';
+      }
+
+      /* ---------- leaderboard ---------- */
+      function renderBoard(data) {
+        var app = document.getElementById("leaderboard-app");
+        if (!app) return;
+        var rows = data.leaderboard || [];
+        var html = "";
+        rows.forEach(function (r, i) {
+          html += '<div class="lb-row">' +
+            '<span class="lb-rank">#' + (i + 1) + "</span>" +
+            '<span class="lb-handle">' + escapeHTML(r.handle) + "</span>" +
+            '<span class="lb-tickets">' + escapeHTML(String(r.tickets)) + " tickets</span>" +
+            '<span class="lb-receipts">' + escapeHTML(r.receipts) + "</span>" +
+            "</div>";
+        });
+        html += '<div class="card"><p class="gold-note">' +
+          escapeHTML(data.the_point || "Every ticket counts toward the next raffle.") +
+          "</p></div>";
+        app.innerHTML = html;
+      }
+
+      /* ---------- load both JSONs (cache-first, one fetch each) ---------- */
+      function loadJSON(url, cacheKey, renderFn) {
+        try {
+          var cached = localStorage.getItem(cacheKey);
+          if (cached) {
+            renderFn(JSON.parse(cached));
+            return; // cache-first: on tethered 3G, never wait on a repeat visit
+          }
+        } catch (e) { /* cache miss or corrupt — fall through to network */ }
+
+        fetch(url)
+          .then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
+          .then(function (data) {
+            renderFn(data);
+            try { localStorage.setItem(cacheKey, JSON.stringify(data)); } catch (e) { /* quota — fine */ }
+          })
+          .catch(function () {
+            var app = document.getElementById(cacheKey === "fedboards-vault" ? "vault-app" : "leaderboard-app");
+            if (app) {
+              app.innerHTML = '<div class="card err"><p>Could not load this list. ' +
+                "The JSON is in the repo — check the network or open the file direct. " +
+                "Nothing is lost; the boards just can't see it right now.</p></div>";
+            }
+          });
+      }
+
+      loadJSON("showcase-vault/shared_links.json", "fedboards-vault", renderVault);
+      loadJSON("leaderboard.json", "fedboards-board", renderBoard);
+
+      // console learners: FEDBoards.loadVault() · FEDBoards.loadBoard()
+      window.FEDBoards = {
+        loadVault: function () { loadJSON("showcase-vault/shared_links.json", "fedboards-vault", renderVault); },
+        loadBoard: function () { loadJSON("leaderboard.json", "fedboards-board", renderBoard); }
+      };
+    })();
+  </script>
+  <script src="../pops.js"></script>
+
+
+
+
+
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+</body>
+</html>

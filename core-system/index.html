@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FED-EDU — The Block</title>
+  <meta name="description" content="AI, coding, and tech for every Black man — phone-only to full rig. The block that builds together.">
+  <meta name="theme-color" content="#f7f2e9">
+
+  <!-- PWA identity (see ADR-007) -->
+  <link rel="manifest" href="../manifest.json">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+  <!-- The block's shared theme (root styles.css) -->
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Icon placeholders: swap in real PNGs (192/512) before launch — build.yml flags oversized ones -->
+
+  
+  
+  
+  
+  
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="wrap">
+
+    <header class="site-header">
+      <p class="tag">FED-EDU</p>
+      <h1>The Block</h1>
+      <p class="tagline">Every Black man. Every starting point. One block.</p>
+    </header>
+
+    <nav class="quick-nav" aria-label="Main">
+      <a class="btn" href="#spawn">🏁 Where you starting from?</a>
+      <a class="btn btn-outline" href="#wings">🗺️ The wings</a>
+      <a class="btn btn-outline" href="#elevator">⚡ 60-second pitch</a>
+    </nav>
+
+    <section id="spawn" class="card">
+      <h2>Where you starting from?</h2>
+      <p class="muted">Every row below works. Nobody's situation disqualifies them here.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Your situation</th><th>Your first move</th></tr></thead>
+          <tbody>
+            <tr><td>📱 Phone only</td><td><a href="../wiki/Getting-Online/Free-WiFi-Spots-and-Libraries.md.html">Free WiFi &amp; libraries</a> → everything here works on phones</td></tr>
+            <tr><td>🔌 Old PC, no internet</td><td><a href="../wiki/Getting-Online/EasyTether-Basics.md.html">EasyTether Basics</a> — internet through your phone's cable</td></tr>
+            <tr><td>🆔 Brand new to GitHub</td><td><a href="../wiki/First-Steps/Make-a-GitHub-Account.md.html">Make a GitHub Account</a> → <a href="../wiki/First-Steps/Push-Your-First-Change.md.html">Push your first change</a></td></tr>
+            <tr><td>🧱 Never touched code</td><td><a href="../wiki/Building/Your-First-Website.md.html">Your First Website</a> — real-life Minecraft, brick one</td></tr>
+            <tr><td>🏠 Home from incarceration</td><td><a href="../docs/FAQ.md.html">FAQ</a> (the record answer first) → <a href="https://github.com/fedpromptly/FED-EDU/issues/new/choose">spawn ticket</a></td></tr>
+            <tr><td>🔨 Already build — here to give back</td><td><a href="../docs/CONTRIBUTING.md.html">CONTRIBUTING</a> + <a href="../docs/MAINTAINERS.md.html">wings marked 🟡 Seeking</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="wings" class="card">
+      <h2>The wings — every door on the block</h2>
+      <div class="grid">
+        <a class="card-link" href="../urban-dictionary/index.html"><h3>📖 Urban Dictionary</h3><p>Tech jargon → plain talk. No gatekept vocabulary.</p></a>
+        <a class="card-link" href="../excellence-matrix/index.html"><h3>🏆 Excellence Matrix</h3><p>Seven boards: leaders to streamers. Where brothers stand on giants.</p></a>
+        <a class="card-link" href="../hustle-index/index.html"><h3>💼 Hustle Index</h3><p>The marketplace. Skills, rate floors, real work.</p></a>
+        <a class="card-link" href="../fed-comm-dm/index.html"><h3>💬 Fed-Comm DM</h3><p>The block's own DMs — the founder's fix for gists and community tabs.</p></a>
+        <a class="card-link" href="../courses-and-guides/index.html"><h3>🎓 Courses &amp; Guides</h3><p>EasyTether mastery, first websites, the corporate ship.</p></a>
+        <a class="card-link" href="../sandbox-blueprints/index.html"><h3>🧪 Sandbox Blueprints</h3><p>Rap Lab, Football Stats, Media FX, Streamer Tools — remix, don't stare.</p></a>
+        <a class="card-link" href="../prompts/index.html"><h3>🧠 Prompts Library</h3><p>Ready-made AI prompts: translator, coaches, project generator, résumé hustle.</p></a>
+        <a class="card-link" href="../wiki/index.html"><h3>📚 The Wiki</h3><p>The full ladder: getting online → first steps → building → hustling.</p></a>
+        <a class="card-link" href="../physical-raffles/index.html"><h3>🎟️ Raffles</h3><p>Refurb PCs for brothers who build. Public ledger, livestreamed draws.</p></a>
+      </div>
+    </section>
+
+    <section id="elevator" class="card">
+      <h2>⚡ The 60-second pitch</h2>
+      <blockquote>
+        <p><strong>FED-EDU = (Urban Dictionary + GitHub) × FED-OS × fedpromptly.</strong></p>
+        <p>We get Black men into AI, coding, and tech — ALL of us: Jamaican, Haitian, African, American, British; gay and trans brothers; young and old; locked up and coming home; homeless and rebuilding; kids who need somewhere to be. Not by melanin alone — a white boy who grew up on this block is more "of it" than a stranger with the darkest skin. The block is culture and love, not color.</p>
+        <p>Hardware is never the disqualifier: phone-only brothers are full members. Scrap-PC brothers run EasyTether. The site obeys the <strong>3-second rule</strong> — every page loads fast on tethered 3G, because that's who we serve first.</p>
+        <p>Kunta Kinte had his name beaten out of him. MLK left us an economic blueprint. Obama showed the system can be mastered. <strong>We're the chapter they never got to write.</strong></p>
+      </blockquote>
+      <p class="muted">Full manifesto: <a href="../README.md.html">README.md</a> · Plain-terms overview: <a href="../docs/SUMMARY.md.html">SUMMARY.md</a></p>
+    </section>
+
+    <section class="card">
+      <h2>📲 Install the block as an app</h2>
+      <p>Phone browser menu (⋮) → <strong>Add to Home Screen</strong>. Full-screen, works offline on visited pages, zero app store. That's the PWA move — ADR-007.</p>
+    </section>
+
+    <footer class="site-footer">
+      <p class="muted">Built by brothers, for brothers. MIT licensed — fork it, own it, ship it.</p>
+      <p class="muted"><a href="../README.md.html">Manifesto</a> · <a href="../docs/CODE_OF_CONDUCT.md.html">Six Rules</a> · <a href="../docs/SUPPORT.md.html">Support</a> · <a href="../docs/SECURITY.md.html">Security</a></p>
+      <p class="muted small">FED-EDU 🏁 — Light the torch.</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script src="../pops.js"></script>
+
+
+
+
+
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+</body>
+</html>
