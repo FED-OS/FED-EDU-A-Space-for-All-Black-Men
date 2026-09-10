@@ -1,0 +1,81 @@
+# FED-EDU Auto-Dap Workflow — the block never sleeps on a brother's win
+# When a PR merges or a first-timer ships, this bot shows up and shows love.
+# "Daps" = recognition. Everybody eats when we celebrate out loud.
+
+name: Auto Dap
+
+on:
+  pull_request:
+    types: [closed]
+  issues:
+    types: [opened, closed]
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  dap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dap on merged PR
+        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            const isFirst = pr.body && pr.body.includes("THIS IS MY FIRST PR EVER");
+
+            const msg = isFirst
+              ? `🏅 **FIRST PR MERGED — @${author} IS OFFICIALLY A BUILDER.**\n\nBrother, tap yourself on the shoulder. Most people never push one commit; you just merged code into a real project used by real brothers. That's not small. That's the door opening.\n\n- ✅ Code shipped to the block\n- 🎟️ Raffle tickets earned (see physical-raffles/ — a maintainer will confirm the count)\n- 📈 Your name hits the Builders wall (AUTHORS.md) on the next sync\n\nNext move: pick your next brick. The block is proud of you. 🏁`
+              : `🤝 **DAPS, @${author}.** Merged clean.\n\n- ✅ \`${pr.title}\`\n- 🎟️ Tickets logged for the refurb-PC raffle\n- 🔨 The block just got stronger.\n\nKeep building. 🏁`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: msg
+            });
+
+      - name: Welcome a first issue (the open-door move)
+        if: github.event_name == 'issues' && github.event.action == 'opened'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+
+            // Only greet on our ticket types — spawn tickets get the full welcome
+            const isSpawn = issue.title.startsWith("[SPAWN]");
+            const isFirstEver = issue.body && issue.body.includes("first issue ever");
+
+            if (isSpawn || isFirstEver) {
+              const msg = isSpawn
+                ? `🏁 **WELCOME TO THE BLOCK, @${author}.**\n\nA maintainer or elder will pull up within 24 hours with your setup path (INSTALL.md has five — phone-only counts).\n\nWhile you wait, three moves:\n1. Read the [Manifesto](https://github.com/${context.repo.owner}/FED-EDU/blob/main/README.md)\n2. Skim [FAQ.md](https://github.com/${context.repo.owner}/FED-EDU/blob/main/FAQ.md) — you're not the first to ask, and you won't be the last\n3. Post in [Discussions → Introduce Yourself](https://github.com/${context.repo.owner}/FED-EDU/discussions)\n\nYou made it here. That's already further than most. 🏁`
+                : `🏅 **First issue ever — welcome, @${author}.**\n\nYou just did something most people never do: you asked out loud. No stupid questions here (Six Rules, Rule 1). A brother will pull up soon.\n\n🏃 In the meantime: [FAQ.md](https://github.com/${context.repo.owner}/FED-EDU/blob/main/FAQ.md) covers the common asks. 🏁`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: msg
+              });
+            }
+
+      - name: Salute a shipped project (SHOW & TELL)
+        if: github.event_name == 'issues' && github.event.action == 'closed' && startsWith(github.event.issue.title, '[SHIP]')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const msg = `🚢 **SALUTE, @${author}.** Project shipped and ticket closed.\n\nEvery [SHIP] on this block is proof for the brothers behind you that it's possible. Yours just became somebody's "if he did it, I can."\n\n- 🎟️ Tickets: logged for the raffle\n- 📸 Showcase vault: a maintainer will link it in community-boards/\n\nWhat's the next build? 🏁`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: msg
+            });

@@ -1,0 +1,36 @@
+{
+  "name": "FED-EDU \u2014 The Block",
+  "short_name": "FED-EDU",
+  "description": "The teaching copy of the root PWA manifest \u2014 read it to learn the pattern, the live one is at the repo root (manifest.json).",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f2e9",
+  "theme_color": "#256d46",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "../icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
