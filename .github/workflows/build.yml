@@ -1,149 +1,331 @@
-# FED-EDU Build Workflow — the cross-platform engine
-# Runs on every push to main + every PR. Validates the 3-second rule.
-# Philosophy (ADR-001): vanilla stack, no node_modules, no build bloat.
-# We don't COMPILE anything — we VERIFY that the block still loads on scrap metal.
-
-name: Build & Verify
+name: Cross-Platform Build
 
 on:
   push:
-    branches: [main]
+    branches: [main, release]
+    tags: ['v*']
   pull_request:
     branches: [main]
-  workflow_dispatch: # allow manual runs from the Actions tab
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  workflow_dispatch:
 
 jobs:
-  # ---- JOB 1: Lint the block (does every file pass the smell test) ----
-  verify:
-    runs-on: ubuntu-latest
+  # ============================================================
+  # TAURI DESKTOP (macOS, Linux, Windows)
+  # ============================================================
+  tauri-desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            args: '--target universal-apple-darwin --bundles app,dmg'
+            rust-targets: 'aarch64-apple-darwin,x86_64-apple-darwin'
+          - platform: ubuntu-22.04
+            args: ''
+            rust-targets: ''
+          - platform: windows-latest
+            args: ''
+            rust-targets: ''
+
+    runs-on: ${{ matrix.platform }}
     steps:
-      - name: Pull up (checkout the code)
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Check for framework contraband (ADR-001)
-        run: |
-          echo "🚨 Scanning for heavy stuff that kills tethered 3G loads..."
-          if find . -path ./node_modules -prune -o -name "package.json" -print -o -name "yarn.lock" -print -o -name "*.tsx" -print | grep -q .; then
-            echo "❌ Found framework contraband. FED-EDU is vanilla-only (see ADR-001)."
-            find . -name "package.json" -o -name "yarn.lock" -o -name "*.tsx"
-            exit 1
-          fi
-          echo "✅ Clean. No frameworks. The block stays light."
-
-      - name: Check image weights (the 2MB rule)
-        run: |
-          echo "🚨 Weighing every image..."
-          FAIL=0
-          while IFS= read -r -d '' IMG; do
-            SIZE=$(stat -c%s "$IMG")
-            if [ "$SIZE" -gt 2097152 ]; then
-              echo "❌ $IMG is $SIZE bytes (over 2MB). Compress it (BUILD.md)."
-              FAIL=1
-            fi
-          done < <(find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.gif" -o -iname "*.webp" \) -print0)
-          [ $FAIL -eq 0 ] && echo "✅ All images under 2MB." || exit 1
-
-      - name: Validate every JSON in the block
-        run: |
-          echo "🚨 Checking JSON files (our database — one bad comma breaks the block)..."
-          FAIL=0
-          while IFS= read -r -d '' J; do
-            if ! python3 -m json.tool "$J" > /dev/null 2>&1; then
-              echo "❌ $J has bad JSON. Run it through a validator and fix."
-              FAIL=1
-            fi
-          done < <(find . -type f -name "*.json" -not -path "./node_modules/*" -print0)
-          [ $FAIL -eq 0 ] && echo "✅ All JSON valid." || exit 1
-
-      - name: HTML sanity check (no orphan pages)
-        run: |
-          echo "🚨 Every index.html must link back home (nobody gets stranded)..."
-          FAIL=0
-          while IFS= read -r -d '' PAGE; do
-            if ! grep -qiE '(\.\./index\.html|\.\./\.\./index\.html|href="https://fedpromptly\.github\.io/FED-EDU/"|FED-EDU</a>)' "$PAGE"; then
-              echo "⚠️  $PAGE — add a link back to the main index so brothers don't get stranded."
-            fi
-          done < <(find . -type f -name "index.html" -not -path "./node_modules/*" -print0)
-          echo "✅ Page check done (warnings above are advisory)."
-
-      - name: Placeholder patrol (YOUR_USERNAME must never reach a live page)
-        run: |
-          echo "🚨 Hunting leftover placeholders..."
-          # Whitelist = the intentional TEMPLATE spots only:
-          #   README.md + .github/README.md (the org's own Ko-fi button template)
-          #   support-the-block/ (the drop-in button template + its docs)
-          #   wiki/Hustling/Set-Up-Ko-fi.md + STRUCTURE.md (instructions that NAME the placeholder)
-          #   CHANGELOG.md (history)
-          # Everything else is a live page. A live page with YOUR_USERNAME still
-          # in the href means somebody copied the button and didn't swap it.
-          if grep -rn "YOUR_USERNAME" --include="*.md" --include="*.html" --include="*.js" . \
-            | grep -v "CHANGELOG" \
-            | grep -vE '^\./(README\.md|\.github/README\.md|STRUCTURE\.md|wiki/Hustling/Set-Up-Ko-fi\.md|support-the-block/)' \
-            | grep -q .; then
-            echo "❌ Found 'YOUR_USERNAME' placeholders in live pages. Replace them before merge (see support-the-block/kofi-button.html — swap it or it doesn't ship)."
-            grep -rn "YOUR_USERNAME" --include="*.md" --include="*.html" --include="*.js" . \
-              | grep -v "CHANGELOG" \
-              | grep -vE '^\./(README\.md|\.github/README\.md|STRUCTURE\.md|wiki/Hustling/Set-Up-Ko-fi\.md|support-the-block/)'
-            exit 1
-          fi
-          echo "✅ No stray placeholders on any live page."
-
-  # ---- JOB 2: Ship to GitHub Pages (the free hosting play) ----
-  deploy-pages:
-    needs: verify
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Pull up
-        uses: actions/checkout@v4
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload the block (no build step — vanilla means it ships as-is)
-        uses: actions/upload-pages-artifact@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: '.'
+          node-version: lts/*
+          cache: 'npm'
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.rust-targets }}
 
-  # ---- JOB 3: Report back in plain terms ----
-  summary:
-    needs: [verify, deploy-pages]
-    if: always()
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install Linux dependencies
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf \
+            xdg-utils
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build Tauri desktop
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # macOS signing (optional)
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        with:
+          tagName: app-v__VERSION__
+          releaseName: 'App v__VERSION__'
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}
+
+      - name: Upload Tauri artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-desktop-${{ matrix.platform }}
+          path: |
+            src-tauri/target/release/bundle/**/*.dmg
+            src-tauri/target/release/bundle/**/*.app
+            src-tauri/target/release/bundle/**/*.deb
+            src-tauri/target/release/bundle/**/*.AppImage
+            src-tauri/target/release/bundle/**/*.msi
+            src-tauri/target/release/bundle/**/*.exe
+          retention-days: 7
+
+  # ============================================================
+  # TAURI iOS (signed IPA)
+  # ============================================================
+  tauri-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-ios
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Init Tauri iOS project
+        run: npx tauri ios init
+
+      - name: Build Tauri iOS
+        run: npx tauri ios build --export-method app-store-connect
+        env:
+          # iOS signing (optional)
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          CI: true
+
+      - name: Upload iOS IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-ios
+          path: |
+            src-tauri/gen/apple/build/**/*.ipa
+            src-tauri/gen/apple/build/**/*.app
+          retention-days: 7
+
+  # ============================================================
+  # TAURI iOS SIMULATOR (unsigned .app.tar.gz)
+  # ============================================================
+  tauri-ios-simulator:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-ios-sim
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Init Tauri iOS project
+        run: npx tauri ios init
+
+      - name: Build Tauri iOS Simulator
+        run: npx tauri ios build --simulator
+        env:
+          CI: true
+
+      - name: Package simulator app
+        run: |
+          APP_PATH=$(find src-tauri/gen/apple/build -name "*.app" -type d | head -1)
+          if [ -n "$APP_PATH" ]; then
+            tar -czf ios-simulator-app.tar.gz -C "$(dirname "$APP_PATH")" "$(basename "$APP_PATH")"
+          fi
+
+      - name: Upload iOS Simulator artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-ios-simulator
+          path: ios-simulator-app.tar.gz
+          retention-days: 7
+
+  # ============================================================
+  # TAURI ANDROID (APK / AAB)
+  # ============================================================
+  tauri-android:
     runs-on: ubuntu-latest
     steps:
-      - name: Give the block the status in plain talk
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android NDK
         run: |
-          echo "============================================"
-          echo "  FED-EDU BUILD REPORT"
-          echo "============================================"
-          if [ "${{ needs.verify.result }}" == "success" ]; then
-            echo "✅ Verify: PASSED — the block still loads light."
-          else
-            echo "❌ Verify: FAILED — check the jobs above, fix, push again. You got this."
-          fi
-          if [ "${{ needs.deploy-pages.result }}" == "success" ]; then
-            echo "✅ Deploy: LIVE on GitHub Pages."
-          elif [ "${{ needs.deploy-pages.result }}" == "skipped" ]; then
-            echo "⏭️  Deploy: skipped (not a push to main — normal for PRs)."
-          else
-            echo "❌ Deploy: FAILED — check the Pages job above."
-          fi
-          echo "============================================"
-          echo "One commit at a time. The block is watching."
-          echo "============================================"
+          echo "y" | sdkmanager "ndk;27.0.12077973"
+          echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> $GITHUB_ENV
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Init Tauri Android project
+        run: npx tauri android init
+
+      - name: Build Tauri Android
+        run: npx tauri android build --apk
+        env:
+          NDK_HOME: ${{ env.NDK_HOME }}
+          CI: true
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-android
+          path: |
+            src-tauri/gen/android/app/build/outputs/**/*.apk
+            src-tauri/gen/android/app/build/outputs/**/*.aab
+          retention-days: 7
+
+  # ============================================================
+  # ELECTRON DESKTOP (macOS, Linux, Windows)
+  # ============================================================
+  electron-desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Electron app
+        run: npx electron-builder --publish never
+        env:
+          # macOS signing (optional)
+          CSC_LINK: ${{ secrets.MAC_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.MAC_CSC_KEY_PASSWORD }}
+          # Windows signing (optional)
+          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+
+      - name: Upload Electron artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: electron-${{ matrix.os }}
+          path: dist/
+          retention-days: 7
+
+  # ============================================================
+  # ELECTRON ANDROID (via Capacitor - requires separate project setup)
+  # ============================================================
+  electron-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android
+
+      - name: Build Android APK
+        working-directory: android
+        run: ./gradlew assembleRelease
+
+      - name: Upload Android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: electron-android
+          path: android/app/build/outputs/apk/release/*.apk
+          retention-days: 7
