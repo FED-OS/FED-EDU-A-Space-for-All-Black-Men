@@ -4,7 +4,7 @@
 
 **(Urban Dictionary + GitHub) × FED-OS × fedpromptly**
 
-Welcome to the block. This is the front door of the FED-EDU organization — the educational wing of the FED-OS / fedpromptly ecosystem, built for every kind of Black man across the globe: the Jamaicans, the Haitians, the Africans, the Americans, the British; the young brothers and the elders; the incarcerated and returning citizens; the gay and trans brothers; the kid with his first bike and the man on his second chance. All Black men. All builders.
+Welcome to the block. This is the front door of the FED-EDU organization — the educational wing of the FED-OS / fedpromptly ecosystem, built for every kind of Black man across the globe: the Jamaicans, the Haitians, the Africans, the Americans, the British; the young brothers and the elders; the incarcerated and returning citizens; the gay and trans brothers; the kid with his first bike and the man on his second chance. All Black men. All builders. https://fed-os.github.io/FED-EDU-A-Space-for-All-Black-Men/
 
 <img width="2176" height="1632" alt="fed-edu-landscape-05-station" src="https://github.com/user-attachments/assets/d35a3d3d-24dc-416b-944b-bfe08187ae96" />
 
