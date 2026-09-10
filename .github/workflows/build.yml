@@ -1,0 +1,149 @@
+# FED-EDU Build Workflow — the cross-platform engine
+# Runs on every push to main + every PR. Validates the 3-second rule.
+# Philosophy (ADR-001): vanilla stack, no node_modules, no build bloat.
+# We don't COMPILE anything — we VERIFY that the block still loads on scrap metal.
+
+name: Build & Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # allow manual runs from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # ---- JOB 1: Lint the block (does every file pass the smell test) ----
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull up (checkout the code)
+        uses: actions/checkout@v4
+
+      - name: Check for framework contraband (ADR-001)
+        run: |
+          echo "🚨 Scanning for heavy stuff that kills tethered 3G loads..."
+          if find . -path ./node_modules -prune -o -name "package.json" -print -o -name "yarn.lock" -print -o -name "*.tsx" -print | grep -q .; then
+            echo "❌ Found framework contraband. FED-EDU is vanilla-only (see ADR-001)."
+            find . -name "package.json" -o -name "yarn.lock" -o -name "*.tsx"
+            exit 1
+          fi
+          echo "✅ Clean. No frameworks. The block stays light."
+
+      - name: Check image weights (the 2MB rule)
+        run: |
+          echo "🚨 Weighing every image..."
+          FAIL=0
+          while IFS= read -r -d '' IMG; do
+            SIZE=$(stat -c%s "$IMG")
+            if [ "$SIZE" -gt 2097152 ]; then
+              echo "❌ $IMG is $SIZE bytes (over 2MB). Compress it (BUILD.md)."
+              FAIL=1
+            fi
+          done < <(find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.gif" -o -iname "*.webp" \) -print0)
+          [ $FAIL -eq 0 ] && echo "✅ All images under 2MB." || exit 1
+
+      - name: Validate every JSON in the block
+        run: |
+          echo "🚨 Checking JSON files (our database — one bad comma breaks the block)..."
+          FAIL=0
+          while IFS= read -r -d '' J; do
+            if ! python3 -m json.tool "$J" > /dev/null 2>&1; then
+              echo "❌ $J has bad JSON. Run it through a validator and fix."
+              FAIL=1
+            fi
+          done < <(find . -type f -name "*.json" -not -path "./node_modules/*" -print0)
+          [ $FAIL -eq 0 ] && echo "✅ All JSON valid." || exit 1
+
+      - name: HTML sanity check (no orphan pages)
+        run: |
+          echo "🚨 Every index.html must link back home (nobody gets stranded)..."
+          FAIL=0
+          while IFS= read -r -d '' PAGE; do
+            if ! grep -qiE '(\.\./index\.html|\.\./\.\./index\.html|href="https://fedpromptly\.github\.io/FED-EDU/"|FED-EDU</a>)' "$PAGE"; then
+              echo "⚠️  $PAGE — add a link back to the main index so brothers don't get stranded."
+            fi
+          done < <(find . -type f -name "index.html" -not -path "./node_modules/*" -print0)
+          echo "✅ Page check done (warnings above are advisory)."
+
+      - name: Placeholder patrol (YOUR_USERNAME must never reach a live page)
+        run: |
+          echo "🚨 Hunting leftover placeholders..."
+          # Whitelist = the intentional TEMPLATE spots only:
+          #   README.md + .github/README.md (the org's own Ko-fi button template)
+          #   support-the-block/ (the drop-in button template + its docs)
+          #   wiki/Hustling/Set-Up-Ko-fi.md + STRUCTURE.md (instructions that NAME the placeholder)
+          #   CHANGELOG.md (history)
+          # Everything else is a live page. A live page with YOUR_USERNAME still
+          # in the href means somebody copied the button and didn't swap it.
+          if grep -rn "YOUR_USERNAME" --include="*.md" --include="*.html" --include="*.js" . \
+            | grep -v "CHANGELOG" \
+            | grep -vE '^\./(README\.md|\.github/README\.md|docs/STRUCTURE\.md|wiki/Hustling/Set-Up-Ko-fi\.md|wiki/Hustling/Set-Up-Ko-fi\.md\.html|support-the-block/)' \
+            | grep -q .; then
+            echo "❌ Found 'YOUR_USERNAME' placeholders in live pages. Replace them before merge (see support-the-block/kofi-button.html — swap it or it doesn't ship)."
+            grep -rn "YOUR_USERNAME" --include="*.md" --include="*.html" --include="*.js" . \
+              | grep -v "CHANGELOG" \
+              | grep -vE '^\./(README\.md|\.github/README\.md|docs/STRUCTURE\.md|wiki/Hustling/Set-Up-Ko-fi\.md|wiki/Hustling/Set-Up-Ko-fi\.md\.html|support-the-block/)'
+            exit 1
+          fi
+          echo "✅ No stray placeholders on any live page."
+
+  # ---- JOB 2: Ship to GitHub Pages (the free hosting play) ----
+  deploy-pages:
+    needs: verify
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Pull up
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the block (no build step — vanilla means it ships as-is)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ---- JOB 3: Report back in plain terms ----
+  summary:
+    needs: [verify, deploy-pages]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Give the block the status in plain talk
+        run: |
+          echo "============================================"
+          echo "  FED-EDU BUILD REPORT"
+          echo "============================================"
+          if [ "${{ needs.verify.result }}" == "success" ]; then
+            echo "✅ Verify: PASSED — the block still loads light."
+          else
+            echo "❌ Verify: FAILED — check the jobs above, fix, push again. You got this."
+          fi
+          if [ "${{ needs.deploy-pages.result }}" == "success" ]; then
+            echo "✅ Deploy: LIVE on GitHub Pages."
+          elif [ "${{ needs.deploy-pages.result }}" == "skipped" ]; then
+            echo "⏭️  Deploy: skipped (not a push to main — normal for PRs)."
+          else
+            echo "❌ Deploy: FAILED — check the Pages job above."
+          fi
+          echo "============================================"
+          echo "One commit at a time. The block is watching."
+          echo "============================================"
