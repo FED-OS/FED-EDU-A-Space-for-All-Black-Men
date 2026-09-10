@@ -133,3 +133,5 @@ git push
   custom domain root.
 - If you attach a custom domain later (Settings → Pages → Custom domain), the same
   relative links keep working with zero changes.
+  
+Forked by Daigon876 on a mission.
