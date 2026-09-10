@@ -1,4 +1,6 @@
-# 🏛️ FED-EDU — ORG PROFILE
+# 🏛️ FED-EDU — ORG PROFILE: https://fed-os.github.io/FED-EDU-A-Space-for-All-Black-Men/
+
+<img width="2176" height="1632" alt="fed-edu-landscape-05-station" src="https://github.com/user-attachments/assets/0f85cb20-caae-4164-afc2-90ddd8ba6519" />
 
 ### The Sovereign AI, Coding & Tech Space for All Black Men
 
