@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>README — THE BLOCK (FED-EDU)</title>
+  <meta name="description" content="THE BLOCK: the manifesto, the map, and how this site runs.">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .sect-wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+      .hub-intro { padding: 34px 4px 10px; }
+      .hub-intro h1 { font-family: Georgia, serif; color: #256d46; font-size: 2.2rem; margin: 0 0 10px; }
+      .hub-intro p { max-width: 720px; color: #2a2520; }
+      .hint { color: #6f675c; font-size: 0.9rem; }
+      .hint a, .hub-intro a { color: #256d46; }
+      .hint.status { background: rgba(176,125,47,.09); border: 1px solid rgba(176,125,47,.35);
+                     padding: 10px 14px; border-radius: 10px; display: block; max-width: 720px; }
+      .hint.status code { background: rgba(176,125,47,.12); }
+      .level { margin: 26px 0 8px; }
+      .level h2 { font-family: Georgia, serif; color: #2a2520; border-bottom: 2px solid #256d46;
+                  padding-bottom: 6px; font-size: 1.5rem; }
+      .level-sub { color: #6f675c; font-style: italic; margin: 4px 0 14px; }
+      .doc-links { display: grid; gap: 10px; }
+      .doc-link { display: grid; gap: 3px; background: #fffdf8; border: 1px solid #e5dcc9;
+                  border-radius: 12px; padding: 16px 18px; text-decoration: none;
+                  box-shadow: 0 1px 3px rgba(70,60,40,.07); transition: border-color .2s, transform .2s; }
+      .doc-link:hover { border-color: #256d46; transform: translateY(-1px); }
+      .doc-link strong { color: #256d46; font-family: Georgia, serif; font-size: 1.05rem; }
+      .doc-link span { color: #6f675c; font-size: 0.92rem; line-height: 1.45; }
+      .sect-foot { border-top: 1px solid #e5dcc9; margin-top: 40px; padding: 18px 16px 26px;
+                   text-align: center; color: #6f675c; font-size: 0.8rem;
+                   font-family: 'Courier New', monospace; }
+      @media (max-width: 600px) { .hub-intro h1 { font-size: 1.7rem; } }
+    </style>
+
+    <style>
+      .doc { max-width: 820px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-family: Georgia, serif; font-size: 2.1rem; color: #256d46; }
+      .doc img { max-width: 100%; }
+      .doc table { display: block; overflow-x: auto; }
+      .doc code { background: #f3ecdd; padding: 1px 5px; border-radius: 5px;
+                  font-size: 0.86em; }
+      .doc blockquote { border-left: 4px solid #b07d2f; margin-left: 0;
+                        padding: 4px 14px; background: #f9f5ec; }
+    </style>
+
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="index.html" class="nv" data-k="home">Home</a>
+      <a href="wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+<h1 class="pg-title">README.md</h1>
+<div align="center">
+<h1>🏛️ FED-EDU</h1>
+<h3>The Sovereign AI, Coding &amp; Tech Space for All Black Men</h3>
+<p><strong>(Urban Dictionary + GitHub) × FED-OS × fedpromptly</strong></p>
+<p><strong>Powered by <a href="https://fedpromptly.com">FED-OS</a> — the educational wing of the ecosystem</strong></p>
+<p><a href='support-the-block/kofi-button.html'>☕ Support the block — the Ko-fi button lives here</a></p>
+</div>
+<hr />
+<h2>📜 THE MANIFESTO</h2>
+<p>Look at the board. <strong>Kai Cenat</strong> controls the traffic. <strong>Jay-Z</strong> owns the asset. <strong>LeBron</strong> executes the playbook. <strong>Obama</strong> commands the system. <strong>Dr. King</strong> organized the movement. <strong>Kunta Kinte</strong> protected the mind. Everything they do is high-level logic, strategy, and architecture. They did it in the streets, on the screens, and on the grass.</p>
+<p><strong>We are doing it on the keyboard.</strong></p>
+<p>FED-EDU is where all Black men unite to turn that exact same cultural genius into software, global code ownership, and real economic power. Every kind of Black man — the Jamaicans, the Haitians, the Africans, the Americans, the British, the gay and trans brothers, the young and the elders, the incarcerated and returning citizens, the kid who just got his first bike, the homeless brother in the shelter. The internet does not care who you are. When you write code, the machine only asks one question: <strong>does the logic work?</strong></p>
+<p><strong>Stop being the product. Start running the platform.</strong> The world uses Black culture, music, style, and energy to power the entire internet — but other people build the apps that cash the checks. This movement teaches every Black man how to build the pipes and collect the rent.</p>
+<hr />
+<h2>⚡ WHY THIS EXISTS</h2>
+<p>Every mainstream tech space fails our people in the same three ways:</p>
+<p><strong>The vibe check fails.</strong> Stack Overflow and coding subreddits look like corporate tax portals. Dry. Clinical. No culture, no rhythm, no style. Our brothers log in, look around, and feel like they walked into the wrong building.</p>
+<p><strong>The gatekeeping is elitist.</strong> A beginner asks a basic question and gets downvoted, mocked, or deleted for &quot;violating formatting rules.&quot; If you don't already know the language, they treat you like you don't belong. That kills a beginner's confidence before he ever writes his first line.</p>
+<p><strong>The content has zero cultural relevance.</strong> They want you to calculate a bank's interest rates or sort corporate employee IDs. None of that connects to a brother trying to scale a music career, organize a local league, or build an exit off the block.</p>
+<p>FED-EDU is the answer to all three. The dialogue is raw and rooted in the shared language of the streets and the diaspora. The milestones we celebrate are the ones that actually matter — first push, first deploy, first customer. The projects you build are the ones you already care about: your music, your stats, your brand, your block.</p>
+<hr />
+<h2>🧮 THE EQUATION</h2>
+<pre><code>FED-EDU = (Urban Dictionary + GitHub) × FED-OS × fedpromptly
+</code></pre>
+<ul>
+<li><strong>Urban Dictionary</strong> — The translation layer. Corporate tech terms get decoded into plain street logic instantly. &quot;Initialize an asynchronous API endpoint&quot; becomes &quot;hit up your plug for the data without freezing your screen.&quot;</li>
+<li><strong>GitHub</strong> — The block. The open stash house of code where blueprints live, get forked, get customized, and get shipped. Collaborative, visual, instant wins.</li>
+<li><strong>FED-OS</strong> — The environment. A lightweight operating layer built for survival-level hardware: tethered phones, refurbished desktops, whatever you got.</li>
+<li><strong>fedpromptly</strong> — The AI engine. Instant coaching in plain language. No waiting on a forum for a know-it-all to answer. Tap in, say &quot;my slider isn't loading on mobile, fix it,&quot; get the exact code and where to paste it.</li>
+</ul>
+<hr />
+<h2>🌍 THE GENERATIONAL ARC</h2>
+<p>Our ancestors built the physical world with their bare hands from Kunta Kinte forward, but they didn't get the receipts. Dr. King marched so we could have the legal right to stand on our own two feet and claim economic power. Obama showed us we have the intellect to run the entire operation from the top. Now it's our turn. The next frontier isn't concrete or politics — it's code and AI. We are taking the brilliant, sharp, hustling minds we've always had and using them to build the digital future, in the simplest terms possible.</p>
+<p><strong>Kunta Kinte — Break the Digital Chains.</strong> We are still working fields we don't own. Every hour you spend consuming content, clicking ads, and feeding your data into someone else's app, you are building their empire. Learning AI and coding is how you refuse to let them take your name and your mind.</p>
+<p><strong>MLK — The New Economic Blueprint.</strong> Dr. King knew having the right to sit at a lunch counter meant nothing if you couldn't afford the burger. Tech is the new lunch counter. If our brothers are locked out of AI and coding, we are economically segregated all over again. This isn't just tech — it's economic civil rights.</p>
+<p><strong>Obama — Command the System.</strong> Obama learned the rules of the constitutional system, organized the people, and took the driver's seat. Coding is the same thing — learning the rules of the digital system so you can write the laws of the internet. When you master AI and programming, you become the commander-in-chief of your own digital destiny.</p>
+<hr />
+<h2>🕹️ TECH IS REAL-LIFE MINECRAFT</h2>
+<p>Traditional coding education forces you to memorize dry syntax and worry about what's &quot;efficient&quot; or whether it's already been built. We do the opposite. <strong>We do whatever we want.</strong> Pick one language or pick five. Grab what you need. Hack a solution together. Build things from pure imagination. Don't ask if it's been done — build it your way.</p>
+<p>A computer screen is an infinite open world where you mine resources, build fortresses, and reshape the environment from nothing. You don't need a certificate. You just start placing digital blocks. And when you're ready, you package that world and ship it — a website becomes an app, the app runs on every device, and the whole thing lives at a link you can text to anybody on Earth.</p>
+<p><strong>The pipeline:</strong> Find what you like → pick a project that enhances it → fork a blueprint → edit it your way → push it live → share it → upgrade it → wrap it as an app → monetize it. That's the whole game.</p>
+<hr />
+<h2>🎯 WHAT'S INSIDE</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>What It Does</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>core-system/</code></td>
+<td>The main dashboard — ultra-lightweight, runs on EasyTether connections</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>wiki/</code></td>
+<td>The Logic Wiki — 12 plain-talk pages, four levels: Getting Online → First Steps → Building → Hustling</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>courses-and-guides/</code></td>
+<td>EasyTether Mastery, Real-Life Minecraft, The Corporate Ship</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>sandbox-blueprints/</code></td>
+<td>Ready-to-fork projects: Rap Lab, StatTracker, Media FX, Streamer Tools</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>urban-dictionary/</code></td>
+<td>The decoder ring — tech jargon translated to street logic</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>prompts/</code></td>
+<td>AI prompt library for the whole collective</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>fedpromptly-coach/</code></td>
+<td>The AI bridge — instant coaching, no judgment</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>excellence-matrix/</code></td>
+<td>Black male excellence across every sector mapped to tech skills</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>discussion/</code></td>
+<td>The porch — categories, pinned posts, templates</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>community-boards/</code></td>
+<td>Diaspora map, help desk, showcase vault</td>
+<td>Live · map shows seed data</td>
+</tr>
+<tr>
+<td><code>hustle-index/</code></td>
+<td>The marketplace · list your services, get hired, no background checks</td>
+<td>Live · sample data only</td>
+</tr>
+<tr>
+<td><code>physical-raffles/</code></td>
+<td>Refurbished PC giveaways — earn tickets by leveling up</td>
+<td>Not live yet — rules only</td>
+</tr>
+<tr>
+<td><code>fed-comm-dm/</code></td>
+<td>The custom GitHub DM system — private circuits, direct link-ups</td>
+<td>Live</td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>The paperwork — ADRs, governance, build law, pricing floors, FAQ</td>
+<td>Reference</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Honest data rule:</strong> anything shipped with example numbers (the diaspora map's city counts, the hustle index's sample profile, the leaderboard's seed rows) is labeled SEED DATA in the files themselves and on the pages. No fake member counts, no invented winners, no payment claims. Real entries replace them one PR at a time.
+---|---|
+| <code>core-system/</code> | The main dashboard — ultra-lightweight, runs on EasyTether connections |
+| <code>fed-comm-dm/</code> | The custom GitHub DM system — private circuits, direct link-ups |
+| <code>urban-dictionary/</code> | The decoder ring — tech jargon translated to street logic |
+| <code>fedpromptly-coach/</code> | The AI bridge — instant coaching, no judgment |
+| <code>courses-and-guides/</code> | EasyTether Mastery, Real-Life Minecraft, The Corporate Ship |
+| <code>sandbox-blueprints/</code> | Ready-to-fork projects: Rap Lab, StatTracker, Media FX, Streamer Tools |
+| <code>excellence-matrix/</code> | Black male excellence across every sector mapped to tech skills |
+| <code>hustle-index/</code> | The marketplace — list your services, get hired, no background checks |
+| <code>community-boards/</code> | Diaspora map, help desk, showcase vault |
+| <code>physical-raffles/</code> | Refurbished PC giveaways — earn tickets by leveling up |
+| <code>wiki/</code> | The Logic Wiki — knowledge in plain terms |
+| <code>discussion/</code> | The corner — categories, pinned posts, templates |
+| <code>prompts/</code> | AI prompt library for the whole collective |</p>
+</blockquote>
+<hr />
+<h2>🚀 SPAWN POINTS (Where To Start)</h2>
+<p><strong>Brand new and never touched code?</strong> Start with <code>wiki/First-Steps/Make-a-GitHub-Account.md</code>. Claim your name on the block, fork your first repo, push your first change. Earn the badge. That's Level 1.</p>
+<p><strong>Got a phone but no computer?</strong> Start with <code>courses-and-guides/01-easytether-mastery/</code>. Learn to get any scrap machine online through your phone. You don't need Wi-Fi bills — you need a signal and a USB cord.</p>
+<p><strong>Know what you like already?</strong> Jump into <code>sandbox-blueprints/</code>. Music? The Rap Lab. Ball? StatTracker. Design? Media FX. Streaming? Streamer Tools. Fork the blueprint, make it yours.</p>
+<p><strong>Ready to get paid?</strong> Read <code>docs/PRICING.md</code>, complete your hustle file in <code>hustle-index/members/</code>, and list yourself on the marketplace.</p>
+<p><strong>Want to link with brothers?</strong> Drop an intro in the discussions, follow the org and everyone in the directory, and start building the syndicate.</p>
+<hr />
+<h2>🛡️ THE GROUND RULES</h2>
+<ol>
+<li><strong>No question is stupid.</strong> If a brother doesn't know how to create a folder, we walk him through it. Zero judgment.</li>
+<li><strong>No jargon without translation.</strong> If you can't explain it in plain terms, you don't understand it well enough to teach it here.</li>
+<li><strong>Celebrate the attempts.</strong> The brother who pushed his first line of code gets the same dap as the one who shipped an app. The first step is the hardest part of the tunnel.</li>
+<li><strong>Zero tolerance for gatekeeping.</strong> Elitism, mocking, downvote culture — banned. This is the anti-Stack Overflow.</li>
+<li><strong>Ownership stays with the builders.</strong> Brothers who contribute to projects own their piece of the pie.</li>
+<li><strong>Protect the younger brothers.</strong> Kids are in this space learning. Keep it a safe house.</li>
+</ol>
+<hr />
+<h2>🤝 THE CREW &amp; CONNECTIONS</h2>
+<ul>
+<li><strong>FED-OS</strong> — The lightweight operating environment that runs anywhere. The foundation.</li>
+<li><strong>fedpromptly</strong> — The AI engine. The coach.</li>
+<li><strong>FED-EDU</strong> — You're here. The school, the block, and the marketplace.</li>
+</ul>
+<p>Inspirations and organizations doing the work: The Hidden Genius Project, Black in AI, BLK Men in Tech, Black Boys Code, All Star Code, and Spill — proof that when we build our own spaces, we thrive.</p>
+<hr />
+<h2>☕ FUEL THE BLOCK</h2>
+<p>Every Ko-fi contribution goes to refurbished desktops for the raffles, data plans for brothers learning on tethered phones, and hosting costs. Even $3 keeps a brother online tonight.</p>
+<p><a href='support-the-block/kofi-button.html'>☕ Support the block — the Ko-fi button lives here</a></p>
+<hr />
+<h2>🚀 PUT THIS SITE ON GITHUB PAGES (3 minutes, free)</h2>
+<p>The whole block is static vanilla HTML — no build step, no node_modules, nothing to install. Push it to a repo and it's live.</p>
+<p><strong>1. Make the repo.</strong> Create <code>yourname.github.io</code> (a user site — then the block lives at the root) or any repo named <code>FED-EDU</code> (a project site — it lives under <code>/FED-EDU/</code>). All internal links in this repo are relative, so either works untouched.</p>
+<p><strong>2. Push this folder.</strong> From inside <code>the-block/</code>:</p>
+<pre><code>git init
+git add .
+git commit -m &quot;the block: first light&quot;
+git branch -M main
+git remote add origin https://github.com/YOUR-NAME/YOUR-REPO.git
+git push -u origin main
+</code></pre>
+<p><strong>3. Turn on Pages.</strong> Repo → <strong>Settings</strong> → <strong>Pages</strong> → Build and deployment → <strong>Source: GitHub Actions</strong> (the included <code>.github/workflows/build.yml</code> runs the checks and deploys on every push to <code>main</code>). Save. First run takes ~2 minutes.</p>
+<p><strong>4. Open your URL.</strong> <code>https://yourname.github.io</code> or <code>https://yourname.github.io/FED-EDU/</code>. Every push to <code>main</code> re-publishes automatically.</p>
+<p><strong>If you'd rather not use Actions:</strong> Settings → Pages → <strong>Source: Deploy from a branch</strong> → branch <code>main</code>, folder <code>/ (root)</code>. Same result, no workflow.</p>
+<p><strong>The one maintenance habit:</strong> when you change any page, the service worker (<code>service-worker.js</code>) needs its <code>CACHE_VERSION</code> bumped (v4 → v5) so brothers' phones drop the old copy and re-download. That's the whole ritual — the file's header explains it.</p>
+<p><strong>Before it truly goes live:</strong> swap the Ko-fi placeholder — <code>support-the-block/kofi-button.html</code> holds a ready-made button with <code>YOUR_USERNAME</code> in two spots; make a real Ko-fi account, swap it, and the placeholder patrol in <code>build.yml</code> will pass. Until then every page still works, the button just points at the template page.</p>
+<hr />
+<h2>⚖️ LICENSE</h2>
+<p>This project lives under the terms in <code>LICENSE</code>. See <code>docs/COPYING.md</code> for the plain-terms breakdown of what you can do with the code.</p>
+<div align="center">
+<p><strong>FED-EDU — from the trenches to the towers.</strong></p>
+<p><strong>We've done it before with everything else we touched. We're doing it again with tech.</strong></p>
+</div>
+
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "home");
+  });
+})();
+</script>
+
+
+<script src="pops.js" defer></script>
+</body>
+</html>

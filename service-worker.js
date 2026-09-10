@@ -11,7 +11,7 @@
  * Skipping the bump = brothers see yesterday's site and think you didn't ship.
  */
 
-var CACHE_VERSION = "fed-edu-block-v3";
+var CACHE_VERSION = "fed-edu-block-v5";
 
 // The shell: front door + the pages a first-time brother hits most.
 // Not every room — the fetch handler caches the rest as you walk through.
@@ -23,6 +23,7 @@ var APP_SHELL = [
   "./icon-192.png",
   "./favicon.ico",
   "./urban-dictionary/index.html",
+  "./urban-dictionary/terms/index.html",
   "./urban-dictionary/search-engine.js",
   "./urban-dictionary/index.json",
   "./excellence-matrix/index.html",
@@ -37,7 +38,17 @@ var APP_SHELL = [
   "./sandbox-blueprints/02-football-stats/index.html",
   "./sandbox-blueprints/03-media-fx-clipper/index.html",
   "./sandbox-blueprints/04-streamer-tools/index.html",
-  "./fed-comm-dm/index.html"
+  "./fed-comm-dm/index.html",
+  "./wiki/index.html",
+  "./courses-and-guides/index.html",
+  "./sandbox-blueprints/index.html",
+  "./prompts/index.html",
+  "./discussion/index.html",
+  "./fedpromptly-coach/index.html",
+  "./physical-raffles/index.html",
+  "./support-the-block/index.html",
+  "./docs/index.html",
+  "./README.md.html"
 ];
 
 // Install: pre-load the shell so first load offline still shows something real.
