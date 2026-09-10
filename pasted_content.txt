@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="THE BLOCK — 15 rooms, one hub, zero boring. Hustle, raffles, prompts, wiki, coaching and more.">
+<title>THE BLOCK — One Hub. Zero Boring.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#07070a; --ink-2:#0d0d13; --ink-3:#15151f;
+  --paper:#f4f4f0; --muted:#9d9db0;
+  --acid:#c6ff3d; --hot:#ff3d81; --cyan:#3df4ff; --gold:#ffd23d; --violet:#8b5cff;
+  --border:rgba(255,255,255,.12);
+  --display:"Archivo Black","Arial Black",sans-serif;
+  --body:"Space Grotesk",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --pad:clamp(.9rem,3vw,2rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;
+  font-family:var(--body);font-size:16px;line-height:1.5;
+  background:var(--ink);color:var(--paper);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::selection{background:var(--acid);color:#000}
+button{font-family:inherit}
+a{color:inherit}
+
+/* ============================================================
+   BACKDROP
+   ============================================================ */
+.bg{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 88% -8%, rgba(198,255,61,.15), transparent 62%),
+    radial-gradient(760px 480px at -8% 26%, rgba(255,61,129,.13), transparent 62%),
+    radial-gradient(900px 640px at 50% 114%, rgba(61,244,255,.11), transparent 62%);
+}
+.bg::after{
+  content:"";position:absolute;inset:0;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* ============================================================
+   TOP BAR + TAB RAIL
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(7,7,10,.87);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.bar{display:flex;align-items:center;gap:1rem;padding:.7rem var(--pad)}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.brand .mark{
+  width:34px;height:34px;display:grid;place-items:center;flex:0 0 auto;
+  font-family:var(--display);font-size:1rem;color:#000;background:var(--acid);
+  transform:rotate(-6deg);box-shadow:0 0 22px rgba(198,255,61,.42);
+}
+.brand b{font-family:var(--display);letter-spacing:.1em;font-size:.92rem;white-space:nowrap}
+.brand small{
+  display:block;font-size:.6rem;letter-spacing:.24em;color:var(--muted);
+  text-transform:uppercase;font-weight:700;
+}
+.search{margin-left:auto;position:relative;display:flex;align-items:center}
+.search input{
+  width:min(240px,38vw);background:var(--ink-3);border:1px solid var(--border);
+  color:var(--paper);border-radius:999px;
+  padding:.48rem .9rem .48rem 2.1rem;font-family:inherit;font-size:.82rem;
+  outline:none;transition:.2s;
+}
+.search input::placeholder{color:#66667a}
+.search input:focus{border-color:var(--acid);box-shadow:0 0 0 3px rgba(198,255,61,.13)}
+.search .ico{position:absolute;left:.78rem;font-size:.78rem;opacity:.55;pointer-events:none}
+
+.tabrail{
+  display:flex;gap:.3rem;overflow-x:auto;scroll-behavior:smooth;
+  padding:.5rem var(--pad);scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.22) transparent;
+}
+.tabrail::-webkit-scrollbar{height:6px}
+.tabrail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:99px}
+.tabrail button{
+  flex:0 0 auto;white-space:nowrap;
+  font-size:.79rem;font-weight:600;color:var(--muted);
+  background:transparent;border:1px solid transparent;border-radius:999px;
+  padding:.42rem .85rem;cursor:pointer;transition:.18s;
+}
+.tabrail button:hover{color:var(--paper);background:rgba(255,255,255,.06)}
+.tabrail button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.tabrail button[aria-selected="true"]{
+  color:#000;background:var(--acid);border-color:var(--acid);
+  box-shadow:0 0 18px rgba(198,255,61,.35);
+}
+.tabrail button[hidden]{display:none}
+
+/* ============================================================
+   PANELS
+   ============================================================ */
+main{max-width:1240px;margin:0 auto;padding:clamp(1.6rem,4vw,3rem) var(--pad) 3rem}
+.panel{display:none}
+.panel.active{display:block;animation:fade .38s cubic-bezier(.2,.8,.3,1) both}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.phead{margin-bottom:1.9rem}
+.phead .kick{
+  display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.28em;
+  text-transform:uppercase;color:#000;background:var(--cyan);
+  padding:.3rem .7rem;transform:rotate(-1.5deg);margin-bottom:.85rem;
+}
+.phead h1{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(1.8rem,5.5vw,3.1rem);line-height:1;margin:0;letter-spacing:-.01em;
+}
+.phead p{color:var(--muted);max-width:62ch;margin:.75rem 0 0;line-height:1.65}
+
+/* ============================================================
+   HERO (home)
+   ============================================================ */
+.hero{text-align:center;padding:clamp(1.5rem,6vh,3rem) 0 1rem}
+.giant{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(2.6rem,10vw,7rem);line-height:.95;
+  letter-spacing:-.01em;margin:0;
+}
+.giant .outline{display:block;color:transparent;-webkit-text-stroke:2px rgba(244,244,240,.85)}
+.rot-wrap{
+  display:inline-flex;align-items:center;gap:.55rem;flex-wrap:wrap;
+  justify-content:center;margin-top:.35rem;
+}
+.rot-wrap .fixed{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.25rem,4.2vw,2.9rem)}
+#rotator{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(1.25rem,4.2vw,2.9rem);
+  color:#000;background:var(--acid);padding:.04em .28em;display:inline-block;
+  transform:rotate(-2deg);box-shadow:6px 6px 0 var(--hot);
+  animation:pop .45s cubic-bezier(.2,1.6,.4,1);
+}
+@keyframes pop{from{transform:rotate(-2deg) scale(.6);opacity:0}to{transform:rotate(-2deg) scale(1);opacity:1}}
+.hero .sub{
+  color:var(--muted);font-size:clamp(.93rem,2vw,1.06rem);
+  max-width:56ch;margin:1.5rem auto 0;line-height:1.65;
+}
+.hero-stats{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:clamp(1.4rem,6vw,4.5rem);margin:2.4rem auto 0;
+}
+.stat{text-align:center}
+.stat b{
+  display:block;font-family:var(--display);
+  font-size:clamp(2rem,6vw,3.3rem);line-height:1;
+  color:transparent;-webkit-text-stroke:2px var(--acid);
+}
+.stat small{
+  display:block;margin-top:.45rem;color:var(--muted);font-size:.68rem;
+  font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+}
+
+/* marquee */
+.marquee-wrap{position:relative;height:6.5rem;margin:3rem 0 1rem;overflow:hidden}
+.marquee{
+  position:absolute;left:-5%;width:110%;overflow:hidden;white-space:nowrap;
+  border-top:3px solid #000;border-bottom:3px solid #000;padding:.5rem 0;
+}
+.marquee.a{
+  top:.4rem;transform:rotate(-2deg);background:var(--acid);color:#000;
+  font-family:var(--display);font-size:.9rem;letter-spacing:.12em;
+}
+.marquee.b{
+  top:3.1rem;transform:rotate(1.6deg);background:#000;color:transparent;
+  border-color:var(--hot);-webkit-text-stroke:1px var(--hot);
+  font-family:var(--display);font-size:.9rem;letter-spacing:.12em;
+}
+.marquee .track{display:inline-flex;gap:2rem;animation:scroll 24s linear infinite}
+.marquee.b .track{animation-direction:reverse;animation-duration:28s}
+.marquee .track span{display:inline-flex;gap:2rem}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.grid{display:grid;gap:.85rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.grid.two{grid-template-columns:repeat(auto-fill,minmax(400px,1fr))}
+
+.card{
+  position:relative;overflow:hidden;text-align:left;
+  background:var(--ink-2);border:1px solid var(--border);border-radius:16px;
+  padding:1.1rem;transition:border-color .22s,transform .22s,box-shadow .28s;
+}
+.card:hover{
+  border-color:var(--c,var(--acid));
+  transform:translateY(-3px);
+  box-shadow:0 18px 40px rgba(0,0,0,.55);
+}
+.card h3{
+  font-family:var(--display);text-transform:uppercase;font-size:.92rem;
+  letter-spacing:.02em;margin:.6rem 0 .35rem;line-height:1.2;
+}
+.card p{color:var(--muted);font-size:.83rem;line-height:1.6;margin:0}
+.card .chip{
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+  font-size:1.05rem;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);transition:transform .35s;
+}
+@supports (background:color-mix(in srgb,red,blue)){
+  .card .chip{
+    background:color-mix(in srgb,var(--c,var(--acid)) 15%,transparent);
+    border-color:color-mix(in srgb,var(--c,var(--acid)) 42%,transparent);
+  }
+}
+.card:hover .chip{transform:scale(1.08) rotate(-5deg)}
+
+.home-card{cursor:pointer;color:inherit;display:block;width:100%}
+.home-card .open{
+  display:block;margin-top:.75rem;font-size:.66rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--c,var(--acid));
+  opacity:0;transform:translateX(-8px);transition:.25s;
+}
+.home-card:hover .open{opacity:1;transform:none}
+
+.meta-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.8rem}
+.pill{
+  font-size:.63rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:.26rem .55rem;border-radius:999px;
+  border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,.04);
+}
+.pill.ok{color:var(--acid);border-color:rgba(198,255,61,.4);background:rgba(198,255,61,.08)}
+.pill.hot{color:var(--hot);border-color:rgba(255,61,129,.4);background:rgba(255,61,129,.08)}
+.pill.cyan{color:var(--cyan);border-color:rgba(61,244,255,.4);background:rgba(61,244,255,.08)}
+.pill.gold{color:var(--gold);border-color:rgba(255,210,61,.4);background:rgba(255,210,61,.08)}
+
+/* progress */
+.prog{height:7px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:.8rem}
+.prog i{display:block;height:100%;border-radius:99px;background:var(--c,var(--acid));
+  transform-origin:left;transform:scaleX(var(--p,.5));transition:transform .6s cubic-bezier(.2,1.2,.4,1)}
+.card:hover .prog i{transform:scaleX(1)}
+.prog-label{
+  display:flex;justify-content:space-between;font-family:var(--mono);
+  font-size:.62rem;color:var(--muted);margin-top:.4rem;letter-spacing:.05em;
+}
+
+/* code block */
+.code{
+  font-family:var(--mono);font-size:.74rem;line-height:1.65;
+  background:#04100a;border:1px solid rgba(198,255,61,.22);border-radius:10px;
+  padding:.85rem;margin:.8rem 0 0;color:#9fffc8;white-space:pre-wrap;
+  word-break:break-word;overflow-x:auto;
+}
+.copy{
+  margin-top:.6rem;font-size:.64rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:#000;background:var(--c,var(--acid));
+  border:none;border-radius:999px;padding:.4rem .85rem;cursor:pointer;transition:.2s;
+}
+.copy:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.copy.done{background:var(--cyan)}
+
+/* threads / lists */
+.list{
+  list-style:none;margin:0;padding:0;
+  border:1px solid var(--border);border-radius:16px;
+  background:var(--ink-2);overflow:hidden;
+}
+.list li{
+  display:flex;align-items:center;gap:.9rem;
+  padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .18s;
+}
+.list li:last-child{border-bottom:none}
+.list li:hover{background:rgba(255,255,255,.035)}
+.list .ic{
+  width:34px;height:34px;flex:0 0 auto;border-radius:10px;display:grid;
+  place-items:center;font-size:.95rem;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+}
+.list .tx{flex:1;min-width:0}
+.list .tx b{display:block;font-size:.86rem;font-weight:600;line-height:1.35}
+.list .tx small{display:block;color:var(--muted);font-size:.72rem;margin-top:.15rem}
+.list .count{
+  font-family:var(--mono);font-size:.72rem;color:var(--c,var(--acid));
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  border-radius:999px;padding:.2rem .6rem;flex:0 0 auto;
+}
+
+/* table */
+.table-wrap{
+  overflow-x:auto;border:1px solid var(--border);border-radius:16px;
+  background:var(--ink-2);
+}
+.tbl{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px}
+.tbl th{
+  text-align:left;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);padding:.75rem .9rem;border-bottom:1px solid var(--border);
+  font-weight:700;white-space:nowrap;
+}
+.tbl td{padding:.8rem .9rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody tr{transition:background .18s}
+.tbl tbody tr:hover{background:rgba(255,255,255,.035)}
+.tbl .rank{font-family:var(--display);color:var(--acid);font-size:.95rem}
+.tbl .num{font-family:var(--mono);color:var(--cyan);font-size:.78rem}
+
+/* section divider inside panel */
+.sub-head{
+  margin:2.4rem 0 1rem;font-family:var(--display);text-transform:uppercase;
+  font-size:1.05rem;letter-spacing:.02em;display:flex;align-items:center;gap:.75rem;
+}
+.sub-head::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* pager */
+.pager{
+  display:flex;justify-content:space-between;gap:.75rem;
+  margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--border);
+}
+.pager button{
+  background:var(--ink-2);border:1px solid var(--border);color:var(--paper);
+  font-size:.75rem;font-weight:600;padding:.6rem 1.1rem;border-radius:999px;
+  cursor:pointer;transition:.2s;
+}
+.pager button:hover{border-color:var(--acid);color:var(--acid);transform:translateY(-2px)}
+
+/* footer */
+footer{
+  border-top:1px solid var(--border);text-align:center;overflow:hidden;
+  margin-top:2rem;
+}
+footer .mega{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(2.6rem,12vw,8rem);line-height:1;white-space:nowrap;
+  color:transparent;-webkit-text-stroke:1.5px rgba(244,244,240,.2);
+  padding:1.4rem 1rem .3rem;user-select:none;
+}
+footer .fine{color:var(--muted);font-size:.76rem;padding-bottom:1.5rem}
+footer .fine a{color:var(--acid);text-decoration:none;font-weight:700}
+footer .fine a:hover{text-decoration:underline}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,120%);
+  background:var(--acid);color:#000;font-size:.78rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.6rem 1.1rem;border-radius:999px;z-index:200;
+  transition:transform .35s cubic-bezier(.2,1.4,.4,1);
+}
+.toast.on{transform:translate(-50%,0)}
+
+/* responsive */
+@media (max-width:640px){
+  .brand small{display:none}
+  .search input{width:44vw}
+  .grid,.grid.wide,.grid.two{grid-template-columns:1fr}
+  .marquee-wrap{height:5.6rem}
+  .pager{flex-direction:column}
+  .pager button{width:100%}
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .marquee .track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+
+<!-- ================= TOP BAR ================= -->
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="#home">
+      <span class="mark">B</span>
+      <span>
+        <b>THE BLOCK</b>
+        <small>15 rooms · one hub</small>
+      </span>
+    </a>
+    <div class="search">
+      <span class="ico" aria-hidden="true">⌕</span>
+      <input id="q" type="search" placeholder="Filter tabs…" aria-label="Filter tabs" autocomplete="off">
+    </div>
+  </div>
+
+  <nav class="tabrail" id="tabrail" role="tablist" aria-label="The Block rooms"></nav>
+</header>
+
+<!-- ================= PANELS ================= -->
+<main>
+
+  <!-- ---------- HOME ---------- -->
+  <section class="panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home">
+    <div class="hero">
+      <h1 class="giant">
+        <span class="outline">Everything</span>
+        <span class="rot-wrap">
+          <span class="fixed">the block runs on —</span>
+          <span id="rotator">HUSTLE</span>
+        </span>
+      </h1>
+      <p class="sub">Fifteen rooms under one roof. No page reloads, no dead ends, every view
+        bookmarkable. Pick a tab and go.</p>
+      <div class="hero-stats">
+        <div class="stat"><b data-count="15">0</b><small>Rooms</small></div>
+        <div class="stat"><b data-count="15">0</b><small>Tabs</small></div>
+        <div class="stat"><b data-count="1">0</b><small>File</small></div>
+        <div class="stat"><b data-count="0">0</b><small>Build Steps</small></div>
+      </div>
+    </div>
+
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee a"><div class="track">
+        <span>HUSTLE INDEX ◆ PHYSICAL RAFFLES ◆ PROMPTS ◆ SANDBOX BLUEPRINTS ◆ SUPPORT THE BLOCK ◆ URBAN DICTIONARY ◆ WIKI ◆ </span>
+        <span>HUSTLE INDEX ◆ PHYSICAL RAFFLES ◆ PROMPTS ◆ SANDBOX BLUEPRINTS ◆ SUPPORT THE BLOCK ◆ URBAN DICTIONARY ◆ WIKI ◆ </span>
+      </div></div>
+      <div class="marquee b"><div class="track">
+        <span>COMMUNITY BOARDS ◆ CORE SYSTEM ◆ COURSES &amp; GUIDES ◆ DISCUSSION ◆ EXCELLENCE MATRIX ◆ FED COMM DM ◆ FEDPROMPTLY COACH ◆ </span>
+        <span>COMMUNITY BOARDS ◆ CORE SYSTEM ◆ COURSES &amp; GUIDES ◆ DISCUSSION ◆ EXCELLENCE MATRIX ◆ FED COMM DM ◆ FEDPROMPTLY COACH ◆ </span>
+      </div></div>
+    </div>
+
+    <div class="phead" style="margin-top:2.6rem">
+      <span class="kick">Directory</span>
+      <h1>Every room, one tap</h1>
+      <p>Jump straight in — your current room stays lit in the rail above.</p>
+    </div>
+    <div class="grid" id="homeGrid"></div>
+  </section>
+
+  <!-- ---------- HUSTLE INDEX ---------- -->
+  <section class="panel" id="panel-hustle-index" role="tabpanel" aria-labelledby="tab-hustle-index">
+    <div class="phead">
+      <span class="kick">01 · Flagship</span>
+      <h1>Hustle Index</h1>
+      <p>The master directory of every play on the block. Filter by effort, startup cost and realistic
+        monthly ceiling, then go build the thing.</p>
+    </div>
+
+    <div class="grid wide">
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">⚡</div>
+        <h3>Prompt Packs</h3>
+        <p>Bundle 10–20 battle-tested prompts around one niche, sell as a downloadable pack.</p>
+        <div class="meta-row"><span class="pill">Digital</span><span class="pill">Low startup</span><span class="pill ok">$200–$2k / mo</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--hot)">
+        <div class="chip">🎟️</div>
+        <h3>Raffle Hosting</h3>
+        <p>Run physical or digital prize draws for local businesses and creators. You take the fee.</p>
+        <div class="meta-row"><span class="pill">Local</span><span class="pill">Ops heavy</span><span class="pill hot">$500–$5k / mo</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">📐</div>
+        <h3>Blueprint Builds</h3>
+        <p>Turn a sandbox prototype into a documented, repeatable setup someone will pay to skip.</p>
+        <div class="meta-row"><span class="pill">Technical</span><span class="pill">Portfolio play</span><span class="pill cyan">$1k–$8k / mo</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">🎓</div>
+        <h3>Micro-Courses</h3>
+        <p>One narrow outcome, 8–12 short lessons, priced low, sold forever.</p>
+        <div class="meta-row"><span class="pill">Evergreen</span><span class="pill">Record once</span><span class="pill gold">$300–$4k / mo</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">🛡️</div>
+        <h3>Support Desk</h3>
+        <p>Flat-rate monthly setup and maintenance retainers for people who hate touching config.</p>
+        <div class="meta-row"><span class="pill">Recurring</span><span class="pill">Low churn</span><span class="pill">$800–$6k / mo</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">💬</div>
+        <h3>Community Ops</h3>
+        <p>Moderate, seed and schedule a board or chat. Boring work, steady money.</p>
+        <div class="meta-row"><span class="pill">Service</span><span class="pill">Hourly</span><span class="pill cyan">$400–$3k / mo</span></div>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Scoring rubric</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>Score</th><th>Startup</th><th>Time to first $</th><th>Ceiling</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">S</td><td>Under $100</td><td>Under 14 days</td><td>Uncapped</td></tr>
+          <tr><td class="rank">A</td><td>Under $500</td><td>Under 30 days</td><td>High</td></tr>
+          <tr><td class="rank">B</td><td>Under $2k</td><td>Under 90 days</td><td>Medium</td></tr>
+          <tr><td class="rank">C</td><td>Over $2k</td><td>Over 90 days</td><td>Variable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ---------- PHYSICAL RAFFLES ---------- -->
+  <section class="panel" id="panel-physical-raffles" role="tabpanel" aria-labelledby="tab-physical-raffles">
+    <div class="phead">
+      <span class="kick">02 · Live draws</span>
+      <h1>Physical Raffles</h1>
+      <p>Real-world prize draws with published rules, transparent ticket counts and a public winner
+        board. Every draw is logged — no quiet edits.</p>
+    </div>
+
+    <div class="grid wide">
+      <article class="card" style="--c:var(--hot)">
+        <div class="chip">🎧</div>
+        <h3>Studio Headphone Drop</h3>
+        <p>One pair, sealed box. Open to the board, one entry per person.</p>
+        <div class="prog"><i style="--p:.82"></i></div>
+        <div class="prog-label"><span>410 / 500 tickets</span><span>Closes Fri 18:00</span></div>
+        <div class="meta-row"><span class="pill hot">Live</span><span class="pill">$5 / ticket</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">📦</div>
+        <h3>Mystery Crate №12</h3>
+        <p>Ten items, one crate, one winner. Contents listed before the draw.</p>
+        <div class="prog"><i style="--p:.47"></i></div>
+        <div class="prog-label"><span>141 / 300 tickets</span><span>Closes in 6 days</span></div>
+        <div class="meta-row"><span class="pill gold">Open</span><span class="pill">$3 / ticket</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">⌨️</div>
+        <h3>Keyboard Build Kit</h3>
+        <p>Full hot-swap kit plus caps. Ships worldwide, tracked.</p>
+        <div class="prog"><i style="--p:1"></i></div>
+        <div class="prog-label"><span>250 / 250 tickets</span><span>Drawn — see winners</span></div>
+        <div class="meta-row"><span class="pill cyan">Drawn</span><span class="pill">$8 / ticket</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">📚</div>
+        <h3>Starter Library Box</h3>
+        <p>Five reference books picked by the board. Opens next cycle.</p>
+        <div class="prog"><i style="--p:.08"></i></div>
+        <div class="prog-label"><span>24 / 300 tickets</span><span>Opens Mon 09:00</span></div>
+        <div class="meta-row"><span class="pill">Upcoming</span><span class="pill">$4 / ticket</span></div>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Winner board</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>Draw</th><th>Winner</th><th>Ticket</th><th>Date</th></tr></thead>
+        <tbody>
+          <tr><td>Keyboard Build Kit</td><td class="rank">@northside_k</td><td class="num">#0198</td><td>12 Mar</td></tr>
+          <tr><td>Mystery Crate №11</td><td class="rank">@dee.builds</td><td class="num">#0073</td><td>28 Feb</td></tr>
+          <tr><td>Studio Monitor Pair</td><td class="rank">@lowendtheory</td><td class="num">#0411</td><td>14 Feb</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sub-head">House rules</h2>
+    <ul class="list">
+      <li><span class="ic">1️⃣</span><div class="tx"><b>One entry per person</b><small>Duplicate entries are voided and refunded.</small></div></li>
+      <li><span class="ic">2️⃣</span><div class="tx"><b>Ticket count is published live</b><small>The counter above is the source of truth.</small></div></li>
+      <li><span class="ic">3️⃣</span><div class="tx"><b>Draws are recorded</b><small>Video or seeded random, published within 24h.</small></div></li>
+      <li><span class="ic">4️⃣</span><div class="tx"><b>Unclaimed prizes roll over</b><small>14 days to respond, then it goes back in the pot.</small></div></li>
+    </ul>
+  </section>
+
+  <!-- ---------- PROMPTS ---------- -->
+  <section class="panel" id="panel-prompts" role="tabpanel" aria-labelledby="tab-prompts">
+    <div class="phead">
+      <span class="kick">03 · Copy &amp; run</span>
+      <h1>Prompts</h1>
+      <p>A working library. Every block below is meant to be copied, edited for your context and
+        reused — not admired.</p>
+    </div>
+
+    <div class="grid two">
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">🔍</div>
+        <h3>Deep Research Brief</h3>
+        <p>Forces structure and sourcing before any writing happens.</p>
+        <pre class="code">You are a research analyst. Before answering:
+
+1. Restate the question in one sentence.
+2. List the 3 sub-questions that must be answered first.
+3. For each, give your current best answer and your confidence (low/med/high).
+4. Flag anything you are unsure about.
+
+Topic: [TOPIC]</pre>
+        <button class="copy">Copy</button>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">✂️</div>
+        <h3>Ruthless Editor</h3>
+        <p>Cuts 30% without losing meaning. Great for landing pages.</p>
+        <pre class="code">Edit the text below.
+
+Rules:
+- Cut at least 30% of the words.
+- Keep every fact and every number.
+- Replace abstractions with concrete nouns.
+- No adverbs. No "very", "really", "just".
+- Return only the edited text, then a bullet list of what you cut and why.
+
+TEXT:
+[PASTE]</pre>
+        <button class="copy">Copy</button>
+      </article>
+
+      <article class="card" style="--c:var(--hot)">
+        <div class="chip">🧪</div>
+        <h3>Idea Stress Test</h3>
+        <p>Attacks your own plan before the market does.</p>
+        <pre class="code">Here is my idea: [IDEA]
+
+Act as a skeptical operator who has seen 100 of these fail.
+
+1. The 3 most likely reasons this dies in 6 months.
+2. The cheapest test I can run this week to falsify each one.
+3. What I'd need to believe for this to be a 10x instead of a 1x.
+4. One thing I should cut entirely.</pre>
+        <button class="copy">Copy</button>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">🎯</div>
+        <h3>Coaching Loop</h3>
+        <p>The core FedPromptly cycle, packaged.</p>
+        <pre class="code">Goal: [WHAT I WANT]
+Where I am: [CURRENT STATE]
+Obstacle: [WHAT'S BLOCKING]
+
+Give me:
+- The single next action (under 30 minutes).
+- How I'll know it worked.
+- The most likely way I'll avoid doing it, and a counter-move.</pre>
+        <button class="copy">Copy</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------- SANDBOX BLUEPRINTS ---------- -->
+  <section class="panel" id="panel-sandbox-blueprints" role="tabpanel" aria-labelledby="tab-sandbox-blueprints">
+    <div class="phead">
+      <span class="kick">04 · Schematics</span>
+      <h1>Sandbox Blueprints</h1>
+      <p>Repeatable setups for fast experiments. Each blueprint is a recipe: inputs, steps, and the
+        signal that tells you to keep going or kill it.</p>
+    </div>
+
+    <div class="grid wide">
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">🧱</div>
+        <h3>BP-01 · Landing Test</h3>
+        <p>One page, one promise, one button. Measure click-through before you build anything.</p>
+        <div class="meta-row"><span class="pill cyan">2 hrs</span><span class="pill">No code</span><span class="pill ok">Signal: &gt;8% CTR</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">📮</div>
+        <h3>BP-02 · Waitlist Funnel</h3>
+        <p>Collect emails against a described outcome. If nobody signs up, the problem isn't real yet.</p>
+        <div class="meta-row"><span class="pill cyan">Half day</span><span class="pill">Free tier</span><span class="pill ok">Signal: &gt;50 signups</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">🧩</div>
+        <h3>BP-03 · Service Sprint</h3>
+        <p>Sell the outcome manually three times before automating once. Learn the real workflow.</p>
+        <div class="meta-row"><span class="pill cyan">1 week</span><span class="pill">Manual</span><span class="pill ok">Signal: 3 paid</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">📊</div>
+        <h3>BP-04 · Content Loop</h3>
+        <p>Publish daily for 14 days, log what lands, then double down on the top two formats.</p>
+        <div class="meta-row"><span class="pill cyan">14 days</span><span class="pill">Daily</span><span class="pill ok">Signal: 2 formats</span></div>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Blueprint anatomy</h2>
+    <ul class="list">
+      <li><span class="ic">①</span><div class="tx"><b>Input</b><small>What you need before starting — time, money, access.</small></div></li>
+      <li><span class="ic">②</span><div class="tx"><b>Steps</b><small>Numbered, ordered, no ambiguity.</small></div></li>
+      <li><span class="ic">③</span><div class="tx"><b>Signal</b><small>The number that decides keep / kill.</small></div></li>
+      <li><span class="ic">④</span><div class="tx"><b>Teardown</b><small>What you keep even if the experiment fails.</small></div></li>
+    </ul>
+  </section>
+
+  <!-- ---------- SUPPORT THE BLOCK ---------- -->
+  <section class="panel" id="panel-support-the-block" role="tabpanel" aria-labelledby="tab-support-the-block">
+    <div class="phead">
+      <span class="kick">05 · Back the network</span>
+      <h1>Support The Block</h1>
+      <p>Everything here stays free and un-gated. If it saved you time, this is how you pay it
+        forward.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">☕</div>
+        <h3>One-Time</h3>
+        <p>Buy the block a coffee. No account, no tier, no follow-up email.</p>
+        <div class="meta-row"><span class="pill ok">Any amount</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">🔁</div>
+        <h3>Monthly</h3>
+        <p>Keeps the servers up and the raffle prizes real. Cancel any time, one click.</p>
+        <div class="meta-row"><span class="pill cyan">$5 / mo</span><span class="pill">Cancel anytime</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">🏗️</div>
+        <h3>Build With Us</h3>
+        <p>Contribute a blueprint, a prompt pack or a guide. Credit stays on the page forever.</p>
+        <div class="meta-row"><span class="pill">Contributor</span><span class="pill">Named credit</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">📣</div>
+        <h3>Spread It</h3>
+        <p>Free, and honestly more useful than money. Send one page to one person who needs it.</p>
+        <div class="meta-row"><span class="pill gold">Free</span><span class="pill">High impact</span></div>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Where it goes</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>Bucket</th><th>Share</th><th>What it covers</th></tr></thead>
+        <tbody>
+          <tr><td>Hosting &amp; domains</td><td class="num">30%</td><td>Keeping every page online, no ads.</td></tr>
+          <tr><td>Raffle prizes</td><td class="num">45%</td><td>Physical prizes ship out of this.</td></tr>
+          <tr><td>Tools</td><td class="num">15%</td><td>Fonts, storage, the boring stuff.</td></tr>
+          <tr><td>Buffer</td><td class="num">10%</td><td>So a bad month doesn't kill the block.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ---------- URBAN DICTIONARY ---------- -->
+  <section class="panel" id="panel-urban-dictionary" role="tabpanel" aria-labelledby="tab-urban-dictionary">
+    <div class="phead">
+      <span class="kick">06 · Slang, by the block</span>
+      <h1>Urban Dictionary</h1>
+      <p>Definitions written on the street, for the street. If you use one of these in a meeting,
+        that's on you.</p>
+    </div>
+
+    <div class="grid two">
+      <article class="card" style="--c:var(--hot)">
+        <div class="chip">📖</div>
+        <h3>blocked out</h3>
+        <p><em>adj.</em> — Fully committed to a build, unreachable for hours, surfaces with something working.</p>
+        <div class="meta-row"><span class="pill hot">“he's been blocked out since tuesday”</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">📖</div>
+        <h3>blueprint brain</h3>
+        <p><em>n.</em> — The state of seeing every problem as a repeatable recipe. Sometimes useful, often annoying at dinner.</p>
+        <div class="meta-row"><span class="pill ok">“she's got blueprint brain again”</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">📖</div>
+        <h3>raffle energy</h3>
+        <p><em>n.</em> — Doing the work with no guarantee, because the ticket is cheap and the upside isn't.</p>
+        <div class="meta-row"><span class="pill cyan">“pure raffle energy, respect”</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">📖</div>
+        <h3>prompt debt</h3>
+        <p><em>n.</em> — The pile of half-written prompts you swear you'll clean up later. You won't.</p>
+        <div class="meta-row"><span class="pill gold">“i'm drowning in prompt debt”</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">📖</div>
+        <h3>matrix moment</h3>
+        <p><em>n.</em> — When the scoreboard finally reflects the work and you pretend you weren't checking daily.</p>
+        <div class="meta-row"><span class="pill">“had a matrix moment this morning”</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">📖</div>
+        <h3>fed comm</h3>
+        <p><em>v.</em> — To communicate with unsettling clarity and zero filler. Usually in bullet points.</p>
+        <div class="meta-row"><span class="pill cyan">“just fed comm'd the whole plan”</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------- WIKI ---------- -->
+  <section class="panel" id="panel-wiki" role="tabpanel" aria-labelledby="tab-wiki">
+    <div class="phead">
+      <span class="kick">07 · Knowledge base</span>
+      <h1>Wiki</h1>
+      <p>How things work and why they work. Deep dives, references and the operating manual for the
+        whole block.</p>
+    </div>
+
+    <div class="grid wide">
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">🗂️</div>
+        <h3>Getting Started</h3>
+        <p>What The Block is, how the rooms relate, and the shortest path to something useful.</p>
+        <div class="meta-row"><span class="pill cyan">5 articles</span><span class="pill">Beginner</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">⚙️</div>
+        <h3>Systems &amp; Mechanics</h3>
+        <p>How the tabs, routing, boards and matrices actually function under the hood.</p>
+        <div class="meta-row"><span class="pill ok">12 articles</span><span class="pill">Reference</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">🧠</div>
+        <h3>Method</h3>
+        <p>The thinking behind blueprints, coaching loops and the excellence scoring.</p>
+        <div class="meta-row"><span class="pill">9 articles</span><span class="pill">Deep dive</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">📜</div>
+        <h3>History</h3>
+        <p>Changelog of every room, what got cut, and what came back after people complained.</p>
+        <div class="meta-row"><span class="pill gold">Rolling</span><span class="pill">Archive</span></div>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Recently updated</h2>
+    <ul class="list">
+      <li><span class="ic">📄</span><div class="tx"><b>How the tab router works</b><small>Systems · updated 2 days ago</small></div><span class="count">4m</span></li>
+      <li><span class="ic">📄</span><div class="tx"><b>Scoring a hustle honestly</b><small>Method · updated 5 days ago</small></div><span class="count">7m</span></li>
+      <li><span class="ic">📄</span><div class="tx"><b>Raffle house rules, annotated</b><small>Getting Started · updated 1 week ago</small></div><span class="count">3m</span></li>
+      <li><span class="ic">📄</span><div class="tx"><b>Why blueprints beat ideas</b><small>Method · updated 2 weeks ago</small></div><span class="count">6m</span></li>
+    </ul>
+  </section>
+
+  <!-- ---------- COMMUNITY BOARDS ---------- -->
+  <section class="panel" id="panel-community-boards" role="tabpanel" aria-labelledby="tab-community-boards">
+    <div class="phead">
+      <span class="kick">08 · Pinned to the cork</span>
+      <h1>Community Boards</h1>
+      <p>Where the block talks to itself. Pinned notices at the top, everything else sorted by heat.</p>
+    </div>
+
+    <ul class="list" style="--c:var(--gold)">
+      <li><span class="ic">📌</span><div class="tx"><b>Read me first — board rules</b><small>Pinned · moderation</small></div><span class="count">12</span></li>
+      <li><span class="ic">📌</span><div class="tx"><b>Raffle draw schedule — Q2</b><small>Pinned · physical raffles</small></div><span class="count">31</span></li>
+      <li><span class="ic">📌</span><div class="tx"><b>Blueprint submissions open</b><small>Pinned · sandbox</small></div><span class="count">18</span></li>
+      <li><span class="ic">💬</span><div class="tx"><b>Anyone running the waitlist blueprint?</b><small>@northside_k · 2h ago</small></div><span class="count">47</span></li>
+      <li><span class="ic">💬</span><div class="tx"><b>Prompt pack pricing — too low?</b><small>@dee.builds · 5h ago</small></div><span class="count">63</span></li>
+      <li><span class="ic">💬</span><div class="tx"><b>Best way to log a failed experiment</b><small>@lowendtheory · 9h ago</small></div><span class="count">22</span></li>
+      <li><span class="ic">💬</span><div class="tx"><b>Show your matrix score, no shame</b><small>@blockmod · 1d ago</small></div><span class="count">88</span></li>
+    </ul>
+  </section>
+
+  <!-- ---------- CORE SYSTEM ---------- -->
+  <section class="panel" id="panel-core-system" role="tabpanel" aria-labelledby="tab-core-system">
+    <div class="phead">
+      <span class="kick">09 · Engine room</span>
+      <h1>Core System</h1>
+      <p>The rules that hold the block together. Everything else is a surface; this is the machinery
+        underneath it.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">1</div>
+        <h3>Ship Ugly</h3>
+        <p>A live rough version beats a perfect draft every single time.</p>
+      </article>
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">2</div>
+        <h3>Write It Down</h3>
+        <p>If it isn't documented, it didn't happen and can't be repeated.</p>
+      </article>
+      <article class="card" style="--c:var(--hot)">
+        <div class="chip">3</div>
+        <h3>Kill Fast</h3>
+        <p>Set the kill signal before you start. Then actually honour it.</p>
+      </article>
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">4</div>
+        <h3>Show the Score</h3>
+        <p>Public numbers keep you honest in a way private ones never do.</p>
+      </article>
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">5</div>
+        <h3>One Roof</h3>
+        <p>Everything lives together and links together. No orphan pages.</p>
+      </article>
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">6</div>
+        <h3>Reversible First</h3>
+        <p>Prefer the decision you can undo over the one you can't.</p>
+      </article>
+    </div>
+
+    <h2 class="sub-head">System status</h2>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>Component</th><th>State</th><th>Load</th></tr></thead>
+        <tbody>
+          <tr><td>Tab router</td><td><span class="pill ok">Healthy</span></td><td class="num">0.4ms</td></tr>
+          <tr><td>Board index</td><td><span class="pill ok">Healthy</span></td><td class="num">1.2ms</td></tr>
+          <tr><td>Raffle ledger</td><td><span class="pill ok">Healthy</span></td><td class="num">0.9ms</td></tr>
+          <tr><td>Matrix scoring</td><td><span class="pill gold">Recalculating</span></td><td class="num">—</td></tr>
+          <tr><td>Prompt library</td><td><span class="pill ok">Healthy</span></td><td class="num">0.2ms</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ---------- COURSES & GUIDES ---------- -->
+  <section class="panel" id="panel-courses-and-guides" role="tabpanel" aria-labelledby="tab-courses-and-guides">
+    <div class="phead">
+      <span class="kick">10 · Learn by doing</span>
+      <h1>Courses &amp; Guides</h1>
+      <p>Short, narrow, finished. Every course ends with something you built, not something you
+        watched.</p>
+    </div>
+
+    <div class="grid wide">
+      <article class="card" style="--c:var(--violet)">
+        <div class="chip">🎓</div>
+        <h3>Ship a Landing Page in a Day</h3>
+        <p>Copy, layout, deploy. No framework, no build step, no excuses.</p>
+        <div class="prog"><i style="--p:.85"></i></div>
+        <div class="prog-label"><span>Lesson 7 / 12</span><span>85%</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">🎓</div>
+        <h3>Prompt Engineering, Properly</h3>
+        <p>Structure, constraints, evaluation. Stop guessing at wording.</p>
+        <div class="prog"><i style="--p:.6"></i></div>
+        <div class="prog-label"><span>Lesson 6 / 10</span><span>60%</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">🎓</div>
+        <h3>Run Your First Raffle</h3>
+        <p>Rules, ticket math, draws, shipping. Everything that can go wrong, covered.</p>
+        <div class="prog"><i style="--p:.4"></i></div>
+        <div class="prog-label"><span>Lesson 4 / 9</span><span>40%</span></div>
+      </article>
+
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">🎓</div>
+        <h3>Documentation That Gets Used</h3>
+        <p>Write the doc people actually read instead of the one you're proud of.</p>
+        <div class="prog"><i style="--p:.15"></i></div>
+        <div class="prog-label"><span>Lesson 2 / 8</span><span>15%</span></div>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Free guides</h2>
+    <ul class="list">
+      <li><span class="ic">📘</span><div class="tx"><b>The 30-Minute Experiment</b><small>A template for testing anything before lunch.</small></div><span class="count">PDF</span></li>
+      <li><span class="ic">📘</span><div class="tx"><b>Naming Things People Remember</b><small>Why "The Block" beats "Project Alpha".</small></div><span class="count">WEB</span></li>
+      <li><span class="ic">📘</span><div class="tx"><b>Pricing Without Panic</b><small>Three anchors and a floor. That's the whole guide.</small></div><span class="count">WEB</span></li>
+    </ul>
+  </section>
+
+  <!-- ---------- DISCUSSION ---------- -->
+  <section class="panel" id="panel-discussion" role="tabpanel" aria-labelledby="tab-discussion">
+    <div class="phead">
+      <span class="kick">11 · Open floor</span>
+      <h1>Discussion</h1>
+      <p>Longer-form than the boards. Bring a question, leave with a next action.</p>
+    </div>
+
+    <div class="card" style="--c:var(--cyan);margin-bottom:1.2rem">
+      <div class="chip">✍️</div>
+      <h3>Start a thread</h3>
+      <p>One clear question. Context in three lines. No "just wondering".</p>
+      <pre class="code">Title: [the actual question]
+Context: [3 lines max]
+What I've tried: [list]
+What I need: [specific ask]</pre>
+      <button class="copy">Copy template</button>
+    </div>
+
+    <ul class="list" style="--c:var(--cyan)">
+      <li><span class="ic">🔥</span><div class="tx"><b>Is the raffle model sustainable long term?</b><small>@northside_k · 34 replies · 2h ago</small></div><span class="count">34</span></li>
+      <li><span class="ic">💬</span><div class="tx"><b>Best format for a 12-lesson micro course?</b><small>@dee.builds · 21 replies · 6h ago</small></div><span class="count">21</span></li>
+      <li><span class="ic">💬</span><div class="tx"><b>How do you score a hustle you've never run?</b><small>@lowendtheory · 18 replies · 11h ago</small></div><span class="count">18</span></li>
+      <li><span class="ic">✅</span><div class="tx"><b>[Resolved] Tabs not restoring from hash</b><small>@blockmod · 9 replies · 1d ago</small></div><span class="count">9</span></li>
+      <li><span class="ic">💬</span><div class="tx"><b>Weekly check-in: what shipped?</b><small>@blockmod · 52 replies · 2d ago</small></div><span class="count">52</span></li>
+    </ul>
+  </section>
+
+  <!-- ---------- EXCELLENCE MATRIX ---------- -->
+  <section class="panel" id="panel-excellence-matrix" role="tabpanel" aria-labelledby="tab-excellence-matrix">
+    <div class="phead">
+      <span class="kick">12 · The scoreboard</span>
+      <h1>Excellence Matrix</h1>
+      <p>Shipped work, scored openly. Four columns, no vibes. If you disagree with your score, the
+        rubric is published below.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>#</th><th>Operator</th><th>Shipped</th><th>Quality</th><th>Consistency</th><th>Score</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="rank">1</td><td>@northside_k</td><td class="num">47</td><td class="num">9.2</td><td class="num">9.6</td><td class="rank">94</td></tr>
+          <tr><td class="rank">2</td><td>@dee.builds</td><td class="num">41</td><td class="num">9.4</td><td class="num">8.8</td><td class="rank">91</td></tr>
+          <tr><td class="rank">3</td><td>@lowendtheory</td><td class="num">38</td><td class="num">8.9</td><td class="num">9.1</td><td class="rank">88</td></tr>
+          <tr><td class="rank">4</td><td>@blockmod</td><td class="num">33</td><td class="num">9.0</td><td class="num">8.4</td><td class="rank">84</td></tr>
+          <tr><td class="rank">5</td><td>@quietbuilder</td><td class="num">29</td><td class="num">8.6</td><td class="num">8.9</td><td class="rank">81</td></tr>
+          <tr><td class="rank">6</td><td>@firstlight</td><td class="num">24</td><td class="num">8.2</td><td class="num">7.9</td><td class="rank">74</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sub-head">How it's scored</h2>
+    <ul class="list">
+      <li><span class="ic">📦</span><div class="tx"><b>Shipped — 40%</b><small>Count of finished, public things. Not drafts.</small></div></li>
+      <li><span class="ic">💎</span><div class="tx"><b>Quality — 35%</b><small>Peer-rated on usefulness, not polish.</small></div></li>
+      <li><span class="ic">📅</span><div class="tx"><b>Consistency — 25%</b><small>Weeks with at least one ship, out of the last 12.</small></div></li>
+    </ul>
+  </section>
+
+  <!-- ---------- FED COMM DM ---------- -->
+  <section class="panel" id="panel-fed-comm-dm" role="tabpanel" aria-labelledby="tab-fed-comm-dm">
+    <div class="phead">
+      <span class="kick">13 · Channels &amp; protocol</span>
+      <h1>Fed Comm DM</h1>
+      <p>Direct communication with unsettling clarity. Short messages, explicit asks, no filler
+        paragraphs.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card" style="--c:var(--hot)">
+        <div class="chip">📡</div>
+        <h3>#general</h3>
+        <p>Announcements only. If it isn't actionable, it doesn't belong here.</p>
+        <div class="meta-row"><span class="pill hot">Read-only</span><span class="pill">1.2k members</span></div>
+      </article>
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">📡</div>
+        <h3>#build-log</h3>
+        <p>What you shipped today. One line, one link, no commentary.</p>
+        <div class="meta-row"><span class="pill cyan">Daily</span><span class="pill">840 members</span></div>
+      </article>
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">📡</div>
+        <h3>#raffle-ops</h3>
+        <p>Ticket counts, draw scheduling, shipping problems.</p>
+        <div class="meta-row"><span class="pill ok">Ops</span><span class="pill">310 members</span></div>
+      </article>
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">📡</div>
+        <h3>#ask</h3>
+        <p>Questions with context. Vague questions get one-word answers.</p>
+        <div class="meta-row"><span class="pill gold">Open</span><span class="pill">960 members</span></div>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Protocol</h2>
+    <ul class="list">
+      <li><span class="ic">▸</span><div class="tx"><b>Lead with the ask</b><small>First line states what you need. Context after.</small></div></li>
+      <li><span class="ic">▸</span><div class="tx"><b>No "hey, quick question"</b><small>Just ask the question.</small></div></li>
+      <li><span class="ic">▸</span><div class="tx"><b>Numbers over adjectives</b><small>"47 signups" not "decent traction".</small></div></li>
+      <li><span class="ic">▸</span><div class="tx"><b>Reply in thread</b><small>Keeps the channel scannable.</small></div></li>
+      <li><span class="ic">▸</span><div class="tx"><b>Close the loop</b><small>When it's solved, say so.</small></div></li>
+    </ul>
+  </section>
+
+  <!-- ---------- FEDPROMPTLY COACH ---------- -->
+  <section class="panel" id="panel-fedpromptly-coach" role="tabpanel" aria-labelledby="tab-fedpromptly-coach">
+    <div class="phead">
+      <span class="kick">14 · Coaching loops</span>
+      <h1>FedPromptly Coach</h1>
+      <p>A repeating four-step loop that turns "I should probably…" into a finished thing. Run it
+        weekly.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card" style="--c:var(--gold)">
+        <div class="chip">①</div>
+        <h3>Name It</h3>
+        <p>One sentence. What outcome, by when. If it takes two sentences it's two goals.</p>
+      </article>
+      <article class="card" style="--c:var(--cyan)">
+        <div class="chip">②</div>
+        <h3>Shrink It</h3>
+        <p>Cut until the first action fits in 30 minutes. Anything longer is a project, not a step.</p>
+      </article>
+      <article class="card" style="--c:var(--acid)">
+        <div class="chip">③</div>
+        <h3>Ship It</h3>
+        <p>Do the 30-minute version today. Publicly if possible.</p>
+      </article>
+      <article class="card" style="--c:var(--hot)">
+        <div class="chip">④</div>
+        <h3>Score It</h3>
+        <p>Log the result in the Matrix. Then decide: repeat, adjust, or kill.</p>
+      </article>
+    </div>
+
+    <h2 class="sub-head">Loop template</h2>
+    <article class="card" style="--c:var(--gold)">
+      <div class="chip">🎯</div>
+      <h3>Paste this into any session</h3>
+      <pre class="code">Goal: [one sentence, with a date]
+Current state: [where you actually are, honestly]
+Obstacle: [the real one, not the polite one]
+
+Give me:
+1. The single next action — under 30 minutes.
+2. How I'll know it worked (a number).
+3. The most likely way I'll avoid it, and the counter-move.
+4. What I should stop doing to make room.</pre>
+      <button class="copy">Copy</button>
+    </article>
+
+    <h2 class="sub-head">Recent sessions</h2>
+    <ul class="list" style="--c:var(--gold)">
+      <li><span class="ic">🎯</span><div class="tx"><b>Landing page live before Friday</b><small>@dee.builds · shipped · scored 91</small></div><span class="count">DONE</span></li>
+      <li><span class="ic">🎯</span><div class="tx"><b>First raffle under 500 tickets</b><small>@northside_k · in progress</small></div><span class="count">WIP</span></li>
+      <li><span class="ic">🎯</span><div class="tx"><b>Rewrite the wiki intro</b><small>@quietbuilder · shipped · scored 84</small></div><span class="count">DONE</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="mega">THE BLOCK</div>
+  <p class="fine">
+    One file · one push · live anywhere &nbsp;·&nbsp;
+    <a href="#home">Home</a> &nbsp;·&nbsp; <a href="#wiki">Wiki</a> &nbsp;·&nbsp; <a href="#support-the-block">Support</a>
+  </p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+<script>
+/* ============================================================
+   THE BLOCK — single-file tab router
+   ============================================================ */
+const TABS = [
+  { id:'home',               label:'Home',                icon:'🏠', color:'var(--acid)',   desc:'The front door. Stats, marquee and a directory of every room.' },
+  { id:'hustle-index',       label:'Hustle Index',        icon:'⚡', color:'var(--acid)',   desc:'The master directory of every play on the block, scored and sorted.' },
+  { id:'physical-raffles',   label:'Physical Raffles',    icon:'🎟️', color:'var(--hot)',    desc:'Live draws, ticket counts, house rules and the public winner board.' },
+  { id:'prompts',            label:'Prompts',             icon:'🧠', color:'var(--cyan)',   desc:'A working library of copy-and-run prompt blocks.' },
+  { id:'sandbox-blueprints', label:'Sandbox Blueprints',  icon:'📐', color:'var(--cyan)',   desc:'Repeatable recipes for fast experiments, with kill signals.' },
+  { id:'support-the-block',  label:'Support The Block',   icon:'🛡️', color:'var(--violet)', desc:'Keep it free. One-time, monthly, or contribute a build.' },
+  { id:'urban-dictionary',   label:'Urban Dictionary',    icon:'📖', color:'var(--hot)',    desc:'Slang written on the street, for the street.' },
+  { id:'wiki',               label:'Wiki',                icon:'🗂️', color:'var(--cyan)',   desc:'The knowledge base — how it works and why it works.' },
+  { id:'community-boards',   label:'Community Boards',    icon:'📋', color:'var(--gold)',   desc:'Pinned notices and the hottest threads on the cork board.' },
+  { id:'core-system',        label:'Core System',         icon:'⚙️', color:'var(--gold)',   desc:'The engine room. Six principles and a live status board.' },
+  { id:'courses-and-guides', label:'Courses & Guides',    icon:'🎓', color:'var(--violet)', desc:'Short, narrow, finished. Learn by shipping.' },
+  { id:'discussion',         label:'Discussion',          icon:'💬', color:'var(--cyan)',   desc:'Longer-form than the boards. Bring a question.' },
+  { id:'excellence-matrix',  label:'Excellence Matrix',   icon:'🏆', color:'var(--acid)',   desc:'The scoreboard. Shipped work, scored openly.' },
+  { id:'fed-comm-dm',        label:'Fed Comm DM',         icon:'📡', color:'var(--hot)',    desc:'Channels and protocol for unsettlingly clear messages.' },
+  { id:'fedpromptly-coach',  label:'FedPromptly Coach',   icon:'🎯', color:'var(--gold)',   desc:'The four-step coaching loop that ends in a finished thing.' }
+];
+
+const rail   = document.getElementById('tabrail');
+const panels = Array.from(document.querySelectorAll('.panel'));
+const homeGrid = document.getElementById('homeGrid');
+const toast  = document.getElementById('toast');
+
+/* ---------- build the tab rail ---------- */
+TABS.forEach(t => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.id = 'tab-' + t.id;
+  b.dataset.id = t.id;
+  b.setAttribute('role','tab');
+  b.setAttribute('aria-selected','false');
+  b.setAttribute('aria-controls','panel-' + t.id);
+  b.textContent = t.label;
+  b.addEventListener('click', () => show(t.id));
+  rail.appendChild(b);
+});
+
+/* ---------- build the home directory grid ---------- */
+TABS.filter(t => t.id !== 'home').forEach(t => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'card home-card';
+  b.style.setProperty('--c', t.color);
+  b.dataset.go = t.id;
+  b.innerHTML = `<div class="chip">${t.icon}</div>
+                 <h3>${t.label}</h3>
+                 <p>${t.desc}</p>
+                 <span class="open">Open →</span>`;
+  homeGrid.appendChild(b);
+});
+
+/* ---------- pager at the bottom of every panel ---------- */
+TABS.forEach((t, i) => {
+  const panel = document.getElementById('panel-' + t.id);
+  if (!panel) return;
+  const prev = TABS[(i - 1 + TABS.length) % TABS.length];
+  const next = TABS[(i + 1) % TABS.length];
+  const nav = document.createElement('div');
+  nav.className = 'pager';
+  nav.innerHTML =
+    `<button type="button" data-go="${prev.id}">← ${prev.label}</button>
+     <button type="button" data-go="${next.id}">${next.label} →</button>`;
+  panel.appendChild(nav);
+});
+
+/* ---------- router ---------- */
+function show(id, push = true) {
+  const valid = TABS.some(t => t.id === id) ? id : 'home';
+  const meta  = TABS.find(t => t.id === valid);
+
+  panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + valid));
+
+  rail.querySelectorAll('button').forEach(b => {
+    b.setAttribute('aria-selected', String(b.dataset.id === valid));
+  });
+
+  document.title = meta.label + ' | THE BLOCK';
+  if (push) history.replaceState(null, '', '#' + valid);
+
+  /* keep the active tab in view without scrolling the page */
+  const activeBtn = rail.querySelector(`button[data-id="${valid}"]`);
+  if (activeBtn) {
+    rail.scrollTo({
+      left: activeBtn.offsetLeft - rail.clientWidth / 2 + activeBtn.clientWidth / 2,
+      behavior: 'smooth'
+    });
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  runCounters(document.getElementById('panel-' + valid));
+}
+
+/* ---------- global click delegation (home cards + pagers) ---------- */
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-go]');
+  if (go) { show(go.dataset.go); return; }
+
+  const copy = e.target.closest('.copy');
+  if (copy) {
+    const pre = copy.closest('.card')?.querySelector('.code');
+    const text = pre ? pre.textContent : '';
+    navigator.clipboard?.writeText(text).then(
+      () => flash(copy, 'Copied ✓'),
+      () => flash(copy, 'Copy failed')
+    );
+  }
+});
+
+function flash(btn, msg) {
+  const original = btn.textContent;
+  btn.textContent = msg;
+  btn.classList.add('done');
+  toast.textContent = msg;
+  toast.classList.add('on');
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.classList.remove('done');
+    toast.classList.remove('on');
+  }, 1500);
+}
+
+/* ---------- hash routing ---------- */
+window.addEventListener('hashchange', () => {
+  show(decodeURIComponent(location.hash.slice(1)) || 'home', false);
+});
+
+/* ---------- search / filter tabs ---------- */
+document.getElementById('q').addEventListener('input', e => {
+  const q = e.target.value.trim().toLowerCase();
+  rail.querySelectorAll('button').forEach(b => {
+    const t = TABS.find(x => x.id === b.dataset.id);
+    const hit = !q || t.label.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q);
+    b.hidden = !hit;
+  });
+});
+
+/* ---------- rotator ---------- */
+(function () {
+  const words = ['HUSTLE', 'RAFFLES', 'PROMPTS', 'THE WIKI', 'COACHING', 'THE BLOCK'];
+  const el = document.getElementById('rotator');
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % words.length;
+    el.textContent = words[i];
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = 'pop .45s cubic-bezier(.2,1.6,.4,1)';
+  }, 2100);
+})();
+
+/* ---------- count-up (home stats) ---------- */
+const counted = new WeakSet();
+function runCounters(scope) {
+  if (!scope) return;
+  scope.querySelectorAll('b[data-count]').forEach(el => {
+    if (counted.has(el)) return;
+    counted.add(el);
+    const target = +el.dataset.count;
+    const dur = 900, t0 = performance.now();
+    (function tick(t) {
+      const p = Math.min((t - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  });
+}
+
+/* ---------- boot ---------- */
+show(decodeURIComponent(location.hash.slice(1)) || 'home', false);
+</script>
+</body>
+</html>
