@@ -1,28 +1,6 @@
 {
-  "what_this_is": "The community leaderboard. SEED DATA — the nightly leaderboard_sync.yml workflow overwrites this file with the real tally from PRs merged, guides completed, blueprint rungs shipped, and commissions paid. Do not hand-edit after launch; let the workflow write it.",
-
-  "generated_at": "2026-03-15T00:00:00Z",
-  "generated_by": "seed data (workflow takes over on first nightly run)",
-
-  "scoring": {
-    "pr_merged": 5,
-    "guide_completed": 10,
-    "blueprint_rung_shipped": 15,
-    "bug_with_receipts": 3,
-    "commission_paid": 5,
-    "repeat_client": 5,
-    "note": "Same economics as physical-raffles/earn-tickets.json. Raffle tickets are the currency; the refurb-PC raffles are the prize."
-  },
-
-  "leaderboard": [
-    { "handle": "sample-brother", "tickets": 38, "receipts": "5 PRs · 1 guide · 2 blueprint rungs · 1 commission paid · 1 repeat client" },
-    { "handle": "sample-brother-2", "tickets": 21, "receipts": "3 PRs · 1 guide · 1 blueprint rung" },
-    { "handle": "the-bridge-king", "tickets": 15, "receipts": "1 guide · 1 blueprint rung" },
-    { "handle": "kingston-tether", "tickets": 12, "receipts": "2 PRs · 1 blueprint rung (phone-only build)" },
-    { "handle": "library-terminal-brother", "tickets": 8, "receipts": "1 PR · 1 guide (USB-stick workflow)" }
-  ],
-
-  "honesty_note": "Numbers here are SEED values for launch day. The nightly workflow counts real receipts from GitHub data. If your tickets look wrong, open a help desk ticket — the tally code is public in .github/workflows/leaderboard_sync.yml and receipts are receipts.",
-
-  "the_point": "The leaderboard exists to MOTIVATE, not to rank brothers against each other. Five tickets or five hundred — every brother on this list is moving. The man at the bottom today posts his first PR tomorrow. That's the whole design. GitHub badges, streak culture, DAP energy: the gamification is the on-ramp, the skill is the destination."
+  "updated": "2026-09-10T09:04:40.153Z",
+  "note": "Auto-tallied nightly by leaderboard_sync. Counts come from GitHub itself — never hand-edited (see AGENTS.md).",
+  "totalTicketsOutstanding": 0,
+  "brothers": []
 }
