@@ -1,0 +1,88 @@
+{
+  "matrix": "historical_leaders",
+  "title": "Historical Leaders",
+  "tagline": "Men who organized, built, and led with nothing but discipline and a plan. The blueprint predates the laptop.",
+
+  "entries": [
+    {
+      "name": "Kunta Kinte",
+      "era": "1750s (the Roots anchor)",
+      "from": "The Gambia, West Africa",
+      "claim": "The captured Gambian whose line Alex Haley traced in Roots. He refused his given slave name through every beating — kept his own name, his own tongue, his own math.",
+      "receipts": "Roots (1976) won the Pulitzer; the miniseries drew over 100 million viewers in 1977. Kunta is semi-fictional — based on Haley's family oral history — and we say that straight, because FED-EDU doesn't stretch the truth to inspire you.",
+      "the_transfer": "He held his name under pressure. You hold your standard under pressure. When the tutorial gets hard and the code won't compile, that's the whipping scene of this journey — the man who keeps his name finishes the lesson. Name your repos like they're your name. They are."
+    },
+    {
+      "name": "Toussaint Louverture",
+      "era": "1743–1803",
+      "from": "Saint-Domingue (now Haiti)",
+      "claim": "The formerly enslaved coachman who studied military strategy from books, then organized the only successful enslaved people's revolution in recorded history.",
+      "receipts": "Haiti, 1804: the first Black republic in the Western Hemisphere, born from an army Toussaint built out of people who were told they had nothing. He died in a French prison cell before the final victory — his generals finished it.",
+      "the_transfer": "He was 45+ when the revolution started and had been studying strategy for YEARS before it did. There is no too-late in this work. The brother starting his first HTML file at 47 is on Toussaint time — study now, strike when the moment comes."
+    },
+    {
+      "name": "Marcus Garvey",
+      "era": "1887–1940",
+      "from": "St. Ann's Bay, Jamaica",
+      "claim": "Printer, publisher, and organizer who built the largest mass movement of African-descended people in history — the UNIA — with newspapers and ships when Black men were told they could own neither.",
+      "receipts": "The Negro World newspaper, shipped globally at its peak against colonial bans. The Black Star Line shipping company. UNIA membership in the millions across 40 countries. He printed his own narrative — literally.",
+      "the_transfer": "Garvey's engine was the printing press. Yours is the browser. He distributed his message past the gatekeepers with technology they didn't control — GitHub Pages is your Negro World, and nobody can ban your repo from reaching Kingston, Lagos, and Baltimore at once. Build your own line."
+    },
+    {
+      "name": "Martin Luther King Jr.",
+      "era": "1929–1968",
+      "from": "Atlanta, Georgia",
+      "claim": "The organizer whose strategic patience turned boycotts, marches, and letters written from a jail cell into legislation.",
+      "receipts": "The Letter from Birmingham Jail, drafted in the margins of a newspaper because he wasn't allowed writing paper — a masterclass in working with the tools you're given. The March on Washington, 1963. The Civil Rights Act of 1964 and Voting Rights Act of 1965.",
+      "the_transfer": "Read the Letter from Birmingham Jail for the structure alone: he names the complaint, answers every objection in order, and closes with the door open. That's not just rhetoric — that's documentation. Every README you write that explains what, why, and how-to-contribute is the same discipline on paper."
+    },
+    {
+      "name": "Malcolm X",
+      "era": "1925–1965",
+      "from": "Omaha, Nebraska",
+      "claim": "Self-educated in prison by copying the dictionary word for word — then became the most precise speaker of his generation.",
+      "receipts": "The Autobiography of Malcolm X, written with Alex Haley — still required reading on leadership in universities worldwide. His debate performances hold up on YouTube today: watch him break a hostile questioner down with pure structure.",
+      "the_transfer": "He had no teacher, no bootcamp, no mentor in that prison library — just the dictionary and the discipline. Every brother reading this from a cell or a half-broken phone: that path is PROVEN. Copy the code line by line like he copied the dictionary. Understanding arrives on the tenth page, not the first."
+    },
+    {
+      "name": "Kwame Nkrumah",
+      "era": "1909–1972",
+      "from": "Nkroful, Gold Coast (now Ghana)",
+      "claim": "Studied in America on money he raised himself, came home, and led the first sub-Saharan colony to independence.",
+      "receipts": "Ghana, March 6, 1957. He told the crowd: 'Ghana, your beloved country, is free forever.' The independence chain reaction across Africa followed within a decade — over 30 nations.",
+      "the_transfer": "Nkrumah left home to learn, then came HOME to build. That's the FED-EDU pattern: yes, learn the industry tools — but bring the skill back to the block. The brother who learns React in Atlanta and builds the site for his uncle's shop in Accra is running the exact same play."
+    },
+    {
+      "name": "Nelson Mandela",
+      "era": "1918–2013",
+      "from": "Mvezo, South Africa",
+      "claim": "27 years in prison, then negotiated the end of apartheid and became president instead of a vengeance war.",
+      "receipts": "Robben Island, where he was allowed one visitor a year and one letter every six months — and still ran organizing strategy from inside. The 1994 election: the first where every South African voted. He chose reconciliation when the world expected war.",
+      "the_transfer": "The long walk. There is no shortcut culture in his story — 27 years is the extreme version of 'the tutorial takes months.' Brothers coming home from prison: this man's entire second career happened AFTER his release. He became president at 75. Your file starts whenever you start it."
+    },
+    {
+      "name": "Frederick Douglass",
+      "era": "1818–1895",
+      "from": "Talbot County, Maryland",
+      "claim": "Taught himself to read when it was illegal to teach him — then turned literacy into the most feared abolitionist pen in America.",
+      "receipts": "Narrative of the Life of Frederick Douglass, 1845 — a bestseller written by a man who was still legally property. His newspapers: The North Star. Adviser to Lincoln. The lesson is right in the title of his paper: follow the north star — have a bearing.",
+      "the_transfer": "The slaveholders banned his reading because they knew literacy was the escape key. Today the gatekeepers price the bootcamp at $15,000. Same story, new century — the ones charging you to learn are telling you exactly how valuable learning is. The free path (this whole repo) is Douglass's path. Read anyway. Read anyway. Read anyway."
+    },
+    {
+      "name": "W.E.B. Du Bois",
+      "era": "1868–1963",
+      "from": "Great Barrington, Massachusetts",
+      "claim": "First Black man to earn a PhD from Harvard, then spent 60 years turning data into weapons against segregation.",
+      "receipts": "The Philadelphia Negro (1899): a full sociological study of a Black community, done door by door, when the academy said Black communities weren't worth studying. The Souls of Black Folk (1903). He literally invented community data visualization with hand-drawn charts for the 1900 Paris Exposition.",
+      "the_transfer": "Du Bois made charts BY HAND of Black land ownership, business, and school enrollment to prove what America refused to count. Your StatTracker dashboards, your league tables — you are standing in a 125-year tradition of brothers turning data into receipts. Make the chart. Let the data argue."
+    },
+    {
+      "name": "Paul Bogle",
+      "era": "1822–1865",
+      "from": "Stony Gut, Jamaica",
+      "claim": "Deacon who led the Morant Bay rebellion for land and justice after the courts failed his people.",
+      "receipts": "October 1865: hundreds of marching farmers at Morant Bay courthouse. The rebellion shook the British Empire into changing Jamaica's constitution — the old planter assembly was abolished within weeks. Bogle was hanged for it, and today he's on the Jamaican $2 coin: national hero.",
+      "the_transfer": "Bogle was a preacher with no army, no funding, and a community in crisis — he organized anyway. That's the muscle in every FED-EDU community drive: no staff, no budget, just brothers deciding the status quo is unacceptable and acting in coordination. Every pinned issue and every welcome thread is organizing, and organizing is a proven nation-changing skill."
+    }
+  ]
+}

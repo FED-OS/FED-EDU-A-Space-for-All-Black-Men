@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>safe shipping checklist — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: safe shipping checklist">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>SAFE SHIPPING CHECKLIST — PHYSICAL RAFFLE MACHINES</h1>
+<p>Every refurb tower, laptop, and phone kit that leaves the FED-EDU block goes through this
+checklist. No exceptions. The machine is the mission — a leaked address kills trust and
+puts brothers in danger. This paper is the law on how addresses move.</p>
+<p>Read it once before your first shipment. Print it. Tape it to the wall next to your
+packing tape. Run it line by line, every box, every time.</p>
+<hr />
+<h2>THE ONE LAW</h2>
+<p><strong>A brother's home address NEVER touches the public repo, the boards, or any issue.</strong></p>
+<p>Not in a commit. Not in a DM on the boards. Not in a comment. Not &quot;just for a second.&quot;
+The repo is public. The whole world can read it. If an address lands in a commit, it is
+in the git history FOREVER — deleting the file does not delete the history. The only
+address channel that exists is <code>fed-comm-dm</code>, the custom DM system, and that system
+moves the address encrypted and deletes it after the label prints. That's the whole
+law. Everything below is just how we keep it.</p>
+<hr />
+<h2>BEFORE YOU SHIP — THE SENDER'S LINES</h2>
+<h3>1. THE WINNER VERIFICATION</h3>
+<ul>
+<li>[ ] Winner confirmed by re-running the public raffle math — winner, pool size, and
+seed posted in the raffle results file. If the math does not re-run, the draw is
+void and you re-run with a new public seed.</li>
+<li>[ ] Winner's entry in <code>hustle-index/members/</code> matches the ticket count used in the
+draw. Receipts posted, vouches standing, no open integrity flags.</li>
+<li>[ ] Winner is not the same brother who won a machine in the last 12 months —
+the one-machine-a-year rule from <code>earn-tickets.json</code>. The engine holds the
+history; check it, don't guess it.</li>
+<li>[ ] Winner is 18 or older. If under 18, EVERYTHING goes to the guardian line below.
+No exceptions, not even &quot;he's basically 18.&quot; Basically-18 is not 18.</li>
+</ul>
+<h3>2. THE ADDRESS HANDOFF — FED-COMM-DM ONLY</h3>
+<ul>
+<li>[ ] Address request sent through <code>fed-comm-dm</code> encrypted messaging. The winner gets
+the request through the same channel. If a brother posts his address ANYWHERE
+public — issue, board, comment — you delete the post immediately, tell him why
+in DM, and treat the posted address as burned. A new one gets requested. The
+posted one never gets used.</li>
+<li>[ ] Address received inside the DM system only. It was never in your email, never
+in a text, never in a file on the repo.</li>
+<li>[ ] You confirmed the shipping name is the name that can receive mail at that
+address. Some brothers ship to a mama's house, a barbershop, a library, a
+church — the name on the label must match the door that opens.</li>
+</ul>
+<h3>3. THE LABEL</h3>
+<ul>
+<li>[ ] Label printed from the fed-comm-dm address pass-through. Printed ONCE.</li>
+<li>[ ] Return address is the FED-EDU block PO box or the hub drop-off point — NEVER
+your home address. The sender's home address is as protected as the winner's.</li>
+<li>[ ] After the label prints, the address is deleted from the DM system. The system
+does this itself — verify the deletion actually happened before you close the
+conversation. If it didn't delete, flag it to the help desk.</li>
+<li>[ ] The label PDF or screenshot is deleted from your machine after printing. Not
+in the trash folder — deleted. <code>Shift+Delete</code> on Windows, not just <code>Delete</code>.
+Empty the trash after.</li>
+</ul>
+<h3>4. THE MACHINE</h3>
+<ul>
+<li>[ ] Storage drive wiped — DBAN, <code>shred</code>, or a clean OS install from the
+refurb guide. NO donor data, NO old OS, NO leftover files. You are shipping a
+clean rig, not your old one.</li>
+<li>[ ] Fresh OS installed with the FED-EDU starter loadout from the sandbox
+blueprints README — browser, VS Code or Notepad++, Python, Node, and the
+first-guide bookmark to the playground.</li>
+<li>[ ] Keyboard, mouse, and cables in the box. A tower with no power cable is a
+paperweight. Check the box against the prize line in <code>earn-tickets.json</code> —
+what the ladder promised is what ships.</li>
+<li>[ ] THE HAND-WRITTEN NOTE inside the box. One paragraph, your hand, your words.
+Tell the brother what this machine is for. Reference his first guide. This is
+not optional — the note is half the prize.</li>
+<li>[ ] A printed copy of the beginner on-ramp README goes in the box. The machine
+arrives with the first move already on paper.</li>
+</ul>
+<hr />
+<h2>THE GUARDIAN LINE — UNDER-18 WINNERS</h2>
+<p>A brother under 18 can win. The machine goes to his parent or legal guardian, and the
+guardian has to be part of it. This is the line, and it doesn't bend:</p>
+<ul>
+<li>[ ] Guardian's name and address collected through fed-comm-dm, same as any winner.</li>
+<li>[ ] Guardian contacted directly — a short plain-talk message: who we are, what the
+machine is, what the kid is going to build with it, and the URL to the repo so
+the guardian can see the whole program with their own eyes.</li>
+<li>[ ] Guardian said yes in writing, in the DM. A &quot;yeah whatever&quot; from the kid is not
+a guardian yes. The yes comes from the guardian's account or the guardian's
+verified voice — your call on how you verify, but the record shows a guardian
+consent.</li>
+<li>[ ] Label goes to the guardian's name. The machine is addressed to the household,
+not to the kid alone.</li>
+<li>[ ] The guardian note in the box explains the program in plain words — what the
+kid is learning, how the ticket economy works, how to check his progress
+in the repo. A guardian who understands the program is a guardian who keeps
+the kid in it.</li>
+</ul>
+<hr />
+<h2>THE PACK AND SEND</h2>
+<ul>
+<li>[ ] Machine double-boxed or factory-fitted with foam. A refurb tower gets corner
+foam and the foam card over the CPU cooler if it shipped with one — a loose
+cooler rips the motherboard out in transit. If you don't know what corner
+foam is, watch one video, spend the ten dollars.</li>
+<li>[ ] Laptop or phone kit: bubble wrap, snug fit, no rattle. If you can hear it
+move, it will break.</li>
+<li>[ ] Tracking number posted to the winner through fed-comm-dm only. Tracking posted
+to the public results file with the address parts redacted — just
+&quot;SHIPPED — tracking sent by DM, ETA in transit.&quot;</li>
+<li>[ ] Cost logged in the Ko-fi transparency post for the month. Shipping money is
+donated money — the receipts culture applies to the block's money same as a
+brother's work.</li>
+</ul>
+<hr />
+<h2>AFTER THE ARRIVAL</h2>
+<ul>
+<li>[ ] Winner posts the arrival receipt to the showcase vault or the boards — a
+picture of the machine up and running, first boot, or the first guide open on
+screen. No home exterior, no street signs, no mail with the address showing.
+The receipt is the machine, not the location.</li>
+<li>[ ] Arrival logged in the raffle results file — <code>SHIPPED → ARRIVED → BUILDING</code>.
+The file is the public record that the machine became a builder.</li>
+<li>[ ] The 30-day check-in scheduled: one DM, one question — &quot;what are you building?&quot;
+If there's no answer in two weeks, one more try, then the hub lead gets the
+name for a real-world check if the brother is local to a hub. The machine is
+the start of a relationship, not the end of one.</li>
+</ul>
+<hr />
+<h2>IF SOMETHING GOES WRONG</h2>
+<p><strong>An address lands in a public place:</strong> delete the post, request a fresh address in
+DM, treat the old one as burned, and report it in the help desk issue with the
+location redacted. The report is &quot;address leaked in X, post deleted, fresh address
+channel opened&quot; — never repeat the address in the report. That's how a cleanup
+becomes a second leak.</p>
+<p><strong>A package is lost or stolen in transit:</strong> the carrier claim is filed by the sender.
+The winner is not out — he keeps his tickets minus the machine draw, or the tickets
+return per the raffle lead's call. The next machine in the pipeline goes to him
+first. Nobody re-draws over a lost box.</p>
+<p><strong>A guardian says no after the draw:</strong> the machine goes to the next name in the
+draw's order — the public math gives us the full order, not just the winner. The
+kid keeps his tickets. The rule is the machine needs a guardian yes, not that a
+guardian no erases his work.</p>
+<p><strong>A winner goes silent with the machine pending:</strong> 30 days of silence after two DM
+tries, the draw rolls to the next name in the order. His tickets stay his — silence
+is not a crime, life happens, jail happens, housing happens. When he surfaces, he's
+still in the economy, and the next machine cycle counts him like anyone.</p>
+<hr />
+<h2>THE CLOSING LINE</h2>
+<p>Every machine that leaves this block is a bet on a brother. The checklist is how
+the bet stays clean: the math public, the address private, the guardian in the
+loop, the note in the box. Run the lines every time. The day you skip the checklist
+because &quot;it's just a quick one&quot; is the day somebody's front door ends up in a git
+history that never forgets.</p>
+<p>Ship clean. Ship complete. And put the note in the box.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "raffles");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

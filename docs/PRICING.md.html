@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRICING — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: PRICING">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>💰 FED-EDU PRICING — Rate Standards &amp; Monetization Playbook</h1>
+<blockquote>
+<p>The community's agreed standards for charging work, so no brother underprices himself out of desperation and no client lowballs the block. These are floors and guides — your skills set your ceiling.</p>
+</blockquote>
+<h2>The Mindset</h2>
+<p>A brother with face tats and a felony record walks into a retail job interview — we all know how that goes. But a local business doesn't run a background check on a website that works. <strong>You don't apply for permission in this economy; you ship value and charge for it.</strong> The hustle-index exists so a client sees your badges, your live portfolio, and your rate — not your paperwork.</p>
+<h2>Rate Floors (Community Minimums)</h2>
+<p>Floor = the lowest the community agreed is fair for standard work. Going below a floor undercuts every other brother — don't do it. Above the floor is between you and the client.</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Community Floor</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple one-page site (template-based)</td>
+<td>$150</td>
+<td>Template + your content, 1–2 rounds of edits</td>
+</tr>
+<tr>
+<td>Multi-page small business site (5 pages)</td>
+<td>$500</td>
+<td>The classic barber/cleaner/church play</td>
+</tr>
+<tr>
+<td>Site + booking or payment feature</td>
+<td>$800</td>
+<td>Wiring Ko-fi or a scheduling tool in</td>
+</tr>
+<tr>
+<td>Monthly site upkeep retainer</td>
+<td>$50/mo</td>
+<td>Updates, backups, small changes — recurring rent</td>
+</tr>
+<tr>
+<td>Resume + portfolio page build</td>
+<td>$75</td>
+<td>A brother's resume is his storefront</td>
+</tr>
+<tr>
+<td>Audio cleanup per track</td>
+<td>$25</td>
+<td>Noise removal, levels, basic mastering via Rap Lab tools</td>
+</tr>
+<tr>
+<td>Beat tagging + 10-track pack prep</td>
+<td>$100</td>
+<td>Organizing a release for streaming</td>
+</tr>
+<tr>
+<td>Photo background removal / batch</td>
+<td>$2/image, $40 per 50</td>
+<td>Media FX Clipper lane</td>
+</tr>
+<tr>
+<td>Simple logo / brand mockup set</td>
+<td>$75</td>
+<td>Mockups for a clothing line or artist</td>
+</tr>
+<tr>
+<td>Twitch/YouTube overlay &amp; alert pack</td>
+<td>$100</td>
+<td>Streamer Tools lane</td>
+</tr>
+<tr>
+<td>Trend/scraper bot setup for a client</td>
+<td>$250</td>
+<td>One-time setup of an automation</td>
+</tr>
+<tr>
+<td>Custom automation script</td>
+<td>$300+</td>
+<td>Scope it before you quote it</td>
+</tr>
+<tr>
+<td>Data entry automation (recurring)</td>
+<td>$75/mo</td>
+<td>&quot;Digital worker&quot; retainers</td>
+</tr>
+</tbody>
+</table>
+<h2>Recurring Revenue (The Real Wealth)</h2>
+<p>One-off gigs pay bills; recurring pays futures. Every quote should include the maintenance retainer option. Ten clients at $50/month is $500/month arriving while you sleep — the quiet money that changes a brother's options. SaaS thinking at street scale: one useful tool, fifty small businesses paying $15/month for it, and you've built $750/month of digital rent. The blueprint library exists to make exactly that path repeatable.</p>
+<h2>Charging Methods</h2>
+<p><strong>Ko-fi</strong> (the community default — button snippet ready in <code>support-the-block/kofi-button.html</code>): lowest fees, no application gate, works for donations AND shop items. <strong>Cash App / PayPal:</strong> fine for local clients; keep records for yourself. <strong>Crypto:</strong> for international brothers where rails are hostile — your call, your risk tolerance. <strong>Whatever the rail: get paid before final handoff.</strong> 50% deposit on scoped work is standard and professional — say it like it's normal, because it is.</p>
+<h2>Pricing Situations</h2>
+<p><strong>&quot;But a kid on Fiverr will do it for $20.&quot;</strong> Let him. Brothers who charge $20 for $500 work burn out and quit in a month; the client gets what $20 buys. Floors protect the ecosystem — a race to the bottom leaves the whole block poor.</p>
+<p><strong>First client ever?</strong> Charge the floor, deliver like it's $5,000, ask for a testimonial and permission to show the work. That testimonial is worth more than the check.</p>
+<p><strong>Scope creep (client keeps adding &quot;small favors&quot;)?</strong> &quot;That's outside what we scoped — happy to quote it.&quot; Say it early, say it friendly, say it every time. Scope in writing: what's included, what's not, how many revision rounds.</p>
+<p><strong>A brother can't pay but the cause is real (church, youth program, a brother in crisis)?</strong> Community-service work is honored here — log it in the Ship Yard as <code>#communitybuild</code> and it counts toward badges and tickets like paid work. Just budget your charity — free work still costs your hours.</p>
+<p><strong>Clients outside the US?</strong> Quote in their currency, get paid through Ko-fi/PayPal; remember brothers in Kingston and Lagos getting paid in USD or GBP is the entire point of the borderless hustle.</p>
+<h2>Getting To Your First $1,000</h2>
+<ol>
+<li>Ship 3+ projects into your portfolio (fork the blueprints, make them YOURS)</li>
+<li>Complete your <code>hustle-index/members/</code> file — flag, skills, floor-respecting rates, live links</li>
+<li>List in the marketplace; get dapped by brothers who've seen your work</li>
+<li>First client: local. Barbers, cleaners, cooks, churches, coaches, artists — the block's economy needs the block's tech</li>
+<li>Deliver, collect, testimonial, referral (&quot;know anybody else whose site is 2015?&quot;)</li>
+<li>Stack one retainer at a time until the quiet money covers your bills — then you have options no gatekeeper can revoke</li>
+</ol>
+<h2>The Long Play</h2>
+<p>Every blueprinted skill here compounds: website today, automation next quarter, SaaS next year. The brother who starts at the $150 floor and keeps learning is quoting $5,000 builds within two years — the price of entry into this economy is skill, not pedigree. That's the whole mission: <strong>options that don't check your record.</strong></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

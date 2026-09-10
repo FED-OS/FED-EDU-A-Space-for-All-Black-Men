@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROADMAP — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: ROADMAP">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>🗺️ FED-EDU ROADMAP — Where The Movement Goes</h1>
+<blockquote>
+<p>Living document. The community votes on priorities in GOVERNANCE.md. Phases ship when they're ready — we don't rush, we build right.</p>
+</blockquote>
+<h2>Now — v0.x &quot;Light The Torch&quot; (2026)</h2>
+<p><strong>Goal: 100 brothers in the org, 25 live projects shipped.</strong></p>
+<ul>
+<li>[x] Manifesto, structure, governance — the foundation is laid</li>
+<li>[x] All module blueprints seeded (core-system through physical-raffles)</li>
+<li>[ ] GitHub Pages live — the dashboard is reachable worldwide</li>
+<li>[ ] EasyTether course battle-tested by brothers on real scrap hardware</li>
+<li>[ ] First 50 urban-dictionary terms decoded</li>
+<li>[ ] First 10 hustle-index listings with real portfolios</li>
+<li>[ ] First 10 refurbished desktops sourced for raffles</li>
+<li>[ ] fed-comm-dm MVP — brothers messaging brothers inside the ecosystem</li>
+</ul>
+<h2>Next — v1.0 &quot;The Block Is Built&quot; (target: 2027)</h2>
+<p><strong>Goal: The community runs itself. The marketplace pays brothers.</strong></p>
+<ul>
+<li>[ ] Custom domain — the block gets its own address</li>
+<li>[ ] fedpromptly engine-connector live — AI coach answers inside the dashboard</li>
+<li>[ ] First raffle completed — a kid gets a desktop, photos posted, hope made tangible</li>
+<li>[ ] hustle-index payments flowing — Ko-fi &amp; cash app rails wired to listings</li>
+<li>[ ] Excellence matrix interactive gallery — icons mapped to learning paths</li>
+<li>[ ] StatTracker adopted by real HS programs — athlete profiles used for recruiting</li>
+<li>[ ] 500 brothers, 100 shipped projects</li>
+<li>[ ] First brother earning recurring monthly revenue from a shipped tool</li>
+<li>[ ] Community-run workshops — brothers teaching brothers live</li>
+</ul>
+<h2>Later — v2.0 &quot;The Syndicate Scales&quot; (2028+)</h2>
+<p><strong>Goal: Sovereign infrastructure. The world notices.</strong></p>
+<ul>
+<li>[ ] FED-OS full integration — the ecosystem boots straight into the community</li>
+<li>[ ] Native mobile apps (wrapped PWA → Play Store APK distribution)</li>
+<li>[ ] Closed Circuits productized — private repos, private teams, private builds</li>
+<li>[ ] FED-EDU certification paths — GitHub-verified badges that carry real weight with employers</li>
+<li>[ ] International chapters — organized regional crews (Jamaica, Haiti, Nigeria, UK, US cities) with local leads</li>
+<li>[ ] Annual FED-EDU showcase — brothers demo shipped products to the world</li>
+<li>[ ] Grant funding &amp; partnerships (Hidden Genius Project, All Star Code, corporate DEI budgets that actually cut checks)</li>
+<li>[ ] Job placement pipeline — companies hiring directly from hustle-index verified badges</li>
+<li>[ ] 1,000 brothers. The vacuum is filled. The world sees what the streets and golden cleats can do.</li>
+</ul>
+<h2>Moonshots — &quot;The Impossible Future&quot;</h2>
+<p>The stuff that sounds crazy until we do it — like a brother in a shelter shipping code a Fortune 500 exec pays for.</p>
+<ul>
+<li>FED-EDU Academy — a full self-paced curriculum replacing bootcamps that charge $15k</li>
+<li>The FED Fund — community pool investing in brother-built startups</li>
+<li>FED-EDU Studios — the community's own media house: tutorials, docs, culture content</li>
+<li>Hardware at scale — refurbished PC pipeline shipping hundreds of towers a year</li>
+<li>The archive — a permanent public record proving what this generation of Black men built</li>
+</ul>
+<hr />
+<h2>Principles That Don't Change (Every Version)</h2>
+<ol>
+<li>Plain terms forever — no gatekeeping language</li>
+<li>$0 entry forever — phone + library Wi-Fi is enough to start</li>
+<li>Build first, lecture never</li>
+<li>Ownership stays with the builders</li>
+<li>Every version ships on EasyTether connections — if it doesn't load on a tethered scrap PC, it doesn't ship</li>
+</ol>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COPYING — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: COPYING">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>⚖️ COPYING — What The License Lets You Do (Plain Terms)</h1>
+<p>FED-EDU lives under the <strong>MIT License</strong> (see <code>LICENSE</code>). But legal text reads like a foreign language, so here it is in plain terms — the way we talk on the block.</p>
+<h2>You CAN</h2>
+<ul>
+<li><strong>Copy it.</strong> Fork it, clone it, download it, share it with your crew. Free.</li>
+<li><strong>Change it.</strong> Edit the code, remix the blueprints, customize everything. Make it yours.</li>
+<li><strong>Build on it.</strong> Use FED-EDU blueprints as the foundation for your own projects, tools, and businesses.</li>
+<li><strong>Ship it.</strong> Publish your customized versions. Put them on your own GitHub Pages.</li>
+<li><strong>Charge for it.</strong> Put your version behind a premium tier, sell licenses to your build, collect subscription rent. That's the whole point — we WANT brothers monetizing.</li>
+<li><strong>Use it in class.</strong> Teach from it, run workshops with it, use it at your organization or school.</li>
+</ul>
+<h2>You MUST</h2>
+<ul>
+<li><strong>Keep the notice.</strong> When you copy or redistribute the code, keep the original copyright notice and MIT license text in there. That's it. One small piece of paperwork that says where the foundation came from.</li>
+</ul>
+<h2>You CAN'T</h2>
+<ul>
+<li><strong>Blame us if it breaks.</strong> The code is provided &quot;as is.&quot; No warranties. If a script eats your audio file or a build fails, that's on the moment — report it in the Help Desk and the community will help you fix it.</li>
+<li><strong>Sue the builders.</strong> The authors and maintainers aren't liable for anything that happens while using this software.</li>
+</ul>
+<h2>The Spirit Of The Rules</h2>
+<p>The MIT license was chosen on purpose. It's the most permissive common license out there. It means: <strong>take the blueprint, build your empire, own your work.</strong> A brother who forks a Rap Lab blueprint and turns it into a paid product keeps 100% of his rights to his version. We don't want credit for your grind — we just want the notice kept so the next brother can find his way here too.</p>
+<p>The one thing no license can enforce: <strong>keep the door open behind you.</strong> When you level up, teach the next brother. Each one, teach one.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>welcome to the block — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: welcome to the block">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>🏁 Welcome to the Block — Start Here</h1>
+<p><em>(Pin this in <strong>Announcements</strong>. This is the front door.)</em></p>
+<p>You made it. Whether you got here from a phone in bed, a library computer, a cousin's link, or a raffle machine sitting on your desk right now — you're in. This post is the map.</p>
+<h2>The Three Beliefs This Block Runs On</h2>
+<ol>
+<li><strong>You are not behind.</strong> Starting at 30, 40, 50 with a 2011 laptop and a cracked phone? The internet doesn't check your hardware. It checks your commits.</li>
+<li><strong>No stupid questions.</strong> The question you're scared to ask is the one five brothers are DMing about privately. Ask it out loud — you're doing them a favor.</li>
+<li><strong>Ownership stays with you.</strong> Everything you build here is yours. Forks are yours. Projects are yours. The block doesn't tax your hustle — ever.</li>
+</ol>
+<h2>🚪 Start Here (By Your Situation)</h2>
+<table>
+<thead>
+<tr>
+<th>Your situation</th>
+<th>Your first move</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brand new — never touched code</td>
+<td><a href="../../wiki/First-Steps/Make-a-GitHub-Account.md.html">Make a GitHub Account</a> then read <a href="../../wiki/Building/Your-First-Website.md.html">Your First Website</a></td>
+</tr>
+<tr>
+<td>Phone only, no computer</td>
+<td><a href="../../wiki/Getting-Online/Free-WiFi-Spots-and-Libraries.md.html">Free WiFi Spots and Libraries</a> — everything here works on phones</td>
+</tr>
+<tr>
+<td>Old PC, no WiFi card</td>
+<td><a href="../../wiki/Getting-Online/EasyTether-Basics.md.html">EasyTether Basics</a> — internet through your phone's cable</td>
+</tr>
+<tr>
+<td>Home from incarceration</td>
+<td>FAQ.md (read the &quot;criminal record&quot; answer first) + the Spawn ticket: <code>.github/ISSUE_TEMPLATE/01_hustle_spawn.md</code></td>
+</tr>
+<tr>
+<td>Already code — here to build and give back</td>
+<td><a href="../../docs/CONTRIBUTING.md.html">CONTRIBUTING.md</a> + check MAINTAINERS.md wings marked 🟡 Seeking</td>
+</tr>
+</tbody>
+</table>
+<h2>🗺️ The Six Categories (The Porch Layout)</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>What it's for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Announcements</strong> 📢</td>
+<td>Official news — raffles, releases, town halls. Read-only for most of us.</td>
+</tr>
+<tr>
+<td><strong>Introduce Yourself</strong> 🏁</td>
+<td>Your first post. City + hardware + mission. Two lines is enough.</td>
+</tr>
+<tr>
+<td><strong>Q&amp;A</strong> ❓</td>
+<td>Any question, any level. Mark the answer that solved it.</td>
+</tr>
+<tr>
+<td><strong>Show and Tell</strong> 🚢</td>
+<td>Built ANYTHING? Post it. A button counts. A lesson from failure counts double.</td>
+</tr>
+<tr>
+<td><strong>Ideas</strong> 💡</td>
+<td>Pitches for the block. Ideas earn tickets too.</td>
+</tr>
+<tr>
+<td><strong>General</strong> 🧢</td>
+<td>The porch: life, wins, Ls, grief, game night.</td>
+</tr>
+</tbody>
+</table>
+<h2>⚖️ The Six Rules (Short Version — Full Law in CODE_OF_CONDUCT.md)</h2>
+<ol>
+<li>No stupid questions.</li>
+<li>No untranslated jargon — translate or link the Urban Dictionary.</li>
+<li>Celebrate attempts, not just wins.</li>
+<li>Zero gatekeeping — ahead ≠ better.</li>
+<li>Ownership stays with builders.</li>
+<li>Protect the younger brothers. No appeal on this one.</li>
+</ol>
+<h2>🎟️ The Money Part (Because Brothers Ask)</h2>
+<p>Every real contribution earns raffle tickets toward free refurb PCs: merged PR = 5, completed guide = 10, full blueprint = 15, closed bug with receipts = 3. Full ledger: <a href="../../physical-raffles/index.html">physical-raffles/</a>. Drawings are livestreamed on a public ledger. <strong>Nobody on this block pays to learn — ever.</strong></p>
+<h2>🫂 One Last Thing (The Real Part)</h2>
+<p>A lot of brothers come here carrying heavy things — records, evictions, grief, hopelessness, the feeling of being late to a life everybody else started on time. That's not a footnote here; that's the BLOCK. Post in General when it's heavy. Somebody's been where you are. And if a night gets dark, the numbers are in SUPPORT.md — 988 in the US, 116 123 in the UK. Real numbers, real people, 24/7.</p>
+<hr />
+<p><em>You're on the block now. Introduce yourself below in the official thread, and one of us will pull up within 24 hours. Welcome home. 🏁</em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "discussion");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

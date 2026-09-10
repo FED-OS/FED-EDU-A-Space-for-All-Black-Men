@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEPLOYMENT — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: DEPLOYMENT">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>🚢 FED-EDU DEPLOYMENT — Shipping To The World</h1>
+<h2>Where FED-EDU Deploys</h2>
+<p><strong>GitHub Pages</strong> is the home port: free, HTTPS by default, reachable on every device on Earth with a browser. The <code>build.yml</code> workflow deploys automatically on every push to <code>main</code> — no manual steps, no server bills, no DevOps degree required.</p>
+<h2>Turning It On (One-Time Org Setup)</h2>
+<ol>
+<li>Org → repo (<code>fed-edu</code> main repo) → <strong>Settings → Pages</strong></li>
+<li>Source: <strong>GitHub Actions</strong> (not &quot;Deploy from branch&quot; — the workflow handles it)</li>
+<li>Save. Push to <code>main</code> once. Live in ~60 seconds at <code>https://&lt;org&gt;.github.io/fed-edu/</code></li>
+<li>PWA is automatic: any phone can &quot;Add to Home Screen&quot; the dashboard as a real app icon</li>
+</ol>
+<h2>The Deployment Surface</h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>What Ships There</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main dashboard</td>
+<td><code>core-system/</code></td>
+<td>build.yml → Pages</td>
+</tr>
+<tr>
+<td>Rap Lab, StatTracker, Media FX, Streamer Tools</td>
+<td><code>sandbox-blueprints/*/index.html</code></td>
+<td>Each blueprint is forkable; brothers deploy their own copies to their own Pages</td>
+</tr>
+<tr>
+<td>DM client</td>
+<td><code>fed-comm-dm/</code></td>
+<td>Deployed under the org or run locally; uses GitHub API for transport</td>
+</tr>
+<tr>
+<td>Excellence matrix gallery</td>
+<td><code>excellence-matrix/</code></td>
+<td>Pages, same pipeline</td>
+</tr>
+<tr>
+<td>Hustle index</td>
+<td><code>hustle-index/</code></td>
+<td>Pages, same pipeline</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brothers shipping their own:</strong> fork → edit → your-username.github.io/your-project. Your deploy, your URL, your ownership. The org never owns what you build from the blueprints — that's the MIT license doing its job.</p>
+<h2>Custom Domain (v1.0 Roadmap Item)</h2>
+<p>When the block gets its own address:</p>
+<ol>
+<li>Buy the domain (community funds, Level 3 vote per GOVERNANCE.md)</li>
+<li>Repo Settings → Pages → Custom domain → enter it</li>
+<li>Commit a <code>CNAME</code> file to <code>core-system/</code> with the domain in it</li>
+<li>DNS at the registrar: A records to GitHub's Pages IPs (185.199.108–111.153) + CNAME for the subdomain. GitHub's docs walk each registrar through it.</li>
+</ol>
+<p>HTTPS: enable &quot;Enforce HTTPS&quot; once the certificate issues. Until then, the default <code>github.io</code> URL stays HTTPS, so nothing ships insecure in the meantime.</p>
+<h2>Android APK Wrapping (The &quot;Real App&quot; Play)</h2>
+<p>A web app that installs from a link is great; an APK a brother can sideload on a phone with no app store account is better. The pipeline for wrapping the PWA (Capacitor or PWABuilder) is a v2.0 roadmap item; the DEPLOYMENT steps will live here when it ships:</p>
+<ol>
+<li>PWA manifest + service worker already in place (they're in <code>core-system/</code>)</li>
+<li>Wrap with Capacitor → generates an Android project → build APK</li>
+<li>Distribute the APK from the org's releases page — sideload-friendly, no store gatekeeper</li>
+</ol>
+<h2>Rollback</h2>
+<p>Pages deploys are atomic: if a push breaks the live site, revert the commit (<code>git revert</code>) and push — the workflow redeploys the last good state in about a minute. No 2AM panic, no war rooms. Git history is the safety net.</p>
+<h2>Deployment Rules</h2>
+<ol>
+<li><strong>Main stays deployable.</strong> Broken builds on main get reverted fast, not &quot;fixed eventually.&quot;</li>
+<li><strong>Every deploy must pass the 3-second rule</strong> (see BUILD.md) — throttle it in your head before you push.</li>
+<li><strong>No secrets in deployed output.</strong> Tokens live in repo secrets for workflows; <code>.env</code> files never get committed (see SECURITY.md).</li>
+<li><strong>Announce ships</strong> in the Ship Yard so brothers know what's new — every deploy is somebody's first impression of the block.</li>
+</ol>
+<h2>When Deployment Acts Up</h2>
+<p>Common fixes in order: check the Actions tab (the failed run names its problem) → confirm Pages source is &quot;GitHub Actions&quot; → confirm artifact path is <code>./core-system</code> → clear and redeploy. Still stuck? <code>bug_report</code> issue with the failed run link; the community debugs deploys together.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

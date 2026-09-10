@@ -1,0 +1,110 @@
+<!--
+  FED-EDU :: fed-comm-dm :: templates/active-brother-row.html
+  The ONE roster row. Every conversation in the Brothers list is this shape.
+  index.html holds the <nav id="dm-roster"> bucket; rows get built into it.
+
+  WHAT THIS ROW MUST DO (in order of importance):
+  1. Work on a 360px phone over USB tether on 3G. One tap, conversation opens.
+     If it can't do that, nothing else on this list matters.
+  2. Show unread count WITHOUT tracking when brothers read YOUR messages.
+     (We count yours-to-open; we don't spy on theirs. One-way accounting only.)
+  3. Fit the Warm Study look — clean sans body, forest green accents, cream ground.
+  4. Say the brother's name in plain letters. No @ handles required to recognize him.
+
+  STATE VARIANTS — one row pattern, four looks:
+  .row-unread   → green pill shows the count of locked boxes waiting
+  .row-today    → activity inside the last 24 hours
+  .row-old      → quieter border, a month+ silent — CHECK ON YOUR BROTHER
+  .row-locked   → passphrase not set with this brother yet, tap sets it up
+  -->
+
+<!-- ===== STATE 1: UNREAD — 3 locked boxes waiting to open ===== -->
+<article class="dm-brother-row row-unread" data-brother="Marqueez" data-pairkey="marqueez__young_exec">
+  <!--
+    data-brother = display name. data-pairkey = the deterministic mailbox id
+    (alphabetized usernames — see chat-engine.js pairKey()). Never show pairkey to users.
+  -->
+  <span class="dm-avatar" data-field="avatar" aria-hidden="true">MG</span>
+  <span class="dm-name-wrap">
+    <span class="dm-name" data-field="name">Marqueez</span>
+    <span class="dm-preview" data-field="preview">…🔒 locked box — open with passphrase</span>
+    <!-- Preview NEVER shows text for unread. That's the POINT of encryption:
+         nothing readable exists on this device until the passphrase opens it. -->
+  </span>
+  <span class="dm-meta">
+    <span class="dm-unread-pill" data-field="unread">3</span>
+    <time class="dm-last-time" datetime="2026-01-15T21:06:00Z">9:06 PM</time>
+  </span>
+</article>
+
+<!-- ===== STATE 2: TODAY, ALL OPENED — the thread is warm ===== -->
+<article class="dm-brother-row row-today" data-brother="Deuce" data-pairkey="deuce__young_exec">
+  <span class="dm-avatar" aria-hidden="true">DC</span>
+  <span class="dm-name-wrap">
+    <span class="dm-name">Deuce</span>
+    <span class="dm-preview">Yo the tether guide got the PC online — write it up, that's a ticket</span>
+  </span>
+  <span class="dm-meta">
+    <span class="dm-unread-pill hidden" aria-hidden="true"></span>
+    <time class="dm-last-time" datetime="2026-01-15T18:40:00Z">6:40 PM</time>
+  </span>
+</article>
+
+<!-- ===== STATE 3: OLD THREAD — a month+ silent. The block's quiet isn't peace. ===== -->
+<article class="dm-brother-row row-old" data-brother="Terrell-from-the-barbershop" data-pairkey="terrell-from-the-barbershop__young_exec">
+  <span class="dm-avatar" aria-hidden="true">TF</span>
+  <span class="dm-name-wrap">
+    <span class="dm-name">Terrell (barbershop)</span>
+    <span class="dm-preview">Last activity 38 days ago — send a check-in</span>
+  </span>
+  <span class="dm-meta">
+    <time class="dm-last-time">Mar 4</time>
+  </span>
+</article>
+
+<!-- ===== STATE 4: LOCKED — no passphrase shared yet ===== -->
+<article class="dm-brother-row row-locked" data-brother="New-Spawn-Jordan" data-pairkey="new-spawn-jordan__young_exec">
+  <span class="dm-avatar" aria-hidden="true">NJ</span>
+  <span class="dm-name-wrap">
+    <span class="dm-name">New Spawn Jordan</span>
+    <span class="dm-preview">🔒 First passphrase not set — tap to lock in the shared secret</span>
+  </span>
+  <span class="dm-meta">
+    <span class="dm-lock" aria-hidden="true">🔒</span>
+    <time class="dm-last-time" datetime="2026-01-10T12:00:00Z">Jan 10</time>
+  </span>
+</article>
+
+<!--
+  HOW THE ENGINE DROPS ROWS INTO THE ROSTER (chat-engine.js):
+
+      roster.innerHTML = html;   // rows built from this pattern
+      roster.hidden = false;
+
+  The engine multiplies this pattern by the brothers list, then the roster
+  <nav> in index.html becomes the full conversation list.
+
+  TOUCH TARGET — 88px minimum (see core-system/styles.css .dm-brother-row):
+  A thumb in January with no gloves is a fat thumb. Respect it.
+
+  THE CHECK-ON-YOUR-BROTHER RULE:
+  The "row-old" state isn't decoration — it's the whole reason we track silence.
+  On the block, when a brother goes quiet for a month, you knock on his door.
+  In fed-comm-dm, quiet gets louder: the row shows "38 days ago — send a check-in."
+  DM him the Excellence Matrix link. DM him the hustle. Don't let quiet become a habit.
+
+  A WORD ON data-pairkey:
+  It exists for the ENGINE's filing system, not for display. Two brothers get one
+  deterministic mailbox id (alphabetized usernames joined with __).
+  If you're printing pairkeys on screen, you've broken the pattern — re-read ADR-005.
+
+  Your Move: when the multi-brother roster lands in v1.0 (see ROADMAP.md),
+  this file is the pattern the whole roster gets built from. Learn it now,
+  and you're already ready to build it.
+
+  NOTE FOR MAINTAINERS: This is a pattern file — a living spec, not a runnable page.
+  Do not link index.html to this file directly; index.html carries its own inline
+  test styling and the engine injects rows into #dm-roster live. This file documents
+  the shape so future builders (and future you) don't re-invent it.
+-->
+

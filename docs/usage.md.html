@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>usage — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: usage">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>📖 FED-EDU USAGE — How To Use The Platform Day-To-Day</h1>
+<blockquote>
+<p>INSTALL.md gets you set up. This file is how you LIVE here — the daily flow, the rhythms, the plays.</p>
+</blockquote>
+<h2>Your First Week</h2>
+<p><strong>Day 1 — Claim your name.</strong> GitHub account (wiki/First-Steps/Make-a-GitHub-Account.md), join the org, follow the org and the brothers in the directory. Drop your intro in the Spawn Zone: your flag 🇯🇲🇭🇹🇳🇬🇬🇧🇺🇸, your hood or city, and your lane (music / sports / design / streaming / still figuring it out).</p>
+<p><strong>Day 2 — Get online, whatever it takes.</strong> Phone-only is a valid setup here. Run the EasyTether Mastery course if you've got a scrap PC needing a connection. Library Wi-Fi counts. Data budgets are respected everywhere — the whole platform stays light.</p>
+<p><strong>Day 3 — First push.</strong> Fork a blueprint, change one line, push it. That's the hardest step of the whole tunnel, and it earns your first badge. Post it. Take your dap.</p>
+<p><strong>Day 4 — Pick your lane.</strong> Browse the sandbox-blueprints. Music → Rap Lab. Ball → StatTracker. Design → Media FX. Streaming → Streamer Tools. Or just start a Flex Page website about whatever you love. Real-Life Minecraft rules: build what YOU want.</p>
+<p><strong>Day 5 — Meet the block.</strong> Answer somebody's <code>[NEED-PLUG]</code> if you can, even if you just learned the fix yesterday. Ask your own question without shame. Read one wiki page and one excellence-matrix entry.</p>
+<p><strong>Day 6 — Learn the AI coach.</strong> Set up the fedpromptly bridge and the prompts/ library. 3AM, script broken, no humans awake — the coach pulls up. (Double-check everything it hands you. AI makes mistakes.)</p>
+<p><strong>Day 7 — Set your sights.</strong> Read ROADMAP.md and todo.md. Claim a task or start your own project. You're in the flow now.</p>
+<h2>The Daily Flow (After Week One)</h2>
+<p><strong>Log in → check three places → build:</strong></p>
+<ol>
+<li><strong>The Help Desk</strong> — issues tagged <code>[NEED-PLUG]</code> and <code>[STUCK-IN-THE-LAB]</code>. Answer one if you can. Being helped and helping are the same muscle.</li>
+<li><strong>The Ship Yard</strong> — brothers posting live builds. Test them, dap them, steal ideas shamelessly (that's what MIT license means).</li>
+<li><strong>Your own project</strong> — even 20 minutes a day compounds. One small brick daily beats one heroic weekend a month.</li>
+</ol>
+<p><strong>Weekly:</strong> ship something, even tiny — a guide edit, a term decoded, a blueprint tweak. Post it in the Ship Yard. Consistency is the whole secret — every &quot;overnight success&quot; in tech was somebody boring-consistent for two years first.</p>
+<h2>Earning &amp; Leveling</h2>
+<p><strong>Badges</strong> land automatically when you push (auto_dap.yml workflow). They stack on your GitHub profile — your trophy room that recruiters can see.</p>
+<p><strong>Raffle tickets</strong> accrue from verified activity (push code = 5 tickets, complete a guide = 10, help a brother = 2 — full metrics in physical-raffles/earn-tickets.json). Redeem nothing — they just accrue until a raffle drops. A refurbished desktop might land at your door. Hope you can hold in your hands.</p>
+<p><strong>The hustle-index</strong> is for when you're ready to charge. Build a portfolio first (3+ shipped projects), then complete your member file and list. See PRICING.md for rate standards the community agreed on.</p>
+<h2>Tools You'll Touch</h2>
+<ul>
+<li><strong>The dashboard</strong> (<code>core-system/</code>) — the front door; installable as an app on any phone or desktop via the PWA manifest</li>
+<li><strong>The DM system</strong> (<code>fed-comm-dm/</code>) — brother-to-brother, encrypted client-side, never asks for your password</li>
+<li><strong>The decoder</strong> (<code>urban-dictionary/</code>) — tech words → plain terms, searchable from a phone</li>
+<li><strong>The AI coach</strong> (<code>fedpromptly-coach/</code> + <code>prompts/</code>) — instant plain-language help</li>
+<li><strong>The matrix</strong> (<code>excellence-matrix/</code>) — when you need to remember whose shoulders you stand on</li>
+</ul>
+<h2>Etiquette In The Wild</h2>
+<ul>
+<li><strong>Dap generously.</strong> Somebody's first push is their hardest one. Be the brother who shows up in the comments.</li>
+<li><strong>Share the receipts.</strong> &quot;I got my first paid commission&quot; posts help the next brother believe it. Money talk is welcome here — that's the point.</li>
+<li><strong>Respect the data budget.</strong> Compress images, keep files light, lazy-load heavy stuff. Half this community is on metered connections.</li>
+<li><strong>No shame in any lane.</strong> The 11-year-old modding Minecraft and the 54-year-old building a barber-shop scheduler are both exactly where they're supposed to be.</li>
+<li><strong>Pass it on.</strong> Somebody walked you through your first fork. When you're six months deep, walk the next brother through his.</li>
+</ul>
+<h2>When Life Happens</h2>
+<p>Miss a week, a month, a season — the block doesn't expire. Brothers have court dates, shifts that run double, family crises, stretches where survival eats all the bandwidth. Come back when you can; the org will be here. Your badges stay, your history stays, your seat stays.</p>
+<h2>The Exit Strategy (The Real One)</h2>
+<p>The whole point of this platform: a brother who masters it stops depending on anyone's permission — no hiring manager, no background check, no gatekeeper. The progression is real: learn → build → ship → charge → own. Plenty of brothers will use FED-EDU skills inside great jobs. Plenty will build their own tables. Both are wins. The mission is that every brother who walks in leaves with options he never had before.</p>
+<p>That's usage. Now go build something.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

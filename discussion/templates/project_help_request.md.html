@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>project_help_request — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: project_help_request">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<!-- Project Help Request Template — post in Q&A with this shape. It gives helpers everything they need to actually help on the first reply, instead of three rounds of "what's your setup?" -->
+<h1>🆘 Project Help Request</h1>
+<h2>🏗️ What I'm Building</h2>
+<!-- One paragraph. What's the project, what's it for, who's it for. "A link-in-bio page for my barber's shop" beats "a website." -->
+<h2>🧱 Where I'm Stuck (The Wall)</h2>
+<!-- The specific wall. "The button does nothing when I tap it on my phone — works on PC" is fixable. "It doesn't work" is not. Be specific about WHAT vs. WHAT YOU EXPECTED. -->
+<h2>💥 The Literal Error (If There Is One)</h2>
+<!-- Copy-paste the EXACT text. Don't paraphrase. Screenshot even better — phone photo of the screen is fine. -->
+<pre><code>PASTE ERROR HERE (or drop a screenshot)
+</code></pre>
+<h2>📱 My Setup</h2>
+<ul>
+<li><strong>Device:</strong> <!-- e.g. 2012 HP laptop, Moto G phone --></li>
+<li><strong>Connection:</strong> <!-- tethered 3G, home WiFi, library --></li>
+<li><strong>Browser + version:</strong> <!-- Chrome on Android, Firefox on Windows 7 --></li>
+</ul>
+<h2>🔗 The Code (Where Helpers Can See It)</h2>
+<!-- Link your fork or repo — even if it's broken, helpers can read broken code. If it's not on GitHub yet, paste the relevant chunk below (the part around the problem, not the whole file). -->
+<ul>
+<li><strong>Repo/fork link:</strong></li>
+<li><strong>The suspect lines:</strong></li>
+</ul>
+<pre><code>PASTE THE RELEVANT CODE CHUNK HERE
+</code></pre>
+<h2>✅ What I Already Tried</h2>
+<!-- This section earns respect and saves helpers' time. List what you attempted and what happened. "Tried changing the id to match — same error." -->
+<ol>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<h2>🙏 The Ask</h2>
+<!-- What kind of help do you want? -->
+<ul>
+<li>[ ] Fix it for me (faster, but you learn less)</li>
+<li>[ ] Walk me to the fix (the Debug Coach way — recommended: prompts/coding-coach/fix_my_code_step_by_step.txt)</li>
+<li>[ ] Just point me at what to study</li>
+</ul>
+<hr />
+<!-- House rule reminder: asking for help here is not weakness — it's participation. The brother who posts a real help request with receipts (error text, repro steps, what he tried) just did real engineering communication. That's a skill jobs pay for. 🏁 -->
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "discussion");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

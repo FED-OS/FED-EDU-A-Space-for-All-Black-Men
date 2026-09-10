@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pc usb bridge — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: pc usb bridge">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>The PC Side — USB Bridge Installation &amp; Debug</h1>
+<h3>Lesson 3 &amp; 4 of EasyTether Mastery · The moment the dead PC wakes up</h3>
+<p><strong>Time:</strong> 20 minutes for the bridge, 25 for the dev rig · <strong>What you need:</strong> Windows PC (7/10/11), USB cable, phone already in developer mode (android-setup.md), EasyTether app installed on the phone</p>
+<hr />
+<h2>The handshake, in plain terms</h2>
+<p>Your phone is ready (android-setup.md is done). Now the PC needs three things: a driver that knows how to talk to EasyTether (software that speaks the phone's dialect), a way to accept the network connection (Windows calls this a network adapter), and trust established between the two machines (the RSA fingerprint toast). The bridge file covers all three, and ends with the five-failure-point checklist so a dead tether never strands you again.</p>
+<hr />
+<h2>Step 1: Get EasyTether on the PC side</h2>
+<p>EasyTether has two halves — phone half and PC half. The phone half you already installed. The PC half is a small driver + menu app. Download from the official site (easytether.com — stick to the official site; third-party driver mirrors are where malware hunts). Run the installer. Windows may ask &quot;Do you want to allow this app to make changes to your device?&quot; — that's User Account Control doing its job — click Yes.</p>
+<p>If the installer window vanishes mid-install or throws an error code, write the code down. The debug section below covers the common ones.</p>
+<h3>The alternative path — Windows built-in USB tethering (no third-party app)</h3>
+<p>Before you pay for anything, know this: <strong>Windows itself can consume a USB tether without any third-party driver, if your phone's plan allows it.</strong> The phone's &quot;USB tethering&quot; toggle (Tap 7 in android-setup.md) shares the phone's connection as a standard network connection — Windows 10/11 recognizes it natively as &quot;Local Area Connection&quot; or &quot;Remote NDIS based Internet Sharing Device.&quot; If your carrier plan permits native tethering, you might not need EasyTether at all: plug the cable, flip the toggle, done. EasyTether exists for the brothers whose plans block native tethering or whose carriers throttle it — it builds its own bridge over the plan's restrictions (that's its whole product). Try the native path first (free, no install), keep EasyTether as the fallback if the plan blocks it. Knowing both paths is mastery.</p>
+<hr />
+<h2>Step 2: First connection — plug, flip, wait</h2>
+<ol>
+<li>Plug the cable into the PC (USB port on the PC itself, not an unpowered hub — hubs that don't plug into the wall are power thieves).</li>
+<li>Phone: set the USB notification to <strong>File transfer / MTP</strong> (not &quot;Charging this device&quot; mode) — see android-setup.md.</li>
+<li>Phone: flip <strong>USB tethering</strong> ON (Settings → Network &amp; internet → Hotspot &amp; tethering).</li>
+<li>PC: if EasyTether is installed, its tray icon turns green. Windows native: look at the taskbar network icon — within 10–30 seconds it should show a wired connection.</li>
+<li>Open a browser on the PC. Load a lightweight page — example.com is the classic test (plain HTML, one page, loads in a blink on any connection). <strong>If the page loads, the bridge is up.</strong></li>
+</ol>
+<p>That moment — a webpage loading on a PC that has no internet of its** own** — brothers describe it the same way: like the computer woke up. Some of you will feel it too. It's not just internet. It's the machine becoming useful again.</p>
+<hr />
+<h2>Step 3: Trust the machine — the RSA handshake</h2>
+<p>The first time USB debugging connects to this PC, the phone shows the &quot;Allow USB debugging?&quot; dialog with the PC's RSA key fingerprint. Check &quot;Always allow from this computer&quot; and Allow. One time, one trust, done. If you skip this and deny, the bridge goes dark until you re-plug and re-allow. Deny twice and the phone stops asking for the session — re-plug the cable to reset the ask.</p>
+<hr />
+<h2>Step 4: Prove it — the five-failure-point checklist</h2>
+<p>A dead tether has five failure points, always in this order. Run this list top to bottom and you'll find the culprit 95% of the time:</p>
+<p>| # | Failure point | The check | The fix |
+| 1 | <strong>Cable</strong> | Can the PC see the phone's files in File Explorer? | No → charge-only cable. Use the cable that came with the phone or one that reliably copies files. |
+| 2 | <strong>Mode</strong> | Phone USB notification says &quot;File transfer / MTP&quot;? | No → tap notification → File transfer. Charging mode = the PC sees a battery, not a device. |
+| 3 | <strong>Toggle</strong> | USB tethering toggle flipped ON (after cable plugged in)? | No → flip it. It only lights up when the phone senses a PC on the wire. |
+| 4 | <strong>Driver</strong> | Device Manager shows the EasyTether adapter / &quot;Remote NDIS&quot; adapter without a yellow ⚠ warning? | Yellow ⚠ → right-click → Update driver → Browse my computer → Let me pick. Or reinstall EasyTether PC app. |
+| 4b | <strong>Driver (native)</strong> | Device Manager → Network adapters → &quot;Remote NDIS based Internet Sharing Device&quot; present, no warning? | Missing → try another USB port; try &quot;Add legacy hardware&quot; only if you know what you're doing. |
+| 5 | <strong>Firewall</strong> | Windows Defender Firewall blocking EasyTether? | Check Windows Security → Firewall → Allowed apps → find EasyTether. Public/private both checked. |</p>
+<p>Run top to bottom. Top to bottom. The order matters because it's cheapest-first: cable is free to check, mode is one tap, toggle is one flip, driver is a reinstall, firewall is a permission. A brother who memorizes this order debugs any dead tether in under two minutes.</p>
+<hr />
+<h2>Step 5: The dev rig — turning the connection into a workstation</h2>
+<p>Internet on the PC is step one. A rig is what you build on top of it:</p>
+<h3>5a. The editor — VS Code on 4GB RAM</h3>
+<p>Download VS Code (code.visualstudio.com — the &quot;User Installer&quot; x64 build for most PCs). It runs fine on a 4GB refurb (see core-system/fed-os-bridge/hardware_profiler.py for tier detection — 4GB is the &quot;TRUE FED-EDU TIER&quot;). Install the default extensions only — no heavy AI extensions on a refurb, they eat RAM like Sunday dinner.</p>
+<h3>5b. The local server — one double-click</h3>
+<p>Copy <code>core-system/fed-os-bridge/local_server_boot.bat</code> into any project folder and double-click. It finds Python (py → python → python3, in that order) and serves that folder on <code>localhost:8080</code>. Now your PC tests sites exactly like GitHub Pages will serve them — same folder structure, same relative paths. What works on localhost:8080 works on Pages. That's the whole point of a local server.</p>
+<h3>5c. The git loop — connect the rig to the block</h3>
+<p>git init in your project folder, remote add to your GitHub repo (wiki/First-Steps/Push-Your-First-Change.md has the four-word vocabulary: clone, add, commit, push). Now the rig is a loop: edit → localhost test → git push → GitHub Pages live. Edit, test, ship. Edit, test, ship. That loop is the entire job. Everything else is details.</p>
+<h3>5d. The phone check — the final say</h3>
+<p>Every site you build gets opened on the phone before you call it done. Not on the PC's browser at phone-width — on the actual phone, over the actual tether, on the actual 3G. Because that's how half your users will meet your work. The 3-second rule (ADR-002) isn't a rule for the repo — it's a rule for the real world your work lives in.</p>
+<hr />
+<h2>The data cost reality</h2>
+<p>USB tethering uses the phone's data plan. Nothing is free — the pipe is only as generous as your plan. The tether monitor (core-system/fed-os-bridge/tether_monitor.sh) shows you exactly how much the dev loop costs per month so there are no surprise bills. Budget like you budget for gas: know the tank, watch the needle.</p>
+<hr />
+<h2>Your Move</h2>
+<p>Bridge up, rig running, phone check done? Screenshot the tether monitor's passing checklist — that's your proof-of-completion and your <strong>10 raffle tickets</strong> (pinned: how-to-earn-raffle-tickets.md). Post it in the discussions with the tag [TETHERED] and a brother who's still phone-only will slide in your replies asking how. Answer him — that's 5 more tickets, and that's how the block grows.</p>
+<p><em>Bridge won't come up after the five-point check? File an issue with the template (.github/ISSUE_TEMPLATE/02_bug_alert.md) and paste the full output of the failing step. Receipts get answers, vibes get silence.</em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "courses");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

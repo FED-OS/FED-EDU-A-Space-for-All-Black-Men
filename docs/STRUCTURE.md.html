@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STRUCTURE — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: STRUCTURE">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>STRUCTURE — THE FULL MAP OF THE BLOCK</h1>
+<p>Every file in the FED-EDU repo, one tree, no mystery. 157 files across 44
+directories. Nothing hidden, nothing unexplained — the block builds in the open.</p>
+<p>If you're new: start at <code>README.md</code>, walk into <code>wiki/First-Steps/</code>, and use this
+page whenever you need to find a room. Every folder below says what it's for in
+one line of plain talk.</p>
+<h2>THE TREE</h2>
+<pre><code>.
+|-- .github
+|   |-- ISSUE_TEMPLATE
+|   |   |-- 01_hustle_spawn.md
+|   |   |-- 02_bug_alert.md
+|   |   |-- 03_project_ship.md
+|   |   |-- bug_report.md
+|   |   |-- custom.md
+|   |   `-- feature_request.md
+|   |-- workflows
+|   |   |-- auto_dap.yml
+|   |   |-- build.yml
+|   |   `-- leaderboard_sync.yml
+|   |-- CODE_OF_CONDUCT.md
+|   |-- DISCUSSION_WELCOME_README.md
+|   |-- PULL_REQUEST_TEMPLATE.md
+|   |-- README.md
+|   `-- social-image.png
+|-- community-boards
+|   |-- showcase-vault
+|   |   `-- shared_links.json
+|   |-- diaspora-data.json
+|   |-- diaspora-map.js
+|   |-- help-desk-bridge.js
+|   |-- index.html
+|   `-- leaderboard.json
+|-- core-system
+|   |-- fed-os-bridge
+|   |   |-- hardware_profiler.py
+|   |   |-- local_server_boot.bat
+|   |   `-- tether_monitor.sh
+|   |-- app.js
+|   |-- index.html
+|   |-- manifest.json
+|   |-- service-worker.js
+|   `-- styles.css
+|-- courses-and-guides
+|   |-- 01-easytether-mastery
+|   |   |-- README.md
+|   |   |-- android-setup.md
+|   |   `-- pc-usb-bridge.md
+|   |-- 02-real-life-minecraft
+|   |   |-- README.md
+|   |   |-- brick-one-html.md
+|   |   `-- index.html
+|   `-- 03-the-corporate-ship
+|       |-- README.md
+|       |-- interview-cheat-sheet.md
+|       `-- markdown-resume-builder.md
+|-- discussion
+|   |-- pinned
+|   |   |-- how-to-earn-raffle-tickets.md
+|   |   |-- introduce-yourself.md
+|   |   `-- welcome-to-the-block.md
+|   |-- templates
+|   |   |-- new_member_intro.md
+|   |   `-- project_help_request.md
+|   `-- categories.json
+|-- excellence-matrix
+|   |-- database
+|   |   |-- Hollywood_directors.json
+|   |   |-- business_moguls.json
+|   |   |-- executive_power.json
+|   |   |-- golden_cleats.json
+|   |   |-- hiphop_engineers.json
+|   |   |-- historical_leaders.json
+|   |   `-- streaming_giants.json
+|   |-- index.html
+|   `-- matrix-engine.js
+|-- fed-comm-dm
+|   |-- templates
+|   |   |-- active-brother-row.html
+|   |   `-- chat-bubble.html
+|   |-- README.md
+|   |-- chat-engine.js
+|   |-- encryption-layer.js
+|   |-- index.html
+|   `-- manifest.json
+|-- fedpromptly-coach
+|   |-- prompts
+|   |   |-- debug_helper.txt
+|   |   |-- project_generator.txt
+|   |   `-- resume_optimizer.txt
+|   |-- context-payload.json
+|   `-- engine-connector.js
+|-- hustle-index
+|   |-- commissions
+|   |   |-- HUSTLE-20260315-01.json
+|   |   `-- roster.json
+|   |-- members
+|   |   |-- roster.json
+|   |   `-- sample_brother_hustle.json
+|   |-- commissions_schema.json
+|   |-- index.html
+|   `-- market-engine.js
+|-- physical-raffles
+|   |-- assets
+|   |   `-- safe-shipping-checklist.md
+|   |-- earn-tickets.json
+|   `-- raffle-logic.js
+|-- prompts
+|   |-- coding-coach
+|   |   |-- explain_like_im_five.txt
+|   |   `-- fix_my_code_step_by_step.txt
+|   |-- project-generator
+|   |   `-- match_my_hobby_to_project.txt
+|   |-- resume-hustle
+|   |   `-- street_to_executive.txt
+|   |-- street-translator
+|   |   `-- translate_tech_docs.txt
+|   `-- README.md
+|-- sandbox-blueprints
+|   |-- 01-rap-lab
+|   |   |-- audio-core.js
+|   |   |-- index.html
+|   |   `-- project-manifest.json
+|   |-- 02-football-stats
+|   |   |-- db-bridge.js
+|   |   |-- index.html
+|   |   `-- schema.sql
+|   |-- 03-media-fx-clipper
+|   |   |-- bg-remover.py
+|   |   `-- index.html
+|   |-- 04-streamer-tools
+|   |   |-- config.example.json
+|   |   |-- index.html
+|   |   |-- stream-alert-bot.js
+|   |   `-- trend-scraper.py
+|   `-- README.md
+|-- support-the-block
+|   |-- archive-and-stash
+|   |   `-- .gitkeep
+|   |-- README.md
+|   `-- kofi-button.html
+|-- urban-dictionary
+|   |-- terms
+|   |   |-- api_endpoint.md
+|   |   |-- database_supabase.md
+|   |   |-- github_fork.md
+|   |   |-- json_explained.md
+|   |   |-- prompt_engineering.md
+|   |   `-- saas_model.md
+|   |-- index.html
+|   |-- index.json
+|   `-- search-engine.js
+|-- wiki
+|   |-- Building
+|   |   |-- Publish-on-GitHub-Pages.md
+|   |   |-- Turn-Website-Into-App.md
+|   |   `-- Your-First-Website.md
+|   |-- First-Steps
+|   |   |-- Fork-Your-First-Repo.md
+|   |   |-- Make-a-GitHub-Account.md
+|   |   `-- Push-Your-First-Change.md
+|   |-- Getting-Online
+|   |   |-- EasyTether-Basics.md
+|   |   `-- Free-WiFi-Spots-and-Libraries.md
+|   |-- Hustling
+|   |   |-- List-on-Hustle-Index.md
+|   |   |-- Price-Your-Work.md
+|   |   `-- Set-Up-Ko-fi.md
+|   `-- Home.md
+|-- .gitignore
+|-- ADR.md
+|-- AGENTS.md
+|-- AUTHORS.md
+|-- BUILD.md
+|-- CHANGELOG.md
+|-- CITATIONS.md
+|-- CLAUDE.md
+|-- CODE_OF_CONDUCT.md
+|-- CONTRIBUTING.md
+|-- COPYING.md
+|-- DEPLOYMENT.md
+|-- FAQ.md
+|-- GOVERNANCE.md
+|-- INSTALL.md
+|-- LICENSE
+|-- MAINTAINERS.md
+|-- NOTICE.md
+|-- PRICING.md
+|-- PULL_REQUEST_TEMPLATE.md
+|-- README.md
+|-- ROADMAP.md
+|-- SECURITY.md
+|-- SUMMARY.md
+|-- SUPPORT.md
+|-- STRUCTURE.md
+|-- app.js
+|-- bug_report.md
+|-- feature_request.md
+|-- favicon.ico
+|-- icon-192.png
+|-- icon-512-maskable.png
+|-- icon-512.png
+|-- index.html
+|-- manifest.json
+|-- pops.js
+|-- service-worker.js
+|-- styles.css
+|-- todo.md
+`-- usage.md
+</code></pre>
+<h2>THE ROOMS, IN PLAIN TALK</h2>
+<p><strong><code>.github/</code> (14 files)</strong> — the org's front office. Issue templates so every
+ticket lands pre-shaped (hustle spawns, bug alerts, project ships), the three
+workflows that run the block's checks (<code>build.yml</code> ships the guardrails,
+<code>auto_dap.yml</code> keeps the DAP honest, <code>leaderboard_sync.yml</code> counts the receipts),
+the org profile, and <code>social-image.png</code> — the banner the world sees when somebody
+links the block.</p>
+<p><strong><code>core-system/</code> (8 files)</strong> — the front door and the engine room. <code>index.html</code>
+is the dashboard every brother lands on; the manifest and service worker make it
+installable as an app on any phone (PWA, works offline); <code>fed-os-bridge/</code> holds
+the rig tools — hardware profiler, tether monitor, PC boot script.</p>
+<p><strong><code>courses-and-guides/</code> (9 files)</strong> — the three ships: EasyTether Mastery (get
+online on a tethered phone), Real-Life Minecraft (first HTML, with the offline
+playground), The Corporate Ship (resume + interview, turn skills into income).</p>
+<p><strong><code>urban-dictionary/</code> (9 files)</strong> — the decoder ring. The live search page, six seed terms translated
+street-to-tech (<code>api_endpoint</code>, <code>database_supabase</code>, <code>github_fork</code>, <code>json</code>,
+<code>prompt_engineering</code>, <code>saas_model</code>), the search engine, and the index that says
+what's in the book.</p>
+<p><strong><code>prompts/</code> (6 files)</strong> — the coach's prompts: coding coach, project matcher,
+resume hustle, and the street-translator that converts any tech doc into plain
+talk. Paste into any AI and get a teacher that speaks your language.</p>
+<p><strong><code>wiki/</code> (12 files)</strong> — the manual for the whole journey: account → first
+change → first website → publish → app; getting online on tether and free Wi-Fi;
+and the hustle pages — list yourself, price your work, set up Ko-fi.</p>
+<p><strong><code>discussion/</code> (6 files)</strong> — the pinned welcome posts and the templates for
+intros and project help. The categories file defines the rooms.</p>
+<p><strong><code>fed-comm-dm/</code> (7 files)</strong> — the custom DM system, built because the gist and
+community tabs suck. Chat engine, encryption layer, templates, and the only
+channel an address ever moves through (the shipping law).</p>
+<p><strong><code>fedpromptly-coach/</code> (5 files)</strong> — the connector between the block and the
+fedpromptly engine: context payload, engine connector, and the three heavy
+prompts (debug helper, project generator, resume optimizer).</p>
+<p><strong><code>sandbox-blueprints/</code> (13 files)</strong> — the four ready-to-fork projects: Rap Lab
+(music brothers), StatTracker (ball brothers), Media FX Clipper (eye brothers),
+Streamer Tools (going-live brothers). Plus the README with the starter loadout
+that goes on every raffle machine.</p>
+<p><strong><code>excellence-matrix/</code> (9 files)</strong> — the receipts that we built this before:
+seven databases of leaders, executives, moguls, engineers, cleats, directors,
+and streamers — every entry with a claim, receipts, and the transfer. The engine
+renders them; the index is the door.</p>
+<p><strong><code>hustle-index/</code> (7 files)</strong> — the commission board: the schema, the rate-floor
+law, sample member profile, first commission, and the rosters that list who's
+selling and what's open. 100% to the shipping brother.</p>
+<p><strong><code>community-boards/</code> (6 files)</strong> — where the block meets: the diaspora map
+(emoji grid, tap a region, see the hubs and brother counts), the help desk
+bridge (GitHub issues, no waiting room), the showcase vault (shipped work with
+vouches), and the leaderboard (same economics as the raffle tickets).</p>
+<p><strong><code>physical-raffles/</code> (3 files)</strong> — the hardware hope pipeline: provably fair
+draw math (any brother can re-run the seed and verify the winner), the ticket
+economy (how tickets are earned), and the safe-shipping checklist — the law
+that keeps addresses out of git history forever.</p>
+<p><strong><code>support-the-block/</code> (3 files)</strong> — the funding room: the Ko-fi drop-in button
+(<code>YOUR_USERNAME</code> placeholder, swap-or-fail rule enforced by <code>build.yml</code>), the
+money README, and the archive-and-stash where closed cycles get filed.</p>
+<p><strong>The root (40 files)</strong> — <code>index.html</code> is the front door (every room one tap away), and the PWA spine that makes the whole block installable: <code>manifest.json</code> (root scope, every room), <code>service-worker.js</code> (offline shell for all rooms), <code>app.js</code> (registers the worker), <code>pops.js</code> (the daily practice engine — the work, read, or pray pops that fire on every page, five to twenty minutes a day), and the real icons (<code>icon-192.png</code>, <code>icon-512.png</code>, <code>icon-512-maskable.png</code>, <code>favicon.ico</code> — the <code>&gt;_</code> glyph in forest on warm cream). Plus the paper trail of a real organization: README
+(manifesto + front door), LICENSE/COPYING/NOTICE (the legal spine),
+CONTRIBUTING/CODE_OF_CONDUCT/GOVERNANCE (how the block runs itself),
+SECURITY/PRIVACY posture, PRICING (the rate floors), ROADMAP, ADR (the
+architecture decisions — no frameworks, 3-second rule), INSTALL/BUILD/DEPLOYMENT
+(runbooks), FAQ/SUPPORT, styles.css (the shared Warm Study theme), todo.md
+(the public task board), and this file.</p>
+<h2>THE COUNTS</h2>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.github/</code></td>
+<td>14</td>
+</tr>
+<tr>
+<td><code>core-system/</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>courses-and-guides/</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td><code>discussion/</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>excellence-matrix/</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td><code>hustle-index/</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td><code>community-boards/</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>physical-raffles/</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>prompts/</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>sandbox-blueprints/</code></td>
+<td>13</td>
+</tr>
+<tr>
+<td><code>support-the-block/</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>urban-dictionary/</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td><code>wiki/</code></td>
+<td>12</td>
+</tr>
+<tr>
+<td><code>fed-comm-dm/</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td><code>fedpromptly-coach/</code></td>
+<td>5</td>
+</tr>
+<tr>
+<td>root files</td>
+<td>40</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>157</strong></td>
+</tr>
+</tbody>
+</table>
+<p>One repo. Every file has a job. Every job serves one mission: every Black man
+who wants to build, can build — on whatever device he's got, from wherever he
+is, starting tonight.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

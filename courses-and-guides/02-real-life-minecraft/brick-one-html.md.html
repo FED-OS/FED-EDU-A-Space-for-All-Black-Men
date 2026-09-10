@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>brick one html — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: brick one html">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>Brick One: HTML From Zero</h1>
+<h3>The full walkthrough of Lessons 1–4 · From empty lot to a house with an address</h3>
+<p><strong>Time:</strong> One weekend, honestly · <strong>Hardware:</strong> Any device with a browser · <strong>Assumes:</strong> You can read. That's it.</p>
+<hr />
+<h2>Lesson 1: The House — What HTML Actually Is</h2>
+<p>HTML is not a programming language. It's a marking language — you mark up text to tell the browser &quot;this part is a headline, this part is a paragraph, this is a picture, this is a door.&quot; The browser reads your marks and builds the page. You are not programming a machine; you are labeling blocks so the builder (the browser) knows what goes where.</p>
+<p>Every block has the same three-part shape:</p>
+<pre><code>&lt;p&gt;            ← opening tag: the block starts here
+  words        ← the content: what's inside the block
+&lt;/p&gt;           ← closing tag: the block ends here (note the slash)
+</code></pre>
+<p>That slash matters more than anything else you'll learn today. <code>&lt;p&gt;</code> opens, <code>&lt;/p&gt;</code> closes. Miss the slash and the browser thinks your sign runs on forever — half of all beginner bugs are missing slashes or misspelled closing tags.</p>
+<h3>The blocks that are 90% of the web</h3>
+<p><strong><code>&lt;div&gt;</code> — the room.</strong> A plain container. Invisible by itself, but everything inside it stays together. A page is rooms inside rooms: a big room (the page), a header room, a content room, a footer room. When you look at any website and squint, you're seeing divs.</p>
+<p><strong><code>&lt;p&gt;</code> — the sign.</strong> A paragraph. Words on the wall. <code>&lt;p&gt;You already know how to write one of these.&lt;/p&gt;</code></p>
+<p><strong><code>&lt;a&gt;</code> — the door.</strong> A link. The <code>href</code> is the address the door leads to: <code>&lt;a href=&quot;https://example.com&quot;&gt;Tap here to leave my house&lt;/a&gt;</code>. Without <code>href</code>, the door is a wall that looks like a door.</p>
+<p><strong><code>&lt;img&gt;</code> — the picture.</strong> The only block that doesn't need a closing tag, because it's not a container — it IS the thing. <code>&lt;img src=&quot;picture-address&quot; alt=&quot;what the picture shows&quot;&gt;</code>. The <code>alt</code> text is for blind visitors (screen readers read it aloud) and for the moment the picture fails to load. Always write the alt. A picture with no alt is a door with no knob.</p>
+<p><strong><code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code> — the name plates.</strong> Headlines, biggest to smallest. One <code>&lt;h1&gt;</code> per house — it's the house's name. Everything else stacks under it: <code>&lt;h2&gt;</code> for sections, <code>&lt;h3&gt;</code> for sub-sections.</p>
+<p><strong><code>&lt;ul&gt;</code> + <code>&lt;li&gt;</code> — the shelf and its items.</strong> <code>&lt;ul&gt;</code> is the shelf (unordered list), each <code>&lt;li&gt;</code> is a thing on it. Bullet lists everywhere on the web are this pair.</p>
+<p>That's the vocabulary. Six block types. Everything else you'll ever meet is a variation: <code>&lt;header&gt;</code> is a div that means &quot;top of the house,&quot; <code>&lt;footer&gt;</code> is a div that means &quot;bottom,&quot; <code>&lt;nav&gt;</code> is a div that means &quot;the doors hallway.&quot; Fancy names, same blocks.</p>
+<h3>Your first file — the moment a block exists</h3>
+<ol>
+<li>Open any text editor. Notion won't work — you need plain text. Phone: the free &quot;Acode&quot; editor or even a notes app that exports .txt. PC: Notepad works; VS Code is better (see 01-easytether-mastery/pc-usb-bridge.md for the rig setup).</li>
+<li>Type this — type it, don't paste it. Fingers learn what eyes skip:</li>
+</ol>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;My Block&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;My Block&lt;/h1&gt;
+  &lt;p&gt;I'm building something.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<ol start="3">
+<li>Save it as <code>index.html</code>. Not <code>myhouse.txt</code>, not <code>page.html.txt</code> — <code>index.html</code>. The name matters: every web server on earth looks for a file named <code>index.html</code> first. It's the front door by convention.</li>
+<li>Open it. Phone: Acode has a preview button. PC: double-click the file — your browser opens it. <strong>You should see &quot;My Block&quot; big at the top and your sentence under it.</strong></li>
+</ol>
+<p>That moment — the file you typed rendering as a real page — is Brick One placed. Every developer you've ever heard of had that moment. You just had it too.</p>
+<p><strong>What each part did:</strong> <code>&lt;!DOCTYPE html&gt;</code> tells the browser &quot;modern HTML, not 1998.&quot; <code>&lt;html&gt;</code> is the outermost room. <code>&lt;head&gt;</code> is the room the visitor doesn't see — house paperwork: the title (what shows on the browser tab). <code>&lt;body&gt;</code> is the room the visitor walks into. <code>lang=&quot;en&quot;</code> tells screen readers how to pronounce your words. <code>charset=&quot;UTF-8&quot;</code> makes accents and emoji survive the trip. Two lines of paperwork, and they matter.</p>
+<hr />
+<h2>Lesson 2: The Paint — CSS Without Fear</h2>
+<p>HTML is the house; CSS is the paint, the trim, the furniture. CSS works by selection: you SELECT a block (by its tag, or by a name you gave it) and declare what it looks like.</p>
+<pre><code class="language-html">&lt;style&gt;
+  body { background: #f7f3ec; color: #222222; font-family: Georgia, serif; }
+  h1   { color: #1a5c2f; border-bottom: 3px solid #1a5c2f; }
+&lt;/style&gt;
+</code></pre>
+<p>Inside <code>&lt;style&gt;</code> lives CSS. Each rule is: <strong>what you're selecting { what you're changing }</strong>. The <code>body</code> rule painted every wall cream and made all text dark. The <code>h1</code> rule painted the big headline green and gave it a green underline. That's the whole grammar: selector { property: value; }.</p>
+<h3>The Warm Study starter paint job</h3>
+<p>This repo ships a complete theme — <code>styles.css</code> at the root. Copy these three lines into your <code>&lt;style&gt;</code> block and your house wears the block's colors:</p>
+<pre><code class="language-css">body { background: #f7f2e9; color: #2a2520; font-family: Georgia, serif; }
+h1   { color: #256d46; }
+a    { color: #256d46; }
+</code></pre>
+<p>Cream paper ground, dark ink walls readable at midnight, forest green doors and name plates. That green — <code>#256d46</code> — is the block's signature. A brother who knows the block recognizes it on sight.</p>
+<p>Then make it yours: change <code>#256d46</code> to your color. Any hex code works — search &quot;color picker&quot; and grab any green, gold, blue, red you want. The house you build should be the house you'd live in.</p>
+<h3>When it breaks (Lesson 2 edition)</h3>
+<p><strong>Nothing changed when I added the style:</strong> You probably put the <code>&lt;style&gt;</code> block after <code>&lt;/body&gt;</code>. It must live inside <code>&lt;head&gt;</code>, before <code>&lt;/head&gt;</code>. Paperwork room, remember — style is paperwork.</p>
+<p><strong>Everything turned black and I can't read it:</strong> You set a dark background and left the text dark too. <code>color:</code> and <code>background:</code> are a pair. Change one, check the other.</p>
+<hr />
+<h2>Lesson 3: The Address — Publishing on GitHub Pages</h2>
+<p>A file on your device is a diary. A file on the internet is a statement. GitHub Pages turns your repo into a live website — free, no card, no trial timer. The path:</p>
+<ol>
+<li><strong>Make the repo.</strong> github.com → your avatar → &quot;+&quot; → New repository. Name it anything (many brothers use <code>yourname.github.io</code> — that naming gets you the cleanest URL). Public. Add a README if it asks. Create.</li>
+<li><strong>Get <code>index.html</code> into the repo.</strong> Web upload is fine for Brick One: repo page → &quot;Add file&quot; → &quot;Create new file&quot; → name it <code>index.html</code> → paste your house → Commit changes. (The git CLI path — clone, add, commit, push — is Lesson 4 of wiki/First-Steps/Push-Your-First-Change.md. Web upload today, CLI when you're ready. Both count.)</li>
+<li><strong>Turn on Pages.</strong> Repo → Settings → Pages → under &quot;Build and deployment,&quot; Source: <strong>Deploy from a branch</strong> → Branch: <strong>main</strong> (or master — whichever your repo shows), folder: <strong>/(root)</strong> → Save.</li>
+<li><strong>Wait two minutes.</strong> The first build takes a moment. Refresh the Pages settings screen — a green box appears with your URL: <code>https://yourname.github.io/reponame/</code> or <code>https://yourname.github.io/</code>.</li>
+<li><strong>Open the URL on your phone.</strong> That's your family's view. Send it to your mother.</li>
+</ol>
+<h3>The three classic failure points</h3>
+<p><strong>The URL 404s:</strong> (a) The branch was wrong — Pages was pointed at a branch with no <code>index.html</code>. Recheck Settings → Pages → Branch. (b) The file is named wrong — <code>index.html.txt</code> or <code>home.html</code>. It must be exactly <code>index.html</code> at the repo root (not inside a folder, for the root deploy). (c) You didn't wait — first deploys take up to a few minutes. Patience, then refresh.
+<strong>The page loads but looks unstyled:</strong> Your <code>&lt;style&gt;</code> block got clipped in the copy-paste. Open the repo's <code>index.html</code>, compare with your local file, re-paste the whole <code>&lt;head&gt;</code>.
+<strong>The image doesn't load:</strong> You linked an image from your device (<code>src=&quot;C:\...&quot;</code> or <code>src=&quot;file:///...&quot;</code>) — the internet can't see your device's hard drive. Either upload the image into the repo next to <code>index.html</code> and use <code>src=&quot;picture.jpg&quot;</code>, or use a real hosted image URL (wikimedia commons images work — see the playground's examples).</p>
+<hr />
+<h2>Lesson 4: The First Remodel — Your Next Blocks</h2>
+<p>The house is up. The address works. Here's the next-block menu, in the order that pays:</p>
+<p><strong>A second page.</strong> Copy <code>index.html</code> → rename <code>about.html</code> → change its content → add a door between them: <code>&lt;a href=&quot;about.html&quot;&gt;About me&lt;/a&gt;</code> on the front page and a door back. Two pages and you've built a site, not a page. (Multi-page work is where the $500 floor in PRICING.md starts — see wiki/Hustling/Price-Your-Work.md.)</p>
+<p><strong>The manifest + service worker — turning the site into an app.</strong> Add <code>core-system/manifest.json</code> (adapted: your name, your colors) and a 30-line service worker (core-system/service-worker.js is the pattern) and your site becomes installable: visitors tap &quot;Add to Home Screen&quot; and your page lives on their home screen like an app, loading offline. The full walkthrough: wiki/Building/Turn-Website-Into-App.md.</p>
+<p><strong>The Hustle Index listing.</strong> When the site is about your services — even one service — list it: wiki/Hustling/List-on-Hustle-Index.md. The block's marketplace JSON is a copy-paste edit.</p>
+<p><strong>The next course.</strong> 03-the-corporate-ship turns this house into income: the interview cheat sheet and the markdown resume builder. The house you just built is the portfolio piece that makes the resume true.</p>
+<hr />
+<h2>The receipts, one more time</h2>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Proof</th>
+<th>Tickets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First file rendering locally</td>
+<td>Screenshot of your browser showing your page</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Live on GitHub Pages</td>
+<td>The URL, posted in discussions</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Helped a brother get his live</td>
+<td>Your commented walkthrough</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Showed the block your house</td>
+<td>[SHIP] post</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>Ten tickets for one weekend of placing blocks. The refurb tower raffle (pinned: how-to-earn-raffle-tickets.md) has had brothers win at fewer tickets than that.</p>
+<hr />
+<h2>Your Move</h2>
+<p>You now know what 90% of the web is made of. Not metaphorically — six block types carry most of the pages you've ever visited. The playground in this folder (<code>index.html</code>) is open 24/7, works offline, keeps your drafts on your device, and never judges a broken block. Place one tonight.</p>
+<p><em>Every path in this walkthrough is a real file in the FED-EDU repo. If one doesn't resolve, that's a bug — .github/ISSUE_TEMPLATE/02_bug_alert.md — and it gets fixed same-day.</em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "courses");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

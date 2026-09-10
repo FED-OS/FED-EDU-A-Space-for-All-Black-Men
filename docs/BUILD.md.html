@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUILD — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: BUILD">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>🔨 FED-EDU BUILD — How The Build Engine Works</h1>
+<h2>What &quot;Build&quot; Means Here</h2>
+<p>This project is deliberately light: pure HTML/CSS/JS with JSON data files, plus a few Python utility scripts. There is no React, no Webpack, no 400MB node_modules folder — because a heavy build pipeline would break the core promise: <strong>everything must load on a tethered scrap PC through a phone connection.</strong> Lightweight is a design decision, not a limitation. See <code>ADR-001</code> in ADR.md.</p>
+<h2>The Automated Pipeline (.github/workflows/build.yml)</h2>
+<p>Every push to <code>main</code> triggers the cross-platform engine:</p>
+<ol>
+<li><strong>Checkout</strong> — the workflow pulls the repo</li>
+<li><strong>Validate</strong> — confirms <code>core-system/index.html</code> exists; the build fails fast if the front door is missing</li>
+<li><strong>Package</strong> — the <code>core-system/</code> directory is bundled as the Pages artifact</li>
+<li><strong>Deploy</strong> — shipped live to the GitHub Pages URL, reachable on every device</li>
+</ol>
+<p>No build minutes wasted, no dependency installs to time out, no npm audit horror stories. Push → live in about a minute.</p>
+<h2>Local Builds (No GitHub Required)</h2>
+<p>You can run the whole platform on your own hardware, offline:</p>
+<p><strong>On FED-OS / Linux / Mac:</strong></p>
+<pre><code class="language-bash">cd FED-EDU/core-system
+python3 -m http.server 8080
+</code></pre>
+<p>Open <code>localhost:8080</code> in your browser. Done.</p>
+<p><strong>On Windows:</strong>
+Double-click <code>fed-os-bridge/local_server_boot.bat</code> — it does the same thing for you.</p>
+<p>That's the entire local build. If it feels too easy — that's the point. Real-life Minecraft doesn't need a permit.</p>
+<h2>The Other Workflows</h2>
+<ul>
+<li><strong><code>auto_dap.yml</code></strong> — runs on pushes; assigns achievement badges and records dap events for the leaderboard</li>
+<li><strong><code>leaderboard_sync.yml</code></strong> — scheduled; recalculates the syndicate standings from verified contribution data and updates the dashboard's stats</li>
+</ul>
+<p>Full specs live in <code>.github/workflows/</code> — each file is commented in plain terms.</p>
+<h2>Build Rules (Hard Requirements)</h2>
+<ol>
+<li><strong>The 3-Second Rule:</strong> first meaningful paint under 3 seconds on a throttled 3G connection. If your change makes the dashboard slower, it doesn't merge.</li>
+<li><strong>No heavy frameworks.</strong> Vanilla JS, small libraries only, and only when they earn their weight.</li>
+<li><strong>Images get compressed</strong> before commit. No 4MB hero photos. (Brothers are paying per megabyte.)</li>
+<li><strong>The service worker gets updated</strong> when assets change, so offline caching stays correct.</li>
+<li><strong>Python scripts stay stdlib-light.</strong> The blueprints (<code>bg-remover.py</code>, <code>trend-scraper.py</code>) document their pip installs inside the file, kept minimal.</li>
+</ol>
+<h2>Testing (What We Check Before Ship)</h2>
+<ul>
+<li>HTML opens and renders on a plain browser with no console errors</li>
+<li>JS runs through the main flows (dashboard loads, search finds terms, DM client connects)</li>
+<li>Mobile layout verified at 360px width (the width of a cheap Android — our reference device)</li>
+<li>The PWA installs on Android via &quot;Add to Home Screen&quot;</li>
+<li>Python scripts run on Python 3.8+ (old machines run old Pythons; we meet them there)</li>
+</ul>
+<h2>When The Build Breaks</h2>
+<p>The workflow fails fast and names the missing piece in plain language. Nine times out of ten it's one of: <code>core-system/index.html</code> missing or renamed, Pages not enabled in repo settings, or the artifact path drifted from <code>./core-system</code>. Fix, push, done.</p>
+<p>Stuck anyway? Help Desk, <code>bug_report</code> template. Builds are community-debugged.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

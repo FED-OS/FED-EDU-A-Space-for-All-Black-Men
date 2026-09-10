@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INSTALL — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: INSTALL">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>🔧 FED-EDU INSTALL — Getting Set Up On Whatever You Have</h1>
+<blockquote>
+<p>There is no &quot;required setup&quot; here — there are setups, plural, matched to the hardware reality of whoever's reading this. Find your situation, follow that path. Everything costs $0.</p>
+</blockquote>
+<h2>Setup Path A — Phone Only (The Valid Starting Point)</h2>
+<p>You don't need a computer. A huge percentage of this community starts here.</p>
+<ol>
+<li><strong>Get the GitHub mobile app</strong> (Android/iOS, free) — or just use github.com in your phone's browser.</li>
+<li><strong>Create your account</strong> — guide: <code>wiki/First-Steps/Make-a-GitHub-Account.md</code>. Your username is your name on the block; choose like it matters.</li>
+<li><strong>Join the FED-EDU org</strong> — request access through the org page (or get invited by any brother).</li>
+<li><strong>Install the dashboard as an app</strong> — open the FED-EDU Pages URL in your browser, then &quot;Add to Home Screen.&quot; The PWA manifest (<code>core-system/manifest.json</code>) makes it a real icon that opens full-screen.</li>
+<li><strong>Edit files right from the phone</strong> — GitHub's app and website let you edit any file in your forks. No terminal needed for the beginner path.</li>
+</ol>
+<p><strong>Data tip:</strong> everything in this ecosystem is built light specifically so it loads on metered connections. Turn on the service worker caching (automatic) and the dashboard keeps working even when your signal drops.</p>
+<h2>Setup Path B — Scrap Desktop + Tethered Phone (The Classic)</h2>
+<p>You've got (or won) an old desktop and a phone with a data plan.</p>
+<ol>
+<li><strong>Take the EasyTether Mastery course</strong> — <code>courses-and-guides/01-easytether-mastery/</code>. It walks you through connecting the desktop to the internet through your phone via USB: the app on the phone, the drivers on the desktop, and the settings that keep the connection stable.</li>
+<li><strong>Install a browser</strong> if the machine has a fossilized one — Firefox or Chromium, whatever runs lightest on the hardware.</li>
+<li><strong>Follow Path A steps 2–5</strong> from the desktop once you're online.</li>
+<li><strong>Optional but powerful — install Python</strong> (python.org, free) to run the Python blueprints (<code>bg-remover.py</code>, <code>trend-scraper.py</code>) and write automation scripts. The <code>hardware_profiler.py</code> in the FED-OS bridge can help you tune the machine.</li>
+</ol>
+<p><strong>Old Windows machine note:</strong> the <code>local_server_boot.bat</code> in <code>core-system/fed-os-bridge/</code> launches a local copy of the dashboard so you can keep building even when the tether drops.</p>
+<h2>Setup Path C — FED-OS Machine (The Home Field)</h2>
+<p>If you're running FED-OS, the ecosystem is native territory.</p>
+<ol>
+<li>FED-OS ships light and fast on low-spec hardware by design — the FED-EDU dashboard and all blueprints run on it without any special setup.</li>
+<li>The <code>fed-os-bridge/</code> scripts integrate: <code>tether_monitor.sh</code> watches your USB connection and logs drops; <code>hardware_profiler.py</code> optimizes memory allocation so heavy browser tabs don't choke the machine.</li>
+<li>Everything else is Path A/B steps — account, org, build.</li>
+</ol>
+<h2>Setup Path D — Library / Public Computer (The Underrated Play)</h2>
+<p>Free hardware, free internet, zero strings.</p>
+<ol>
+<li>Bring headphones and a phone (or memorize/write your credentials — don't save passwords on public machines).</li>
+<li>Do your account setup and learning sessions there — see <code>wiki/Getting-Online/Free-WiFi-Spots-and-Libraries.md</code> for the directory and etiquette guide.</li>
+<li>Use GitHub in the browser; your work lives in the cloud, so it follows you to whatever machine you sit at next.</li>
+<li><strong>Security note:</strong> always log fully out of public machines. Never leave sessions open, never save tokens to public hardware.</li>
+</ol>
+<h2>Setup Path E — You Already Have A Real Machine</h2>
+<p>Welcome, and check your privilege at the door like everybody else. Standard flow:</p>
+<ol>
+<li><code>git</code> installed (git-scm.com) if you want the full local workflow — or just use the browser/GitHub Desktop like everyone else; both are equally respected here.</li>
+<li>Optional: Node 20+ and Python 3.11+ if you're going to run the workflows and Python blueprints locally.</li>
+<li>Clone the repo, fork it, and build. BUILD.md covers local builds; DEPLOYMENT.md covers shipping.</li>
+</ol>
+<h2>Everyone, All Paths — Do These Three Things</h2>
+<ol>
+<li><strong>Read <code>CODE_OF_CONDUCT.md</code></strong> — the ground rules are short and they're the price of entry.</li>
+<li><strong>Drop your intro in the Spawn Zone</strong> — flag, city, lane.</li>
+<li><strong>Push one change</strong> to earn your first badge — even a typo fix counts. First push is the hardest step of the whole tunnel.</li>
+</ol>
+<h2>Troubleshooting Setup</h2>
+<p><strong>Tether keeps dropping?</strong> → <code>courses-and-guides/01-easytether-mastery/README.md</code> troubleshooting section + the tether_monitor script.
+<strong>Page won't load on your connection?</strong> → that's a bug for us, not you — file a <code>bug_report</code> issue with your device and connection type. Lightweight-or-it-doesn't-ship is a hard rule here.
+<strong>Can't afford data this month?</strong> → say so in the Spawn Zone. The community fund exists partly for exactly this, and there's no shame in it — that's why we fund it.
+<strong>Stuck on literally anything else?</strong> → Help Desk, <code>[NEED-PLUG]</code> tag. Someone's been where you are.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

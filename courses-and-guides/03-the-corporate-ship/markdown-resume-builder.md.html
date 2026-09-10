@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>markdown resume builder — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: markdown resume builder">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>The Markdown Resume Builder</h1>
+<h3>A resume that lives in a repo, prints clean, and updates with every skill you gain</h3>
+<p><strong>Who this is for:</strong> Every brother who needs paper proof of what he can do — first job, career switch, or second chance. <strong>Output:</strong> One page, one repo, one URL that updates itself every time you commit a skill.</p>
+<hr />
+<h2>Why markdown, why a repo</h2>
+<p>A regular resume is a dead file. You email it, it gets stale, you forget which version you sent. The markdown resume is alive: it lives in a GitHub repo, renders as a styled page on GitHub Pages, and every new skill is a commit. The URL never changes; the content keeps getting truer. That's receipts on receipts — and it's the format this block runs on.</p>
+<p>Markdown itself is the easiest marking language you'll ever learn: <code>#</code> makes a headline, <code>**bold**</code> makes bold, <code>-</code> makes a bullet. You already learned HTML blocks in 02-real-life-minecraft; markdown is the blocks with the tags shaved off. Five minutes of syntax and you're writing.</p>
+<p><strong>The two formats, one source:</strong> The same markdown file renders ON GitHub (your profile's receipts page) AND prints to a clean one-page PDF (that's what you hand the recruiter). Build once, use everywhere.</p>
+<hr />
+<h2>The build, step by step</h2>
+<h3>Step 1: Make the resume repo</h3>
+<p>New repository → name it <code>resume</code>. Public (it's your receipts — private receipts are a contradiction). Create <code>resume.md</code>. This file is the source of truth — every edit for the rest of your career is a commit here.</p>
+<h3>Step 2: The skeleton (copy this whole block, then fill it)</h3>
+<pre><code class="language-markdown"># YOUR NAME
+**What you do:** Front-end developer · HTML/CSS/JS · GitHub Pages deployments
+**Live proof:** [yourname.github.io](https://yourname.github.io) · [github.com/yourname](https://github.com/yourname)
+**Contact:** [city] · [email]
+
+---
+
+## PROOF OF WORK
+### *Project One Name* — *built [month/year]*
+Responsive one-page site, built vanilla (no frameworks), deployed on GitHub Pages.
+- Loads under 3 seconds on 3G — tested on a tethered connection, by design
+- Accessible: alt text on every image, 88px touch targets on mobile
+- [One more receipt: &quot;Cut image weight 60% by compressing before upload&quot; / &quot;Wrote the README so a stranger can run it in 2 steps&quot;]
+
+### *Project Two Name* — *built [month/year]*
+[One-line what-it-does.]
+- [Receipt]
+- [Receipt]
+
+---
+
+## SKILLS
+**Building:** HTML, CSS, JavaScript (vanilla), responsive design, PWA basics
+**Shipping:** Git, GitHub (PRs, code review, Actions), GitHub Pages deployment
+**Working:** Documentation as part of the product, plain-talk communication, code review culture
+
+---
+
+## EXPERIENCE — THE REAL VERSION
+### [Thing you actually did] — [city] · [dates]
+- [Translated into corporate terms — see the translation table in
+  fedpromptly-coach/prompts/resume_optimizer.txt: &quot;Ran the league's numbers&quot;
+  → &quot;Collected and analyzed weekly performance data; built automated stat tables (JavaScript)&quot;]
+- [Receipt, receipt]
+
+### [Earlier thing] — [city] · [dates]
+- [Translated line]
+- [Translated line]
+
+---
+
+## EDUCATION &amp; TRAINING
+**[Program/course]** — [where] · [dates]
+- [The real skills: &quot;Built and deployed 3 sites; 11 merged PRs in a peer-review community&quot;]
+
+---
+
+## THE BOTTOM LINE
+[One sentence, your own voice: &quot;I build light, fast, documented sites — and I
+show the code. Live links above; the receipts are public.&quot;]
+</code></pre>
+<h3>Step 3: The translation pass — where the block becomes the resume</h3>
+<p>Fill EXPERIENCE with what you ACTUALLY did, translated. The full table lives in <code>fedpromptly-coach/prompts/resume_optimizer.txt</code> — the core moves:</p>
+<ul>
+<li>&quot;Fixed cousins' phones and PCs&quot; → &quot;Provided technical support for 15+ users; diagnosed hardware and software issues&quot;</li>
+<li>&quot;Ran the cookout playlist&quot; → &quot;Managed event media systems for 200+ attendee events&quot;</li>
+<li>&quot;Sold kicks online&quot; → &quot;E-commerce operations: listings, customer communication, order fulfillment&quot;</li>
+<li>&quot;Built a promo page for an artist for free&quot; → &quot;Delivered a responsive landing page for a client — live link above&quot;</li>
+</ul>
+<p>Translation, never fabrication. The promo page you built for love IS experience. It never becomes &quot;3 years at an agency&quot; — that's a lie that follows you. See the resume coach's hard rules (fedpromptly-coach/prompts/resume_optimizer.txt) for the line and why we never cross it.</p>
+<h3>Step 4: The GitHub-as-receipts pass</h3>
+<p>Your resume is only as strong as your profile. Before you send the resume anywhere:</p>
+<ol>
+<li><strong>The profile README</strong> — the <code>.github/README.md</code> pattern (this repo's own org profile is the template): who you are, what you build, live links, pinned repos. Anyone who hits your profile from the resume link should see the same receipts the resume promised.</li>
+<li><strong>Pin the proof</strong> — profile → Customize pins → your 2-4 best repos. The resume says &quot;live links above&quot;; the profile DELIVERS them.</li>
+<li><strong>README discipline</strong> — every pinned repo's README written for a stranger: what it is, what it does, how to run it in two steps. A repo with a lazy README is a receipt with the price tag torn off.</li>
+</ol>
+<h3>Step 5: Print the PDF (the version recruiters get)</h3>
+<p>GitHub renders your markdown — repo page → <code>resume.md</code> renders styled. For the PDF: browser → open the rendered page → Print → &quot;Save as PDF&quot; → margins: default → Background graphics: ON (if you styled it) → Save. One page. If it spills to two, cut lines until it fits — the second page is where resumes go to die. What to cut first, in order: the oldest experience, the education details, any skill you can't demo from a pinned repo. What NEVER gets cut: PROOF OF WORK, the live links, contact.</p>
+<h3>Step 6: The loop — the resume that updates itself</h3>
+<p>New skill learned → new project shipped → commit to <code>resume.md</code> → the live version is current before you've even updated your head. The resume stops being a chore (rewrite the whole doc every six months) and becomes a habit (commit the skill the week you gain it). That habit — version-controlled proof of growth — is itself something no other candidate's resume can say. &quot;My resume is a repo with a commit history&quot; is a sentence that wins rooms.</p>
+<hr />
+<h2>The one-page audit (before you send it anywhere)</h2>
+<p>Run this checklist top to bottom:</p>
+<ul>
+<li>[ ] <strong>Top third answers three things in 6 seconds:</strong> who, what can you do, where's the proof (the skeleton's header does exactly this — name, stack, live links)</li>
+<li>[ ] <strong>Every project has a working link</strong> — a dead link on a resume is worse than no link (test every one, on your phone, the week you send)</li>
+<li>[ ] <strong>Zero &quot;objective&quot; lines</strong> — &quot;Seeking a challenging position…&quot; is dead; the PROOF OF WORK section is alive</li>
+<li>[ ] <strong>Every jargon term you use, you can also explain out loud</strong> — the interview cheat sheet (interview-cheat-sheet.md) will ask you to</li>
+<li>[ ] <strong>One page</strong> — always, at entry and second-chance level</li>
+<li>[ ] <strong>No typos in the URL</strong> — recruiters paste it; one wrong character is a 404 on your whole pitch</li>
+<li>[ ] <strong>The record is not the headline</strong> — skills lead; anything from the past is handled with the Ban-the-Box playbook (fedpromptly-coach/prompts/resume_optimizer.txt), not the resume</li>
+<li>[ ] <strong>Rate floors respected</strong> — if the resume doubles as a services page, the prices on it start at the floors: $150 one-pager, $500 multi-page, $50/mo retainer (PRICING.md). Underpricing on paper underprices you in the room.</li>
+</ul>
+<hr />
+<h2>The second-chance addendum</h2>
+<p>If there's a gap or a record: the resume is a skills document and leads with skills. In Ban-the-Box jurisdictions, applications can't ask about records — so the resume doesn't volunteer what the law keeps off the application. The gap line in EXPERIENCE can be handled honestly in one line — &quot;Focused period: technical training and independent building — see PROOF OF WORK ([dates])&quot; — which is true (your GitHub IS the proof) and doesn't dwell. The full playbook — the background-check moment, the prepared sentence, fair-chance employer targeting — lives in the resume coach's file (fedpromptly-coach/prompts/resume_optimizer.txt). The map exists. Use the map.</p>
+<hr />
+<h2>Your Move</h2>
+<p>Tonight, thirty minutes: make the <code>resume</code> repo, paste the skeleton, fill PROOF OF WORK with one real project. Even if &quot;one real project&quot; is the house you built in 02-real-life-minecraft this weekend — that's a live link, that's a receipt, that's the top third of the page done. Commit it. The resume is now alive and every skill you gain makes it truer.</p>
+<p><em>The translation table, the second-chance playbook, and the interview side of this story are all in this repo: fedpromptly-coach/prompts/resume_optimizer.txt and courses-and-guides/03-the-corporate-ship/interview-cheat-sheet.md. Real files, real paths — a broken one is a bug (.github/ISSUE_TEMPLATE/02_bug_alert.md), fixed same-day.</em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "courses");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "member": "sample_brother_hustle",
+  "member_handle": "@SAMPLE-BROTHER",
+  "read_me_first": "This is a SAMPLE file showing the shape of a member profile in the hustle-index. Copy it, rename it to your GitHub handle (lowercase, no @), fill it with your REAL receipts, and PR it. build.yml validates the shape; the community reads the receipts.",
+
+  "identity": {
+    "handle": "sample-brother",
+    "display_name": "Sample Brother",
+    "matrix_nickname": "The Bridge",
+    "joined": "2026-03",
+    "level": "builder",
+    "level_scale": "spawn -> builder -> certified-builder -> og (fedpromptly-coach context-payload.json uses the same scale)",
+    "location": "Atlanta, GA",
+    "phone_only": false,
+    "hardware_note": "Started phone-only on a 2019 Moto with EasyTether. Rung 2 refurb PC now."
+  },
+
+  "skills": {
+    "shipped": ["one-pager-static", "github-pages-deploy", "form-email-embed", "basic-seo-tags"],
+    "in_progress": ["multi-page-nav", "supabase-stattracker"],
+    "courses_completed": ["01-easytether-mastery", "02-real-life-minecraft"],
+    "blueprint_rungs": {
+      "01-rap-lab": "rung-2",
+      "02-football-stats": "rung-1",
+      "03-media-fx-clipper": "rung-1"
+    }
+  },
+
+  "hustle": {
+    "rate_card": {
+      "one_pager": "$150",
+      "multi_page": "$500",
+      "retainer": "$50/month"
+    },
+    "commissions": [
+      {
+        "id": "HUSTLE-20260401-01",
+        "title": "Barbershop one-pager with booking button",
+        "service_type": "one-pager",
+        "status": "paid",
+        "delivered_url": "example-barbershop.pages.dev",
+        "timeline_days": 6,
+        "receipt": "First client site shipped. Booking button live. Client re-upped for retainer."
+      },
+      {
+        "id": "HUSTLE-20260410-02",
+        "title": "Church newsletter multi-page",
+        "service_type": "multi-page",
+        "status": "in_progress",
+        "timeline_days": 14,
+        "receipt": "Nav built, 3 of 5 pages done, DAPs running daily."
+      }
+    ],
+    "client_types_served": ["small-business", "community-org"],
+    "retainers_active": 1,
+
+    "repeat_clients": 1,
+    "notes": "The repeat client is the whole game. First site was the audition; the retainer is the income."
+  },
+
+  "raffle": {
+    "tickets": 38,
+    "earned_from": {
+      "prs_merged": 5,
+      "guides_completed": 10,
+      "blueprints_shipped": 15,
+      "bug_bounties": 3,
+      "commissions": 5
+    },
+    "disclaimer": "Numbers are the SAMPLE. Your file carries your real receipts — the nightly leaderboard_sync.yml workflow tallies them and writes community-boards/leaderboard.json.",
+    "entered_raffles": ["spring-refurb-pc"]
+  },
+
+  "the_story": "Started phone-only, shipped a barbershop site in week 6, kept the client. The pattern works. Copy the file, ship your own receipts."
+}

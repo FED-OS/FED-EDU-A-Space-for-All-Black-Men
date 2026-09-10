@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Real-Life Minecraft: Brick One — the interactive HTML playground. Place blocks, see them exist, build a house you can stand in. Works offline, keeps drafts on your device.">
+  <title>Brick One Playground — FED-EDU</title>
+  <link rel="manifest" href="../../manifest.json">
+<link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <style>
+    /* ============ Warm Study theme (root styles.css, compressed for playground) ============ */
+    :root {
+      --bg: #f7f2e9;
+      --panel: #fffdf8;
+      --ink: #2a2520;
+      --muted: #6f675c;
+      --green: #256d46;
+      --border: #e5dcc9;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+    header { border-bottom: 2px solid var(--green); margin-bottom: 16px; padding-bottom: 12px; }
+    h1 { color: var(--green); font-size: 1.3rem; margin: 0 0 4px 0; }
+    .tagline { color: var(--muted); font-size: 0.85rem; margin: 0; }
+
+    .hint { color: var(--muted); font-size: 0.8rem; margin: 8px 0; }
+
+    /* ============ Block buttons ============ */
+    .block-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .block-btn {
+      background: var(--panel);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 10px 12px;
+      min-height: 44px;
+      cursor: pointer;
+    }
+    .block-btn:active { background: var(--green); color: #fffdf8; }
+
+    /* ============ Editor + preview ============ */
+    .workbench { display: grid; gap: 12px; }
+    @media (min-width: 640px) {
+      .workbench { grid-template-columns: 1fr 1fr; }
+    }
+    .pane { background: var(--panel); border: 1px solid var(--border); padding: 8px; }
+    .pane-label {
+      color: var(--green);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 6px 0;
+      display: block;
+    }
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      background: #f3ecdd;
+      color: #2a2520;
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 10px;
+      resize: vertical;
+    }
+    iframe {
+      width: 100%;
+      height: 220px;
+      background: #fffdf8;
+      border: 1px solid var(--border);
+    }
+    .btn {
+      background: var(--green);
+      color: #fffdf8;
+      border: none;
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 0.9rem;
+      padding: 12px 18px;
+      min-height: 44px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border: 1px solid var(--green);
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 12px 18px;
+      min-height: 44px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ============ Status line ============ */
+    .status {
+      margin-top: 14px;
+      padding: 10px;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    .status strong { color: var(--green); }
+
+    /* ============ Data-saver / light mode (core-system/styles.css pattern) ============ */
+    html.data-saver {
+      --bg: #f3ecdd;
+      --panel: #fffdf8;
+      --ink: #2a2520;
+      --muted: #6f675c;
+      --green: #256d46;
+      --border: #e5dcc9;
+    }
+    html.data-saver textarea { background: #fffdf8; color: #1d5837; }
+    html.data-saver iframe { background: #fffdf8; }
+  </style>
+
+  
+  
+  
+  
+  
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<header>
+    <h1>🧱 Brick One Playground</h1>
+    <p class="tagline">Real-Life Minecraft · Place blocks · See them exist · Build a house you can stand in</p>
+  </header>
+
+  <p class="hint">
+    Tap a block button below to learn what that block does — it loads a live example into the editor.
+    Or type your own HTML in the editor and watch the right pane render it as you type.
+    Your draft saves on THIS device only (localStorage — nothing leaves your phone).
+  </p>
+
+  <!-- ============ Block buttons ============ -->
+  <section aria-label="Block types">
+    <div class="block-bar">
+      <button class="block-btn" type="button" data-block="div">&lt;div&gt; — a room</button>
+      <button class="block-btn" type="button" data-block="p">&lt;p&gt; — a sign</button>
+      <button class="block-btn" type="button" data-block="a">&lt;a&gt; — a door</button>
+      <button class="block-btn" type="button" data-block="img">&lt;img&gt; — a picture</button>
+      <button class="block-btn" type="button" data-block="h">&lt;h1&gt;–&lt;h3&gt; — name plates</button>
+      <button class="block-btn" type="button" data-block="list">&lt;ul&gt; — a shelf</button>
+      <button class="block-btn" type="button" data-block="full">🏠 The whole starter house</button>
+    </div>
+  </section>
+
+  <!-- ============ Workbench ============ -->
+  <main class="workbench">
+    <section class="pane">
+      <span class="pane-label">Your blocks (edit me)</span>
+      <textarea id="editor" spellcheck="false" aria-label="HTML editor"></textarea>
+      <div class="actions">
+        <button class="btn" id="btn-render" type="button">🔨 Render</button>
+        <button class="btn-outline" id="btn-reset" type="button">🧹 Clear</button>
+        <button class="btn-outline" id="btn-saver" type="button">🌗 Data-saver</button>
+      </div>
+    </section>
+    <section class="pane">
+      <span class="pane-label">The house (live preview)</span>
+      <iframe id="preview" title="Live HTML preview" sandbox=""></iframe>
+    </section>
+  </main>
+
+  <p class="status" id="status">Ready. Tap a block or type HTML. Draft saves locally every change.</p>
+
+  <script>
+    /* ================================================================
+       FED-EDU :: courses-and-guides/02-real-life-minecraft :: index.html
+       The Brick One playground. Vanilla JS, zero dependencies (ADR-001).
+       30 lines of render loop. Read it — it's readable.
+       ================================================================ */
+
+    var STORE_KEY = "brickone-draft";
+
+    /* ---- Block examples (each is a teachable unit) ---- */
+    var BLOCKS = {
+      div: '<div style="border:2px solid #256d46; padding:12px">\n  I am a room. Everything inside me stays inside me.\n  <div style="border:1px dashed #6f675c; padding:8px; margin-top:8px">\n    I am a smaller room inside the room.\n  </div>\n</div>',
+      p:   '<p>This is a sign — a paragraph of words on the wall.</p>\n<p>Every sign starts and ends. The closing slash matters: it says the sign is done.</p>',
+      a:   '<p>Visit my friend\'s page:</p>\n<a href="https://example.com">This is a door — tap it and you leave my house for example.com</a>',
+      img: '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/PlaceholderLC.png/256px-PlaceholderLC.png" alt="A picture on the wall">\n<p>alt is the caption for blind visitors and broken links — always write it.</p>',
+      h:   '<h1>Biggest name plate</h1>\n<h2>Medium name plate</h2>\n<h3>Small name plate</h3>\n<p>One h1 per house. The rest stack under it.</p>',
+      full:'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>My Block</title>\n  <style>\n    body { font-family: Georgia, serif; background: #f7f2e9; color: #2a2520; max-width: 600px; margin: 0 auto; padding: 24px; }\n    h1 { color: #256d46; }\n    img { max-width: 100%; border: 4px solid #256d46; }\n  </style>\n</head>\n<body>\n  <h1>My Block</h1>\n  <p>Where I\'m from and what I\'m building.</p>\n  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/PlaceholderLC.png/256px-PlaceholderLC.png" alt="The view from my block">\n  <h2>Who\'s on my block</h2>\n  <ul>\n    <li>The ones who taught me</li>\n    <li>The ones I\'m teaching</li>\n    <li>The ones coming next</li>\n  </ul>\n  <h2>What I\'m building</h2>\n  <p>Watch this page grow. Every week it gets one more block.</p>\n  <a href="https://example.com">The door out</a>\n
+
+
+
+
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "courses");
+  });
+})();
+</script>
+
+</body>\n</html>',
+      list:'<ul>\n  <li>One thing on the shelf</li>\n  <li>Another thing</li>\n  <li>A third thing</li>\n</ul>\n<p>ul is the shelf. li is each thing on it. Unordered = no numbers needed.</p>',
+    };
+
+    var editor   = document.getElementById("editor");
+    var preview  = document.getElementById("preview");
+    var statusEl = document.getElementById("status");
+
+    /* ---- Render loop: editor -> preview ---- */
+    function render() {
+      preview.srcdoc = editor.value || "<p style='color:#999;font-family:sans-serif'>The house is empty. Place a block.</p>";
+      saveDraft();
+    }
+
+    /* ---- Draft save (local only — SECURITY.md: nothing leaves the device) ---- */
+    function saveDraft() {
+      try { localStorage.setItem(STORE_KEY, editor.value); } catch (e) {}
+    }
+    function loadDraft() {
+      try {
+        var saved = localStorage.getItem(STORE_KEY);
+        if (saved) {
+          editor.value = saved;
+          statusEl.textContent = "Welcome back — your draft survived. Keep building.";
+        }
+      } catch (e) {}
+    }
+
+    /* ---- Block buttons: load example + explain ---- */
+    var bar = document.querySelector(".block-bar");
+    bar.addEventListener("click", function (ev) {
+      var btn = ev.target.closest("[data-block]");
+      if (!btn) { return; }
+      var key  = btn.getAttribute("data-block");
+      editor.value = BLOCKS[key];
+      render();
+      var names = {
+        div: "The room block",
+        p: "The sign block",
+        a: "The door block",
+        img: "The picture block",
+        h: "The name-plate blocks",
+        list: "The shelf block",
+        full: "The whole starter house"
+      };
+      statusEl.innerHTML = "Placed: <strong>" + names[key] + "</strong> — now edit it. Change a word. Change a color. Break it and fix it. That's how blocks are learned.";
+    });
+
+    /* ---- Render / Clear / Data-saver ---- */
+    document.getElementById("btn-render").addEventListener("click", render);
+    document.getElementById("btn-reset").addEventListener("click", function () {
+      if (confirm("Clear the editor? Your saved draft goes with it.")) {
+        editor.value = "";
+        render();
+        statusEl.textContent = "Empty lot. Fresh start. Place your first block.";
+      }
+    });
+    document.getElementById("btn-saver").addEventListener("click", function () {
+      document.documentElement.classList.toggle("data-saver");
+      statusEl.textContent = "Data-saver " + (document.documentElement.classList.contains("data-saver") ? "ON — light theme, metered-data friendly" : "OFF — full Warm Study");
+    });
+
+    /* ---- Live render as you type (debounced 300ms — kind to 3G thumbs) ---- */
+    var timer = null;
+    editor.addEventListener("input", function () {
+      clearTimeout(timer);
+      timer = setTimeout(render, 300);
+    });
+
+    /* ---- Boot ---- */
+    loadDraft();
+    if (!editor.value) { editor.value = BLOCKS.full; }
+    render();
+  </script>
+  <script src="../../pops.js"></script>
+</body>
+</html>

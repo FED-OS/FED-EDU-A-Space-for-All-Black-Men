@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>README — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: README">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../../index.html" class="nv" data-k="home">Home</a>
+      <a href="../../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="../../index.html">&larr; THE BLOCK</a></p>
+<div class="doc">
+<h1>Real-Life Minecraft: Brick One</h1>
+<h3>The course that teaches HTML by making you build a house you actually live in</h3>
+<p><strong>Level:</strong> Absolute Spawn (zero assumed) · <strong>Time:</strong> One weekend · <strong>Output:</strong> A one-page site live on GitHub Pages with your name on the URL</p>
+<hr />
+<h2>Why &quot;Minecraft&quot; is the honest teacher</h2>
+<p>Most people who love building in Minecraft have never written a line of code, and most people who quit coding never got past week two of a tutorial. The pattern's the same in both directions: Minecraft works because every block is simple, you can see it the moment you place it, and you can stand inside what you built. Coding tutorials die because the first example is someone else's todo-list app, invisible until it's &quot;done,&quot; and &quot;done&quot; never comes.</p>
+<p>This course uses the block metaphor with zero shame, because it's the best teaching tool that's ever existed for HTML. An HTML tag IS a block: you place it, it exists, you can stand inside it. <code>&lt;div&gt;</code> is a room. <code>&lt;p&gt;</code> is a sign you hang on the wall. <code>&lt;a&gt;</code> is a door that leads somewhere. <code>&lt;img&gt;</code> is a picture on the wall. That's HTML. All of it. A house built from blocks you can see and touch — and once you see that, the mystery is gone and you're just placing blocks.</p>
+<p>The second reason the metaphor works: in Minecraft, nobody reads a book about blocks before placing one. You place a bad block, look at it, adjust. That's how this course teaches. Every lesson ends with something you can SEE in a browser, within minutes. The 3-second rule of this repo (ADR-002) applies to teaching too: if a brother can't see his progress in about three seconds of opening the file, we've lost him.</p>
+<hr />
+<h2>What you'll be able to do when you finish</h2>
+<ol>
+<li><strong>Read HTML like a map</strong> — open any webpage, right-click → Inspect, and understand what you're seeing: which part is the room, which is the sign, which is the door.</li>
+<li><strong>Build a complete one-page site from scratch</strong> — not a copy-tutorial: your own page, about anything you care about, with a real title, real sections, a working link, a real image, and styling that makes it yours.</li>
+<li><strong>Publish it live on GitHub Pages</strong> — a real URL, free hosting, live to the world. Your family can open it on their phones. That URL is a receipt.</li>
+<li><strong>Explain what you built to anyone, in plain terms</strong> — because every lesson comes with the street-translation of every term you meet (the jargon table habit lives here too).</li>
+</ol>
+<hr />
+<h2>The lesson plan</h2>
+<h3>Lesson 1: The House — What HTML Is (brick-one-html.md)</h3>
+<p>The full walkthrough of Brick One: the house metaphor worked through every tag, the three tags that are 90% of the web (<code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>), the family of heading blocks, and the image block. Ends with your first file saved and opened in a browser — the moment you place your first block and see it exist.</p>
+<h3>Lesson 2: The Paint — CSS Without Fear (brick-one-html.md, second half)</h3>
+<p>Same file, second half: styling your house. The Warm Study theme of this repo (styles.css at the root) is a complete ready-to-wear paint job — you'll copy three lines of CSS from it into your own file and watch your page transform. Then you'll change the colors to yours. Painting is where the house stops being a skeleton and starts being yours.</p>
+<h3>Lesson 3: The Address — Publishing on GitHub Pages (brick-one-html.md, final part)</h3>
+<p>The complete publish path: repo → settings → Pages → live URL. Including the three most common failure points (branch selection, file naming — it must be <code>index.html</code>, not <code>home.html</code> — and the two-minute patience window while the site goes live).</p>
+<h3>Lesson 4: The First Remodel — Your Next Block</h3>
+<p>Not a lesson, a launching pad. The last section of brick-one-html.md points you at the next blocks: a second page, a contact form, the PWA conversion (core-system/manifest.json + service-worker.js patterns) that turns any site into an app. It also points you at the next course: 03-the-corporate-ship, where the house you built becomes a résumé argument.</p>
+<h3>The Interactive Playground (index.html)</h3>
+<p>This course ships with a runnable playground: <code>index.html</code> in this folder. Open it in any browser — no internet needed after first load (it's a PWA — core-system/manifest.json pattern) — and you can:</p>
+<ul>
+<li>Tap any block-type button to see live what <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>, `<img> and heading tags DO on a page.</li>
+<li>Type into the live editor and see your HTML render as you type (the render loop is 30 lines of vanilla JS — read it, it's readable).</li>
+<li>Save your work locally (localStorage — your draft stays in THIS browser even if you close it, and travels with no account needed).</li>
+<li>Share nothing you don't want shared — the playground is offline-capable, private, and keeps drafts on-device. SECURITY.md rules: nothing leaves your phone without your say-so.</li>
+</ul>
+<p>The playground is the Minecraft server for HTML: a world where placing blocks is safe, instant, and fun. Break blocks. Place blocks. Stand in the house you built.</p>
+<hr />
+<h2>The raffle math</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Tickets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First HTML file saved and opened in a browser (screenshot posted)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>One-page site published live on GitHub Pages (link posted in discussions)</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Help another brother publish his first site (commented walkthrough)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Submit the playground or your site as a Show and Tell ([SHIP] tag)</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>A brother who finishes this course and helps one other brother gets to 15 tickets before he knows what a <code>&lt;div&gt;</code> does. That's the point. The door opens before you're &quot;ready.&quot; That's how doors work.</p>
+<hr />
+<h2>The fine print</h2>
+<p><strong>Zero assumed knowledge.</strong> This course assumes you can read, own any device with a browser, and nothing else. Phone-only brothers can do the whole course on a phone — the playground is 360px-first, and GitHub's web editor works on mobile. If you're PC + tether, even better: open the playground on the PC and test on the phone. Both paths are first-class here.</p>
+<p><strong>The house is yours, not the course's.</strong> The example project is &quot;My Block&quot; — a page about your own world: your city, your people, your hobbies, your music. The course never assigns you a topic. It hands you blocks and says build the house you want. A course that assigns you somebody else's dream is a course about somebody else.</p>
+<p><strong>When it breaks:</strong> Every lesson has a &quot;when it breaks&quot; section. And when you hit something outside those sections, that's a bug report (.github/ISSUE_TEMPLATE/02_bug_alert.md exists for exactly that moment), and a maintainer fixes it same-day. The block doesn't leave you stuck alone.</p>
+<hr />
+<h2>Your Move</h2>
+<p>Open brick-one-html.md and place your first block. The playground is right here in this folder for when you want to try a block before reading about it. The URL that's live at the end of this course — that's a receipt that no one can take from you. Build the house. Stand in it.</p>
+<p><em>All paths in this course point to real files in the FED-EDU repo. Broken link? That's a bug — file it (.github/ISSUE_TEMPLATE/02_bug_alert.md), and it gets fixed same-day.</em></p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "courses");
+  });
+})();
+</script>
+
+
+<script src="../../pops.js" defer></script>
+</body>
+</html>

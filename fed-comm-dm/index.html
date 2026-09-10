@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fed-Comm DM — The Block's Kitchen Table</title>
+  <meta name="description" content="Brother-to-brother DMs on the block's own infrastructure. Encrypted in the browser before anything leaves your phone.">
+  <meta name="theme-color" content="#f7f2e9">
+  <link rel="manifest" href="manifest.json">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    /* DM-specific layout — chat is a different beast from documents (root styles.css carries the theme) */
+    .dm-app { display: flex; flex-direction: column; height: 100vh; max-width: 720px; margin: 0 auto; border: 1px solid var(--border); }
+    .dm-header { padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .dm-header strong { color: var(--accent); }
+    .dm-list { flex: 1; overflow-y: auto; padding: 14px; }
+    .dm-bubble { max-width: 78%; padding: 10px 12px; border-radius: 12px; margin: 6px 0; font-size: .95rem; line-height: 1.4; word-wrap: break-word; }
+    .dm-bubble.me { background: rgba(37,109,70,0.12); border: 1px solid rgba(37,109,70,0.4); margin-left: auto; }
+    .dm-bubble.them { background: var(--card); border: 1px solid var(--border); }
+    .dm-bubble .meta { display: block; font-size: .7rem; color: var(--muted); margin-top: 4px; }
+    .dm-input-row { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--border); }
+    .dm-input-row input[type=text] { flex: 1; min-width: 0; }
+    .dm-empty { text-align: center; color: var(--muted); padding: 40px 20px; }
+    .dm-locknote { font-size: .78rem; color: var(--muted); text-align: center; padding: 6px; border-top: 1px dashed var(--border); }
+    .dm-brother-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid var(--border); }
+    .dm-err { color: #b3403a; font-size: .85rem; padding: 8px; text-align: center; }
+  </style>
+
+  
+  
+  
+  
+  
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="dm-app" id="dm-app">
+
+    <header class="dm-header">
+      <div>
+        <strong id="dm-who">Fed-Comm DM</strong>
+        <span class="tag" id="dm-status">offline</span>
+      </div>
+      <div>
+        <button class="btn btn-outline" id="btn-key" type="button">🔑 Passphrase</button>
+        <button class="btn btn-outline" id="btn-brothers" type="button">👥 Brothers</button>
+      </div>
+    </header>
+
+    <!-- The conversation list (each row follows templates/active-brother-row.html) -->
+    <nav id="dm-roster" class="dm-list" hidden aria-label="Conversations"></nav>
+
+    <!-- The open conversation (each message follows templates/chat-bubble.html) -->
+    <main id="dm-list" class="dm-list" aria-live="polite">
+      <div class="dm-empty">
+        <p>🔑 <strong>First move:</strong> set a shared passphrase with your brother.</p>
+        <p class="muted">Agree on it OUT of band — in person, on a call, or in a public thread.<br>It never touches GitHub. It IS the lock (see README).</p>
+      </div>
+    </main>
+
+    <p class="dm-err" id="dm-err" hidden></p>
+
+    <form class="dm-input-row" id="dm-form">
+      <input type="text" id="dm-input" placeholder="Talk your talk…" autocomplete="off" maxlength="2000" aria-label="Message">
+      <button class="btn" type="submit">Send</button>
+    </form>
+
+    <p class="dm-locknote">🔒 Encrypted in YOUR browser before anything leaves the phone.<br>Privacy from snoops — not anonymity, not a vault. SECURITY.md rules apply.</p>
+  </div>
+
+  <script src="encryption-layer.js"></script>
+  <script src="chat-engine.js"></script>
+  <script src="../pops.js"></script>
+
+
+
+
+
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+</body>
+</html>

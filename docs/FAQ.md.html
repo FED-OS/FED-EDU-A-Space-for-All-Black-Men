@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: FAQ">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>❓ FED-EDU FAQ — Real Questions, Plain Answers</h1>
+<p><strong>Q: Do I need to know how to code already?</strong>
+A: No. Zero. This space was built specifically for the true beginner — the brother who doesn't know what a file is yet gets walked through it. If you can explain how to run a play, you can write code. Start: <code>wiki/First-Steps/</code>.</p>
+<p><strong>Q: I only have a phone. Can I still participate?</strong>
+A: Fully. Phone-only is a valid, first-class setup here. GitHub's app and website let you edit code right from a phone screen, and the dashboard installs as an app. Plenty of brothers started exactly there.</p>
+<p><strong>Q: I'm not from the streets — is this space still for me?</strong>
+A: Yes. Street terms are our translation layer, not a membership card. Jamaican, Haitian, African, British, American; gay, trans, young, elder; student, worker, returning citizen, homeless brother — all Black men, all welcome. Cultural translation, not a box. See CODE_OF_CONDUCT.md.</p>
+<p><strong>Q: I have a criminal record. Does that matter here?</strong>
+A: Not to a compiler. The machine only asks if the code works. And the hustle-index route means clients see your portfolio and badges, not your paperwork. Plenty of brothers here have records — that's partly why this exists.</p>
+<p><strong>Q: Is this free?</strong>
+A: Everything costs $0: hosting, tools, courses, blueprints, community. Optional Ko-fi fuel funds desktops and data plans for brothers who need them. You will never be paywalled out of learning here.</p>
+<p><strong>Q: Is this only for beginners? What if I'm already skilled?</strong>
+A: Already-skilled brothers are the mentors and maintainers — the ones who answer Help Desk issues and keep wings running. There's a standing rule: the community needs your knowledge as much as you once needed somebody's. Plus the hustle-index pays at every level.</p>
+<p><strong>Q: Why GitHub? Why not a normal website with a forum?</strong>
+A: Because the platform is the curriculum — navigating FED-EDU teaches professional git/GitHub skills by immersion, and your public profile becomes your portfolio automatically. ADR-002 has the full reasoning.</p>
+<p><strong>Q: The street metaphors — isn't that stereotyping?</strong>
+A: The mission is the opposite: MTV airing rap videos never assumed every Black person lived that reality — but it refused to pretend the culture didn't exist. We meet brothers where they are with language they recognize, without assuming everyone's the same. If a metaphor doesn't fit you, skip it; the knowledge works in any dialect.</p>
+<p><strong>Q: Can I make money from this? How?</strong>
+A: That's the entire point. Build a portfolio → list on the hustle-index → get hired at community-floor rates (PRICING.md) → stack retainers. The path: learn → build → ship → charge → own. No gatekeeper holds a veto on it.</p>
+<p><strong>Q: Can I build a business on these blueprints? Own it completely?</strong>
+A: Yes — 100%. MIT License: fork a blueprint, build your empire, keep every right. Only rule: keep the license notice so the next brother can find this place too. COPYING.md in plain terms.</p>
+<p><strong>Q: What's FED-OS? What's fedpromptly? How do they relate to FED-EDU?</strong>
+A: FED-OS is the lightweight operating environment (runs on anything); fedpromptly is the AI engine. FED-EDU is the educational wing — the school and community that plugs into both. The equation: (Urban Dictionary + GitHub) × FED-OS × fedpromptly.</p>
+<p><strong>Q: Is the AI coach trustworthy?</strong>
+A: The coach is a 3AM first responder — instant, plain-language, patient. But AI makes mistakes, so the culture is verify-before-ship: test what it hands you. We teach that from day one. ADR-009.</p>
+<p><strong>Q: Are kids safe here?</strong>
+A: That's Rule 6 — protecting younger brothers — and it has zero appeal process. Moderation is active; violations get removed instantly and reported where the law requires. Parents: read CODE_OF_CONDUCT.md and SECURITY.md.</p>
+<p><strong>Q: How do the PC raffles work?</strong>
+A: Verified activity earns tickets (push code = 5, guide completed = 10 — full table in physical-raffles/). Raffles draw winners transparently from the public ledger. Winners get a refurbished desktop shipped, checklist-verified. Hope, made physical.</p>
+<p><strong>Q: Can women participate?</strong>
+A: This space was built to fill a specific vacuum: Black men missing from tech spaces. Our sister organizations (blackcomputeHER, Black Girls Code, others in CITATIONS.md) serve Black women with their own dedicated rooms — we link and collaborate rather than duplicate. Allies are welcome to follow the Code of Conduct and contribute.</p>
+<p><strong>Q: What if somebody disrespects me here?</strong>
+A: Report to any maintainer — privately, immediately (SUPPORT.md). Disputes follow GOVERNANCE.md: talk → mediation → sanctions. Harassment over nationality, sexuality, gender identity, age, record, or housing status doesn't get a second chance.</p>
+<p><strong>Q: I'm locked up. Can I really do this?</strong>
+A: Brothers inside have used prison education programs and reentry resources to start learning; on release, the block is waiting with $0 barriers. The wiki keeps everything self-paced for exactly this. A record can't stop software from running.</p>
+<p><strong>Q: How do I actually join?</strong>
+A: GitHub account → request into the org → drop your intro in the Spawn Zone (flag, city, lane) → push one change for your first badge. INSTALL.md walks all of it on any hardware you have.</p>
+<p><strong>Q: Who runs this?</strong>
+A: The community, under GOVERNANCE.md — founders protect the mission, maintainers keep the wings, members vote the direction, elders hold the culture. The block is designed to outlive any individual.</p>
+<p><strong>Q: Why 'FED-EDU'?</strong>
+A: FED — the family brand (FED-OS, fedpromptly). EDU — education. The educational wing of the ecosystem, built as the front door for brothers the rest of tech keeps outside.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

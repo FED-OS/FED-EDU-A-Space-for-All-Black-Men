@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUPPORT — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: SUPPORT">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>🆘 FED-EDU SUPPORT — How To Get Help</h1>
+<blockquote>
+<p>Stuck? That's what the block is for. No question is stupid here — we mean that literally. Here's exactly where to go depending on what you need.</p>
+</blockquote>
+<h2>Quick Answers</h2>
+<table>
+<thead>
+<tr>
+<th>You need...</th>
+<th>Go here</th>
+<th>Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A tech word decoded</td>
+<td><code>urban-dictionary/</code> search</td>
+<td>Instant</td>
+</tr>
+<tr>
+<td>Help with code that won't work</td>
+<td>Help Desk issue <code>[NEED-PLUG]</code></td>
+<td>Usually same day</td>
+</tr>
+<tr>
+<td>Guidance on what to build</td>
+<td>Discussion: Spawn Zone</td>
+<td>Same day</td>
+</tr>
+<tr>
+<td>To report a bug in our tools</td>
+<td>Issue: <code>bug_report.md</code> template</td>
+<td>48 hrs</td>
+</tr>
+<tr>
+<td>To talk to the AI coach</td>
+<td><code>fedpromptly-coach/</code> bridge</td>
+<td>Instant</td>
+</tr>
+<tr>
+<td>Something broke in your setup</td>
+<td><code>wiki/Getting-Online/</code></td>
+<td>Self-serve, 24/7</td>
+</tr>
+<tr>
+<td>You're being harassed</td>
+<td>Maintainers (private)</td>
+<td>Immediate</td>
+</tr>
+<tr>
+<td>Security vulnerability</td>
+<td>SECURITY.md process</td>
+<td>Immediate</td>
+</tr>
+</tbody>
+</table>
+<h2>The Help Desk (Primary Channel)</h2>
+<p>The fastest way to get unstuck. Open a GitHub issue and pick the template that fits:</p>
+<ul>
+<li><strong><code>[NEED-PLUG]</code></strong> — your code is broken or won't run and you need a fix. Paste the code, describe what you expected vs. what happened, and say what you're running it on (phone / old desktop / FED-OS). Screenshots help if you can.</li>
+<li><strong><code>[STUCK-IN-THE-LAB]</code></strong> — you understand the goal but can't figure out the next move. Bigger-picture help: which path to take, what to learn next, how to structure a project.</li>
+<li><strong><code>bug_report.md</code></strong> — something in FED-EDU's own tools is broken (dashboard, DM system, blueprints).</li>
+</ul>
+<p>A brother — maintainer or member — will pull up. Nobody gets mocked for the level of their question. That's Rule 1.</p>
+<h2>The Spawn Zone (Community Wisdom)</h2>
+<p>For questions that don't have one right answer: &quot;which language should I start with?&quot;, &quot;is this project idea crazy?&quot;, &quot;how do I stay motivated when everything's falling apart?&quot; Post in the discussions under Spawn Zone. Brothers who've been where you are will talk it through with you.</p>
+<h2>The Logic Wiki (Self-Serve, 24/7)</h2>
+<p><code>wiki/</code> holds the accumulated knowledge of the block, written in plain terms. Getting-Online covers tethering and free access points. First-Steps covers accounts, forks, and first pushes. Building covers websites, apps, and publishing. Hustling covers listings, payments, and pricing. If the wiki's missing something you needed, that's a contribution opportunity — write the page you wish existed.</p>
+<h2>The AI Coach (fedpromptly)</h2>
+<p>When no human's awake at 3AM and your script won't run, the AI coach bridge in <code>fedpromptly-coach/</code> (plus the <code>prompts/</code> library) is there. Feed it your broken code with the debug_helper prompt. It explains the fix in plain terms and tells you exactly where to paste it. Remember: AI can make mistakes — always double-check what it hands you before shipping.</p>
+<h2>Response Times</h2>
+<p>The community operates on mutual aid, not SLAs. That said, the culture here is fast: most Help Desk issues get eyes within hours, and maintainers are expected to keep their wings answered within 48. If something sits longer, tag a maintainer from <code>MAINTAINERS.md</code>.</p>
+<h2>Private Matters</h2>
+<p>Code problems are public (that's how everyone learns). Personal matters aren't:</p>
+<ul>
+<li><strong>Harassment or conduct violations:</strong> message any maintainer directly or use the contact in <code>SECURITY.md</code>. Handled immediately and discreetly.</li>
+<li><strong>Mental health &amp; life crises:</strong> this community is a brotherhood, not a clinic. Brothers will talk with you, but please also reach out to real help — in the US, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline). In the UK, Samaritans at <strong>116 123</strong>. In Jamaica, <strong>888 NEW LIFE</strong>. In Nigeria, <strong>0806 000 0000</strong> (SURPIN). Keep fighting. The tunnel has an end.</li>
+</ul>
+<h2>Before You Ask — The 60-Second Checklist</h2>
+<ol>
+<li>Did you search the wiki and urban-dictionary first?</li>
+<li>Did you search closed issues? Somebody might've hit the same wall.</li>
+<li>Can you paste the exact code and the exact error? (The words on the screen, copy-pasted, not summarized from memory)</li>
+<li>Can you say what you expected to happen vs. what happened?</li>
+</ol>
+<p>Bring those four things and you'll get a real answer fast. Even if you can't — ask anyway. That's the rule.</p>
+<h2>Giving Support</h2>
+<p>The strongest contribution a brother can make: answer one Help Desk issue a week. Somebody once walked you through something. Pass it forward. Each one, teach one.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

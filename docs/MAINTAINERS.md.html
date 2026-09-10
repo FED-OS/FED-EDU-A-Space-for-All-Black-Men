@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAINTAINERS — THE BLOCK</title>
+  <meta name="description" content="THE BLOCK: MAINTAINERS">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .crumb { font-family: 'Courier New', monospace; font-size: 0.8rem; margin: 10px 0 0; }
+      .crumb a { color: #256d46; text-decoration: none; }
+      .doc { max-width: 780px; margin: 0 auto; padding: 26px 18px 40px; }
+      .doc h1 { font-size: 1.9rem; }
+      .doc table { display: block; overflow-x: auto; }
+    </style>
+    
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+  <p class="crumb"><a href="index.html">&larr; the paperwork</a></p>
+<div class="doc">
+<h1>🔧 FED-EDU MAINTAINERS — Who Keeps Each Wing Running</h1>
+<blockquote>
+<p>Maintainers are brothers who consistently ship and got trusted with a room. Need a module decision, a fast review, or a conduct matter? Find the right name here. Want a room? Contribute consistently — that's the whole pipeline.</p>
+</blockquote>
+<h2>Global Maintainers</h2>
+<table>
+<thead>
+<tr>
+<th>Handle</th>
+<th>Responsibility</th>
+<th>Reach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@fedpromptly</td>
+<td>Founder. Org keys, mission integrity, final architecture calls, deployment pipeline</td>
+<td>All wings</td>
+</tr>
+</tbody>
+</table>
+<p><em>Module maintainers get added here as rooms get claimed. Format: handle, wing, what &quot;kept running&quot; means for that room.</em></p>
+<h2>The Wings (Rooms Waiting For Brothers)</h2>
+<table>
+<thead>
+<tr>
+<th>Wing</th>
+<th>Status</th>
+<th>Keeper Duties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>core-system/</code></td>
+<td>🔰 Founder-held</td>
+<td>Dashboard health, PWA integrity, 3-second rule enforcement</td>
+</tr>
+<tr>
+<td><code>fed-comm-dm/</code></td>
+<td>🟡 Seeking</td>
+<td>DM engine stability, encryption review, token safety</td>
+</tr>
+<tr>
+<td><code>urban-dictionary/</code></td>
+<td>🟡 Seeking</td>
+<td>Term quality, translation tone, search index health</td>
+</tr>
+<tr>
+<td><code>fedpromptly-coach/</code></td>
+<td>🔰 Founder-held</td>
+<td>Engine bridge, prompt quality, plain-language enforcement</td>
+</tr>
+<tr>
+<td><code>courses-and-guides/</code></td>
+<td>🟡 Seeking</td>
+<td>Course accuracy, EasyTether hardware testing across devices</td>
+</tr>
+<tr>
+<td><code>sandbox-blueprints/</code></td>
+<td>🟡 Seeking</td>
+<td>Blueprint forkability, lightweight audits, version pinning</td>
+</tr>
+<tr>
+<td><code>excellence-matrix/</code></td>
+<td>🟡 Seeking</td>
+<td>Data accuracy, respectful tone, addition/removal policy</td>
+</tr>
+<tr>
+<td><code>hustle-index/</code></td>
+<td>🟡 Seeking</td>
+<td>Listing standards, rate-floor education, dispute first-response</td>
+</tr>
+<tr>
+<td><code>community-boards/</code></td>
+<td>🟡 Seeking</td>
+<td>Diaspora map health, showcase curation, help-desk triage</td>
+</tr>
+<tr>
+<td><code>physical-raffles/</code></td>
+<td>🔰 Founder-held</td>
+<td>Ticket ledger integrity, winner fairness, shipping logistics</td>
+</tr>
+<tr>
+<td><code>wiki/</code> + <code>discussion/</code></td>
+<td>🟡 Seeking</td>
+<td>Wiki accuracy, pinned-post freshness, welcoming energy</td>
+</tr>
+<tr>
+<td><code>prompts/</code></td>
+<td>🟡 Seeking</td>
+<td>Prompt quality, tone consistency, new prompt curation</td>
+</tr>
+</tbody>
+</table>
+<h2>What A Maintainer Commits To</h2>
+<ol>
+<li><strong>48-hour eyes</strong> on issues and PRs touching your wing (community standard — see SUPPORT.md)</li>
+<li><strong>Keep the docs true</strong> — when reality drifts from documentation, docs get fixed fast</li>
+<li><strong>Enforce the conduct rules</strong> in your room — gatekeeping dies on sight, kids stay protected</li>
+<li><strong>Stay lightweight</strong> — every merge in your wing honors the 3-second rule</li>
+<li><strong>Pass it forward</strong> — spot and mentor your eventual replacement; rooms shouldn't die when life happens</li>
+</ol>
+<h2>How Rooms Change Hands</h2>
+<p>Life happens — court dates, double shifts, family seasons. A maintainer stepping back opens a <code>[PROPOSAL]</code> discussion naming a successor (usually the most consistent contributor in that wing). Handover = keys documented, duties confirmed, AUTHORS.md updated. No drama, no vacuum — the block keeps running.</p>
+<h2>Contacting Maintainers</h2>
+<p><strong>Code/docs:</strong> open the issue or PR — public by default, that's how everyone learns. <strong>Conduct/security:</strong> direct and private per SECURITY.md. <strong>&quot;Who do I even ask?&quot;</strong> — Help Desk with the <code>custom</code> template and a maintainer will route you.</p>
+
+</div>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "none");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>

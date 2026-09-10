@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses &amp; Guides — THE BLOCK</title>
+  <meta name="description" content="Three full courses in plain talk: EasyTether Mastery, Real-Life Minecraft, The Corporate Ship.">
+  <meta name="theme-color" content="#2a2520">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── shared THE BLOCK nav bar (injected by build script) ── */
+    .blockbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(42, 37, 32, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+    }
+    .bb-in {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; gap: 10px;
+    }
+    .bb-logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 1.5px;
+      color: #f7f2e9; text-decoration: none; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bb-logo:hover { color: #fffdf8; }
+    .bb-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #256d46; color: #fffdf8; width: 26px; height: 26px;
+      border-radius: 7px; font-size: 0.7rem;
+    }
+    .bb-links { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+    .bb-links a {
+      color: rgba(247, 242, 233, 0.75); text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem; letter-spacing: 0.4px;
+      padding: 6px 9px; border-radius: 6px; white-space: nowrap;
+    }
+    .bb-links a:hover { color: #fffdf8; background: rgba(37, 109, 70, 0.35); }
+    .bb-links a.active { color: #c9f0d2; background: rgba(37, 109, 70, 0.45); }
+    .bb-burger {
+      display: none; background: none; border: 1px solid rgba(232,220,197,.3);
+      border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 38px;
+    }
+    .bb-burger span {
+      display: block; width: 16px; height: 2px; margin: 3px 0;
+      background: #f7f2e9; border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .bb-links {
+        display: none; flex-direction: column; align-items: stretch;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(42, 37, 32, 0.98);
+        border-bottom: 1px solid rgba(232, 220, 197, 0.22);
+        padding: 8px 14px 12px; gap: 4px;
+      }
+      .bb-links.open { display: flex; }
+      .bb-burger { display: block; margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blockbar { transition: none; }
+    }
+  </style>
+
+
+    <style>
+      .sect-wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+      .hub-intro { padding: 34px 4px 10px; }
+      .hub-intro h1 { font-family: Georgia, serif; color: #256d46; font-size: 2.2rem; margin: 0 0 10px; }
+      .hub-intro p { max-width: 720px; color: #2a2520; }
+      .hint { color: #6f675c; font-size: 0.9rem; }
+      .hint a, .hub-intro a { color: #256d46; }
+      .hint.status { background: rgba(176,125,47,.09); border: 1px solid rgba(176,125,47,.35);
+                     padding: 10px 14px; border-radius: 10px; display: block; max-width: 720px; }
+      .hint.status code { background: rgba(176,125,47,.12); }
+      .level { margin: 26px 0 8px; }
+      .level h2 { font-family: Georgia, serif; color: #2a2520; border-bottom: 2px solid #256d46;
+                  padding-bottom: 6px; font-size: 1.5rem; }
+      .level-sub { color: #6f675c; font-style: italic; margin: 4px 0 14px; }
+      .doc-links { display: grid; gap: 10px; }
+      .doc-link { display: grid; gap: 3px; background: #fffdf8; border: 1px solid #e5dcc9;
+                  border-radius: 12px; padding: 16px 18px; text-decoration: none;
+                  box-shadow: 0 1px 3px rgba(70,60,40,.07); transition: border-color .2s, transform .2s; }
+      .doc-link:hover { border-color: #256d46; transform: translateY(-1px); }
+      .doc-link strong { color: #256d46; font-family: Georgia, serif; font-size: 1.05rem; }
+      .doc-link span { color: #6f675c; font-size: 0.92rem; line-height: 1.45; }
+      .sect-foot { border-top: 1px solid #e5dcc9; margin-top: 40px; padding: 18px 16px 26px;
+                   text-align: center; color: #6f675c; font-size: 0.8rem;
+                   font-family: 'Courier New', monospace; }
+      @media (max-width: 600px) { .hub-intro h1 { font-size: 1.7rem; } }
+    </style>
+
+    <style>
+      .course { background: #fffdf8; border: 1px solid #e5dcc9; border-radius: 14px;
+                padding: 20px; margin: 14px 0; box-shadow: 0 1px 3px rgba(70,60,40,.07); }
+      .course-head { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+      .course-head .emoji { font-size: 2rem; }
+      .course-head h2 { border: none; margin: 0; padding: 0; color: #256d46; font-family: Georgia, serif; }
+      .course-head p { margin: 4px 0 0; color: #6f675c; max-width: 560px; }
+      .badge { margin-left: auto; font-family: 'Courier New', monospace; font-size: 0.72rem;
+               border: 1px solid #256d46; color: #256d46; border-radius: 999px; padding: 3px 10px; }
+      .lessons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+      .lesson { background: #f3ecdd; border: 1px solid #e5dcc9; border-radius: 9px;
+                padding: 9px 14px; text-decoration: none; color: #2a2520;
+                font-size: 0.92rem; min-height: 40px; display: inline-flex; align-items: center; }
+      .lesson:hover { border-color: #256d46; color: #256d46; }
+    </style>
+
+
+</head>
+<body>
+<header class="blockbar" data-active="unknown">
+  <div class="bb-in">
+    <a class="bb-logo" href="../index.html"><span class="bb-mark">&gt;_</span> THE BLOCK</a>
+    <nav class="bb-links" aria-label="Sections">
+      <a href="../index.html" class="nv" data-k="home">Home</a>
+      <a href="../wiki/index.html" class="nv" data-k="wiki">Wiki</a>
+      <a href="../courses-and-guides/index.html" class="nv" data-k="courses">Courses</a>
+      <a href="../sandbox-blueprints/index.html" class="nv" data-k="blueprints">Blueprints</a>
+      <a href="../prompts/index.html" class="nv" data-k="prompts">Prompts</a>
+      <a href="../urban-dictionary/index.html" class="nv" data-k="dictionary">Dictionary</a>
+      <a href="../fedpromptly-coach/index.html" class="nv" data-k="coach">Coach</a>
+      <a href="../community-boards/index.html" class="nv" data-k="community">Community</a>
+      <a href="../discussion/index.html" class="nv" data-k="discussion">Discussion</a>
+      <a href="../hustle-index/index.html" class="nv" data-k="hustle">Hustle</a>
+      <a href="../physical-raffles/index.html" class="nv" data-k="raffles">Raffles</a>
+      <a href="../support-the-block/index.html" class="nv" data-k="support">Support</a>
+    </nav>
+    <button class="bb-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main class="sect-wrap">
+
+    <section class="course">
+      <div class="course-head">
+        <span class="emoji" aria-hidden="true">📶</span>
+        <div>
+          <h2>EasyTether Mastery</h2>
+          <p>Get your PC online through your phone&#x27;s data — no Wi-Fi card, no cable bill. The survival course.</p>
+        </div>
+        <span class="badge">Course</span>
+      </div>
+      <div class="lessons">
+        <a class="lesson" href="01-easytether-mastery/README.md.html">Overview</a>
+        <a class="lesson" href="01-easytether-mastery/android-setup.md.html">Android Setup — The Seven Taps</a>
+        <a class="lesson" href="01-easytether-mastery/pc-usb-bridge.md.html">The PC Side — USB Bridge Installation &amp; Debug</a>
+      </div>
+    </section>
+    <section class="course">
+      <div class="course-head">
+        <span class="emoji" aria-hidden="true">🧱</span>
+        <div>
+          <h2>Real-Life Minecraft</h2>
+          <p>The full course: HTML as blocks, the web as your world. Assumes nothing, teaches everything.</p>
+        </div>
+        <span class="badge">Course</span>
+      </div>
+      <div class="lessons">
+        <a class="lesson" href="02-real-life-minecraft/README.md.html">Overview</a>
+        <a class="lesson" href="02-real-life-minecraft/brick-one-html.md.html">Brick One: HTML From Zero</a>
+      </div>
+    </section>
+    <section class="course">
+      <div class="course-head">
+        <span class="emoji" aria-hidden="true">💼</span>
+        <div>
+          <h2>The Corporate Ship</h2>
+          <p>Resume builder + interview cheat sheet. Turn the skills into the income.</p>
+        </div>
+        <span class="badge">Course</span>
+      </div>
+      <div class="lessons">
+        <a class="lesson" href="03-the-corporate-ship/README.md.html">Overview</a>
+        <a class="lesson" href="03-the-corporate-ship/interview-cheat-sheet.md.html">The Corporate Ship — Interview Cheat Sheet</a>
+        <a class="lesson" href="03-the-corporate-ship/markdown-resume-builder.md.html">The Markdown Resume Builder</a>
+      </div>
+    </section>
+</main>
+<footer class="sect-foot">
+  <p>THE BLOCK · FED-EDU · vanilla HTML/CSS/JS · works offline · no build step · no tracking</p>
+</footer>
+
+<script>
+/* THE BLOCK shared nav — burger toggle + active-link highlighting */
+(function () {
+  var bar = document.querySelector('.blockbar');
+  if (!bar) return;
+  var burger = bar.querySelector('.bb-burger');
+  var links = bar.querySelector('.bb-links');
+  if (burger && links) {
+    burger.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  /* highlight the link whose data-k matches the page's folder */
+  var here = location.pathname.split('/').filter(Boolean).pop() || '';
+  var folder = location.pathname.split('/').filter(Boolean);
+  var current = folder.length ? folder[folder.length - 1] : '';
+  Array.prototype.forEach.call(links && links.querySelectorAll('a[data-k]') || [], function (a) {
+    a.classList.toggle('active', a.dataset.k === "courses");
+  });
+})();
+</script>
+
+
+<script src="../pops.js" defer></script>
+</body>
+</html>
